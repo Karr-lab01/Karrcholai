@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 import HeroSection from '../components/HeroSection'
 import WelcomeSection from '../components/WelcomeSection'
+import HomeFounderSection from '../components/HomeFounderSection'
 import KarrCholaiSection from '../components/KarrCholaiSection'
 import ServicesSection from '../components/ServicesSection'
 import WhyChooseUs from '../components/WhyChooseUs'
@@ -28,6 +29,7 @@ const Home = () => {
       {/* ── Welcome / About intro ── */}
       <section id="about">
         <WelcomeSection />
+        <HomeFounderSection />
       </section>
 
       {/* ── Video Showcase ── */}
