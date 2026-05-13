@@ -1,59 +1,32 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-
-// Import blog images
-import sustainableArch from '../assets/blog/sustainable_arch.png';
-import constructionTips from '../assets/blog/construction_tips.png';
-import solarIntegration from '../assets/blog/solar_integration.png';
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "The Future of Sustainable Architecture in Tamil Nadu",
-    category: "Sustainability",
-    date: "April 15, 2024",
-    image: sustainableArch,
-    excerpt: "Exploring how traditional techniques are meeting modern green building standards to create climate-responsive homes.",
-    link: "/blog/sustainable-architecture"
-  },
-  {
-    id: 2,
-    title: "Top 5 Things to Consider Before Starting Your Home Construction",
-    category: "Guides",
-    date: "April 08, 2024",
-    image: constructionTips,
-    excerpt: "A comprehensive checklist for homeowners to ensure a smooth transition from blueprint to groundbreaking.",
-    link: "/blog/construction-tips"
-  },
-  {
-    id: 3,
-    title: "How Solar Integration is Changing Modern Residential Design",
-    category: "Innovation",
-    date: "March 28, 2024",
-    image: solarIntegration,
-    excerpt: "Beyond panels: How we integrate renewable energy into the very fabric of architectural aesthetics.",
-    link: "/blog/solar-integration"
-  }
-];
+import { FiArrowRight } from 'react-icons/fi';
+import { blogPosts } from '../data/blogData';
 
 const BlogSection = () => {
+  const displayPosts = blogPosts.slice(0, 3);
   return (
-    <section id="insights" className="py-24 bg-[#fafafa]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <section id="insights" className="py-24 md:py-32 bg-[#FAF6F0] relative overflow-hidden">
+      {/* Decorative Watermark */}
+      <div className="absolute left-10 top-1/2 -translate-y-1/2 opacity-[0.02] pointer-events-none select-none hidden lg:block">
+        <span className="text-[200px] font-black font-serif uppercase rotate-90 inline-block">Journal</span>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
           <div className="max-w-2xl">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="flex items-center gap-3 mb-6"
+              className="flex items-center gap-4 mb-8"
             >
-              <span className="w-10 h-[1px] bg-secondary" />
-              <span className="text-secondary font-black text-[10px] tracking-[0.4em] uppercase">Industry Insights</span>
+              <span className="w-12 h-[1px] bg-secondary" />
+              <span className="text-secondary font-black text-[10px] tracking-[0.6em] uppercase">The Karrcholai Journal</span>
             </motion.div>
 
             <motion.h2
@@ -61,9 +34,10 @@ const BlogSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl md:text-5xl font-bold text-dark font-serif leading-tight"
+              className="text-4xl md:text-6xl font-black text-dark font-serif uppercase tracking-tight leading-[0.95]"
             >
-              Recent <span className="italic text-primary">Perspectives</span> & Expertise
+              Insights & <br />
+              <span className="italic font-light text-secondary/40">Architectural Lore.</span>
             </motion.h2>
           </div>
 
@@ -73,11 +47,11 @@ const BlogSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Link to="/blog" className="group flex items-center gap-4 text-dark hover:text-secondary transition-colors py-2">
-              <span className="text-[11px] font-black tracking-[0.2em] uppercase">View All Insights</span>
-              <div className="w-10 h-10 rounded-full border border-dark/10 flex items-center justify-center group-hover:border-secondary group-hover:bg-secondary/5 transition-all">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M1 13L13 1M13 1H1M13 1V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <Link to="/blog" className="group flex items-center gap-6 text-dark hover:text-secondary transition-all py-2">
+              <span className="text-[10px] font-black tracking-[0.4em] uppercase">Enter Journal</span>
+              <div className="w-12 h-12 rounded-full border border-dark/10 flex items-center justify-center group-hover:border-secondary group-hover:bg-secondary/5 transition-all">
+                <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
+                  <path d="M1 13L13 1M13 1H1M13 1V13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
             </Link>
@@ -85,55 +59,51 @@ const BlogSection = () => {
         </div>
 
         {/* Blog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+          {displayPosts.map((post, index) => (
             <motion.article
               key={post.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group cursor-pointer"
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              className="group cursor-pointer flex flex-col"
             >
               {/* Image Container */}
-              <div className="relative aspect-[4/3] overflow-hidden mb-8 bg-dark/5">
+              <Link to={`/blog/${post.id}`} className="relative aspect-[4/5] overflow-hidden mb-10 rounded-sm shadow-sm">
                 <motion.img
                   src={post.image}
                   alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
                 />
-                <div className="absolute top-6 left-6">
-                  <span className="px-4 py-2 bg-white/90 backdrop-blur-sm text-dark text-[9px] font-black tracking-[0.2em] uppercase">
-                    {post.category}
-                  </span>
-                </div>
-              </div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-700" />
+              </Link>
 
               {/* Content */}
-              <div className="flex flex-col h-full">
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="text-dark/30 text-[10px] font-bold tracking-widest uppercase">{post.date}</span>
-                  <span className="w-4 h-[1px] bg-dark/10" />
-                  <span className="text-dark/30 text-[10px] font-bold tracking-widest uppercase">Admin</span>
+              <div className="flex flex-col flex-grow">
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="text-secondary font-bold text-[9px] tracking-[0.3em] uppercase">{post.category}</span>
+                  <div className="w-1 h-1 rounded-full bg-dark/10" />
+                  <span className="text-dark/30 text-[9px] font-bold tracking-widest uppercase">{post.date}</span>
                 </div>
 
-                <h3 className="text-xl font-bold text-dark group-hover:text-secondary transition-colors duration-300 leading-tight mb-4 font-serif">
-                  {post.title}
-                </h3>
+                <Link to={`/blog/${post.id}`}>
+                  <h3 className="text-2xl font-black text-dark group-hover:text-secondary transition-colors duration-500 leading-tight mb-6 font-serif uppercase tracking-tight line-clamp-2">
+                    {post.title}
+                  </h3>
+                </Link>
 
-                <p className="text-dark/50 text-sm font-light leading-relaxed mb-6 line-clamp-2">
+                <p className="text-dark/50 text-sm font-light leading-relaxed mb-8 line-clamp-2">
                   {post.excerpt}
                 </p>
 
                 <div className="mt-auto">
                   <Link 
-                    to={post.link}
-                    className="inline-flex items-center gap-2 text-[10px] font-black tracking-[0.3em] uppercase text-dark/40 group-hover:text-secondary transition-colors"
+                    to={`/blog/${post.id}`}
+                    className="inline-flex items-center gap-4 text-[9px] font-black tracking-[0.4em] uppercase text-dark/40 group-hover:text-secondary transition-all"
                   >
-                    Read Insight
-                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" className="transform transition-transform group-hover:translate-x-1">
-                      <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    Read Story
+                    <FiArrowRight className="transform transition-transform group-hover:translate-x-2 text-secondary" />
                   </Link>
                 </div>
               </div>

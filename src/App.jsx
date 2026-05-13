@@ -14,6 +14,7 @@ const Karr      = lazy(() => import('./pages/Karr'))
 const Projects  = lazy(() => import('./pages/Projects'))
 const Cholai    = lazy(() => import('./pages/Cholai'))
 const Blog      = lazy(() => import('./pages/Blog'))
+const BlogDetail = lazy(() => import('./pages/BlogDetail'))
 const Manaiyadi  = lazy(() => import('./pages/Manaiyadi'))
 
 // Minimal fallback while lazy page loads
@@ -45,6 +46,7 @@ function App() {
               <Route path="/projects"element={<Projects />} />
               <Route path="/cholai"  element={<Cholai />} />
               <Route path="/blog"    element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogDetail />} />
               <Route path="/manaiyadi" element={<Manaiyadi />} />
             </Routes>
           </Suspense>

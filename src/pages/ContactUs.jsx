@@ -309,52 +309,20 @@ export default function ContactUs() {
         </div>
       </section>
 
-      {/* ── FORM + SIDEBAR (Merged with Reach Us) ───────────────────────── */}
-      <section ref={formRef} className="py-16 md:py-24" style={{ background: DARK }}>
+      {/* ── CONTACT SECTION ────────────────────────────────────────── */}
+      <section ref={formRef} className="py-12 md:py-16" style={{ background: DARK }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={formInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }} className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-3">
               <span className="w-8 h-px" style={{ background: TERRA }} />
-              <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>How to reach us</span>
+              <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>Simple Process</span>
               <span className="w-8 h-px" style={{ background: TERRA }} />
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black font-serif text-white">Get in Touch</h2>
+            <h2 className="text-3xl sm:text-5xl font-black font-serif text-white">How to Reach Us</h2>
           </motion.div>
 
-          {/* Step cards merged here */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-20">
-            {[
-              { step: '01', title: 'Call or WhatsApp', desc: "Call us directly or send a WhatsApp message. We respond within minutes during office hours.", Icon: FiPhone, color: TERRA, image: img3, action: { label: 'Call Now', href: 'tel:+919876543210' } },
-              { step: '02', title: 'Send a Message', desc: "Fill out our contact form with your project details. We'll review and get back within 24 hours.", Icon: FiMail, color: FOREST, image: img5, action: { label: 'Email Us', href: 'mailto:info@karrcholai.com' } },
-              { step: '03', title: 'Visit Our Office', desc: "Meet our team in person at our Tamil Nadu office. We'd love to discuss your vision face to face.", Icon: FiMapPin, color: '#8B7355', image: img9, action: { label: 'Get Directions', href: 'https://maps.google.com/?q=Chennai,Tamil+Nadu' } },
-            ].map((item, i) => (
-              <motion.div key={i}
-                initial={{ opacity: 0, y: 30 }}
-                animate={formInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.1, duration: 0.8 }}
-                whileHover={{ y: -6 }}
-                className="rounded-3xl overflow-hidden group cursor-pointer"
-                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <div className="relative h-40 overflow-hidden">
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-black/40" />
-                  <div className="absolute top-4 left-4 w-8 h-8 rounded-lg flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20">
-                    <span className="text-[10px] font-black text-white">{item.step}</span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-base font-black text-white mb-2">{item.title}</h3>
-                  <p className="text-[11px] font-light leading-relaxed mb-4 text-white/50">{item.desc}</p>
-                  <a href={item.action.href} className="flex items-center gap-2 text-[10px] font-black tracking-widest uppercase" style={{ color: item.color }}>
-                    {item.action.label} <FiArrowRight size={10} />
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={formInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="lg:col-span-3 rounded-[2rem] p-5 sm:p-6 flex flex-col" style={{ background: CREAM }}>
@@ -402,9 +370,7 @@ export default function ContactUs() {
 
             <motion.div initial={{ opacity: 0, y: 30 }} animate={formInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.15 }} className="lg:col-span-2 flex flex-col gap-5">
-              <div className="rounded-3xl overflow-hidden h-36 flex-shrink-0">
-                <img src={modernHouse} alt="" className="w-full h-full object-cover" />
-              </div>
+
               <div className="rounded-3xl p-6" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
                 <div className="flex items-center gap-3 mb-4">
                   <FiClock size={15} style={{ color: TERRA }} />
@@ -427,177 +393,128 @@ export default function ContactUs() {
                   <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.3)' }}>Currently Open</span>
                 </div>
               </div>
-              <div className="rounded-3xl p-5" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <div className="flex flex-col gap-1">
-                  <p className="text-[10px] font-black tracking-[0.3em] uppercase text-white/30">Proprietor</p>
-                  <p className="text-sm font-black text-white tracking-widest uppercase">SARAVANAKUMAR.B</p>
+
+              {/* Added: Important Direct Contact Card */}
+              <div className="rounded-3xl p-6" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <div className="flex flex-col gap-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${TERRA}20` }}>
+                      <FiPhone size={14} style={{ color: TERRA }} />
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-black tracking-widest uppercase text-white/30">Direct Call</p>
+                      <p className="text-sm font-bold text-white">+91 97414 16747</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${FOREST}20` }}>
+                      <FiMail size={14} style={{ color: FOREST }} />
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-black tracking-widest uppercase text-white/30">Official Email</p>
+                      <p className="text-sm font-bold text-white">karrcholai@gmail.com</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="rounded-3xl p-5 flex items-center gap-4"
-                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <p className="text-xs font-black tracking-widest uppercase text-white/40 flex-1">Follow Us</p>
-                {[
-                  { Icon: FiInstagram, color: '#E1306C', href: 'https://instagram.com' },
-                  { Icon: FiFacebook, color: '#1877F2', href: 'https://facebook.com' },
-                ].map((s, i) => (
-                  <motion.a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
-                    whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: `${s.color}20`, border: `1px solid ${s.color}40` }}>
-                    <s.Icon size={16} style={{ color: s.color }} />
-                  </motion.a>
-                ))}
-              </div>
+
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── FAQ — premium dark accordion ─────────────────────────────── */}
+      {/* ── FAQ & MAP UNIFIED ────────────────────────────────────────── */}
       <section ref={faqRef} className="py-20 md:py-28 relative overflow-hidden" style={{ background: DARK }}>
-        {/* Ambient glow */}
+        {/* Ambient glows */}
         <motion.div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-          style={{ background: TERRA, opacity: 0.06 }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.04, 0.09, 0.04] }}
+          style={{ background: TERRA, opacity: 0.04 }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.03, 0.07, 0.03] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} />
-        <motion.div className="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl pointer-events-none"
-          style={{ background: FOREST, opacity: 0.06 }}
-          animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 10, repeat: Infinity, delay: 3 }} />
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
-          {/* Header */}
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={faqInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
-            <div>
-              <motion.div initial={{ opacity: 0, x: -20 }} animate={faqInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6 }} className="flex items-center gap-3 mb-4">
-                <motion.div className="h-[2px] rounded-full" style={{ background: TERRA }}
-                  initial={{ width: 0 }} animate={faqInView ? { width: 32 } : { width: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }} />
-                <span className="text-[10px] font-black tracking-[0.45em] uppercase" style={{ color: TERRA }}>Common Questions</span>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            
+            {/* Left: FAQ */}
+            <div ref={faqRef}>
+              <motion.div initial={{ opacity: 0, y: 30 }} animate={faqInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8 }} className="mb-12">
+                <div className="flex items-center gap-3 mb-4">
+                  <motion.div className="h-[2px] rounded-full" style={{ background: TERRA }}
+                    initial={{ width: 0 }} animate={faqInView ? { width: 32 } : { width: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }} />
+                  <span className="text-[10px] font-black tracking-[0.45em] uppercase" style={{ color: TERRA }}>Common Questions</span>
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-black font-serif text-white leading-tight">
+                  Got Questions? We've Got <span style={{ color: TERRA, fontStyle: 'italic' }}>Answers.</span>
+                </h2>
               </motion.div>
-              <h2 className="text-3xl sm:text-5xl font-black font-serif text-white leading-tight">
-                Got Questions?<br />
-                <span style={{ color: TERRA, fontStyle: 'italic' }}>We've Got Answers.</span>
-              </h2>
+
+              <div className="space-y-1">
+                {faqs.map((f, i) => (
+                  <FAQDark key={i} q={f.q} a={f.a} i={i} inView={faqInView} />
+                ))}
+              </div>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={faqInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.6 }}
+                className="mt-10 p-6 rounded-2xl border border-white/5 bg-white/[0.02]">
+                <p className="text-xs font-bold text-white mb-1">Still have questions?</p>
+                <p className="text-[11px] font-light text-white/40">Our team is ready to help you plan your project. Contact us via email or phone.</p>
+              </motion.div>
             </div>
-            <motion.p initial={{ opacity: 0 }} animate={faqInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.3 }} className="text-sm font-light max-w-xs md:text-right"
-              style={{ color: 'rgba(232,229,223,0.4)' }}>
-              Everything you need to know before starting your dream project.
-            </motion.p>
-          </motion.div>
 
-          {/* Animated rule */}
-          <motion.div className="h-px mb-0 origin-left" style={{ background: `linear-gradient(90deg, ${TERRA}60, transparent)` }}
-            initial={{ scaleX: 0 }} animate={faqInView ? { scaleX: 1 } : { scaleX: 0 }}
-            transition={{ duration: 1, delay: 0.3 }} />
+            {/* Right: MAP */}
+            <div ref={mapRef} className="lg:sticky lg:top-32">
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={faqInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative rounded-3xl overflow-hidden aspect-[4/5] lg:aspect-auto lg:h-[580px] group shadow-2xl border border-white/10">
+                
+                {/* Map iframe */}
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125345.97330756779!2d78.01633513361834!3d10.958742211910795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2f08029517e7%3A0xc95861502476d7d!2sKarur%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1715609000000!5m2!1sen!2sin"
+                  width="100%" height="100%" style={{ border: 0, filter: 'saturate(0.8) contrast(1.1) invert(0.1) hue-rotate(180deg)' }}
+                  allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
 
-          {/* FAQ items — numbered, dark style */}
-          <div>
-            {faqs.map((f, i) => (
-              <FAQDark key={i} q={f.q} a={f.a} i={i} inView={faqInView} />
-            ))}
+                {/* Info Card Overlay */}
+                <div className="absolute bottom-6 left-6 right-6 z-20 pointer-events-none">
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={mapInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="pointer-events-auto rounded-2xl p-5"
+                    style={{ background: 'rgba(22,20,16,0.92)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    
+                    <div className="flex flex-col gap-4">
+                      <div>
+                        <h3 className="text-xl font-black font-serif text-white">Find Us</h3>
+                        <p className="text-[10px] font-light text-white/40 mt-1">5/20, Puliyampatti, Karur - 639 206</p>
+                      </div>
+                      
+                      <div className="flex flex-col gap-2.5">
+                        {[
+                          { Icon: FiMapPin, v: 'Thennilai (West), Karur', c: TERRA },
+                          { Icon: FiPhone, v: '+91 97414 16747', c: FOREST },
+                        ].map((row, i) => (
+                          <div key={i} className="flex items-center gap-3">
+                            <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0"
+                              style={{ background: `${row.c}20`, border: `1px solid ${row.c}30` }}>
+                              <row.Icon size={10} style={{ color: row.c }} />
+                            </div>
+                            <span className="text-[11px] font-medium text-white/60">{row.v}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <motion.a href="https://maps.google.com/?q=Karur,Tamil+Nadu" target="_blank" rel="noopener noreferrer"
+                        whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                        className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white text-dark text-[10px] font-black uppercase tracking-widest transition-all">
+                        <FiNavigation size={12} /> Get Directions
+                      </motion.a>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </div>
+
           </div>
-
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={faqInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.6 }}
-            className="mt-12 p-8 rounded-3xl text-center"
-            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <p className="text-sm font-bold text-white mb-2">Still have questions?</p>
-            <p className="text-xs font-light" style={{ color: 'rgba(232,229,223,0.45)' }}>Our team is ready to help you plan your project. Contact us via email or phone above.</p>
-          </motion.div>
         </div>
-      </section>
-
-      {/* ── MAP — full-width with overlay card ───────────────────────────── */}
-      <section ref={mapRef} className="relative overflow-hidden" style={{ height: 'clamp(420px, 55vw, 560px)' }}>
-        {/* Map wipe reveal */}
-        <motion.div className="absolute inset-0 z-10 pointer-events-none" style={{ background: CREAM }}
-          initial={{ scaleX: 1, originX: 0 }} animate={mapInView ? { scaleX: 0 } : { scaleX: 1 }}
-          transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.2 }} />
-
-        {/* Map iframe */}
-        <motion.div className="absolute inset-0"
-          initial={{ scale: 1.06 }} animate={mapInView ? { scale: 1 } : { scale: 1.06 }}
-          transition={{ duration: 1.4, ease: 'easeOut', delay: 0.3 }}>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124440.3207011961!2d80.12588102213768!3d12.923149830537025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267da565d8a95%3A0x669145657803732!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-            width="100%" height="100%" style={{ border: 0, filter: 'saturate(0.9) contrast(1.05)' }}
-            allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
-        </motion.div>
-
-        {/* Centered overlay card */}
-        <div className="absolute inset-0 z-20 flex items-center justify-start px-6 sm:px-12 pointer-events-none">
-          <motion.div initial={{ opacity: 0, x: -50, y: 20 }} animate={mapInView ? { opacity: 1, x: 0, y: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-auto w-72 sm:w-80 rounded-3xl flex flex-col gap-4 p-6 sm:p-8"
-            style={{ background: 'rgba(22,20,16,0.90)', backdropFilter: 'blur(24px)', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 32px 80px rgba(0,0,0,0.5)' }}>
-
-            {/* Live badge */}
-            <div className="flex items-center gap-2">
-              <motion.div className="w-2 h-2 rounded-full bg-green-400"
-                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.4, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
-              <span className="text-[9px] font-black tracking-[0.35em] uppercase" style={{ color: 'rgba(255,255,255,0.35)' }}>We're Open Now</span>
-            </div>
-
-            {/* Title */}
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-black font-serif text-white leading-tight">
-                Find <span style={{ color: TERRA, fontStyle: 'italic' }}>Us</span>
-              </h3>
-              <p className="text-[10px] font-light mt-1 leading-relaxed" style={{ color: 'rgba(232,229,223,0.4)' }}>
-                5/20, Puliyampatti, Cv Palayam,<br />
-                Karur - 639 206
-              </p>
-            </div>
-
-            {/* Divider */}
-            <div className="h-px" style={{ background: 'rgba(255,255,255,0.07)' }} />
-
-            {/* Info rows */}
-            <div className="flex flex-col gap-3">
-              {[
-                { Icon: FiMapPin, v: 'Thennilai (West), Karur', c: TERRA },
-                { Icon: FiPhone, v: '+91 97414 16747', c: FOREST },
-                { Icon: FiClock, v: 'Mon–Sat · 9:00 AM – 6:00 PM', c: '#8B7355' },
-              ].map((row, i) => (
-                <motion.div key={i} initial={{ opacity: 0, x: -12 }} animate={mapInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.9 + i * 0.1 }} className="flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: `${row.c}20`, border: `1px solid ${row.c}35` }}>
-                    <row.Icon size={11} style={{ color: row.c }} />
-                  </div>
-                  <span className="text-xs font-medium" style={{ color: 'rgba(232,229,223,0.6)' }}>{row.v}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Directions button */}
-            <motion.a href="https://maps.google.com/?q=Chennai,Tamil+Nadu" target="_blank" rel="noopener noreferrer"
-              whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}
-              className="relative flex items-center justify-center gap-2 py-3.5 rounded-2xl cursor-pointer overflow-hidden mt-1"
-              style={{ background: `linear-gradient(135deg, ${TERRA}, ${FOREST})`, boxShadow: `0 8px 24px ${TERRA}40` }}>
-              {/* Shimmer */}
-              <motion.div className="absolute inset-0 pointer-events-none"
-                style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)', width: '50%' }}
-                animate={{ x: ['-100%', '300%'] }} transition={{ duration: 2.5, repeat: Infinity, ease: 'linear', repeatDelay: 1.5 }} />
-              <FiNavigation size={13} className="text-white" />
-              <span className="text-xs font-black tracking-[0.2em] uppercase text-white">Get Directions</span>
-              <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
-                <FiArrowRight size={12} className="text-white/70" />
-              </motion.div>
-            </motion.a>
-          </motion.div>
-        </div>
-
-        {/* Top-right badge */}
-        <motion.div initial={{ opacity: 0, y: -12 }} animate={mapInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.2 }}
-          className="absolute top-5 right-5 z-20 px-4 py-2 rounded-full"
-          style={{ background: 'rgba(22,20,16,0.82)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-          <span className="text-[9px] font-black tracking-[0.35em] uppercase text-white/50">Karur · Tamil Nadu · India</span>
-        </motion.div>
       </section>
 
       <UnifiedFooter />
