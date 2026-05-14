@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import ManaiyadiCalculator from '../components/manaiyadi/ManaiyadiCalculator'
 import MeasurementTable from '../components/manaiyadi/MeasurementTable'
-import YogaAndRooms from '../components/manaiyadi/YogaAndRooms'
+
 
 // Assets
 import heroBg from '../assets/manaiyadi_hero.png'
@@ -173,49 +173,7 @@ const Manaiyadi = () => {
           </div>
         </section>
 
-        {/* 5. MODERN APPLICATION GRID - SPLIT SCREEN FOR CLARITY */}
-        <section className="bg-white border-y border-dark/5">
-          <div className="flex flex-col lg:flex-row">
-            {/* Left: High-Impact Clear Image */}
-            <div className="lg:w-1/3 h-[250px] md:h-[400px] lg:h-auto relative overflow-hidden">
-               <img src={staircase} alt="Modern Vastu" className="w-full h-full object-cover" />
-               <div className="absolute inset-0 bg-dark/10"></div>
-               <div className="absolute bottom-8 left-8 right-6 md:bottom-12 md:left-12">
-                  <h3 className="text-white font-black tracking-[0.5em] uppercase text-[10px] mb-4">The Vision</h3>
-                  <p className="text-white text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none break-words">Ancient <br /> Precision.</p>
-               </div>
-            </div>
 
-            {/* Right: Clean Content Grid */}
-            <div className="lg:w-2/3 py-16 md:py-24 px-6 md:px-20 bg-[#fdfbf7]">
-               <div className="max-w-4xl">
-                  <div className="mb-12 md:mb-16">
-                    <h3 className="text-secondary font-black tracking-[0.5em] uppercase text-[10px] mb-4 md:mb-6">Modern Context</h3>
-                    <h2 className="text-3xl md:text-6xl font-black text-dark tracking-tighter leading-none uppercase">Applying Ancient <br className="md:hidden" /> <span className="text-primary italic font-serif">Wisdom.</span></h2>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                    {[
-                      { title: "Room Planning", icon: <FiLayers />, desc: "Design each room's internal dimensions using favorable measurements for targeted results." },
-                      { title: "Wall Heights", icon: <FiMaximize />, desc: "Standard 8-foot or 10-foot ceilings bring prosperity and elevated status." },
-                      { title: "Optimization", icon: <FiShield />, desc: "If a measurement is inauspicious, adjust by inches to reach a favorable dimension." },
-                      { title: "Avoid Conflicts", icon: <FiAlertTriangle />, desc: "Never pair a favorable length with an unfavorable width; energies will conflict." },
-                      { title: "Internal Focus", icon: <FiInfo />, desc: "Always measure internal room dimensions only, excluding wall thickness." },
-                      { title: "Holistic Integration", icon: <FiCheckCircle />, desc: "Combine with directional alignment and energy flow for complete harmony." }
-                    ].map((item, i) => (
-                      <div key={i} className="p-8 md:p-10 bg-white border border-dark/5 rounded-[2rem] md:rounded-[2.5rem] hover:shadow-2xl transition-all duration-500 group">
-                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-dark text-white flex items-center justify-center mb-6 md:mb-8 group-hover:bg-primary transition-all duration-500">
-                          {item.icon}
-                        </div>
-                        <h4 className="text-base md:text-lg font-black text-dark mb-4 tracking-tight uppercase">{item.title}</h4>
-                        <p className="text-[11px] md:text-xs text-dark/40 font-light leading-relaxed">{item.desc}</p>
-                      </div>
-                    ))}
-                  </div>
-               </div>
-            </div>
-          </div>
-        </section>
 
         {/* 6. REFERENCE TABLES */}
         <section className="py-24 md:py-48 px-4 md:px-6 bg-[#fdfbf7] border-t border-dark/5">
@@ -224,12 +182,7 @@ const Manaiyadi = () => {
           </div>
         </section>
 
-        {/* 7. YOGA COMBINATIONS */}
-        <section className="py-24 md:py-48 px-4 md:px-6 bg-white">
-          <div className="mx-auto max-w-7xl">
-            <YogaAndRooms />
-          </div>
-        </section>
+
 
         {/* 8. COMMON MISTAKES & PERSPECTIVE */}
         <section className="py-24 md:py-48 px-6 bg-[#fdfbf7]">
