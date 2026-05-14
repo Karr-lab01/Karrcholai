@@ -5,18 +5,18 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import logoImg from '../../assets/KARRCHOLAI LOGO.png'
 
 const navLinks = [
-  { name: 'Home',     path: '/' },
-  { name: 'About',    path: '/about' },
-  { name: 'Karr',     path: '/karr' },
-  { name: 'Cholai',   path: '/cholai' },
-  { name: 'Projects', path: '/projects' },
-  { name: 'Blog',     path: '/blog' },
-  { name: 'Manaiyadi', path: '/manaiyadi' },
-  { name: 'Contact',  path: '/contact' },
+  { name: 'Home',      path: '/#home' },
+  { name: 'About',     path: '/#about' },
+  { name: 'Karr',      path: '/#divisions' },
+  { name: 'Cholai',    path: '/#divisions' },
+  { name: 'Projects',  path: '/#projects' },
+  { name: 'Blog',      path: '/#blog' },
+  { name: 'Manaiyadi', path: '/#manaiyadi' },
+  { name: 'Contact',   path: '/#contact' },
 ]
 
 // Pages where navbar is always solid white
-const SOLID_PAGES = ['/projects', '/about', '/contact', '/services', '/karr', '/cholai', '/blog', '/manaiyadi']
+const SOLID_PAGES = ['/manaiyadi']
 
 const Navbar = () => {
   const [scrolled, setScrolled]       = useState(false)
@@ -48,7 +48,10 @@ const Navbar = () => {
       const id = path.split('#')[1]
       if (location.pathname !== '/') {
         navigate('/')
-        setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 120)
+        // Wait for page to render then scroll
+        setTimeout(() => {
+          document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+        }, 350)
       } else {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
       }
@@ -70,8 +73,15 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex justify-between items-center">
 
           {/* Logo */}
-          <Link 
-            to="/" 
+          <button
+            onClick={() => {
+              if (location.pathname !== '/') {
+                navigate('/')
+                setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 350)
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }
+            }}
             className={`flex items-center transition-all duration-700 ${
               (!scrolled && !SOLID_PAGES.includes(location.pathname)) ? 'opacity-0 -translate-x-4 pointer-events-none' : 'opacity-100 translate-x-0'
             }`}
@@ -81,7 +91,7 @@ const Navbar = () => {
               alt="KARRCHOLAI"
               className={`w-auto object-contain transition-all duration-400 drop-shadow-md ${isSolid ? 'h-14 md:h-20' : 'h-20 md:h-28'}`}
             />
-          </Link>
+          </button>
 
           {/* Hamburger Menu (Visible on all sizes) */}
           <button
@@ -127,7 +137,7 @@ const Navbar = () => {
               {/* Nav links (Minimalist) */}
               <nav className="flex-1 px-10 flex flex-col justify-center gap-4 md:gap-6">
                 {navLinks.map((link, i) => {
-                  const isActive = location.pathname === link.path
+                  const isActive = location.pathname === '/' && false // hash-based, skip active highlight per path
                   return (
                     <motion.button
                       key={link.name}
