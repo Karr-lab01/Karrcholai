@@ -6,6 +6,8 @@ import {
   FiLayers, FiMaximize, FiArrowUpRight, FiArrowRight
 } from 'react-icons/fi'
 import { roomRecommendations, yogaCombinations } from '../data/manaiyadiData'
+import ManaiyadiCalculator from './manaiyadi/ManaiyadiCalculator'
+import MeasurementTable from './manaiyadi/MeasurementTable'
 import heroBg from '../assets/manaiyadi_hero.png'
 import vastuDetail from '../assets/vastu_detail.png'
 import staircase from '../assets/minimalist_luxury_staircase.png'
@@ -153,6 +155,63 @@ const HomeManaiadiSection = () => {
             </div>
           </div>
         </div>
+
+        {/* ── THE CALCULATOR ── */}
+        <div className="py-16 md:py-24 border-t border-dark/5 mb-16 relative">
+          <div className="text-center mb-16 md:mb-24">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-secondary font-black tracking-[0.3em] md:tracking-[0.5em] uppercase text-[10px] mb-4 md:mb-6">Precision Tooling</h3>
+              <h2 className="text-4xl md:text-8xl font-black text-dark mb-6 md:mb-8 tracking-tighter uppercase">Algorithm <br className="md:hidden" /> <span className="text-primary italic font-serif">Engine.</span></h2>
+              <div className="w-12 h-1 bg-primary mx-auto mb-10"></div>
+            </motion.div>
+          </div>
+          <ManaiyadiCalculator />
+        </div>
+
+        {/* ── REFERENCE TABLES ── */}
+        <div className="mb-24">
+          <MeasurementTable />
+        </div>
+
+        {/* ── COMMON MISTAKES & PERSPECTIVE ── */}
+        <div className="mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+            <div className="p-8 md:p-16 bg-secondary/5 border border-secondary/10 rounded-[3rem] md:rounded-[4rem] relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-8 text-secondary/10"><FiAlertTriangle size={80}/></div>
+               <h3 className="text-secondary font-black uppercase tracking-[0.4em] text-[10px] mb-8 md:mb-10">Pitfalls to Avoid</h3>
+               <h2 className="text-3xl md:text-4xl font-black text-dark mb-8 md:mb-12 tracking-tight uppercase leading-none">Common <br/> <span className="italic font-serif">Mistakes.</span></h2>
+               <ul className="space-y-6 md:space-y-8">
+                  {[
+                    "Including Wall Thickness in calculations",
+                    "Mixing favorable and unfavorable pairs",
+                    "Ignoring the importance of ceiling height",
+                    "Focusing only on plot size rather than rooms"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-4 md:gap-6 text-[10px] md:text-sm font-bold text-dark/60 uppercase tracking-widest leading-tight">
+                       <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-1 flex-shrink-0"></span>
+                       {item}
+                    </li>
+                  ))}
+               </ul>
+            </div>
+            <div className="p-8 md:p-16 bg-primary/5 border border-primary/10 rounded-[3rem] md:rounded-[4rem] relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-8 text-primary/10"><FiCheckCircle size={80}/></div>
+               <h3 className="text-primary font-black uppercase tracking-[0.4em] text-[10px] mb-8 md:mb-10">Scientific Perspective</h3>
+               <h2 className="text-3xl md:text-4xl font-black text-dark mb-8 md:mb-12 tracking-tight uppercase leading-none">Cultural <br/> <span className="italic font-serif">Confidence.</span></h2>
+               <p className="text-xs md:text-sm text-dark/40 leading-relaxed font-light mb-6 md:mb-8">
+                  While rooted in traditional beliefs, Manaiyadi Sastram represents a sophisticated system of architectural planning that has stood the test of time.
+               </p>
+               <p className="text-xs md:text-sm text-dark/40 leading-relaxed font-light">
+                  The psychological comfort and cultural confidence that auspicious measurements provide translate into real benefits for mental well-being and family harmony.
+               </p>
+            </div>
+          </div>
+        </div>
+
 
         {/* ── Room Recommendations Panel ── */}
         <motion.div

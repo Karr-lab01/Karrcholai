@@ -123,32 +123,7 @@ const HomeFounderSection = () => {
         </div>
       </section>
 
-      {/* ── 3. STATS STRIP ── */}
-      <section className="py-16 md:py-24 bg-dark text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10" />
-        <div className="container mx-auto px-6 max-w-6xl relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 divide-x-0 md:divide-x divide-white/10">
-            {[
-              { number: "12+", label: "Years Experience" },
-              { number: "150+", label: "Projects Completed" },
-              { number: "100%", label: "Client Satisfaction" },
-              { number: "24/7", label: "Project Support" }
-            ].map((stat, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="text-center md:text-left pl-0 md:pl-10 first:pl-0 flex flex-col items-center md:items-start"
-              >
-                <div className="text-4xl md:text-6xl font-light text-secondary mb-3 tracking-tighter italic font-serif">{stat.number}</div>
-                <div className="text-[9px] md:text-[11px] uppercase tracking-[0.3em] md:tracking-[0.4em] text-white/50 font-bold">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
     </div>
   )

@@ -292,26 +292,7 @@ const CholaiHomeSection = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* ── Bottom Stats Bar ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-white/5 pt-12"
-        >
-          {[
-            { label: 'Landscape Projects', value: '120+' },
-            { label: 'Rainwater Systems', value: '85+' },
-            { label: 'Solar Installations', value: '60+' },
-            { label: 'Homes Transformed', value: '200+' },
-          ].map((stat, i) => (
-            <div key={i} className="text-center md:text-left">
-              <p className="text-4xl font-black text-white mb-1">{stat.value}</p>
-              <p className="text-white/30 text-[10px] font-bold tracking-widest uppercase">{stat.label}</p>
-            </div>
-          ))}
-        </motion.div>
+
       </div>
     </section>
   )
