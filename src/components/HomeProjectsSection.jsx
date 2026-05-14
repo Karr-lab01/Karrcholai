@@ -2,9 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { FiArrowUpRight, FiMapPin } from 'react-icons/fi'
-import prj1 from '../../assets/pic2.png'
-import prj2 from '../../assets/pic3.png'
-import prj3 from '../../assets/pic7.png'
+import pr1 from '../assets/pr1.jpeg'
 
 const SAMPLE_PROJECTS = [
   {
@@ -12,24 +10,8 @@ const SAMPLE_PROJECTS = [
     title: 'Modern Villa',
     location: 'Chennai, TN',
     tag: 'Residential',
-    image: prj1,
+    image: pr1,
     color: '#3F5F4A'
-  },
-  {
-    id: 'heritage-duplex',
-    title: 'Heritage Duplex',
-    location: 'Coimbatore, TN',
-    tag: 'Construction',
-    image: prj2,
-    color: '#C9754A'
-  },
-  {
-    id: 'eco-living-hub',
-    title: 'Eco-Living Hub',
-    location: 'Madurai, TN',
-    tag: 'Sustainable',
-    image: prj3,
-    color: '#8B7355'
   }
 ]
 
@@ -82,7 +64,7 @@ const HomeProjectsSection = () => {
         </div>
 
         {/* Cinematic Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 max-w-md mx-auto gap-8 md:gap-12">
           {SAMPLE_PROJECTS.map((project, i) => (
             <motion.div
               key={project.id}
@@ -93,7 +75,7 @@ const HomeProjectsSection = () => {
               className="group relative"
             >
               {/* Image Container */}
-              <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] bg-gray-100 mb-8">
+              <Link to={`/projects/${project.id}`} className="block relative aspect-[3/4] overflow-hidden rounded-[2rem] bg-gray-100 mb-8 cursor-pointer group-hover:shadow-2xl transition-all duration-500">
                 <img 
                   src={project.image} 
                   alt={project.title} 
@@ -119,7 +101,7 @@ const HomeProjectsSection = () => {
                     <FiMapPin size={10} /> {project.location}
                   </div>
                 </div>
-              </div>
+              </Link>
               
               {/* Content & Button */}
               <div className="px-2">

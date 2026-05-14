@@ -4,6 +4,9 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { FiArrowLeft, FiMapPin, FiCalendar, FiMaximize, FiTag, FiClock, FiCheckCircle } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
+import pr_1 from '../assets/pr_1.jpeg'
+import pr_2 from '../assets/pr_2.jpeg'
+import pr_3 from '../assets/pr_3.jpeg'
 
 // Sample data (in a real app, this would come from a central data file or API)
 const PROJECTS_DATA = [
@@ -15,7 +18,8 @@ const PROJECTS_DATA = [
     year: '2023',
     size: '4,500 Sq.Ft',
     category: 'Residential',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    image: pr_1,
+    gallery: [pr_1, pr_2, pr_3],
     description: 'A sleek contemporary villa blending open-plan living with lush landscaping and smart home systems. This project highlights our commitment to architectural brilliance and structural integrity.',
     fullStory: `The Modern Villa project was conceived as a sanctuary that balances the raw beauty of natural stone with the precision of modern engineering. Located in the heart of Chennai, this 4,500 sq.ft residence features expansive glass facades that invite natural light into every corner.
 
@@ -27,50 +31,6 @@ const PROJECTS_DATA = [
       { label: 'Completion Time', value: '14 Months' },
       { label: 'Concrete Used', value: '850 m³' },
       { label: 'Workforce', value: '120+' }
-    ]
-  },
-  {
-    id: 'heritage-duplex',
-    title: 'Heritage Duplex',
-    subtitle: 'Timeless Twin Home',
-    location: 'Coimbatore, TN',
-    year: '2022',
-    size: '3,200 Sq.Ft',
-    category: 'Construction',
-    image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-    description: 'Timeless duplex design honoring traditional Tamil architecture with modern comforts. A perfect blend of heritage aesthetics and contemporary utility.',
-    fullStory: `The Heritage Duplex is a tribute to the rich architectural legacy of Tamil Nadu, reimagined for a modern family. The design features a central courtyard (Muttram) that provides natural ventilation and a focal point for family gatherings.
-
-    We used traditional materials like Athangudi tiles and reclaimed teak wood, while integrating a state-of-the-art kitchen and modern insulation. The biggest challenge was sourcing master craftsmen who could execute the intricate wood carvings on the main entrance.
-
-    This project stands as a testament to our ability to preserve cultural identity while delivering a home that meets the highest standards of 21st-century construction.`,
-    features: ['Traditional Courtyard', 'Athangudi Tiling', 'Eco-friendly Materials', 'Handcrafted Woodwork'],
-    stats: [
-      { label: 'Completion Time', value: '11 Months' },
-      { label: 'Tile Area', value: '2,400 Sq.Ft' },
-      { label: 'Craftsmen', value: '15 Master Artists' }
-    ]
-  },
-  {
-    id: 'eco-living-hub',
-    title: 'Eco-Living Hub',
-    subtitle: 'Net-Zero Home',
-    location: 'Madurai, TN',
-    year: '2024',
-    size: '5,100 Sq.Ft',
-    category: 'Sustainable',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-    description: 'Net-zero energy home with solar integration and rainwater harvesting systems. Our most ambitious sustainable project to date.',
-    fullStory: `The Eco-Living Hub is more than just a house; it's a statement on the future of sustainable habitation. Designed to produce more energy than it consumes, this 5,100 sq.ft estate utilizes a massive rooftop solar array and a sophisticated battery storage system.
-
-    The building envelope is constructed using high-thermal-mass materials that naturally regulate temperature, drastically reducing the need for artificial cooling. Rainwater is harvested from 100% of the roof area and stored in a 50,000-liter underground tank.
-
-    Every material was chosen for its low carbon footprint, from the recycled steel structure to the VOC-free paints. It represents the pinnacle of Karrcholai's Cholai division expertise.`,
-    features: ['15kW Solar Array', '50kL Rainwater Tank', 'Passive Solar Design', 'Recycled Steel Structure'],
-    stats: [
-      { label: 'Energy Savings', value: '95%' },
-      { label: 'Water Recycled', value: '100%' },
-      { label: 'Carbon Saved', value: '12 Tons/Year' }
     ]
   }
 ]
@@ -106,11 +66,11 @@ const ProjectDetail = () => {
       />
 
       {/* Back Button */}
-      <div className="fixed top-24 left-6 md:left-12 z-50">
+      <div className="fixed top-24 left-6 md:left-12 z-[999]">
         <Link to="/">
           <motion.button
             whileHover={{ x: -5 }}
-            className="flex items-center gap-2 text-[10px] font-black tracking-[0.3em] uppercase text-dark/40 hover:text-dark transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-black/20 backdrop-blur-md rounded-full text-[10px] font-black tracking-[0.3em] uppercase text-white hover:bg-black/40 transition-all border border-white/10"
           >
             <FiArrowLeft /> Back to Home
           </motion.button>
@@ -119,7 +79,7 @@ const ProjectDetail = () => {
 
       <main>
         {/* Cinematic Hero */}
-        <section className="relative h-[80vh] md:h-screen overflow-hidden bg-dark">
+        <section className="relative h-[80vh] md:h-screen overflow-hidden bg-[#1C1C1A]">
           <motion.div
             initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -127,31 +87,29 @@ const ProjectDetail = () => {
             className="absolute inset-0"
           >
             <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#F5F2EC]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1A]/90 via-[#1C1C1A]/20 to-transparent" />
+            <div className="absolute inset-0 bg-black/10" />
           </motion.div>
 
-          <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-24">
+          <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12 z-10">
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="max-w-5xl"
+              className="max-w-xl"
             >
-              <div className="flex items-center gap-4 mb-6">
-                <span className="px-3 py-1 bg-dark text-white text-[9px] font-black tracking-widest uppercase rounded-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="px-3 py-1 bg-[#C9754A] text-white text-[9px] font-black tracking-widest uppercase rounded-full shadow-lg">
                   {project.category}
                 </span>
-                <span className="text-dark/40 text-[9px] font-black tracking-widest uppercase">
-                  Project Ref: {project.id.slice(0, 4).toUpperCase()}-2024
+                <span className="text-white/80 text-[9px] font-bold tracking-widest uppercase bg-black/20 px-3 py-1 rounded-full backdrop-blur-sm border border-white/10">
+                  Ref: {project.id.slice(0, 4).toUpperCase()}-2024
                 </span>
               </div>
-              <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black text-dark leading-[0.8] tracking-tighter mb-8 font-sans">
-                {project.title.split(' ')[0]} <br />
-                <span className="text-transparent italic" style={{ WebkitTextStroke: '1px rgba(28,28,26,0.2)' }}>
-                  {project.title.split(' ')[1]}
-                </span>
+              <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-2 drop-shadow-md">
+                {project.title}
               </h1>
-              <p className="text-xl md:text-2xl font-light text-dark/60 max-w-2xl leading-relaxed italic">
+              <p className="text-sm md:text-base font-light text-white/70 italic drop-shadow-sm">
                 {project.subtitle}
               </p>
             </motion.div>
@@ -235,6 +193,33 @@ const ProjectDetail = () => {
 
           </div>
         </section>
+
+        {/* Visual Showcase */}
+        {project.gallery && (
+          <section className="py-24 bg-white">
+            <div className="max-w-7xl mx-auto px-6 md:px-12">
+              <div className="flex items-center gap-4 mb-12">
+                <span className="w-12 h-px bg-[#C9754A]" />
+                <span className="text-[#C9754A] font-black text-[10px] tracking-[0.4em] uppercase">Visual Showcase</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {project.gallery.map((img, i) => (
+                  <motion.div 
+                    key={i}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.2, duration: 0.8 }}
+                    className={`relative overflow-hidden rounded-[2rem] shadow-xl ${i === 0 ? 'md:col-span-2 md:row-span-2 aspect-video' : 'aspect-square'}`}
+                  >
+                    <img src={img} alt={`Gallery image ${i + 1}`} className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105" />
+                    <div className="absolute inset-0 bg-black/10 hover:bg-transparent transition-colors duration-500" />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Call to Action */}
         <section className="py-24 bg-[#1C1C1A] text-white overflow-hidden relative">
