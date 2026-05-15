@@ -10,10 +10,10 @@ export default function FootprintMapSection() {
 
   const locations = [
     { name: 'Chennai', top: '20%', left: '70%', delay: 0.1 },
-    { name: 'Coimbatore', top: '50%', left: '25%', delay: 0.3 },
-    { name: 'Madurai', top: '75%', left: '45%', delay: 0.5 },
-    { name: 'Trichy', top: '55%', left: '55%', delay: 0.7 },
-    { name: 'Salem', top: '40%', left: '40%', delay: 0.9 },
+    { name: 'Bengaluru', top: '10%', left: '35%', delay: 0.3 },
+    { name: 'Erode', top: '45%', left: '32%', delay: 0.5 },
+    { name: 'Karur', top: '52%', left: '45%', delay: 0.7 },
+    { name: 'Coimbatore', top: '50%', left: '25%', delay: 0.9 },
   ]
 
   return (
@@ -23,8 +23,8 @@ export default function FootprintMapSection() {
       
       {/* Large faint text in background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none select-none">
-        <span className="text-[12vw] font-black font-serif text-white opacity-[0.02] whitespace-nowrap">
-          TAMIL NADU
+        <span className="text-[10vw] md:text-[12vw] font-black font-serif text-white opacity-[0.02] whitespace-nowrap">
+          SOUTH INDIA
         </span>
       </div>
 
@@ -48,7 +48,7 @@ export default function FootprintMapSection() {
             </h2>
             
             <p className="text-sm font-light leading-relaxed mb-8" style={{ color: `${STONE}80` }}>
-              From the coastal luxury of Chennai to the serene landscapes of Coimbatore and the heritage-rich grounds of Madurai, Karrcholai's legacy of strength spans across Tamil Nadu. We bring the same unyielding discipline and premium quality to every site, no matter the city.
+              From the coastal luxury of Chennai to the serene landscapes of Coimbatore and the vibrant energy of Bengaluru, Karrcholai's legacy of strength spans across South India. We bring the same unyielding discipline and premium quality to every site, no matter the city.
             </p>
 
             <div className="grid grid-cols-2 gap-6">
