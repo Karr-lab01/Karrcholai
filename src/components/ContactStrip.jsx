@@ -28,7 +28,7 @@ const ContactStrip = () => {
               <div className="text-secondary mb-5 text-4xl group-hover:scale-110 transition-transform duration-300">
                 {contact.icon}
               </div>
-              <h3 className="text-2xl font-bold font-serif mb-2 tracking-wide group-hover:text-secondary transition-colors">
+              <h3 className="text-2xl font-bold mb-2 tracking-wide group-hover:text-secondary transition-colors">
                 {contact.text}
               </h3>
               <p className="text-white/60 font-light tracking-widest text-sm uppercase">

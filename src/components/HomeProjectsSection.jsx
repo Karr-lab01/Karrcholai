@@ -30,7 +30,7 @@ const HomeProjectsSection = () => {
               className="text-5xl md:text-7xl font-black text-dark leading-none tracking-tighter"
             >
               CRAFTING <br />
-              <span className="text-dark/20 italic font-serif">Benchmarks.</span>
+              <span className="text-dark/20 italic">Benchmarks.</span>
             </motion.h2>
           </div>
           
@@ -81,7 +81,7 @@ const HomeProjectsSection = () => {
               </div>
               
               <h3 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter mb-8 leading-[0.9]">
-                Our <span className="text-transparent stroke-text-white italic font-serif">Portfolio</span> <br /> 
+                Our <span className="text-transparent stroke-text-white italic">Portfolio</span> <br /> 
                 Showcase.
               </h3>
               

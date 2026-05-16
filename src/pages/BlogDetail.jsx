@@ -17,7 +17,7 @@ const BlogDetail = () => {
   if (!post) {
     return (
       <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">
-        <h1 className="text-3xl font-serif uppercase tracking-widest mb-6 opacity-30">Story not found</h1>
+        <h1 className="text-3xl uppercase tracking-widest mb-6 opacity-30">Story not found</h1>
         <Link to="/blog" className="text-[#1a1a1a] font-black tracking-[0.4em] uppercase text-[10px] border-b border-[#1a1a1a] pb-1">
           Return to Journal
         </Link>
@@ -78,7 +78,7 @@ const BlogDetail = () => {
                           {item.title}
                         </h3>
                       )}
-                      <p className="text-[#1a1a1a]/75 text-[18px] leading-[2.1] font-serif text-left font-light">
+                      <p className="text-[#1a1a1a]/75 text-[18px] leading-[2.1] text-left font-light">
                         {item.content}
                       </p>
                     </div>
@@ -89,8 +89,8 @@ const BlogDetail = () => {
             </div>
           ) : (
             <article className="max-w-5xl mx-auto py-20">
-              <h1 className="text-4xl font-serif uppercase tracking-wider mb-12 text-center">{post.title}</h1>
-              <div className="prose prose-lg max-w-none font-serif text-[#1a1a1a]/70" dangerouslySetInnerHTML={{ __html: post.content }} />
+              <h1 className="text-4xl uppercase tracking-wider mb-12 text-center">{post.title}</h1>
+              <div className="prose prose-lg max-w-none text-[#1a1a1a]/70" dangerouslySetInnerHTML={{ __html: post.content }} />
             </article>
           )}
 

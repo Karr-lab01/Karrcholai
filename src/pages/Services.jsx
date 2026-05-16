@@ -130,7 +130,7 @@ const Services = () => {
             >
               <h2 className="text-secondary font-black tracking-[0.5em] uppercase text-xs md:text-sm mb-6">Our Expertise</h2>
               <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.95] md:leading-none tracking-tighter mb-8 uppercase">
-                Building <br /> <span className="text-transparent stroke-text italic font-serif">Excellence.</span>
+                Building <br /> <span className="text-transparent stroke-text italic">Excellence.</span>
               </h1>
               <p className="text-white/60 text-base md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
                 We provide comprehensive support throughout the entire construction process, making it smooth, transparent, and stress-free.
@@ -219,7 +219,7 @@ const Services = () => {
               <motion.div {...fadeInUp}>
                 <h2 className="text-secondary font-black tracking-[0.6em] uppercase text-[10px] md:text-xs mb-6">Our Commitment</h2>
                 <h3 className="text-4xl md:text-7xl font-black text-dark leading-[1.1] md:leading-none tracking-tighter mb-8">
-                  Why Choose <br /> <span className="text-primary italic font-serif">Karrcholai.</span>
+                  Why Choose <br /> <span className="text-primary italic">Karrcholai.</span>
                 </h3>
                 <p className="text-dark/40 text-base md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
                   We are committed to delivering high-quality construction while building long-term trust with our clients through excellence and transparency.

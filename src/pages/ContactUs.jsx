@@ -198,7 +198,7 @@ export default function ContactUs() {
                 style={{ fontSize: 'clamp(2.8rem, 12vw, 8rem)' }}>
                 <PWord delay={0.1}>CONTACT&nbsp;</PWord>
                 <PWord delay={0.22}>
-                  <span className="italic font-serif" style={{
+                  <span className="italic" style={{
                     color: 'transparent',
                     WebkitTextStroke: `2px ${TERRA}`,
                     textShadow: `0 0 40px ${TERRA}66`
@@ -246,7 +246,7 @@ export default function ContactUs() {
             <div className="overflow-hidden mb-6">
               <motion.h2 initial={{ y: 60, opacity: 0 }} animate={introInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="text-3xl sm:text-4xl md:text-5xl font-black font-serif leading-tight" style={{ color: DARK }}>
+                className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight" style={{ color: DARK }}>
                 If you are planning to<br />
                 <span style={{ color: TERRA, fontStyle: 'italic' }}>build a house</span> or require<br />
                 professional support
@@ -326,7 +326,7 @@ export default function ContactUs() {
               <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>Simple Process</span>
               <span className="w-8 h-px" style={{ background: TERRA }} />
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black font-serif text-white">How to Reach Us</h2>
+            <h2 className="text-3xl sm:text-5xl font-black text-white">How to Reach Us</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
@@ -334,7 +334,7 @@ export default function ContactUs() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="lg:col-span-3 rounded-[2rem] p-5 sm:p-6 flex flex-col" style={{ background: CREAM }}>
               <div className="mb-3">
-                <h3 className="text-xl font-black font-serif mb-0.5" style={{ color: DARK }}>Get in Touch</h3>
+                <h3 className="text-xl font-black mb-0.5" style={{ color: DARK }}>Get in Touch</h3>
                 <p className="text-[11px] font-light" style={{ color: `${DARK}60` }}>We'll get back to you shortly.</p>
               </div>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -451,7 +451,7 @@ export default function ContactUs() {
                     transition={{ duration: 0.8, delay: 0.2 }} />
                   <span className="text-[10px] font-black tracking-[0.45em] uppercase" style={{ color: TERRA }}>Common Questions</span>
                 </div>
-                <h2 className="text-3xl sm:text-4xl font-black font-serif text-white leading-tight">
+                <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
                   Got Questions? We've Got <span style={{ color: TERRA, fontStyle: 'italic' }}>Answers.</span>
                 </h2>
               </motion.div>
@@ -490,7 +490,7 @@ export default function ContactUs() {
                     
                     <div className="flex flex-col gap-4">
                       <div>
-                        <h3 className="text-xl font-black font-serif text-white">Find Us</h3>
+                        <h3 className="text-xl font-black text-white">Find Us</h3>
                         <p className="text-[10px] font-light text-white/40 mt-1">5/20, Puliyampatti, Karur - 639 206</p>
                       </div>
                       

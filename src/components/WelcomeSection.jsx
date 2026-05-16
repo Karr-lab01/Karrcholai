@@ -77,13 +77,13 @@ const WelcomeSection = () => {
               className="grid grid-cols-2 gap-8"
             >
               <div className="border-l-4 border-primary pl-6 py-2">
-                <h4 className="text-3xl font-serif font-black text-primary mb-1">
+                <h4 className="text-3xl font-black text-primary mb-1">
                   <Counter to={12} suffix="+" />
                 </h4>
                 <p className="text-[10px] text-dark/40 font-black tracking-widest uppercase">Years of mastery</p>
               </div>
               <div className="border-l-4 border-secondary pl-6 py-2">
-                <h4 className="text-3xl font-serif font-black text-secondary mb-1">
+                <h4 className="text-3xl font-black text-secondary mb-1">
                   <Counter to={150} suffix="+" />
                 </h4>
                 <p className="text-[10px] text-dark/40 font-black tracking-widest uppercase">Visions Realized</p>
@@ -142,14 +142,14 @@ const WelcomeSection = () => {
                   </text>
                 </svg>
                 <div className="absolute flex flex-col items-center justify-center bg-white w-20 h-20 rounded-full shadow-xl">
-                  <span className="text-2xl font-black text-secondary font-serif">12</span>
+                  <span className="text-2xl font-black text-secondary">12</span>
                   <span className="text-[8px] font-black uppercase tracking-tighter">Years</span>
                 </div>
               </motion.div>
             </div>
 
             {/* Decorative background number */}
-            <div className="absolute -top-10 -right-10 text-[200px] font-black text-dark/5 font-serif select-none pointer-events-none">
+            <div className="absolute -top-10 -right-10 text-[200px] font-black text-dark/5 select-none pointer-events-none">
               EST.
             </div>
           </div>

@@ -219,7 +219,7 @@ function ProjectCard({ project, category, index }) {
             <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase mb-1" style={{ color: `${STONE}60` }}>
               {project.sub}
             </p>
-            <h3 className="text-lg sm:text-xl font-black font-serif leading-tight mb-2 transition-colors duration-300"
+            <h3 className="text-lg sm:text-xl font-black leading-tight mb-2 transition-colors duration-300"
               style={{ color: hovered ? TERRA : STONE }}>
               {project.title}
             </h3>
@@ -318,7 +318,7 @@ function CategorySection({ category }) {
             initial={{ y: 60, opacity: 0 }}
             animate={headInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.85, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl md:text-6xl font-black font-serif leading-tight"
+            className="text-4xl md:text-6xl font-black leading-tight"
             style={{ color: DARK }}
           >
             {cat.tagline}
@@ -401,7 +401,7 @@ function VirtualTourSection() {
               <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>Interactive Experience</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-serif text-white leading-tight mb-8">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-8">
               Step Inside Our <br/>
               <span style={{ color: TERRA, fontStyle: 'italic' }}>Flagship Villa.</span>
             </h2>
@@ -515,7 +515,7 @@ function SustainabilitySection() {
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                 <span className="text-[10px] font-bold text-white uppercase tracking-widest">Net-Zero Ready</span>
               </div>
-              <h3 className="text-2xl font-serif text-white leading-tight">Building for the next hundred years.</h3>
+              <h3 className="text-2xl text-white leading-tight">Building for the next hundred years.</h3>
             </div>
           </motion.div>
         </div>
@@ -532,7 +532,7 @@ function SustainabilitySection() {
               <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>Eco-Engineering</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-serif text-white leading-tight mb-8">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-8">
               Sustainable Luxury, <br/>
               <span style={{ color: TERRA, fontStyle: 'italic' }}>Without Compromise.</span>
             </h2>
@@ -751,7 +751,7 @@ export default function Projects() {
         />
         {/* Big ghost text */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-          <span className="text-[20vw] font-black font-serif opacity-[0.04] select-none whitespace-nowrap" style={{ color: STONE }}>
+          <span className="text-[20vw] font-black opacity-[0.04] select-none whitespace-nowrap" style={{ color: STONE }}>
             BUILD
           </span>
         </div>
@@ -775,7 +775,7 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl md:text-6xl font-black font-serif leading-tight mb-6"
+            className="text-4xl md:text-6xl font-black leading-tight mb-6"
             style={{ color: STONE }}
           >
             Have a Project<br />

@@ -35,7 +35,7 @@ const HomeBlogSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="text-4xl md:text-7xl font-black text-dark font-serif leading-[0.9] tracking-tighter uppercase"
+              className="text-4xl md:text-7xl font-black text-dark leading-[0.9] tracking-tighter uppercase"
             >
               The <br />
               <span className="text-secondary italic font-light">Journal.</span>
@@ -90,7 +90,7 @@ const HomeBlogSection = () => {
                 </div>
 
                 <Link to={`/blog/${post.id}`}>
-                  <h3 className="text-3xl font-black text-dark group-hover:text-secondary transition-colors duration-500 leading-tight font-serif uppercase tracking-tight line-clamp-2">
+                  <h3 className="text-3xl font-black text-dark group-hover:text-secondary transition-colors duration-500 leading-tight uppercase tracking-tight line-clamp-2">
                     {post.title}
                   </h3>
                 </Link>

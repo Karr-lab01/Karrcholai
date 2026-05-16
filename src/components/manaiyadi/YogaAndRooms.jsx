@@ -29,7 +29,7 @@ const YogaAndRooms = () => {
              <div className="absolute inset-0 bg-dark/20"></div>
              <div className="absolute top-8 left-8 right-6 md:top-12 md:left-12">
                 <h3 className="text-white font-black tracking-[0.5em] uppercase text-[10px] mb-4 px-1">Synergetic</h3>
-                <p className="text-white text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none">The Yoga <br/> <span className="italic font-serif">Unions.</span></p>
+                <p className="text-white text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none">The Yoga <br/> <span className="italic">Unions.</span></p>
              </div>
           </div>
 
@@ -39,7 +39,7 @@ const YogaAndRooms = () => {
                 <div className="mb-12 md:mb-16">
                   <h3 className="text-secondary font-black tracking-[0.5em] uppercase text-[10px] mb-4 md:mb-6">Synergetic Ratios</h3>
                   <h2 className="text-3xl md:text-6xl font-black text-dark leading-[0.95] tracking-tighter uppercase mb-6">
-                    Harmonic <span className="text-primary italic font-serif">Pairings.</span>
+                    Harmonic <span className="text-primary italic">Pairings.</span>
                   </h2>
                   <p className="text-dark/40 text-base md:text-lg font-light leading-relaxed max-w-xl">
                     For maximum prosperity, both length and width must align. These specific combinations create powerful positive energy fields.
@@ -78,7 +78,7 @@ const YogaAndRooms = () => {
              <div className="absolute inset-0 bg-dark/20"></div>
              <div className="absolute bottom-8 left-8 right-6 md:bottom-16 md:left-12">
                 <h3 className="text-white font-black tracking-[0.5em] uppercase text-[10px] mb-4">Archetypes</h3>
-                <p className="text-white text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none break-words">Optimal <br/> <span className="italic font-serif">Proportions.</span></p>
+                <p className="text-white text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none break-words">Optimal <br/> <span className="italic">Proportions.</span></p>
              </div>
           </div>
 
@@ -88,7 +88,7 @@ const YogaAndRooms = () => {
                 <div className="mb-12 md:mb-20">
                   <h3 className="text-secondary font-black tracking-[0.5em] uppercase text-[10px] mb-4 md:mb-6">Structural Wisdom</h3>
                   <h2 className="text-3xl md:text-6xl font-black text-dark leading-tight uppercase mb-6 md:mb-8">
-                    Space <span className="text-primary italic font-serif">Archetypes.</span>
+                    Space <span className="text-primary italic">Archetypes.</span>
                   </h2>
                   <p className="text-dark/40 text-base md:text-lg font-light leading-relaxed max-w-2xl italic">
                     Specific dimensional pairings curated for individual sanctuary types to maximize energy flow and purpose.

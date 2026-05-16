@@ -23,7 +23,7 @@ export default function FootprintMapSection() {
       
       {/* Large faint text in background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none select-none">
-        <span className="text-[10vw] md:text-[12vw] font-black font-serif text-white opacity-[0.02] whitespace-nowrap">
+        <span className="text-[10vw] md:text-[12vw] font-black text-white opacity-[0.02] whitespace-nowrap">
           SOUTH INDIA
         </span>
       </div>
@@ -42,7 +42,7 @@ export default function FootprintMapSection() {
               <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>Our Footprint</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-serif text-white leading-tight mb-6">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
               Building Across <br/>
               <span style={{ color: TERRA, fontStyle: 'italic' }}>The Region.</span>
             </h2>

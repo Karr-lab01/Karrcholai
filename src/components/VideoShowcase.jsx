@@ -52,7 +52,7 @@ const VideoShowcase = () => {
           </span>
           <h2 className="text-3xl sm:text-5xl md:text-8xl font-bold text-white tracking-tighter leading-none mb-6 md:mb-8">
             From Stone to <br />
-            <span className="italic text-white/40 font-serif font-light">Oasis.</span>
+            <span className="italic text-white/40 font-light">Oasis.</span>
           </h2>
           
           <div className="max-w-xl mx-auto">

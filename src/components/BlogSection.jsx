@@ -10,7 +10,7 @@ const BlogSection = () => {
     <section id="insights" className="py-24 md:py-32 bg-[#FAF6F0] relative overflow-hidden">
       {/* Decorative Watermark */}
       <div className="absolute left-10 top-1/2 -translate-y-1/2 opacity-[0.02] pointer-events-none select-none hidden lg:block">
-        <span className="text-[200px] font-black font-serif uppercase rotate-90 inline-block">Journal</span>
+        <span className="text-[200px] font-black uppercase rotate-90 inline-block">Journal</span>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
@@ -34,7 +34,7 @@ const BlogSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl md:text-6xl font-black text-dark font-serif uppercase tracking-tight leading-[0.95]"
+              className="text-4xl md:text-6xl font-black text-dark uppercase tracking-tight leading-[0.95]"
             >
               Insights & <br />
               <span className="italic font-light text-secondary/40">Architectural Lore.</span>
@@ -88,7 +88,7 @@ const BlogSection = () => {
                 </div>
 
                 <Link to={`/blog/${post.id}`}>
-                  <h3 className="text-2xl font-black text-dark group-hover:text-secondary transition-colors duration-500 leading-tight mb-6 font-serif uppercase tracking-tight line-clamp-2">
+                  <h3 className="text-2xl font-black text-dark group-hover:text-secondary transition-colors duration-500 leading-tight mb-6 uppercase tracking-tight line-clamp-2">
                     {post.title}
                   </h3>
                 </Link>

@@ -31,7 +31,7 @@ const CTASection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold font-serif text-white mb-6 drop-shadow-2xl"
+          className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl"
         >
           Stone Strong. Oasis Living.
         </motion.h2>

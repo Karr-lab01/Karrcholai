@@ -47,7 +47,7 @@ const HomeContactSection = () => {
                 <span className="w-12 h-px bg-secondary" />
                 <span className="text-secondary font-black text-[10px] tracking-[0.4em] uppercase">Connect With Us</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-black text-dark font-serif leading-tight">
+              <h2 className="text-4xl md:text-5xl font-black text-dark leading-tight">
                 Let's <span className="italic text-secondary">Collaborate</span> On Your Vision.
               </h2>
             </div>

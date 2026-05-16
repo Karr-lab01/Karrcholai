@@ -88,7 +88,7 @@ const KarrHomeSection = () => {
               className="text-5xl md:text-7xl font-black leading-none tracking-tighter text-[#1a1a1a]"
             >
               KARR <br />
-              <span className="italic font-serif text-[#1a1a1a]/15">Construction.</span>
+              <span className="italic text-[#1a1a1a]/15">Construction.</span>
             </motion.h2>
           </div>
 
@@ -171,7 +171,7 @@ const KarrHomeSection = () => {
               <div>
                 <h3 className="text-4xl md:text-5xl font-black text-[#1a1a1a] leading-tight tracking-tight mb-6">
                   {current.headline.split(' ').slice(0, -1).join(' ')}{' '}
-                  <span className="italic font-serif text-[#1a1a1a]/20">
+                  <span className="italic text-[#1a1a1a]/20">
                     {current.headline.split(' ').slice(-1)}
                   </span>
                 </h3>

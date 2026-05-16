@@ -127,7 +127,7 @@ const Karr = () => {
               </span>
               <h1 className="text-5xl md:text-8xl font-bold text-white leading-none tracking-tighter mb-8">
                 Karr<br />
-                <span className="text-white/30 italic font-serif">Construction.</span>
+                <span className="text-white/30 italic">Construction.</span>
               </h1>
               <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
                 The Karr division focuses on providing strong, durable, and professionally managed residential construction services.
@@ -152,7 +152,7 @@ const Karr = () => {
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block">Residential Construction</span>
                 <h2 className="text-4xl md:text-6xl font-bold leading-none tracking-tight">
                   Crafting <br />
-                  <span className="text-[#1a1a1a]/20 italic font-serif">Exceptional Homes.</span>
+                  <span className="text-[#1a1a1a]/20 italic">Exceptional Homes.</span>
                 </h2>
               </motion.div>
               <motion.p 
@@ -202,7 +202,7 @@ const Karr = () => {
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block">Project Management Consultancy (PMC)</span>
                 <h2 className="text-4xl md:text-7xl font-bold leading-none tracking-tight mb-8">
                   Efficiency in <br />
-                  <span className="text-white/30 italic font-serif">Execution.</span>
+                  <span className="text-white/30 italic">Execution.</span>
                 </h2>
                 <p className="text-white/40 text-lg font-light leading-relaxed mb-12 max-w-lg">
                   Our Project Management Consultancy (PMC) services help homeowners manage their construction projects efficiently.
@@ -274,7 +274,7 @@ const Karr = () => {
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block">Renovation & Remodelling</span>
                 <h2 className="text-4xl md:text-6xl font-bold leading-none tracking-tight mb-8">
                   Revitalize Your <br />
-                  <span className="text-[#1a1a1a]/20 italic font-serif">Living Space.</span>
+                  <span className="text-[#1a1a1a]/20 italic">Living Space.</span>
                 </h2>
                 <p className="text-[#1a1a1a]/50 text-lg font-light leading-relaxed mb-12">
                   Our renovation solutions enhance the functionality, durability, and appearance of existing homes.
@@ -312,7 +312,7 @@ const Karr = () => {
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block text-center">Planning & Estimation</span>
                 <h2 className="text-4xl md:text-7xl font-bold leading-none tracking-tighter">
                   Financial <br />
-                  <span className="text-[#1a1a1a]/20 italic font-serif text-center">Clarity.</span>
+                  <span className="text-[#1a1a1a]/20 italic text-center">Clarity.</span>
                 </h2>
               </motion.div>
             </div>

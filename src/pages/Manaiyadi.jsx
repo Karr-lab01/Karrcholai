@@ -56,7 +56,7 @@ const Manaiyadi = () => {
             >
               <h2 className="text-white font-black tracking-[0.5em] md:tracking-[0.8em] uppercase text-[10px] md:text-xs mb-6 md:mb-8">Architectural Wisdom</h2>
               <h1 className="text-4xl md:text-7xl lg:text-8xl font-black text-white leading-[0.85] tracking-tighter mb-8 md:mb-12 uppercase mix-blend-difference whitespace-normal md:whitespace-nowrap">
-                Manaiyadi <br className="md:hidden" /> <span className="text-transparent stroke-text-white italic font-serif">Sastram.</span>
+                Manaiyadi <br className="md:hidden" /> <span className="text-transparent stroke-text-white italic">Sastram.</span>
               </h1>
               <div className="flex flex-col md:flex-row items-center justify-center gap-8">
                 <div className="w-[1px] h-20 bg-white/20 hidden md:block"></div>
@@ -90,7 +90,7 @@ const Manaiyadi = () => {
                   <span className="w-8 h-[1px] bg-secondary"></span> Introduction
                 </h3>
                 <h2 className="text-4xl md:text-6xl font-black text-dark leading-tight tracking-tighter">
-                  Ancient <br /> <span className="text-primary italic font-serif">Heritage.</span>
+                  Ancient <br /> <span className="text-primary italic">Heritage.</span>
                 </h2>
               </div>
               <div className="md:w-2/3">
@@ -125,7 +125,7 @@ const Manaiyadi = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent"></div>
                       <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
                         <p className="text-white font-black uppercase tracking-[0.3em] text-[9px] mb-2 opacity-60">Visual Harmony</p>
-                        <p className="text-white text-xl md:text-2xl font-black tracking-tighter uppercase italic font-serif leading-tight">Structural <br/> Divinity.</p>
+                        <p className="text-white text-xl md:text-2xl font-black tracking-tighter uppercase italic leading-tight">Structural <br/> Divinity.</p>
                       </div>
                     </motion.div>
                     
@@ -149,12 +149,12 @@ const Manaiyadi = () => {
                  {/* Right Column: Philosophy Text */}
                  <motion.div {...fadeInUp} className="lg:pl-12">
                     <h3 className="text-secondary font-black uppercase tracking-[0.4em] text-[10px] mb-6 md:mb-8">The Philosophy</h3>
-                    <h2 className="text-3xl md:text-7xl font-black text-dark mb-6 md:mb-10 tracking-tighter uppercase leading-none">Vibrational <br/> <span className="text-primary italic font-serif">Synchronicity.</span></h2>
+                    <h2 className="text-3xl md:text-7xl font-black text-dark mb-6 md:mb-10 tracking-tighter uppercase leading-none">Vibrational <br/> <span className="text-primary italic">Synchronicity.</span></h2>
                     <p className="text-dark/40 text-base md:text-lg font-light leading-relaxed mb-6 md:mb-8">
                        Every dimension—width, length, or height—carries a specific vibrational frequency that interacts with cosmic energies. 
                     </p>
                     <div className="w-12 h-px bg-dark/10 mb-8"></div>
-                    <p className="text-dark/60 text-sm italic font-serif">
+                    <p className="text-dark/60 text-sm italic">
                        "Architecture is the reach for truth, and Manaiyadi Sastram is the mathematical path to it."
                     </p>
                  </motion.div>
@@ -171,7 +171,7 @@ const Manaiyadi = () => {
             <div className="text-center mb-16 md:mb-24">
               <motion.div {...fadeInUp}>
                 <h3 className="text-secondary font-black tracking-[0.3em] md:tracking-[0.5em] uppercase text-[10px] mb-4 md:mb-6">Precision Tooling</h3>
-                <h2 className="text-4xl md:text-8xl font-black text-dark mb-6 md:mb-8 tracking-tighter uppercase">Algorithm <br className="md:hidden" /> <span className="text-primary italic font-serif">Engine.</span></h2>
+                <h2 className="text-4xl md:text-8xl font-black text-dark mb-6 md:mb-8 tracking-tighter uppercase">Algorithm <br className="md:hidden" /> <span className="text-primary italic">Engine.</span></h2>
                 <div className="w-12 h-1 bg-primary mx-auto mb-10"></div>
               </motion.div>
             </div>
@@ -197,7 +197,7 @@ const Manaiyadi = () => {
                  <div className="p-8 md:p-16 bg-secondary/5 border border-secondary/10 rounded-[3rem] md:rounded-[4rem] relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-8 text-secondary/10"><FiAlertTriangle size={80}/></div>
                     <h3 className="text-secondary font-black uppercase tracking-[0.4em] text-[10px] mb-8 md:mb-10">Pitfalls to Avoid</h3>
-                    <h2 className="text-3xl md:text-4xl font-black text-dark mb-8 md:mb-12 tracking-tight uppercase leading-none">Common <br/> <span className="italic font-serif">Mistakes.</span></h2>
+                    <h2 className="text-3xl md:text-4xl font-black text-dark mb-8 md:mb-12 tracking-tight uppercase leading-none">Common <br/> <span className="italic">Mistakes.</span></h2>
                     <ul className="space-y-6 md:space-y-8">
                        {[
                          "Including Wall Thickness in calculations",
@@ -215,7 +215,7 @@ const Manaiyadi = () => {
                  <div className="p-8 md:p-16 bg-primary/5 border border-primary/10 rounded-[3rem] md:rounded-[4rem] relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-8 text-primary/10"><FiCheckCircle size={80}/></div>
                     <h3 className="text-primary font-black uppercase tracking-[0.4em] text-[10px] mb-8 md:mb-10">Scientific Perspective</h3>
-                    <h2 className="text-3xl md:text-4xl font-black text-dark mb-8 md:mb-12 tracking-tight uppercase leading-none">Cultural <br/> <span className="italic font-serif">Confidence.</span></h2>
+                    <h2 className="text-3xl md:text-4xl font-black text-dark mb-8 md:mb-12 tracking-tight uppercase leading-none">Cultural <br/> <span className="italic">Confidence.</span></h2>
                     <p className="text-xs md:text-sm text-dark/40 leading-relaxed font-light mb-6 md:mb-8">
                        While rooted in traditional beliefs, Manaiyadi Sastram represents a sophisticated system of architectural planning that has stood the test of time.
                     </p>
@@ -241,7 +241,7 @@ const Manaiyadi = () => {
               </div>
               <div className="relative z-10">
                 <h2 className="text-2xl sm:text-3xl md:text-6xl font-black mb-6 tracking-tighter uppercase leading-[1.1]">
-                  Begin Your <br className="sm:hidden" /> <span className="text-secondary italic font-serif">Auspicious</span> <br className="sm:hidden" /> Journey.
+                  Begin Your <br className="sm:hidden" /> <span className="text-secondary italic">Auspicious</span> <br className="sm:hidden" /> Journey.
                 </h2>
                 <p className="text-white/40 text-xs md:text-base mb-10 max-w-lg mx-auto font-light leading-relaxed">
                   Our master planners are ready to harmonize your vision with ancient structural integrity.

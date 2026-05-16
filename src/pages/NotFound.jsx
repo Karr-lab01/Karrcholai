@@ -18,7 +18,7 @@ export default function NotFound() {
         transition={{ duration: 0.5 }}
         className="flex-grow flex flex-col items-center justify-center text-center px-6 pt-32 pb-20"
       >
-        <h1 className="text-8xl md:text-[12rem] font-black mb-4 tracking-tighter text-dark/10" style={{ fontFamily: 'Playfair Display, serif' }}>
+        <h1 className="text-8xl md:text-[12rem] font-black mb-4 tracking-tighter text-dark/10">
           404
         </h1>
         <h2 className="text-2xl md:text-4xl font-black mb-4 text-dark uppercase tracking-widest">

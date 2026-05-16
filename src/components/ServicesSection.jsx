@@ -63,7 +63,7 @@ const ServicesSection = () => {
             <span className="text-secondary font-bold tracking-[0.6em] uppercase text-[10px] mb-4 block">Our Expertise</span>
             <h2 className="text-4xl sm:text-5xl md:text-8xl font-bold text-white tracking-tighter leading-none">
               Our <br />
-              <span className="text-white/30 italic font-serif">Services.</span>
+              <span className="text-white/30 italic">Services.</span>
             </h2>
           </motion.div>
           

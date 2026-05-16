@@ -117,7 +117,7 @@ const CholaiHomeSection = () => {
               className="text-5xl md:text-7xl font-black leading-none tracking-tighter"
             >
               CHOLAI <br />
-              <span className="italic font-serif text-white/15">Solutions.</span>
+              <span className="italic text-white/15">Solutions.</span>
             </motion.h2>
           </div>
 
@@ -186,7 +186,7 @@ const CholaiHomeSection = () => {
                 <h3 className="text-4xl md:text-5xl font-black leading-tight tracking-tight mb-6">
                   {current.title.split(' ')[0]}{' '}
                   <br />
-                  <span className="text-white/20 italic font-serif">
+                  <span className="text-white/20 italic">
                     {current.title.split(' ').slice(1).join(' ')}
                   </span>
                 </h3>

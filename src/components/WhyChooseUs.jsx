@@ -36,7 +36,7 @@ const WhyChooseUs = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-dark font-serif leading-none mb-6 md:mb-10"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-dark leading-none mb-6 md:mb-10"
             >
               Why <br/>
               <span className="text-secondary italic">Trust</span> Us?
@@ -52,7 +52,7 @@ const WhyChooseUs = () => {
             </motion.p>
 
             {/* Large background text */}
-            <div className="text-[180px] font-black text-primary/5 font-serif leading-none select-none pointer-events-none mt-20">
+            <div className="text-[180px] font-black text-primary/5 leading-none select-none pointer-events-none mt-20">
               12+
             </div>
           </div>
@@ -74,7 +74,7 @@ const WhyChooseUs = () => {
                       <Icon size={28} />
                     </div>
                     
-                    <h3 className="text-2xl font-serif font-black text-dark mb-4 group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-2xl font-black text-dark mb-4 group-hover:text-primary transition-colors duration-300">
                       {r.title}
                     </h3>
                     

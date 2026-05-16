@@ -136,7 +136,7 @@ const Cholai = () => {
             >
               <h2 className="text-secondary font-black tracking-[0.4em] uppercase text-[10px] md:text-sm mb-4 md:mb-6 block">Sustainable Living</h2>
               <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-[0.95] mb-6 md:mb-8">
-                CHOLAI <br className="md:hidden" /> <span className="text-transparent stroke-text italic font-serif">Solutions</span>
+                CHOLAI <br className="md:hidden" /> <span className="text-transparent stroke-text italic">Solutions</span>
               </h1>
               <div className="flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-8">
                 <div className="h-[1px] w-8 md:w-12 bg-secondary/50" />
@@ -328,7 +328,7 @@ const Cholai = () => {
               <h3 className="text-3xl md:text-5xl lg:text-7xl font-black mb-10 leading-[1.1] md:leading-[0.95] tracking-tighter">
                 Ready to transform <br className="hidden md:block" />
                 your home into a <br className="hidden md:block" />
-                <span className="font-black italic text-secondary font-serif">sustainable sanctuary?</span>
+                <span className="font-black italic text-secondary">sustainable sanctuary?</span>
               </h3>
               
               <p className="text-white/50 text-lg font-light mb-12 max-w-2xl mx-auto leading-relaxed">

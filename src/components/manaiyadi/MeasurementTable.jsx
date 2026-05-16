@@ -35,7 +35,7 @@ const MeasurementTable = () => {
           <div className="max-w-xl text-center lg:text-left">
             <h3 className="text-secondary font-black tracking-[0.5em] uppercase text-[10px] mb-4">Registry 01</h3>
             <h2 className="text-4xl md:text-7xl font-black text-dark leading-[0.9] tracking-tighter uppercase">
-              The Master <br /> <span className="text-transparent stroke-text-dark italic font-serif">Registry.</span>
+              The Master <br /> <span className="text-transparent stroke-text-dark italic">Registry.</span>
             </h2>
           </div>
 
@@ -160,7 +160,7 @@ const MeasurementTable = () => {
           <div className="text-center mb-12 md:mb-20">
              <h3 className="text-secondary font-black tracking-[0.5em] uppercase text-[10px] mb-4">Analysis 02</h3>
              <h2 className="text-4xl md:text-7xl font-black text-dark tracking-tighter uppercase leading-none">
-                Vertical <span className="text-primary italic font-serif">Elevation.</span>
+                Vertical <span className="text-primary italic">Elevation.</span>
              </h2>
              <p className="mt-6 text-dark/40 text-base md:text-lg font-light max-w-2xl mx-auto italic">
                 How wall heights dictate the vertical energy flow of a sanctuary.
@@ -225,7 +225,7 @@ const MeasurementTable = () => {
                         <StatusIcon status={wallHeightEffects[activeHeight].status} />
                         <span className="text-[10px] font-black uppercase tracking-widest">{wallHeightEffects[activeHeight].status}</span>
                      </div>
-                     <h3 className="text-3xl md:text-6xl font-black text-dark tracking-tighter uppercase mb-4 md:mb-6">{activeHeight} Feet <span className="text-primary italic font-serif">Height.</span></h3>
+                     <h3 className="text-3xl md:text-6xl font-black text-dark tracking-tighter uppercase mb-4 md:mb-6">{activeHeight} Feet <span className="text-primary italic">Height.</span></h3>
                      <p className="text-lg md:text-xl text-dark/60 font-light leading-relaxed max-w-xl italic">
                        "{wallHeightEffects[activeHeight].effect}"
                      </p>

@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
 :root {
   --primary: #2D4B37;
   --secondary: #B85C38;
@@ -17,7 +15,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Barlow', sans-serif !important;
   background-color: var(--cream);
   color: var(--dark);
   overflow-x: hidden;

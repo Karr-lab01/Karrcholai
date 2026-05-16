@@ -31,7 +31,7 @@ const Blog = () => {
         {/* ── KANAKAVALLI STYLE HEADER ── */}
         <div className="border-b border-[#1a1a1a]/10 pb-12 mb-12">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h1 className="text-4xl md:text-5xl font-serif uppercase tracking-[0.2em] mb-4">The Journal</h1>
+            <h1 className="text-4xl md:text-5xl uppercase tracking-[0.2em] mb-4">The Journal</h1>
             <p className="text-[10px] md:text-[11px] font-bold tracking-[0.4em] uppercase text-[#1a1a1a]/50">Insights, Stories & Architectural Lore</p>
           </div>
         </div>
@@ -81,7 +81,7 @@ const Blog = () => {
                     {post.category}
                   </span>
                   <Link to={`/blog/${post.id}`}>
-                    <h3 className="text-xl md:text-2xl font-serif uppercase tracking-tight leading-tight mb-6 group-hover:opacity-60 transition-opacity">
+                    <h3 className="text-xl md:text-2xl uppercase tracking-tight leading-tight mb-6 group-hover:opacity-60 transition-opacity">
                       {post.title}
                     </h3>
                   </Link>

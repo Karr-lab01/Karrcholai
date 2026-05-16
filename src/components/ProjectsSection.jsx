@@ -57,7 +57,7 @@ const ProjectsSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white font-serif leading-none"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white leading-none"
             >
               Featured <br/>
               <span className="text-primary italic">Architectures.</span>
@@ -112,7 +112,7 @@ const ProjectsSection = () => {
                       </span>
                     </div>
                     
-                    <h3 className="text-xl md:text-3xl font-black text-white font-serif mb-1 md:mb-2 group-hover:text-secondary transition-colors duration-300 leading-none">
+                    <h3 className="text-xl md:text-3xl font-black text-white mb-1 md:mb-2 group-hover:text-secondary transition-colors duration-300 leading-none">
                       {p.title}
                     </h3>
                     

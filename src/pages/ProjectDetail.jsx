@@ -169,7 +169,7 @@ const ProjectDetail = () => {
                 <span className="text-[#C9754A] font-black text-[10px] tracking-[0.4em] uppercase">The Narrative</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-black mb-12 leading-tight">
-                Engineering <span className="text-dark/20">meets</span> architectural <span className="italic font-serif text-[#C9754A]">poetry.</span>
+                Engineering <span className="text-dark/20">meets</span> architectural <span className="italic text-[#C9754A]">poetry.</span>
               </h2>
               
               <div className="prose prose-lg max-w-none">
@@ -229,7 +229,7 @@ const ProjectDetail = () => {
           <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
             <h2 className="text-4xl md:text-7xl font-black mb-8 leading-none tracking-tighter">
               Inspired by this <br />
-              <span className="text-[#C9754A] italic font-serif">Structure?</span>
+              <span className="text-[#C9754A] italic">Structure?</span>
             </h2>
             <p className="text-white/50 text-lg font-light mb-12 max-w-2xl mx-auto">
               Every project starts with a single conversation. Let's discuss how we can bring 

@@ -94,7 +94,7 @@ const AboutUs = () => {
             >
               <h2 className="text-secondary font-bold tracking-[0.4em] md:tracking-[0.6em] uppercase text-[10px] md:text-sm mb-4 md:mb-6 block">Building Excellence</h2>
               <h1 className="text-5xl md:text-9xl font-black text-white uppercase tracking-tighter leading-tight md:leading-none mb-6 md:mb-8">
-                ABOUT <span className="text-transparent stroke-text italic font-serif inline-block ml-2">US</span>
+                ABOUT <span className="text-transparent stroke-text italic inline-block ml-2">US</span>
               </h1>
               <div className="flex items-center justify-center gap-3 md:gap-4 mb-8">
                 <div className="h-[1px] w-8 md:w-12 bg-secondary/50" />
@@ -278,7 +278,7 @@ const AboutUs = () => {
                 </div>
                 <h3 className="text-2xl md:text-4xl font-light text-dark tracking-tighter leading-tight">
                   Crafting <span className="font-medium">Excellence</span> <br /> 
-                  <span className="text-dark/20 font-serif italic">In every detail.</span>
+                  <span className="text-dark/20 italic">In every detail.</span>
                 </h3>
               </motion.div>
               
@@ -430,7 +430,7 @@ const AboutUs = () => {
                   
                   <h3 className="text-4xl md:text-5xl font-light leading-[1.1] mb-8 tracking-tighter">
                     Expertise that <br/>
-                    <span className="font-bold italic text-white font-serif">empowers</span> <br/>
+                    <span className="font-bold italic text-white">empowers</span> <br/>
                     <span className="text-secondary italic">your vision.</span>
                   </h3>
                   
@@ -673,7 +673,7 @@ const AboutUs = () => {
             >
               <h3 className="text-3xl md:text-5xl font-light mb-6 tracking-tight">
                 Ready to begin your <br />
-                <span className="font-medium italic text-secondary font-serif">architectural journey?</span>
+                <span className="font-medium italic text-secondary">architectural journey?</span>
               </h3>
               <p className="text-sm md:text-base text-white/50 font-light mb-12 max-w-lg mx-auto leading-relaxed">
                 Schedule a consultation with our experts and take the first step towards realizing your vision with precision and elegance.
