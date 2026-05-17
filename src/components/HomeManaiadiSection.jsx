@@ -61,8 +61,8 @@ const HomeManaiadiSection = () => {
               The ancient Tamil science of vibrational measurement — governing how building dimensions influence human life, prosperity, and harmony.
             </p>
             <Link to="/manaiyadi">
-              <button className="group flex items-center gap-3 text-dark font-black text-[10px] tracking-[0.3em] uppercase hover:text-secondary transition-colors">
-                Explore Full Guide <FiArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              <button className="group bg-[#B85C38] text-white text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase px-6 sm:px-8 py-3.5 sm:py-4 rounded-sm transition-all duration-500 hover:bg-[#1a1a1a] hover:-translate-y-1 w-fit flex items-center justify-center gap-3 shadow-lg">
+                Explore Full Guide <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>
           </motion.div>

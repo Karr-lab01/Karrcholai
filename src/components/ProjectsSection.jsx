@@ -6,12 +6,12 @@ import prj3 from '../../assets/pic7.png'
 
 const projects = [
   { 
-    title: 'Modern Villa', 
-    location: 'Chennai, TN',
+    title: 'ecr residence', 
+    location: 'Chennai ecr',
     tag: 'Residential', 
     image: prj1, 
-    year: '2023',
-    size: '4,500 Sq.Ft'
+    year: '2026',
+    size: '17k Sq.Ft'
   },
   { 
     title: 'Heritage Duplex', 

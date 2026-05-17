@@ -157,26 +157,25 @@ export default function Projects() {
               className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight mt-2 leading-none" 
               style={{ color: BRONZE, fontFamily: "'Oswald', sans-serif" }}
             >
-              The Mohanavalli Residence
+              ECR Residence
             </h2>
             <div className="w-16 h-[2px] mt-4" style={{ background: TERRA }} />
           </div>
 
           {/* LUXURY METRICS DASHBOARD */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl sm:rounded-3xl border shadow-sm mb-10 sm:mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl sm:rounded-3xl border shadow-sm mb-10 sm:mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
             {[
-              { icon: FiMaximize, label: "Total Built Space", value: "4,500 Sq.Ft", accent: TERRA },
-              { icon: FiMapPin, label: "Geographic Site", value: "Erode, TN", accent: TERRA },
-              { icon: FiCalendar, label: "Year Completed", value: "2023", accent: TERRA },
-              { icon: FiUser, label: "Client Homeowner", value: "Mrs. E. Mohanavalli", accent: TERRA }
+              { icon: FiMaximize, label: "Total Built Space", value: "17k Sq.Ft", accent: TERRA },
+              { icon: FiMapPin, label: "Geographic Site", value: "Chennai ECR", accent: TERRA },
+              { icon: FiCalendar, label: "Year Completed", value: "2026", accent: TERRA }
             ].map((spec, idx) => (
-              <div key={idx} className="p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-dark/[0.02] bg-[#FCFBF9] flex flex-col justify-between hover:border-dark/10 transition-all duration-300">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 mb-4 sm:mb-6" style={{ background: `${spec.accent}08` }}>
-                  <spec.icon className="text-sm sm:text-lg" style={{ color: spec.accent }} />
+              <div key={idx} className="p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-dark/[0.02] bg-[#FCFBF9] flex items-center gap-3 sm:gap-4 hover:border-dark/10 transition-all duration-300">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${spec.accent}08` }}>
+                  <spec.icon className="text-sm sm:text-base" style={{ color: spec.accent }} />
                 </div>
                 <div>
-                  <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-dark/35 mb-1" style={{ fontFamily: "'Outfit', sans-serif" }}>{spec.label}</p>
-                  <p className="text-xs sm:text-base font-black text-dark/95 leading-none" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{spec.value}</p>
+                  <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-dark/35 mb-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>{spec.label}</p>
+                  <p className="text-xs sm:text-sm font-black text-dark/95 leading-none" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{spec.value}</p>
                 </div>
               </div>
             ))}
@@ -393,12 +392,11 @@ export default function Projects() {
           </div>
 
           {/* BRIGHT LUXURY METRICS ACCORDION */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl sm:rounded-3xl border shadow-sm mb-10 sm:mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl sm:rounded-3xl border shadow-sm mb-10 sm:mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
             {[
               { icon: FiMaximize, label: "Total Built Space", value: "5,100 Sq.Ft", accent: SAGE },
               { icon: FiMapPin, label: "Geographic Site", value: "Coimbatore, TN", accent: SAGE },
-              { icon: FiCalendar, label: "Year Completed", value: "2024", accent: SAGE },
-              { icon: FiUser, label: "Client Homeowner", value: "Mrs. N. Karthiga Devi", accent: SAGE }
+              { icon: FiCalendar, label: "Year Completed", value: "2024", accent: SAGE }
             ].map((spec, idx) => (
               <div key={idx} className="p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-dark/[0.02] bg-[#FCFBF9] flex items-center gap-3 sm:gap-4 hover:border-dark/10 transition-all duration-300">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${spec.accent}08` }}>
@@ -589,9 +587,6 @@ export default function Projects() {
             </div>
 
           </div>
-
-        </div>
-      </section>div>
 
         </div>
       </section>
