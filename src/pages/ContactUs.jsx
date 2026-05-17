@@ -1,10 +1,10 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useInView, useScroll, useTransform, useSpring } from 'framer-motion'
 import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiArrowRight, FiNavigation, FiChevronDown, FiInstagram, FiFacebook } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import heroBg from '../../assets/Exterior of modern luxury house with garden and beautiful sky.jpg'
-import heroVid from '../../assets/contact.mp4'
+import heroVid from '../../assets/contact1.jpg'
 import img1 from '../../assets/img1.jpg'
 import img5 from '../../assets/img5.jpg'
 import img9 from '../../assets/img9.jpg'
@@ -15,7 +15,6 @@ const FOREST = '#3F5F4A'
 const TERRA = '#C9754A'
 const CREAM = '#F5F2EC'
 const DARK = '#1C1C1A'
-
 
 const inp = `w-full px-4 py-2.5 rounded-xl text-sm font-medium outline-none transition-all duration-300 border-2 border-transparent bg-[#F5F2EC] focus:bg-white focus:border-[#C9754A]`
 
@@ -158,17 +157,16 @@ export default function ContactUs() {
       <section ref={heroRef} className="relative flex items-center justify-center overflow-hidden"
         style={{ height: 'clamp(420px, 65vw, 600px)' }}>
 
-        {/* Background — video with slow Ken Burns zoom + parallax */}
+        {/* Background — image with slow Ken Burns zoom + parallax */}
         <motion.div className="absolute inset-0 z-0" style={{ y: heroY }}>
-          <motion.video
-            autoPlay muted loop playsInline
+          <motion.img
+            src={heroVid}
+            alt="Contact Us Background"
             className="absolute inset-0 w-full h-full object-cover object-center"
             initial={{ scale: 1.15, opacity: 0 }}
             animate={{ scale: 1.08, opacity: 1 }}
             transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <source src={heroVid} type="video/mp4" />
-          </motion.video>
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
         </motion.div>
         {/* Ambient orbs */}
@@ -265,7 +263,7 @@ export default function ContactUs() {
               {[
                 { Icon: FiPhone, label: 'Phone', value: '+91 97414 16747', href: 'tel:+919741416747', color: TERRA },
                 { Icon: FiMail, label: 'Email', value: 'karrcholai@gmail.com', href: 'mailto:karrcholai@gmail.com', color: FOREST },
-                { Icon: FiMapPin, label: 'Location', value: 'Karur, Tamil Nadu', href: 'https://maps.google.com/?q=Karur,Tamil+Nadu', color: '#8B7355' },
+                { Icon: FiMapPin, label: 'Location', value: 'Karur, Tamil Nadu', href: 'https://maps.google.com/?q=5/20,+PULIYAMPATTI,+CV+PALAYAM+(PO),+PUGALUR+(TALUK),+THENNILAI+(WEST),+KARUR(DT)+-+639+206', color: '#8B7355' },
               ].map((item, i) => (
                 <motion.a key={i} href={item.href}
                   target={item.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
@@ -437,10 +435,10 @@ export default function ContactUs() {
           style={{ background: TERRA, opacity: 0.04 }}
           animate={{ scale: [1, 1.2, 1], opacity: [0.03, 0.07, 0.03] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            
+
             {/* Left: FAQ */}
             <div ref={faqRef}>
               <motion.div initial={{ opacity: 0, y: 30 }} animate={faqInView ? { opacity: 1, y: 0 } : {}}
@@ -475,11 +473,17 @@ export default function ContactUs() {
               <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={faqInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="relative rounded-3xl overflow-hidden aspect-[4/5] lg:aspect-auto lg:h-[580px] group shadow-2xl border border-white/10">
-                
+
                 {/* Map iframe */}
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125345.97330756779!2d78.01633513361834!3d10.958742211910795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2f08029517e7%3A0xc95861502476d7d!2sKarur%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1715609000000!5m2!1sen!2sin"
+                <iframe src="https://maps.google.com/maps?q=5/20,+PULIYAMPATTI,+CV+PALAYAM+(PO),+PUGALUR+(TALUK),+THENNILAI+(WEST),+KARUR(DT)+-+639+206&t=&z=13&ie=UTF8&iwloc=&output=embed"
                   width="100%" height="100%" style={{ border: 0, filter: 'saturate(0.8) contrast(1.1) invert(0.1) hue-rotate(180deg)' }}
                   allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+
+                {/* Map Clickable Overlay */}
+                <a href="https://maps.google.com/?q=5/20,+PULIYAMPATTI,+CV+PALAYAM+(PO),+PUGALUR+(TALUK),+THENNILAI+(WEST),+KARUR(DT)+-+639+206" 
+                   target="_blank" rel="noopener noreferrer" 
+                   className="absolute inset-0 z-10 block cursor-pointer" aria-label="Open location in Google Maps">
+                </a>
 
                 {/* Info Card Overlay */}
                 <div className="absolute bottom-6 left-6 right-6 z-20 pointer-events-none">
@@ -487,13 +491,13 @@ export default function ContactUs() {
                     transition={{ duration: 0.8, delay: 0.5 }}
                     className="pointer-events-auto rounded-2xl p-5"
                     style={{ background: 'rgba(22,20,16,0.92)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                    
+
                     <div className="flex flex-col gap-4">
                       <div>
                         <h3 className="text-xl font-black text-white">Find Us</h3>
-                        <p className="text-[10px] font-light text-white/40 mt-1">5/20, Puliyampatti, Karur - 639 206</p>
+                        <p className="text-[10px] font-light text-white/40 mt-1 leading-relaxed">5/20, PULIYAMPATTI, CV PALAYAM (PO), PUGALUR (TALUK), THENNILAI (WEST), KARUR(DT) - 639 206</p>
                       </div>
-                      
+
                       <div className="flex flex-col gap-2.5">
                         {[
                           { Icon: FiMapPin, v: 'Thennilai (West), Karur', c: TERRA },
@@ -509,7 +513,7 @@ export default function ContactUs() {
                         ))}
                       </div>
 
-                      <motion.a href="https://maps.google.com/?q=Karur,Tamil+Nadu" target="_blank" rel="noopener noreferrer"
+                      <motion.a href="https://maps.google.com/?q=5/20,+PULIYAMPATTI,+CV+PALAYAM+(PO),+PUGALUR+(TALUK),+THENNILAI+(WEST),+KARUR(DT)+-+639+206" target="_blank" rel="noopener noreferrer"
                         whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                         className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white text-dark text-[10px] font-black uppercase tracking-widest transition-all">
                         <FiNavigation size={12} /> Get Directions
@@ -523,7 +527,6 @@ export default function ContactUs() {
           </div>
         </div>
       </section>
-
       <UnifiedFooter />
     </div>
   )

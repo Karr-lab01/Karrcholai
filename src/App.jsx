@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { AnimatePresence } from 'framer-motion'
 import ScrollToTop from './components/ScrollToTop'
 import WhatsAppButton from './components/WhatsAppButton'
+import Pet from './components/Pet'
 import Preloader from './components/Preloader'
 import { usePageTracking } from './hooks/usePageTracking'
 
@@ -66,6 +67,7 @@ const AppContent = ({ loading, setLoading }) => {
             </Suspense>
           </main>
           <WhatsAppButton />
+          <Pet />
         </>
       )}
     </>
