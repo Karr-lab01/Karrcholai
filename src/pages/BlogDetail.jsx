@@ -29,9 +29,41 @@ const BlogDetail = () => {
     <div className="bg-white min-h-screen text-[#1a1a1a] font-sans selection:bg-[#B85C38] selection:text-white overflow-x-hidden">
       <Navbar />
 
-      <main className="pt-32 pb-20">
+      <main className="pt-24 pb-20">
+        
+        {/* ── HERO SECTION ── */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="w-full h-[60vh] md:h-[80vh] relative mb-16 md:mb-24 overflow-hidden bg-[#1a1a1a]"
+        >
+          {/* Blurred Background for Professional Framing */}
+          <div 
+             className="absolute inset-0 bg-cover bg-center blur-3xl opacity-40 scale-110" 
+             style={{ backgroundImage: `url(${post.image})` }} 
+          />
+          {/* Fully Visible Main Image */}
+          <img 
+             src={post.image} 
+             alt={post.title} 
+             className="w-full h-full object-contain relative z-10 py-4 md:py-8" 
+          />
+        </motion.div>
+
         <div className="max-w-6xl mx-auto px-6">
           
+          {/* ── POST HEADER ── */}
+          <div className="text-center mb-16 md:mb-24">
+             <span className="text-[#B85C38] text-[10px] font-black tracking-[0.4em] uppercase mb-6 block">
+                {post.category}
+             </span>
+             <h1 className="text-3xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-tight max-w-4xl mx-auto text-[#1a1a1a]">
+                {post.title}
+             </h1>
+             <div className="w-12 h-[1px] bg-[#1a1a1a]/10 mx-auto mt-10" />
+          </div>
+
           {/* ── DYNAMIC GALLERY LAYOUT ── */}
           {post.gallery ? (
             <div className="space-y-16 md:space-y-24">
@@ -84,12 +116,25 @@ const BlogDetail = () => {
                     </div>
                   );
                 }
+
+                if (item.type === 'html') {
+                  return (
+                    <article key={idx} className="max-w-5xl mx-auto py-4">
+                      {item.title && (
+                        <h3 className="text-center text-xs font-black tracking-[0.5em] uppercase mb-10 text-[#1a1a1a]">
+                          {item.title}
+                        </h3>
+                      )}
+                      <div className="prose prose-lg max-w-none text-[#1a1a1a]/70" dangerouslySetInnerHTML={{ __html: item.content }} />
+                    </article>
+                  );
+                }
+                
                 return null;
               })}
             </div>
           ) : (
-            <article className="max-w-5xl mx-auto py-20">
-              <h1 className="text-4xl uppercase tracking-wider mb-12 text-center">{post.title}</h1>
+            <article className="max-w-5xl mx-auto py-8">
               <div className="prose prose-lg max-w-none text-[#1a1a1a]/70" dangerouslySetInnerHTML={{ __html: post.content }} />
             </article>
           )}

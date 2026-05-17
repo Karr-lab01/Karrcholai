@@ -65,7 +65,6 @@ const PROJECTS = {
 }
 
 const CATEGORIES = [
-  { key:'completed', label:'Completed', icon:FiCheckCircle, accent:FOREST,  tagline:'Delivered with Excellence' },
   { key:'ongoing',   label:'Ongoing',   icon:FiClock,       accent:TERRA,   tagline:'Currently Under Construction' },
   { key:'upcoming',  label:'Upcoming',  icon:FiZap,         accent:'#8B7355',tagline:'On the Horizon' },
 ]
@@ -699,17 +698,6 @@ export default function Projects() {
       <div style={{ background: CREAM }}>
         <div className="max-w-7xl mx-auto px-6 md:px-16 pt-6">
           <div className="h-px" style={{ background: `${DARK}10` }} />
-        </div>
-
-        <CategorySection category="completed" />
-
-        <div className="max-w-7xl mx-auto px-6 md:px-16">
-          <motion.div
-            initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="h-px origin-left"
-            style={{ background: `linear-gradient(90deg, ${FOREST}40, ${TERRA}40, transparent)` }}
-          />
         </div>
 
         <VirtualTourSection />
