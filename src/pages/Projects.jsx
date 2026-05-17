@@ -1,784 +1,612 @@
 import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence, useInView, useScroll, useTransform, useSpring } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FiMapPin, FiArrowRight, FiArrowUpRight, FiCheckCircle, FiClock, FiZap, FiPlay, FiSun, FiDroplet, FiWind } from 'react-icons/fi'
+import { 
+  FiMapPin, FiCalendar, FiMaximize, FiUser, FiArrowRight, 
+  FiCheckCircle, FiShield, FiCpu, FiSun, FiDroplet, FiZap, FiActivity, FiCompass 
+} from 'react-icons/fi'
+import { FaStar, FaQuoteLeft } from 'react-icons/fa'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import FootprintMapSection from '../components/FootprintMapSection'
 import { Helmet } from 'react-helmet-async'
-import prj1 from '../../assets/prj1.jpeg'
-import prj2 from '../../assets/prj2.jpeg'
-import prj3 from '../../assets/prj3.jpeg'
-import prj4 from '../../assets/prj4.jpeg'
-import prj5 from '../../assets/prj5.jpeg'
-import prj6 from '../../assets/prj6.jpeg'
-import prj7 from '../../assets/prj7.jpeg'
-import prj8 from '../../assets/prj8.jpeg'
-import prj9 from '../../assets/prj9.jpeg'
-import prj10 from '../../assets/prj10.jpeg'
+
+// Image imports from root assets
 import prj11 from '../../assets/prj11.jpeg'
-import prj12 from '../../assets/prj12.jpeg'
-import prj13 from '../../assets/prj13.jpeg'
-import prj14 from '../../assets/prj14.jpeg'
-import prj15 from '../../assets/prj15.jpeg'
-import prj16 from '../../assets/prj16.jpeg'
-import prj17 from '../../assets/prj17.jpeg'
-import prj18 from '../../assets/prj18.jpeg'
-import prj19 from '../../assets/prj19.jpeg'
 import prj20 from '../../assets/prj20.jpeg'
-import prj21 from '../../assets/prj21.jpeg'
-import prj22 from '../../assets/prj22.jpeg'
 import prj23 from '../../assets/prj23.jpeg'
+import prj6 from '../../assets/prj6.jpeg'
+import prj2 from '../../assets/prj2.jpeg'
+import prj8 from '../../assets/prj8.jpeg'
+import prj5 from '../../assets/prj5.jpeg'
+
 import prj24 from '../../assets/prj24.jpeg'
 import prj25 from '../../assets/prj25.jpeg'
 import prj26 from '../../assets/prj26.jpeg'
-import pr_2 from '../../assets/pr_2.jpeg'
-import pr_3 from '../../assets/pr_3.jpeg'
-import contact6 from '../../assets/contact6.jpg'
 import heroImg from '../../assets/img1.jpg'
-import projectVid from '../../assets/project.mp4'
 
-// ─── Brand palette from theme image ───────────────────────────────────────────
-const FOREST = '#3F5F4A'
-const TERRA = '#C9754A'
-const STONE = '#E8E5DF'
-const CREAM = '#F5F2EC'
-const DARK = '#1C1C1A'
+// Bright Luxury Color Palette
+const CREAM = '#fdfbf7'      // Alabaster Cream
+const CARD_BG = '#F6F3EC'    // Light Linen Cream
+const SAGE = '#2D4B37'       // Sage green highlight
+const TERRA = '#B85C38'      // Terracotta highlight
+const BRONZE = '#2A2A28'     // Premium dark-bronze text
+const MUTED = '#7C7C79'      // Muted text
+const BRASS = '#C5A880'      // Brass highlights
+const BORDER_COLOR = 'rgba(58,58,56,0.06)' // Soft elegant borders
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-const PROJECTS = {
-  completed: [
-    { id: 1, title: 'Modern Villa', sub: 'Stone Grove Residence', location: 'Chennai, TN', type: 'Residential', image: prj1, year: '2023', size: '4,500 Sq.Ft', desc: 'A sleek contemporary villa blending open-plan living with lush landscaping and smart home systems.' },
-    { id: 2, title: 'Heritage Duplex', sub: 'Timeless Twin Home', location: 'Coimbatore, TN', type: 'Construction', image: prj2, year: '2022', size: '3,200 Sq.Ft', desc: 'Timeless duplex design honoring traditional Tamil architecture with modern comforts.' },
-    { id: 3, title: 'Luxury Bungalow', sub: 'Signature Estate', location: 'Trichy, TN', type: 'Residential', image: prj3, year: '2023', size: '6,200 Sq.Ft', desc: 'Premium bungalow with infinity pool, home theatre, and full smart home automation.' },
-    { id: 4, title: 'Urban Townhouse', sub: 'Vertical Living', location: 'Chennai, TN', type: 'Construction', image: prj4, year: '2022', size: '3,900 Sq.Ft', desc: 'Compact urban townhouse maximizing vertical space with a stunning rooftop terrace.' },
-    { id: 5, title: 'Stone Arch Villa', sub: 'Classic Courtyard Home', location: 'Madurai, TN', type: 'Residential', image: prj5, year: '2021', size: '5,000 Sq.Ft', desc: 'Courtyard-style villa with stone arch entrances and traditional Chettinad-inspired interiors.' },
-    { id: 6, title: 'Palm Grove House', sub: 'Tropical Modern', location: 'Coimbatore, TN', type: 'Residential', image: prj6, year: '2021', size: '3,600 Sq.Ft', desc: 'Tropical modern home surrounded by palm groves with open verandas and natural ventilation.' },
-    { id: 7, title: 'Riverside Mansion', sub: 'Waterfront Estate', location: 'Thanjavur, TN', type: 'Residential', image: prj7, year: '2023', size: '8,000 Sq.Ft', desc: 'A grand waterfront mansion featuring expansive glass walls and sustainable water management.' },
-    { id: 8, title: 'Hill Crest Home', sub: 'Elevated Living', location: 'Ooty, TN', type: 'Residential', image: prj8, year: '2023', size: '4,200 Sq.Ft', desc: 'Mountain retreat designed for panoramic views and built with sustainable thermal mass materials.' },
-    { id: 9, title: 'Eco Courtyard', sub: 'Green Living', location: 'Salem, TN', type: 'Sustainable', image: prj9, year: '2022', size: '3,800 Sq.Ft', desc: 'A fully solar-powered courtyard home incorporating natural airflow and green roofing.' },
-    { id: 10, title: 'Zen Estate', sub: 'Minimalist Villa', location: 'Kodaikanal, TN', type: 'Residential', image: prj10, year: '2022', size: '4,000 Sq.Ft', desc: 'Japanese-inspired minimalist estate blending wood, stone, and natural light seamlessly.' },
-    { id: 11, title: 'Urban Oasis', sub: 'City Retreat', location: 'Chennai, TN', type: 'Construction', image: prj11, year: '2021', size: '3,400 Sq.Ft', desc: 'A peaceful urban retreat built to insulate noise while maximizing internal daylight.' },
-    { id: 12, title: 'Classic Heritage', sub: 'Traditional Revival', location: 'Madurai, TN', type: 'Construction', image: prj12, year: '2021', size: '5,500 Sq.Ft', desc: 'Revival of classic Dravidian architectural elements infused into a modern luxury dwelling.' },
-    { id: 13, title: 'Skyline Penthouse', sub: 'Luxury Living', location: 'Coimbatore, TN', type: 'Residential', image: prj13, year: '2023', size: '3,000 Sq.Ft', desc: 'High-end penthouse finishing and custom structural modification for sweeping city views.' },
-    { id: 14, title: 'Eco-Living Hub', sub: 'Net-Zero Home', location: 'Madurai, TN', type: 'Sustainable', image: prj14, year: '2024', size: '5,100 Sq.Ft', desc: 'Net-zero energy home with solar integration and rainwater harvesting systems.' },
-    { id: 15, title: 'Garden Retreat', sub: 'Biophilic Sanctuary', location: 'Salem, TN', type: 'Sustainable', image: prj15, year: '2024', size: '2,800 Sq.Ft', desc: 'Biophilic design retreat surrounded by curated gardens and natural stone finishes.' },
-    { id: 16, title: 'Terrace Villa', sub: 'Stepped Landscape Home', location: 'Trichy, TN', type: 'Residential', image: prj16, year: '2024', size: '4,800 Sq.Ft', desc: 'Multi-level terrace villa with cascading gardens and infinity-edge pool on each floor.' },
-    { id: 17, title: 'Solar Farmhouse', sub: 'Off-Grid Living', location: 'Erode, TN', type: 'Sustainable', image: prj17, year: '2024', size: '3,500 Sq.Ft', progress: 30, desc: 'Fully off-grid farmhouse powered by solar panels with organic farming integration.' },
-    { id: 18, title: 'Twin Courtyard', sub: 'Dual-Family Residence', location: 'Coimbatore, TN', type: 'Construction', image: prj18, year: '2024', size: '6,000 Sq.Ft', progress: 78, desc: 'Dual-family residence sharing a central courtyard garden with independent living wings.' },
-    { id: 19, title: 'Riverside Cottage', sub: 'Waterfront Living', location: 'Thanjavur, TN', type: 'Residential', image: prj19, year: '2024', size: '2,200 Sq.Ft', progress: 20, desc: 'Intimate riverside cottage with wraparound deck and natural timber construction.' },
-    { id: 20, title: 'Hilltop Residence', sub: 'Valley View Estate', location: 'Ooty, TN', type: 'Residential', image: prj20, year: '2025', size: '7,000 Sq.Ft', progress: 15, desc: 'A panoramic hilltop home designed to frame breathtaking valley views year-round.' },
-    { id: 21, title: 'Riverside Villas', sub: 'Gated Community', location: 'Thanjavur, TN', type: 'Construction', image: prj21, year: '2025', size: '12,000 Sq.Ft', progress: 10, desc: 'A gated riverside villa community with shared amenities and sustainable infrastructure.' },
-    { id: 22, title: 'Zen Garden Home', sub: 'Minimalist Retreat', location: 'Kodaikanal, TN', type: 'Residential', image: prj22, year: '2025', size: '3,800 Sq.Ft', progress: 5, desc: 'A minimalist retreat inspired by Japanese Zen principles with curated stone gardens.' },
-    { id: 23, title: 'Heritage Mansion', sub: 'Colonial Revival', location: 'Madurai, TN', type: 'Construction', image: prj23, year: '2025', size: '9,500 Sq.Ft', progress: 45, desc: 'Grand colonial revival mansion with heritage-style columns, arches, and period detailing.' },
-    { id: 24, title: 'Cliff Edge Villa', sub: 'Dramatic Landscape Home', location: 'Yercaud, TN', type: 'Residential', image: prj24, year: '2026', size: '5,600 Sq.Ft', progress: 8, desc: 'Dramatic cliff-edge villa cantilevered over the hillside with 270° panoramic views.' },
-  ],
-  ongoing: [
-    { id: 25, title: 'Bamboo Grove House', sub: 'Eco Architecture', location: 'Coimbatore, TN', type: 'Sustainable', image: prj25, year: '2026', size: '2,900 Sq.Ft', progress: 2, desc: 'Eco-architecture home built with bamboo structural elements and natural earth plasters.' },
-    { id: 26, title: 'Hilltop Sanctuary', sub: 'Elevated Design', location: 'Ooty, TN', type: 'Residential', image: prj26, year: '2026', size: '4,400 Sq.Ft', progress: 10, desc: 'Stunning hilltop sanctuary featuring modern stone and glass architecture.' },
-    { id: 27, title: 'Classic Villa', sub: 'Heritage Styling', location: 'Madurai, TN', type: 'Construction', image: pr_2, year: '2025', size: '5,200 Sq.Ft', progress: 35, desc: 'Timeless architectural styling paired with modern internal layouts.' },
-  ],
-}
+export default function Projects() {
+  const containerRef = useRef(null)
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 })
 
-const CATEGORIES = [
+  // Interactive Gallery States
+  const [activeImgP1, setActiveImgP1] = useState(0)
+  const [activeTabP1, setActiveTabP1] = useState('vision')
 
-  { key: 'completed', label: 'Project Series 1', icon: FiCheckCircle, accent: FOREST, tagline: 'Signature Collection' },
-  { key: 'ongoing', label: 'Project Series 2', icon: FiClock, accent: TERRA, tagline: 'Premium Residences' },
+  const [activeImgP2, setActiveImgP2] = useState(0)
+  const [activeTabP2, setActiveTabP2] = useState('vision')
 
-]
+  const p1Images = [prj11, prj20, prj23, prj6, prj2, prj8]
+  const p1Captions = [
+    "01 / Primary Front Elevation Facade",
+    "02 / Structural Pillar Column Supports",
+    "03 / Double-Height Open Ceiling Span",
+    "04 / High-Density Custom Granite Masonry",
+    "05 / Internal Structural Span Layout",
+    "06 / Modern Courtyard Concrete Frame"
+  ]
 
-// ─── Cursor follower ──────────────────────────────────────────────────────────
-function CursorDot() {
-  const [pos, setPos] = useState({ x: -100, y: -100 })
-  const [visible, setVisible] = useState(false)
-  useEffect(() => {
-    const move = e => { setPos({ x: e.clientX, y: e.clientY }); setVisible(true) }
-    const leave = () => setVisible(false)
-    window.addEventListener('mousemove', move)
-    window.addEventListener('mouseleave', leave)
-    return () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseleave', leave) }
-  }, [])
-  return (
-    <motion.div
-      className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[999] mix-blend-multiply"
-      style={{ background: TERRA, x: pos.x - 16, y: pos.y - 16 }}
-      animate={{ scale: visible ? 1 : 0, opacity: visible ? 0.6 : 0 }}
-      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-    />
-  )
-}
-
-// ─── Hero parallax word ───────────────────────────────────────────────────────
-function ParallaxWord({ children, delay = 0 }) {
-  return (
-    <motion.span
-      initial={{ y: 120, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1.1, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="inline-block"
-      style={{ paddingBottom: '0.15em', marginBottom: '-0.15em' }}
-    >
-      {children}
-    </motion.span>
-  )
-}
-
-// ─── Cinematic project card ───────────────────────────────────────────────────
-function ProjectCard({ project, category, index }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, amount: 0.1 })
-  const [hovered, setHovered] = useState(false)
-  const cat = CATEGORIES.find(c => c.key === category)
-
-  return (
-    <motion.article
-      ref={ref}
-      variants={{
-        hidden: { opacity: 0, y: 40 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
-      }}
-      initial="hidden"
-      animate={inView ? 'visible' : 'hidden'}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      className="group relative cursor-pointer"
-    >
-      {/* Image */}
-      <div className="relative overflow-hidden rounded-xl" style={{ aspectRatio: '4/5', minHeight: '260px' }}>
-        <img
-          src={project.image}
-          alt={project.title}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-          style={{ transform: hovered ? 'scale(1.07)' : 'scale(1)' }}
-          loading="lazy"
-        />
-
-        {/* Warm cream vignette */}
-        <div className="absolute inset-0" style={{
-          background: `linear-gradient(to top, ${DARK}EE 0%, ${DARK}55 45%, transparent 75%)`
-        }} />
-
-        {/* Hover tint */}
-        <motion.div className="absolute inset-0"
-          style={{ background: `${cat.accent}33` }}
-          animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.5 }}
-        />
-
-        {/* Top row */}
-        <div className="absolute top-4 left-4 right-4 flex justify-between items-center gap-2">
-          {/* Type badge — solid dark pill, always readable */}
-          <span className="text-[10px] font-black tracking-[0.25em] uppercase px-3 py-1.5 rounded-full"
-            style={{
-              background: 'rgba(10,10,10,0.75)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255,255,255,0.18)',
-              color: '#FFFFFF',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.5)'
-            }}>
-            {project.type}
-          </span>
-
-          {/* Status badge */}
-          {category === 'ongoing' && (
-            <span className="flex items-center gap-1.5 text-[10px] font-black tracking-[0.2em] uppercase px-3 py-1.5 rounded-full"
-              style={{
-                background: TERRA,
-                color: '#fff',
-                boxShadow: `0 0 12px ${TERRA}99, 0 2px 8px rgba(0,0,0,0.5)`
-              }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-              Live
-            </span>
-          )}
-          {category === 'upcoming' && (
-            <span className="text-[10px] font-black tracking-[0.2em] uppercase px-3 py-1.5 rounded-full"
-              style={{
-                background: 'rgba(139,115,85,0.85)',
-                backdropFilter: 'blur(8px)',
-                color: '#fff',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.5)'
-              }}>
-              2025
-            </span>
-          )}
-          {category === 'completed' && (
-            <span className="flex items-center gap-1.5 text-[10px] font-black tracking-[0.2em] uppercase px-3 py-1.5 rounded-full"
-              style={{
-                background: FOREST,
-                color: '#fff',
-                boxShadow: `0 0 12px ${FOREST}88, 0 2px 8px rgba(0,0,0,0.5)`
-              }}>
-              <FiCheckCircle size={10} /> Done
-            </span>
-          )}
-        </div>
-
-        {/* Progress bar */}
-        {category === 'ongoing' && (
-          <div className="absolute left-5 right-5" style={{ top: '52px' }}>
-            <div className="h-[2px] rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.1)' }}>
-              <motion.div className="h-full rounded-full" style={{ background: TERRA }}
-                initial={{ width: 0 }}
-                animate={inView ? { width: `${project.progress}%` } : {}}
-                transition={{ duration: 1.4, delay: 0.6, ease: 'easeOut' }}
-              />
-            </div>
-            <div className="flex justify-end mt-1">
-              <span className="text-[9px] font-black tracking-widest" style={{ color: TERRA }}>{project.progress}%</span>
-            </div>
-          </div>
-        )}
-
-        {/* Bottom content */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-          <div style={{ transform: hovered ? 'translateY(0)' : 'translateY(6px)', transition: 'transform 0.4s ease' }}>
-            <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase mb-1" style={{ color: `${STONE}60` }}>
-              {project.sub}
-            </p>
-            <h3 className="text-lg sm:text-xl font-black leading-tight mb-2 transition-colors duration-300"
-              style={{ color: hovered ? TERRA : STONE }}>
-              {project.title}
-            </h3>
-            <div className="flex flex-wrap items-center gap-1.5 mb-3">
-              <FiMapPin size={9} style={{ color: `${STONE}50` }} />
-              <span className="text-[10px] font-bold" style={{ color: `${STONE}50` }}>{project.location}</span>
-              <span style={{ color: `${STONE}25` }}>·</span>
-              <span className="text-[10px] font-bold" style={{ color: `${STONE}50` }}>{project.size}</span>
-            </div>
-
-            {/* Desc — always visible on mobile, hover-only on desktop */}
-            <p className="text-xs font-light leading-relaxed mb-3 sm:hidden"
-              style={{ color: `${STONE}65` }}>
-              {project.desc}
-            </p>
-            <motion.p
-              animate={{ opacity: hovered ? 1 : 0, height: hovered ? 'auto' : 0 }}
-              transition={{ duration: 0.4 }}
-              className="text-sm font-light leading-relaxed overflow-hidden mb-4 hidden sm:block"
-              style={{ color: `${STONE}70` }}
-            >
-              {project.desc}
-            </motion.p>
-
-            {/* View arrow */}
-            <div className="flex items-center gap-2"
-              style={{ opacity: hovered ? 1 : 0, transition: 'opacity 0.3s' }}>
-              <span className="text-[10px] font-black tracking-[0.25em] uppercase" style={{ color: TERRA }}>View Project</span>
-              <FiArrowUpRight size={12} style={{ color: TERRA }} />
-            </div>
-
-            {/* Accent line */}
-            <div className="mt-3 h-[1px] origin-left rounded-full"
-              style={{
-                background: `linear-gradient(90deg, ${cat.accent}, transparent)`,
-                transform: `scaleX(${hovered ? 1 : 0.12})`,
-                transition: 'transform 0.5s ease'
-              }}
-            />
-          </div>
-        </div>
-      </div>
-    </motion.article>
-  )
-}
-
-// ─── Category Section ─────────────────────────────────────────────────────────
-function CategorySection({ category }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-  const headRef = useRef(null)
-  const headInView = useInView(headRef, { once: true, margin: '-40px' })
-  const cat = CATEGORIES.find(c => c.key === category)
-  const projects = PROJECTS[category]
-
-  return (
-    <section ref={ref} className="py-28 relative overflow-hidden">
-
-      {/* Floating ambient orb */}
-      <motion.div
-        className="absolute pointer-events-none rounded-full blur-[120px] opacity-[0.07]"
-        style={{ background: cat.accent, width: 500, height: 500, top: '10%', right: category === 'ongoing' ? 'auto' : '-10%', left: category === 'ongoing' ? '-10%' : 'auto' }}
-        animate={{ scale: [1, 1.15, 1], opacity: [0.05, 0.1, 0.05] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
-      {/* Section heading */}
-      <div ref={headRef} className="max-w-7xl mx-auto px-6 md:px-16 mb-16">
-
-        {/* Overline */}
-        <motion.div
-          initial={{ opacity: 0, x: -24 }}
-          animate={headInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="flex items-center gap-3 mb-4"
-        >
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={headInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="h-[2px] w-10 origin-left rounded-full"
-            style={{ background: cat.accent }}
-          />
-          <div className="w-7 h-7 rounded-sm flex items-center justify-center"
-            style={{ background: `${cat.accent}18`, border: `1px solid ${cat.accent}40` }}>
-            <cat.icon size={13} style={{ color: cat.accent }} />
-          </div>
-          <span className="text-[11px] font-black tracking-[0.45em] uppercase" style={{ color: cat.accent }}>
-            {cat.label} Projects
-          </span>
-        </motion.div>
-
-        {/* Big heading — word by word */}
-        <div className="overflow-hidden mb-4">
-          <motion.h2
-            initial={{ y: 60, opacity: 0 }}
-            animate={headInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.85, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl md:text-6xl font-black leading-tight"
-            style={{ color: DARK }}
-          >
-            {cat.tagline}
-          </motion.h2>
-        </div>
-
-        {/* Bottom row */}
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={headInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-sm font-light max-w-md"
-            style={{ color: `${DARK}60` }}
-          >
-            {category === 'completed' && 'Every completed project reflects our dedication to durability, craftsmanship, and client satisfaction.'}
-            {category === 'ongoing' && 'These projects are actively under construction — built with precision and monitored daily.'}
-            {category === 'upcoming' && 'Exciting new projects in the pipeline, designed and ready to break ground soon.'}
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={headInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
-            className="flex items-center gap-3"
-          >
-            <span className="text-sm font-bold tabular-nums" style={{ color: cat.accent }}>
-              {String(projects.length).padStart(2, '0')}
-            </span>
-            <span className="text-xs font-light" style={{ color: `${DARK}40` }}>Projects</span>
-          </motion.div>
-        </div>
-
-        {/* Animated rule */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={headInView ? { scaleX: 1 } : {}}
-          transition={{ duration: 1.1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 h-px origin-left"
-          style={{ background: `linear-gradient(90deg, ${cat.accent}80, transparent)` }}
-        />
-      </div>
-
-      {/* Cards — staggered entrance */}
-      <div className="max-w-7xl mx-auto px-6 md:px-16">
-        <motion.div
-          className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-        >
-          {projects.map((p, i) => (
-            <ProjectCard key={p.id} project={p} category={category} index={i} />
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-// ─── Virtual Tour Section ───────────────────────────────────────────────────────
-function VirtualTourSection() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
-  const [isPlaying, setIsPlaying] = useState(false)
-
-  return (
-    <section ref={ref} className="py-24 relative overflow-hidden" style={{ background: DARK }}>
-      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cubes.png")' }} />
-
-      <div className="max-w-7xl mx-auto px-6 md:px-16 relative z-10 flex flex-col lg:flex-row items-center gap-16">
-
-        {/* Left: Text Content */}
-        <div className="w-full lg:w-5/12">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-10 h-px" style={{ background: TERRA }} />
-              <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>Interactive Experience</span>
-            </div>
-
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-8">
-              Step Inside Our <br />
-              <span style={{ color: TERRA, fontStyle: 'italic' }}>Flagship Villa.</span>
-            </h2>
-
-            <p className="text-sm font-light leading-relaxed mb-10" style={{ color: `${STONE}80` }}>
-              Experience the unmatched quality and flow of a Karrcholai-built home before it's even constructed. Take a 360° virtual walkthrough of our latest award-winning model home.
-            </p>
-
-            <div className="flex items-center gap-6">
-              <div className="flex -space-x-4">
-                <div className="w-12 h-12 rounded-full border-2 border-dark" style={{ background: TERRA }}>
-                  <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Preview 1" className="w-full h-full rounded-full object-cover opacity-80" />
-                </div>
-                <div className="w-12 h-12 rounded-full border-2 border-dark" style={{ background: FOREST }}>
-                  <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Preview 2" className="w-full h-full rounded-full object-cover opacity-80" />
-                </div>
-                <div className="w-12 h-12 rounded-full border-2 border-dark flex items-center justify-center text-white text-[10px] font-bold" style={{ background: '#333' }}>
-                  +3
-                </div>
-              </div>
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: STONE }}>5 Available Tours</span>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Right: Video/Interactive Element */}
-        <div className="w-full lg:w-7/12 relative mt-8 lg:mt-0">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group cursor-pointer border border-white/10"
-            onClick={() => setIsPlaying(true)}
-          >
-            {isPlaying ? (
-              <video
-                src={projectVid}
-                autoPlay
-                controls
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <>
-                <img
-                  src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                  alt="Virtual Tour Preview"
-                  className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
-                />
-
-                {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
-
-                {/* Centered Controls Overlay */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                  {/* 360 Badge above Play Button */}
-                  <motion.div
-                    animate={{ y: [0, -4, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    className="px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-white/20 shadow-lg"
-                  >
-                    <span className="text-[10px] font-bold tracking-widest text-white uppercase flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                      360° View
-                    </span>
-                  </motion.div>
-
-                  {/* Play Button */}
-                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:bg-white group-hover:text-dark text-white transition-all duration-500 shadow-[0_0_0_0_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_0_15px_rgba(255,255,255,0.1)]">
-                    <FiPlay className="text-2xl ml-1" />
-                  </div>
-                </div>
-              </>
-            )}
-          </motion.div>
-
-          {/* Accent Box Behind */}
-          <motion.div
-            initial={{ opacity: 0, x: 20, y: 20 }}
-            animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="absolute -bottom-6 -right-6 w-full h-full border border-white/5 rounded-2xl -z-10 hidden md:block"
-            style={{ borderColor: `${TERRA}40` }}
-          />
-        </div>
-
-      </div>
-    </section>
-  )
-}
-
-// ─── Sustainability Spotlight ──────────────────────────────────────────────────
-function SustainabilitySection() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
-
-  const ecoFeatures = [
-    { icon: FiSun, title: 'Solar Integration', desc: 'Seamlessly integrated roof panels powering up to 80% of daily energy needs.' },
-    { icon: FiDroplet, title: 'Rainwater Harvesting', desc: 'Advanced filtration systems turning monsoon rains into usable household water.' },
-    { icon: FiWind, title: 'Passive Cooling', desc: 'Strategic cross-ventilation and thermal mass walls reducing AC dependency.' }
+  const p2Images = [prj24, prj25, prj26]
+  const p2Captions = [
+    "01 / Panoramic Biophilic Facade Elevation",
+    "02 / Natural Cross-Ventilation Open Interiors",
+    "03 / Subterranean Rainwater Aquifer Courtyard"
   ]
 
   return (
-    <section ref={ref} className="py-24 relative overflow-hidden" style={{ background: FOREST }}>
-      {/* Background patterns */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white opacity-[0.02] rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-
-      <div className="max-w-7xl mx-auto px-6 md:px-16 relative z-10 flex flex-col lg:flex-row items-center gap-16">
-
-        {/* Left: Huge image with leaf/eco accent */}
-        <div className="w-full lg:w-1/2 relative">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] max-w-md mx-auto lg:mx-0"
-          >
-            <img
-              src={contact6}
-              alt="Sustainable Architecture"
-              className="w-full h-full object-cover"
-            />
-            {/* Green overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-            {/* Badge inside image */}
-            <div className="absolute bottom-8 left-8 right-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-4">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-[10px] font-bold text-white uppercase tracking-widest">Net-Zero Ready</span>
-              </div>
-              <h3 className="text-2xl text-white leading-tight">Building for the next hundred years.</h3>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Right: Content */}
-        <div className="w-full lg:w-1/2">
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-10 h-px" style={{ background: TERRA }} />
-              <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>Eco-Engineering</span>
-            </div>
-
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-8">
-              Sustainable Luxury, <br />
-              <span style={{ color: TERRA, fontStyle: 'italic' }}>Without Compromise.</span>
-            </h2>
-
-            <p className="text-sm font-light leading-relaxed mb-12" style={{ color: `${STONE}90` }}>
-              We believe that true luxury doesn't cost the earth. Karrcholai integrates state-of-the-art green technologies seamlessly into every design, ensuring your home is as environmentally responsible as it is breathtaking.
-            </p>
-
-            <div className="grid gap-8">
-              {ecoFeatures.map((feat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.4 + (i * 0.15) }}
-                  className="flex gap-4"
-                >
-                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,255,255,0.05)' }}>
-                    <feat.icon className="text-xl" style={{ color: TERRA }} />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-2">{feat.title}</h4>
-                    <p className="text-sm font-light leading-relaxed" style={{ color: `${STONE}70` }}>{feat.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-
-      </div>
-    </section>
-  )
-}
-
-
-// ─── Main Page ────────────────────────────────────────────────────────────────
-export default function Projects() {
-  const heroRef = useRef(null)
-  const { scrollYProgress } = useScroll()
-  const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 })
-  const heroY = useTransform(heroScroll, [0, 1], ['0%', '30%'])
-  const heroOpacity = useTransform(heroScroll, [0, 0.7], [1, 0])
-  const springY = useSpring(heroY, { stiffness: 80, damping: 20 })
-
-  const totalProjects = Object.values(PROJECTS).flat().length
-
-  return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: CREAM, color: DARK }}>
+    <div ref={containerRef} className="min-h-screen overflow-x-hidden font-sans select-none" style={{ background: CREAM, color: BRONZE }}>
       <Helmet>
-        <title>Our Projects | Karrcholai Construction</title>
-        <meta name="description" content="Explore Karrcholai Construction's portfolio of completed and ongoing residential projects in Tamil Nadu, from luxury villas to sustainable homes." />
+        <title>Signature Client Projects | Karrcholai Construction</title>
+        <meta name="description" content="Explore Karrcholai Construction's signature client residences. A cinematic portfolio showcasing structural integrity, biophilic planning, and modern luxury." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;600;900&family=Oswald:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet" />
         <link rel="canonical" href="https://karrcholai.com/projects" />
       </Helmet>
 
-      {/* Scroll progress bar — like Karr page */}
+      {/* Luxury Progress Scroll Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[3px] z-[200] origin-left"
-        style={{ scaleX, background: `linear-gradient(90deg, ${FOREST}, ${TERRA})` }}
+        className="fixed top-0 left-0 right-0 h-[4px] z-[200] origin-left"
+        style={{ scaleX, background: `linear-gradient(90deg, ${SAGE}, ${BRASS}, ${TERRA})` }}
       />
 
       <Navbar />
 
-      {/* ── HERO ────────────────────────────────────────────────────────── */}
-      <section
-        ref={heroRef}
-        className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-black"
-      >
-        {/* Parallax BG — Image */}
-        <motion.div className="absolute inset-0 z-0" style={{ y: springY, opacity: heroOpacity }}>
-          <motion.img
+      {/* ── CINEMATIC FULL-WIDTH DARK HERO (Consistent with Karr / Cholai Screens) ── */}
+      <section className="relative w-full h-[75vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#1a1a1a]">
+        
+        {/* Background Visual Frame */}
+        <div className="absolute inset-0 z-0">
+          <motion.img 
             src={heroImg}
-            alt="Karrcholai Projects"
-            className="absolute inset-0 w-full h-full object-cover object-center"
-            initial={{ scale: 1.12, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+            alt="Karrcholai Construction Signature Landmarks"
+            className="w-full h-full object-cover opacity-85"
+            initial={{ scale: 1.15 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.8, ease: "easeOut" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/80" />
-        </motion.div>
+          {/* Sophisticated site-wide multi-layered overlays */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a]/40 via-transparent to-[#1a1a1a]/70" />
+          <div className="absolute inset-0" style={{
+            background: 'linear-gradient(135deg, rgba(45,75,55,0.08) 0%, transparent 60%, rgba(184,92,56,0.06) 100%)'
+          }} />
+        </div>
 
-        {/* Centered content */}
-        <div className="relative z-10 text-center px-4 max-w-5xl">
+        {/* Centered Premium Title Branding Block */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 text-center drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
           >
-            <h2 className="font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-6 block" style={{ color: TERRA }}>
-              Karrcholai · Stone Grove
-            </h2>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tighter leading-none mb-8 font-sans">
-              OUR <span className="text-transparent italic" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.6)' }}>PROJECTS</span>
+            <h1 
+              className="text-5xl md:text-8xl font-bold text-white leading-none tracking-tighter mb-8 drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]"
+              style={{ fontFamily: "'Oswald', sans-serif" }}
+            >
+              Our <span className="text-white/40 italic">Projects.</span>
             </h1>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
-              <div className="hidden md:block h-[1px] w-12" style={{ background: `${TERRA}80` }} />
-              <p className="text-white/70 text-xs md:text-sm font-light tracking-[0.3em] uppercase">
-                Quality Construction · Professional Management
-              </p>
-              <div className="hidden md:block h-[1px] w-12" style={{ background: `${TERRA}80` }} />
-            </div>
+            <p 
+              className="text-white/90 text-sm md:text-lg max-w-xl mx-auto font-normal leading-relaxed border-t border-white/20 pt-6 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+              style={{ fontFamily: "'Outfit', sans-serif" }}
+            >
+              Signature residential estates engineered with unyielding concrete strength and bespoke biophilic planning.
+            </p>
           </motion.div>
         </div>
 
-        {/* Decorative Elements */}
-        <motion.div
-          animate={{ y: [0, 20, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10"
-        >
-          <span className="text-white/30 text-[10px] uppercase tracking-[0.4em] rotate-90 mb-8">Scroll</span>
-          <div className="w-[1px] h-20" style={{ background: `linear-gradient(to bottom, ${TERRA}, transparent)` }} />
-        </motion.div>
+        {/* Downward Scroll Indicator */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 hidden md:block">
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            className="w-[1px] h-12 bg-gradient-to-b from-[#B85C38] to-transparent"
+          />
+        </div>
       </section>
 
-      {/* ── INTRO BAND ──────────────────────────────────────────────────── */}
-      <div style={{ background: DARK }} className="py-12 relative overflow-hidden">
-        {/* Floating particles */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div key={i}
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: 4 + (i % 3) * 3,
-              height: 4 + (i % 3) * 3,
-              background: i % 2 === 0 ? TERRA : FOREST,
-              left: `${10 + i * 15}%`,
-              top: `${20 + (i % 3) * 25}%`,
-              opacity: 0.25
-            }}
-            animate={{ y: [-8, 8, -8], opacity: [0.15, 0.35, 0.15] }}
-            transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: 'easeInOut', delay: i * 0.4 }}
-          />
-        ))}
-        <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-3 gap-px">
-          {[
-            { icon: FiCheckCircle, color: FOREST, t: 'Engineering Excellence', d: 'Built to the highest structural and material standards.' },
-            { icon: FiClock, color: TERRA, t: 'On-Time Delivery', d: 'Disciplined project management from blueprint to possession.' },
-            { icon: FiZap, color: '#8B7355', t: 'Client Satisfaction', d: 'Transparent communication and quality that speaks for itself.' },
-          ].map((item, i) => (
-            <motion.div key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -4, transition: { duration: 0.25 } }}
-              transition={{ delay: i * 0.12, duration: 0.6 }}
-              className="flex items-start gap-4 px-8 py-8 cursor-default"
-              style={{ borderLeft: i > 0 ? `1px solid rgba(255,255,255,0.06)` : 'none' }}
+      {/* ── PROJECT 01: THE MOHANAVALLI RESIDENCE (ERODE) ── */}
+      <section className="py-28 md:py-40 border-b relative" style={{ borderColor: BORDER_COLOR }}>
+        
+        {/* Decorative Grid coordinate marker */}
+        <div className="absolute right-12 top-12 text-[10px] font-black text-dark/15 tracking-widest uppercase hidden md:block" style={{ fontFamily: "'Outfit', sans-serif" }}>
+          LATITUDE 11.34° N // LONGITUDE 77.71° E // ERODE, TN
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          
+          {/* Headline block */}
+          <div className="mb-14">
+            <span 
+              className="text-[10px] font-black tracking-[0.35em] uppercase" 
+              style={{ color: TERRA, fontFamily: "'Outfit', sans-serif" }}
             >
-              <div className="w-9 h-9 rounded-sm flex items-center justify-center flex-shrink-0"
-                style={{ background: `${item.color}20`, border: `1px solid ${item.color}40` }}>
-                <item.icon size={14} style={{ color: item.color }} />
+              Case Study 01 // Structural Integration
+            </span>
+            <h2 
+              className="text-4xl md:text-7xl font-bold tracking-tight mt-2 leading-none" 
+              style={{ color: BRONZE, fontFamily: "'Oswald', sans-serif" }}
+            >
+              The Mohanavalli Residence
+            </h2>
+            <div className="w-16 h-[2px] mt-4" style={{ background: TERRA }} />
+          </div>
+
+          {/* LUXURY METRICS DASHBOARD */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-3xl border shadow-sm mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
+            {[
+              { icon: FiMaximize, label: "Total Built Space", value: "4,500 Sq.Ft", accent: TERRA },
+              { icon: FiMapPin, label: "Geographic Site", value: "Erode, TN", accent: TERRA },
+              { icon: FiCalendar, label: "Year Completed", value: "2023", accent: TERRA },
+              { icon: FiUser, label: "Client Homeowner", value: "Mrs. E. Mohanavalli", accent: TERRA }
+            ].map((spec, idx) => (
+              <div key={idx} className="p-6 rounded-2xl border border-dark/[0.02] bg-[#FCFBF9] flex flex-col justify-between hover:border-dark/10 transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mb-6" style={{ background: `${spec.accent}08` }}>
+                  <spec.icon className="text-lg" style={{ color: spec.accent }} />
+                </div>
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-wider text-dark/35 mb-1" style={{ fontFamily: "'Outfit', sans-serif" }}>{spec.label}</p>
+                  <p className="text-base font-black text-dark/95 leading-none" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{spec.value}</p>
+                </div>
               </div>
-              <div>
-                <div className="font-bold text-sm mb-1" style={{ color: STONE }}>{item.t}</div>
-                <div className="text-sm font-light leading-relaxed" style={{ color: `${STONE}45` }}>{item.d}</div>
+            ))}
+          </div>
+
+          {/* MAIN ALIGNED 2-COLUMN GRID (Images and Content Perfectly Aligned Side-by-Side) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-stretch">
+            
+            {/* Left Panel: Cinematic Image Gallery with Dynamic Thumbnail Selection (7/12 Width) */}
+            <div className="lg:col-span-7 flex flex-col justify-between self-stretch gap-6">
+              
+              {/* Primary Active Showcase Frame */}
+              <div className="overflow-hidden rounded-[28px] shadow-lg aspect-[16/10] group relative bg-stone-100 border border-dark/5 flex-1 flex items-stretch">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeImgP1}
+                    src={p1Images[activeImgP1]}
+                    alt={p1Captions[activeImgP1]}
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-103"
+                    initial={{ opacity: 0, scale: 1.02 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.5, ease: 'easeInOut' }}
+                  />
+                </AnimatePresence>
+                {/* Active Caption Badge */}
+                <div 
+                  className="absolute bottom-5 left-5 bg-[#fdfbf7]/95 backdrop-blur-md text-dark text-[9px] uppercase tracking-widest px-4 py-2 rounded-md font-black border border-dark/5 shadow-sm"
+                  style={{ fontFamily: "'Outfit', sans-serif" }}
+                >
+                  {p1Captions[activeImgP1]}
+                </div>
               </div>
-            </motion.div>
-          ))}
+
+              {/* Symmetrical Row of Interactive Thumbnails (Updated to grid-cols-6) */}
+              <div className="grid grid-cols-6 gap-3 flex-shrink-0">
+                {p1Images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveImgP1(idx)}
+                    className={`overflow-hidden rounded-2xl shadow-sm aspect-[4/3] relative bg-stone-100 border transition-all duration-300 ${
+                      activeImgP1 === idx ? 'border-[#B85C38] scale-103 ring-2 ring-[#B85C38]/20' : 'border-dark/5 opacity-70 hover:opacity-100'
+                    }`}
+                  >
+                    <img src={img} alt={`Thumbnail ${idx}`} className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Panel: Advanced Project Storytelling Tabs Deck & Testimonial (5/12 Width) */}
+            <div className="lg:col-span-5 flex flex-col justify-between self-stretch gap-6">
+              
+              {/* Architectural Storytelling deck */}
+              <div className="p-6 md:p-8 rounded-3xl bg-white border shadow-sm flex-1 flex flex-col justify-between" style={{ borderColor: BORDER_COLOR }}>
+                <div>
+                  
+                  {/* Visual Spec Tabs */}
+                  <div className="flex border-b pb-4 mb-6 gap-3 overflow-x-auto" style={{ borderColor: 'rgba(58,58,56,0.06)' }}>
+                    {[
+                      { id: 'vision', label: '01 / Vision' },
+                      { id: 'structural', label: '02 / Structure' },
+                      { id: 'material', label: '03 / Materiality' },
+                      { id: 'timeline', label: '04 / Timeline' }
+                    ].map((tab) => (
+                      <button
+                        key={tab.id}
+                        onClick={() => setActiveTabP1(tab.id)}
+                        className={`text-[9px] font-bold uppercase tracking-wider pb-1.5 border-b-2 transition-all duration-300 flex-shrink-0 ${
+                          activeTabP1 === tab.id ? 'border-[#B85C38] text-dark' : 'border-transparent text-dark/40 hover:text-dark/70'
+                        }`}
+                        style={{ fontFamily: "'Outfit', sans-serif" }}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Dynamic Tab Contents */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeTabP1}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 10 }}
+                      transition={{ duration: 0.3 }}
+                      className="space-y-4 text-xs md:text-sm font-light text-dark/75 leading-relaxed"
+                    >
+                      {activeTabP1 === 'vision' && (
+                        <>
+                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept & Philosophy</h4>
+                          <p>
+                            Commissioned to serve as an enduring ancestral landmark, the Mohanavalli Residence represents a masterclass in modern luxury and uncompromised structural integrity.
+                          </p>
+                          <p>
+                            The layout challenge lay in crafting wide-span, open social spaces that seamlessly connect the indoor living pavilions with the outdoor swimming pools, all while maintaining perfect thermal resilience under Erode's harsh summer climate.
+                          </p>
+                        </>
+                      )}
+
+                      {activeTabP1 === 'structural' && (
+                        <>
+                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Structural & Engineering Excellence</h4>
+                          <p>
+                            By deploying advanced post-tensioned slab technology and pre-stressed steel cables, our engineering team eliminated the need for load-bearing partition walls, resulting in a majestic double-height living room with a continuous 40-foot column-free span.
+                          </p>
+                          <p className="font-bold border-l-2 pl-3 border-[#B85C38]" style={{ color: BRONZE }}>
+                            Anchored into solid Fe-550 high-seismic reinforced steel foundations.
+                          </p>
+                        </>
+                      )}
+
+                      {activeTabP1 === 'material' && (
+                        <>
+                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Premium Materials & Finishes</h4>
+                          <p>
+                            The entire structure is wrapped in high-density local Erode granite cavity walls, providing an exceptional natural thermal barrier that drops peak summer indoor temperatures by up to 6°C.
+                          </p>
+                          <p>
+                            The interior integrates hand-selected Italian statuario marble flooring with a centralized smart home automation grid that operates HVAC, motorized lighting, and automated security.
+                          </p>
+                        </>
+                      )}
+
+                      {activeTabP1 === 'timeline' && (
+                        <>
+                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Construction Timeline & Milestones</h4>
+                          <ul className="space-y-2 text-xs">
+                            <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
+                              <span><strong>Phase 1:</strong> Blueprints & Excavation</span>
+                              <span>Month 1-3</span>
+                            </li>
+                            <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
+                              <span><strong>Phase 2:</strong> Substructure & Post-tensioning</span>
+                              <span>Month 4-8</span>
+                            </li>
+                            <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
+                              <span><strong>Phase 3:</strong> Masonry & Cavity Wall System</span>
+                              <span>Month 9-12</span>
+                            </li>
+                            <li className="flex justify-between" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
+                              <span><strong>Phase 4:</strong> Marble Flooring & Handover</span>
+                              <span>Month 13-16</span>
+                            </li>
+                          </ul>
+                        </>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                <div className="h-[1px] w-full bg-gradient-to-r from-[#B85C38]/20 to-transparent mt-6" />
+              </div>
+
+              {/* Bright Testimonial Panel */}
+              <div className="p-6 md:p-8 rounded-3xl border shadow-sm flex-shrink-0 flex flex-col justify-between relative overflow-hidden bg-white" style={{ borderColor: BORDER_COLOR }}>
+                <div className="absolute top-4 right-4 text-dark/[0.02] text-7xl pointer-events-none font-serif leading-none">“</div>
+                
+                <div className="relative z-10">
+                  {/* Star Ratings */}
+                  <div className="flex items-center gap-1 text-xs text-amber-500 mb-4">
+                    {[...Array(5)].map((_, i) => <FaStar key={i} />)}
+                  </div>
+
+                  <p className="text-xs md:text-sm font-light italic leading-relaxed text-dark/80 mb-6">
+                    "The KARRCHOLAI team impressed with their professionalism and dedication. From the initial planning stages to the ongoing execution, they have demonstrated a keen eye for detail and a commitment to excellence."
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t flex items-center justify-between" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
+                  <div>
+                    <h4 className="font-bold text-xs tracking-wide" style={{ color: BRONZE }}>Mrs. Elumalai Mohanavalli</h4>
+                    <p className="text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Erode</p>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="text-[9px] font-black px-2.5 py-1 rounded bg-[#B85C38]/08 text-[#B85C38] uppercase tracking-wider" style={{ fontFamily: "'Outfit', sans-serif" }}>Verified Review</span>
+                    <span className="text-[8px] text-dark/30 mt-1 uppercase font-bold tracking-widest">12-Mo Evaluation</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
-      </div>
+      </section>
 
-      {/* ── TWO CATEGORY SECTIONS ─────────────────────────────────────── */}
-      <div style={{ background: CREAM }}>
-        <div className="max-w-7xl mx-auto px-6 md:px-16 pt-6">
-          <div className="h-px" style={{ background: `${DARK}10` }} />
+      {/* ── PROJECT 02: THE KARTHIGA DEVI RESIDENCE (COIMBATORE) ── */}
+      <section className="py-28 md:py-40 relative" style={{ background: '#FAF8F5' }}>
+        
+        {/* Decorative Grid coordinate marker */}
+        <div className="absolute right-12 top-12 text-[10px] font-black text-dark/15 tracking-widest uppercase hidden md:block" style={{ fontFamily: "'Outfit', sans-serif" }}>
+          LATITUDE 11.01° N // LONGITUDE 76.95° E // COIMBATORE, TN
         </div>
 
-        <CategorySection category="completed" />
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          
+          {/* Section Case Header */}
+          <div className="mb-14">
+            <span 
+              className="text-[9px] font-bold tracking-[0.35em] uppercase" 
+              style={{ color: SAGE, fontFamily: "'Outfit', sans-serif" }}
+            >
+              Case Study 02 // Ecological Architecture
+            </span>
+            <h2 
+              className="text-3xl md:text-5xl font-bold tracking-tight mt-1" 
+              style={{ color: BRONZE, fontFamily: "'Oswald', sans-serif" }}
+            >
+              The Karthiga Devi Residence
+            </h2>
+            <div className="w-16 h-[2px] mt-4" style={{ background: SAGE }} />
+          </div>
 
-        <div className="max-w-7xl mx-auto px-6 md:px-16">
-          <motion.div
-            initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="h-px origin-left"
-            style={{ background: `linear-gradient(90deg, ${FOREST}40, ${TERRA}40, transparent)` }}
-          />
+          {/* BRIGHT LUXURY METRICS ACCORDION */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-3xl border shadow-sm mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
+            {[
+              { icon: FiMaximize, label: "Total Built Space", value: "5,100 Sq.Ft", accent: SAGE },
+              { icon: FiMapPin, label: "Geographic Site", value: "Coimbatore, TN", accent: SAGE },
+              { icon: FiCalendar, label: "Year Completed", value: "2024", accent: SAGE },
+              { icon: FiUser, label: "Client Homeowner", value: "Mrs. N. Karthiga Devi", accent: SAGE }
+            ].map((spec, idx) => (
+              <div key={idx} className="p-5 rounded-xl border border-dark/[0.02] bg-[#FCFBF9] flex items-center gap-4 hover:border-dark/10 transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${spec.accent}08` }}>
+                  <spec.icon className="text-base" style={{ color: spec.accent }} />
+                </div>
+                <div>
+                  <p className="text-[8px] font-bold uppercase tracking-wider text-dark/35 mb-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>{spec.label}</p>
+                  <p className="text-sm font-black text-dark/95 leading-none" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{spec.value}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* MAIN ALIGNED 2-COLUMN GRID (Images and Content Perfectly Aligned Side-by-Side) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
+            
+            {/* Left Panel: Symmetrical Image Gallery with Interactive Thumbnails (7/12 Width) */}
+            <div className="lg:col-span-7 space-y-5">
+              {/* Primary Active Showcase Frame */}
+              <div className="overflow-hidden rounded-2xl shadow-sm aspect-[16/10] group relative bg-stone-100 border border-dark/5">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeImgP2}
+                    src={p2Images[activeImgP2]}
+                    alt={p2Captions[activeImgP2]}
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-103"
+                    initial={{ opacity: 0, scale: 1.02 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.5, ease: 'easeInOut' }}
+                  />
+                </AnimatePresence>
+                <div 
+                  className="absolute bottom-4 left-4 bg-[#fdfbf7]/95 backdrop-blur-md text-dark text-[9px] uppercase tracking-widest px-3 py-1.5 rounded font-black border border-dark/5 shadow-sm"
+                  style={{ fontFamily: "'Outfit', sans-serif" }}
+                >
+                  {p2Captions[activeImgP2]}
+                </div>
+              </div>
+
+              {/* Symmetrical Row of 3 Interactive Thumbnails */}
+              <div className="grid grid-cols-3 gap-5">
+                {p2Images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveImgP2(idx)}
+                    className={`overflow-hidden rounded-xl shadow-sm aspect-[3/2] relative bg-stone-100 border transition-all duration-300 ${
+                      activeImgP2 === idx ? 'border-[#2D4B37] scale-103 ring-2 ring-[#2D4B37]/20' : 'border-dark/5 opacity-70 hover:opacity-100'
+                    }`}
+                  >
+                    <img src={img} alt={`Thumbnail ${idx}`} className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Panel: Aligned structured specifications & Review (5/12 Width) */}
+            <div className="lg:col-span-5 flex flex-col justify-between self-stretch gap-6">
+              
+              {/* Architectural Storytelling deck */}
+              <div className="p-6 md:p-8 rounded-3xl bg-white border shadow-sm flex-1 flex flex-col justify-between" style={{ borderColor: BORDER_COLOR }}>
+                <div>
+                  
+                  {/* Visual Spec Tabs */}
+                  <div className="flex border-b pb-4 mb-6 gap-3 overflow-x-auto" style={{ borderColor: 'rgba(58,58,56,0.06)' }}>
+                    {[
+                      { id: 'vision', label: '01 / Vision' },
+                      { id: 'structural', label: '02 / Eco Core' },
+                      { id: 'material', label: '03 / Materials' },
+                      { id: 'timeline', label: '04 / Logistics' }
+                    ].map((tab) => (
+                      <button
+                        key={tab.id}
+                        onClick={() => setActiveTabP2(tab.id)}
+                        className={`text-[9px] font-bold uppercase tracking-wider pb-1.5 border-b-2 transition-all duration-300 flex-shrink-0 ${
+                          activeTabP2 === tab.id ? 'border-[#2D4B37] text-dark' : 'border-transparent text-dark/40 hover:text-dark/70'
+                        }`}
+                        style={{ fontFamily: "'Outfit', sans-serif" }}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Dynamic Tab Contents */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeTabP2}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 10 }}
+                      transition={{ duration: 0.3 }}
+                      className="space-y-4 text-xs md:text-sm font-light text-dark/75 leading-relaxed"
+                    >
+                      {activeTabP2 === 'vision' && (
+                        <>
+                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept & Vision</h4>
+                          <p>
+                            The Karthiga Devi Residence is a breakthrough achievement in eco-friendly architecture and self-sustaining engineering. Nestled within Coimbatore's biophilic landscape, the design focuses on building a carbon-neutral sanctuary.
+                          </p>
+                          <p>
+                            Every engineering element is optimized for circular resource management, showing that premium contemporary luxury can live in perfect harmony with the environment.
+                          </p>
+                        </>
+                      )}
+
+                      {activeTabP2 === 'structural' && (
+                        <>
+                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Eco Engineering & Solar Infrastructure</h4>
+                          <p>
+                            Built with seamless, roof-integrated monocrystalline solar tiles working in tandem with smart lithium battery banks (12.5 kWp). The system captures clean solar radiation to fuel over 80% of daily domestic loads.
+                          </p>
+                          <p>
+                            Water security is integrated via a heavy-duty monsoonal rainwater harvesting system that channels runoff through a three-stage bio-filtration aquifer into a 50,000L subterranean cell.
+                          </p>
+                        </>
+                      )}
+
+                      {activeTabP2 === 'material' && (
+                        <>
+                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Low-Carbon Materiality</h4>
+                          <p>
+                            Constructed utilizing high-performance compressed earth blocks (CSEBs) and custom-cast sustainable bamboo columns.
+                          </p>
+                          <p>
+                            Architectural footprints are aligned along natural wind corridors, utilizing double-height air shafts and strategically placed native timber trees to maximize cross-ventilation drafts.
+                          </p>
+                        </>
+                      )}
+
+                      {activeTabP2 === 'timeline' && (
+                        <>
+                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Engineering Milestones</h4>
+                          <ul className="space-y-2 text-xs">
+                            <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
+                              <span><strong>Phase 1:</strong> Biophilic Site Orientation Study</span>
+                              <span>Month 1-2</span>
+                            </li>
+                            <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
+                              <span><strong>Phase 2:</strong> Subterranean Harvester Harvester Aquifer</span>
+                              <span>Month 3-6</span>
+                            </li>
+                            <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
+                              <span><strong>Phase 3:</strong> CSEB Earth Block Masonry</span>
+                              <span>Month 7-11</span>
+                            </li>
+                            <li className="flex justify-between" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
+                              <span><strong>Phase 4:</strong> Active Solar PV Integration</span>
+                              <span>Month 12-14</span>
+                            </li>
+                          </ul>
+                        </>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                <div className="h-[1px] w-full bg-gradient-to-r from-[#2D4B37]/20 to-transparent mt-6" />
+              </div>
+
+              {/* Bright Testimonial Panel */}
+              <div className="p-6 md:p-8 rounded-2xl border shadow-sm flex-shrink-0 flex flex-col justify-between relative overflow-hidden bg-white" style={{ borderColor: BORDER_COLOR }}>
+                <div className="absolute top-4 right-4 text-dark/[0.02] text-7xl pointer-events-none font-serif leading-none">“</div>
+                
+                <div className="relative z-10">
+                  {/* Star Ratings */}
+                  <div className="flex items-center gap-1 text-xs text-amber-500 mb-4">
+                    {[...Array(5)].map((_, i) => <FaStar key={i} />)}
+                  </div>
+
+                  <p className="text-xs md:text-sm font-light italic leading-relaxed text-dark/85 mb-6">
+                    "We entrusted KARRCHOLAI with our home. The team's dedication to quality craftsmanship and attention to detail truly shines through in every corner of our home. Thank you for turning our house into a haven!"
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t flex items-center justify-between" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
+                  <div>
+                    <h4 className="font-bold text-xs tracking-wide" style={{ color: BRONZE }}>Mrs. Naatrayan Karthiga Devi</h4>
+                    <p className="text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Coimbatore</p>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="text-[9px] font-black px-2.5 py-1 rounded bg-[#2D4B37]/08 text-[#2D4B37] uppercase tracking-wider" style={{ fontFamily: "'Outfit', sans-serif" }}>Verified Review</span>
+                    <span className="text-[8px] text-dark/30 mt-1 uppercase font-bold tracking-widest">12-Mo Evaluation</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
+      </section>
 
-        <VirtualTourSection />
-
-        <div className="max-w-7xl mx-auto px-6 md:px-16 pt-16">
-          <motion.div
-            initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="h-px origin-left"
-            style={{ background: `linear-gradient(90deg, ${TERRA}40, transparent)` }}
-          />
-        </div>
-
-        <CategorySection category="ongoing" />
-      </div>
-
-      <SustainabilitySection />
-
-      <ThoughtOnConstruction />
-
+      {/* ── GEOGRAPHIC FOOTPRINT MAP SECTION ── */}
       <FootprintMapSection />
 
-      {/* ── CTA ─────────────────────────────────────────────────────────── */}
-      <section className="relative py-32 overflow-hidden" style={{ background: FOREST }}>
-        <div className="absolute inset-0 opacity-[0.07]"
+
+      {/* ── CALL TO ACTION ── */}
+      <section className="relative py-32 overflow-hidden" style={{ background: SAGE }}>
+        <div className="absolute inset-0 opacity-[0.05]"
           style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/dark-matter.png")' }}
         />
         <div className="absolute inset-0"
           style={{ background: `radial-gradient(ellipse at 65% 50%, ${TERRA}25 0%, transparent 65%)` }}
         />
-        {/* Big ghost text */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-          <span className="text-[20vw] font-black opacity-[0.04] select-none whitespace-nowrap" style={{ color: STONE }}>
+          <span className="text-[20vw] font-black opacity-[0.03] select-none whitespace-nowrap text-white">
             BUILD
           </span>
         </div>
@@ -790,35 +618,31 @@ export default function Projects() {
             viewport={{ once: true }}
             className="flex items-center justify-center gap-3 mb-6"
           >
-            <div className="h-px w-10" style={{ background: TERRA }} />
-            <span className="text-[11px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>
+            <div className="h-px w-10 bg-white/40" />
+            <span className="text-[11px] font-black tracking-[0.4em] uppercase text-white/80" style={{ fontFamily: "'Outfit', sans-serif" }}>
               Let's Build Together
             </span>
-            <div className="h-px w-10" style={{ background: TERRA }} />
+            <div className="h-px w-10 bg-white/40" />
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl md:text-6xl font-black leading-tight mb-6"
-            style={{ color: STONE }}
+            className="text-4xl md:text-6xl font-black leading-tight text-white mb-6"
+            style={{ fontFamily: "'Oswald', sans-serif" }}
           >
             Have a Project<br />
-            <span style={{ color: TERRA, fontStyle: 'italic' }}>in Mind?</span>
+            <span style={{ color: BRASS, fontStyle: 'italic' }}>in Mind?</span>
           </motion.h2>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-base font-light leading-relaxed mb-12"
-            style={{ color: `${STONE}65` }}
+          <p 
+            className="text-xs md:text-base font-light leading-relaxed mb-12 text-white/70 max-w-xl mx-auto"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            Let's turn your vision into a landmark. Get a free consultation and walk through every step of your construction journey — from planning to possession.
-          </motion.p>
+            Let's turn your vision into an enduring architectural landmark. Walk through every step of your custom construction journey — from blueprints to possession.
+          </p>
 
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -831,7 +655,8 @@ export default function Projects() {
               <motion.button
                 whileHover={{ scale: 1.04, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="btn-primary text-sm tracking-[0.15em] uppercase flex items-center gap-2"
+                className="w-full sm:w-auto btn-primary bg-white text-[#1c1c1a] hover:bg-[#B85C38] hover:text-white text-xs tracking-[0.18em] uppercase flex items-center justify-center gap-2 px-8 py-4 rounded-sm transition-all duration-300 font-bold"
+                style={{ fontFamily: "'Outfit', sans-serif" }}
               >
                 Start Your Project <FiArrowRight />
               </motion.button>
@@ -840,7 +665,8 @@ export default function Projects() {
               <motion.button
                 whileHover={{ scale: 1.04, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="btn-outline text-sm tracking-[0.15em] uppercase"
+                className="w-full sm:w-auto border border-white/25 hover:border-white text-white hover:bg-white/10 text-xs tracking-[0.18em] uppercase flex items-center justify-center px-8 py-4 rounded-sm transition-all duration-300 font-bold bg-transparent"
+                style={{ fontFamily: "'Outfit', sans-serif" }}
               >
                 View Our Services
               </motion.button>
@@ -848,80 +674,10 @@ export default function Projects() {
           </motion.div>
         </div>
       </section>
+
       <UnifiedFooter />
     </div>
   )
 }
 
-// ─── Thought on Construction ────────────────────────────────────────────────────
-function ThoughtOnConstruction() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
 
-  return (
-    <section ref={ref} className="py-24 relative overflow-hidden" style={{ background: CREAM }}>
-      <div className="max-w-7xl mx-auto px-6 md:px-16 flex flex-col lg:flex-row items-center gap-16">
-
-        {/* Left: Text Content */}
-        <div className="w-full lg:w-1/2">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-8" style={{ color: '#4A3B32' }}>
-              My Thought on Construction
-            </h2>
-
-            <div className="space-y-6 text-[15px] leading-relaxed" style={{ color: '#5A4A42' }}>
-              <p>
-                Construction is not just about building a structure.<br />
-                It is about creating a space where life happens.
-              </p>
-
-              <p>
-                A good house should not depend only on design.<br />
-                It must have a strong foundation, proper planning,<br />
-                correct materials, and disciplined execution.
-              </p>
-
-              <p>
-                Through my experience in residential construction, I have learned<br />
-                that most problems come from poor planning and lack of supervision.<br />
-                Because of that, I always follow a systematic approach in every project.
-              </p>
-
-              <p>
-                I believe in practical buildings rather than decorative buildings.<br />
-                A home should be strong, functional, comfortable,<br />
-                and peaceful for the people who live in it.
-              </p>
-
-              <p className="font-medium pt-2">
-                My goal in every project is simple —<br />
-                to build with responsibility, clarity, and long-term thinking.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Right: Image */}
-        <div className="w-full lg:w-1/2">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            className="relative rounded-[2rem] overflow-hidden shadow-md aspect-[4/3] border-[6px] border-white"
-          >
-            <img
-              src={pr_3}
-              alt="Courtyard Design"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        </div>
-
-      </div>
-    </section>
-  )
-}
