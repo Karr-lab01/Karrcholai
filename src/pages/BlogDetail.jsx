@@ -32,24 +32,26 @@ const BlogDetail = () => {
       <main className="pt-24 pb-20">
         
         {/* ── HERO SECTION ── */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="w-full h-[60vh] md:h-[80vh] relative mb-16 md:mb-24 overflow-hidden bg-[#1a1a1a]"
-        >
-          {/* Blurred Background for Professional Framing */}
-          <div 
-             className="absolute inset-0 bg-cover bg-center blur-3xl opacity-40 scale-110" 
-             style={{ backgroundImage: `url(${post.image})` }} 
-          />
-          {/* Fully Visible Main Image */}
-          <img 
-             src={post.image} 
-             alt={post.title} 
-             className="w-full h-full object-contain relative z-10 py-4 md:py-8" 
-          />
-        </motion.div>
+        {post.id === 601 && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="w-full h-[60vh] md:h-[80vh] relative mb-16 md:mb-24 overflow-hidden bg-[#1a1a1a]"
+          >
+            {/* Blurred Background for Professional Framing */}
+            <div 
+               className="absolute inset-0 bg-cover bg-center blur-3xl opacity-40 scale-110" 
+               style={{ backgroundImage: `url(${post.image})` }} 
+            />
+            {/* Fully Visible Main Image */}
+            <img 
+               src={post.image} 
+               alt={post.title} 
+               className="w-full h-full object-contain relative z-10 py-4 md:py-8" 
+            />
+          </motion.div>
+        )}
 
         <div className="max-w-6xl mx-auto px-6">
           

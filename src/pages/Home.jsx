@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 import HeroSection from '../components/HeroSection'
 import WelcomeSection from '../components/WelcomeSection'
+import StatsSection from '../components/StatsSection'
 import KarrHomeSection from '../components/KarrHomeSection'
 import CholaiHomeSection from '../components/CholaiHomeSection'
 import ServicesSection from '../components/ServicesSection'
@@ -26,6 +27,11 @@ const Home = () => {
       {/* ── Hero ── */}
       <section id="home">
         <HeroSection />
+      </section>
+
+      {/* ── Stats ── */}
+      <section id="stats">
+        <StatsSection />
       </section>
 
 
