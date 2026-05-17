@@ -1,7 +1,6 @@
 import Navbar from '../components/Navbar'
 import HeroSection from '../components/HeroSection'
 import WelcomeSection from '../components/WelcomeSection'
-import HomeFounderSection from '../components/HomeFounderSection'
 import KarrHomeSection from '../components/KarrHomeSection'
 import CholaiHomeSection from '../components/CholaiHomeSection'
 import ServicesSection from '../components/ServicesSection'
@@ -11,7 +10,6 @@ import HomeBlogSection from '../components/HomeBlogSection'
 import HomeManaiadiSection from '../components/HomeManaiadiSection'
 import FootprintMapSection from '../components/FootprintMapSection'
 import HomeProjectsSection from '../components/HomeProjectsSection'
-import HomeContactSection from '../components/HomeContactSection'
 import UnifiedFooter from '../components/UnifiedFooter'
 import { Helmet } from 'react-helmet-async'
 
@@ -34,7 +32,6 @@ const Home = () => {
       {/* ── Welcome / About intro ── */}
       <section id="about">
         <WelcomeSection />
-        <HomeFounderSection />
       </section>
 
       {/* ── Services ── */}
@@ -72,10 +69,6 @@ const Home = () => {
 
 
 
-      {/* ── Contact Section ── */}
-      <section id="contact">
-        <HomeContactSection />
-      </section>
 
       <UnifiedFooter />
 

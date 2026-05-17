@@ -97,7 +97,7 @@ const WelcomeSection = () => {
             >
               <Link to="/about" className="inline-block group">
                 <div className="relative flex items-center gap-6 bg-dark text-white px-10 py-5 rounded-full overflow-hidden transition-all duration-500 hover:pr-14">
-                  <span className="relative z-10 font-bold tracking-widest uppercase text-xs">Discover Our Philosophy</span>
+                  <span className="relative z-10 font-bold tracking-widest uppercase text-xs">Learn More</span>
                   <div className="absolute right-0 top-0 h-full w-0 bg-secondary group-hover:w-full transition-all duration-500" />
                   <svg className="relative z-10 w-5 h-5 transition-transform duration-500 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

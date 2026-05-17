@@ -6,10 +6,10 @@ import {
   FiCheckCircle, FiTool, FiLayout, FiDollarSign,
   FiUserCheck, FiSearch, FiArrowRight, FiArrowUpRight
 } from 'react-icons/fi'
-import kar2 from '../../assets/kar2.avif'
-import img1 from '../../assets/img1.jpg'
+import renovationImg from '../../assets/renovation.jpg.jpeg'
+import pmcImg from '../../assets/pmc.jpeg'
 import img6 from '../../assets/img6.jpg'
-import residential from '../../assets/Residential_construction.jpg'
+import residential from '../../assets/image resiential.jpg.jpeg'
 
 const TERRA = '#B85C38'
 const FOREST = '#2D4B37'
@@ -35,7 +35,7 @@ const tabs = [
     label: 'PMC',
     headline: 'Efficiency in Execution.',
     desc: 'Our Project Management Consultancy (PMC) services help homeowners manage their construction projects efficiently — saving time, controlling costs, and ensuring quality throughout every phase.',
-    image: img1,
+    image: pmcImg,
     services: [
       { title: 'Project planning & scheduling', icon: FiLayout },
       { title: 'Construction cost estimation', icon: FiDollarSign },
@@ -50,7 +50,7 @@ const tabs = [
     label: 'Renovation',
     headline: 'Revitalize Your Living Space.',
     desc: 'Our renovation solutions enhance the functionality, durability, and appearance of existing homes — breathing new life into every corner with precision and craftsmanship.',
-    image: kar2,
+    image: renovationImg,
     services: [
       { title: 'House renovation', icon: FiHome },
       { title: 'Structural repair', icon: FiTool },

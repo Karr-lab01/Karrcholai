@@ -4,13 +4,10 @@ import { Link } from 'react-router-dom'
 import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight } from 'react-icons/fa'
 import { FiArrowUpRight, FiCheckCircle } from 'react-icons/fi'
 
-import landscapeImg from '../assets/cholai/landscape.png'
-import landscape1 from '../assets/cholai/landscape_1.jpg'
-import rainwaterImg from '../assets/cholai/rainwater.png'
-import rainwater1 from '../assets/cholai/rainwater_1.jpg'
-import solarImg from '../assets/cholai/solar.png'
-import solar1 from '../assets/cholai/solar_image.jpg'
-import wasteImg from '../assets/cholai/waste.png'
+import newLandscape from '../../assets/lancape.jpg.jpeg'
+import newRainwater from '../../assets/rainwater.jpg.jpeg'
+import newSolar from '../../assets/solar panel.jpg.jpeg'
+import newWaste from '../../assets/WhatsApp Image 2026-05-17 at 16.41.22.jpeg'
 
 const SERVICES = [
   {
@@ -22,7 +19,7 @@ const SERVICES = [
     desc: 'We design and develop attractive outdoor spaces that enhance both the beauty and environmental value of residential properties. Our approach integrates native flora with modern aesthetics.',
     items: ['Garden planning and development', 'Landscape design', 'Green space planning'],
     impact: '100% Eco-Design',
-    images: [landscapeImg, landscape1],
+    images: [newLandscape],
     accent: '#3F7A4F',
     lightBg: 'from-green-500/10 to-emerald-500/10',
   },
@@ -35,7 +32,7 @@ const SERVICES = [
     desc: 'Rainwater harvesting helps conserve water and recharge groundwater resources. Our advanced collection systems ensure long-term water security for homeowners.',
     items: ['Rainwater collection systems', 'Groundwater recharge solutions', 'Water conservation planning'],
     impact: '50,000L+ Stored',
-    images: [rainwaterImg, rainwater1],
+    images: [newRainwater],
     accent: '#3B82F6',
     lightBg: 'from-blue-500/10 to-cyan-500/10',
   },
@@ -48,7 +45,7 @@ const SERVICES = [
     desc: 'We provide renewable energy solutions that help homeowners reduce electricity costs and environmental impact. Clean, silent, and sustainable energy for modern homes.',
     items: ['Solar panel installation', 'Solar energy system planning', 'Renewable energy integration'],
     impact: '95% Energy Saving',
-    images: [solarImg, solar1],
+    images: [newSolar],
     accent: '#F59E0B',
     lightBg: 'from-yellow-500/10 to-orange-500/10',
   },
@@ -61,7 +58,7 @@ const SERVICES = [
     desc: 'Responsible waste management improves environmental health and sustainability. We implement systems that turn waste into resources, supporting a clean living space.',
     items: ['Waste segregation systems', 'Composting solutions', 'Sustainable waste planning'],
     impact: 'Zero Waste Goal',
-    images: [wasteImg],
+    images: [newWaste],
     accent: '#8B7355',
     lightBg: 'from-amber-500/10 to-stone-500/10',
   },
