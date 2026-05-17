@@ -5,11 +5,10 @@ import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import heroBg from '../../assets/Exterior of modern luxury house with garden and beautiful sky.jpg'
 import heroVid from '../../assets/contact1.jpg'
-import img1 from '../../assets/img1.jpg'
-import img5 from '../../assets/img5.jpg'
-import img9 from '../../assets/img9.jpg'
-import img3 from '../../assets/img3.jpg'
 import modernHouse from '../../assets/MORDEN HOUSE.jpg'
+import contact3 from '../../assets/contact3.jpg'
+import contact4 from '../../assets/contact4.jpg'
+import contact5 from '../../assets/contact5.jpg'
 
 const FOREST = '#3F5F4A'
 const TERRA = '#C9754A'
@@ -292,18 +291,18 @@ export default function ContactUs() {
             <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={introInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
-              <img src={img1} alt="Karrcholai" className="w-full h-full object-cover" />
+              <img src={contact3} alt="Karrcholai" className="w-full h-full object-cover" />
               <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${FOREST}22, transparent)` }} />
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30, y: -20 }} animate={introInView ? { opacity: 1, x: 0, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.5 }}
               className="absolute -top-4 -right-4 sm:-right-8 w-36 sm:w-44 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-              <img src={img5} alt="" className="w-full h-28 sm:h-36 object-cover" />
+              <img src={contact4} alt="" className="w-full h-28 sm:h-36 object-cover" />
             </motion.div>
             <motion.div initial={{ opacity: 0, x: -30, y: 20 }} animate={introInView ? { opacity: 1, x: 0, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.65 }}
               className="absolute -bottom-4 -left-4 sm:-left-8 w-40 sm:w-52 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-              <img src={img9} alt="" className="w-full h-24 sm:h-32 object-cover" />
+              <img src={contact5} alt="" className="w-full h-24 sm:h-32 object-cover" />
               <div className="p-3" style={{ background: DARK }}>
                 <p className="text-[9px] font-black tracking-widest uppercase" style={{ color: TERRA }}>Tamil Nadu</p>
                 <p className="text-xs font-bold text-white">Premium Construction</p>

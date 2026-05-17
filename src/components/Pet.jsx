@@ -6,56 +6,53 @@ export default function Pet() {
   
   const pos = useRef({ 
     x: typeof window !== 'undefined' ? window.innerWidth / 2 : 200, 
-    y: typeof window !== 'undefined' ? window.innerHeight - 80 : 200 // Default to bottom
   })
   const flip = useRef(false)
+  const direction = useRef(1) // 1 for right, -1 for left
   
   useEffect(() => {
     let animationFrameId;
-    let walkTargetX = pos.current.x;
-    let walkTargetY = pos.current.y;
     let isIdle = false;
+    let idleTimer = null;
+    let roamTimer = null;
 
-    // Toggle between roaming and standing still
-    const stateInterval = setInterval(() => {
-      isIdle = Math.random() > 0.6; // 60% chance to stand idle
-    }, 3000);
+    // A more predictable roaming state machine
+    const setRoamingState = () => {
+      // Roam for 5-10 seconds
+      isIdle = false;
+      roamTimer = setTimeout(() => {
+        // Then idle for 2-4 seconds
+        isIdle = true;
+        idleTimer = setTimeout(setRoamingState, 2000 + Math.random() * 2000);
+      }, 5000 + Math.random() * 5000);
+    };
+
+    setRoamingState();
 
     const animate = () => {
       if (!isIdle) {
-        // Occasionally pick a new random walk target
-        if (Math.random() < 0.02) {
-           walkTargetX = pos.current.x + (Math.random() - 0.5) * 600;
-           walkTargetY = pos.current.y + (Math.random() - 0.5) * 600;
-        }
-        
-        // Keep target within window bounds
-        if (typeof window !== 'undefined') {
-           walkTargetX = Math.max(0, Math.min(window.innerWidth - 80, walkTargetX));
-           walkTargetY = Math.max(0, Math.min(window.innerHeight - 80, walkTargetY));
-        }
+        // Move horizontally
+        pos.current.x += direction.current * 1.5;
 
-        const dx = walkTargetX - pos.current.x;
-        const dy = walkTargetY - pos.current.y;
-        
-        pos.current.x += dx * 0.015;
-        pos.current.y += dy * 0.015;
+        // Check boundaries
+        if (typeof window !== 'undefined') {
+          const maxLeft = window.innerWidth - 80; // 80 is the width of the gif
+          
+          if (pos.current.x >= maxLeft) {
+            pos.current.x = maxLeft;
+            direction.current = -1; // Turn left
+          } else if (pos.current.x <= 0) {
+            pos.current.x = 0;
+            direction.current = 1; // Turn right
+          }
+        }
 
         // Flip image to face the direction of movement
-        if (Math.abs(dx) > 1) {
-          flip.current = dx < 0;
-        }
-      }
-      
-      // Ensure pet doesn't walk off-screen
-      if (typeof window !== 'undefined') {
-        pos.current.x = Math.max(0, Math.min(window.innerWidth - 80, pos.current.x));
-        pos.current.y = Math.max(0, Math.min(window.innerHeight - 80, pos.current.y));
+        flip.current = direction.current < 0;
       }
 
       if (henRef.current) {
         henRef.current.style.left = pos.current.x + "px";
-        henRef.current.style.top = pos.current.y + "px";
         henRef.current.style.transform = `scaleX(${flip.current ? -1 : 1})`;
       }
 
@@ -66,13 +63,15 @@ export default function Pet() {
     
     return () => {
       cancelAnimationFrame(animationFrameId);
-      clearInterval(stateInterval);
+      clearTimeout(idleTimer);
+      clearTimeout(roamTimer);
     };
   }, [])
 
   return (
     <div ref={henRef} style={{
       position: 'fixed',
+      bottom: '0px', // Fixed to the footer/bottom
       width: '80px',
       height: '80px',
       zIndex: 999999, // Ensure it's above absolutely everything
