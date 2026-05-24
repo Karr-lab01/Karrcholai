@@ -54,40 +54,40 @@ const Cholai = () => {
     {
       id: "landscape",
       title: "Landscape Development",
-      subtitle: "Designing with Nature",
-      description: "We design and develop attractive outdoor spaces that enhance both the beauty and environmental value of residential properties. Our approach integrates native flora with modern aesthetics.",
+      subtitle: "Integrated Outdoor Design",
+      description: "We plan and develop outdoor spaces that improve the appearance and environmental value of residential properties — combining practical layout with native planting and green area planning.",
       images: [landscapeImg, landscape1, landscape3],
-      items: ["Garden planning and development", "Landscape design", "Green space planning"],
+      items: ["Garden Planning & Development", "Landscape Design", "Green Space Planning"],
       icon: <FaLeaf />,
       color: "from-green-500/20 to-emerald-500/20"
     },
     {
       id: "rainwater",
       title: "Rainwater Harvesting",
-      subtitle: "Conserving Every Drop",
-      description: "Rainwater harvesting helps conserve water and recharge groundwater resources. Our advanced collection systems ensure long-term water security for homeowners.",
+      subtitle: "Water Conservation Systems",
+      description: "Rainwater harvesting reduces water dependency and supports groundwater recharge. We design and install collection systems suited to your site layout and water requirements.",
       images: [rainwaterImg, rainwater1, rainwater2],
-      items: ["Rainwater collection systems", "Groundwater recharge solutions", "Water conservation planning"],
+      items: ["Rainwater Collection Systems", "Groundwater Recharge Solutions", "Water Conservation Planning"],
       icon: <FaCloudRain />,
       color: "from-blue-500/20 to-cyan-500/20"
     },
     {
       id: "solar",
       title: "Solar Energy Solutions",
-      subtitle: "Powering the Future",
-      description: "We provide renewable energy solutions that help homeowners reduce electricity costs and environmental impact. Clean, silent, and sustainable energy for modern homes.",
+      subtitle: "Renewable Energy for Homes",
+      description: "Solar installations help homeowners reduce electricity costs and dependence on grid power. We plan and integrate solar systems based on your roof layout and energy needs.",
       images: [solarImg, solar1],
-      items: ["Solar panel installation", "Solar energy system planning", "Renewable energy integration"],
+      items: ["Solar Panel Installation", "System Planning & Design", "Renewable Energy Integration"],
       icon: <FaSun />,
       color: "from-yellow-500/20 to-orange-500/20"
     },
     {
       id: "waste",
       title: "Waste Management",
-      subtitle: "Circular Living",
-      description: "Responsible waste management improves environmental health and sustainability. We implement systems that turn waste into resources, supporting a clean living space.",
+      subtitle: "Responsible Waste Systems",
+      description: "Proper waste management keeps homes cleaner and reduces environmental impact. We design segregation and composting systems suited to residential use and local requirements.",
       image: wasteImg,
-      items: ["Waste segregation systems", "Composting solutions", "Sustainable waste management planning"],
+      items: ["Waste Segregation Systems", "Composting Solutions", "Sustainable Waste Planning"],
       icon: <FaRecycle />,
       color: "from-brown-500/20 to-stone-500/20"
     }
@@ -96,8 +96,8 @@ const Cholai = () => {
   return (
     <div ref={containerRef} className="bg-[#fcfcf9] min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
       <Helmet>
-        <title>Cholai | Sustainable Living Solutions & Landscape</title>
-        <meta name="description" content="Cholai division of Karrcholai provides eco-friendly solutions including landscape development, rainwater harvesting, solar energy, and waste management in Tamil Nadu." />
+        <title>Cholai | Sustainable Home Solutions in Tamil Nadu</title>
+        <meta name="description" content="Cholai is the sustainability division of Karrcholai — landscape development, rainwater harvesting, solar energy, and waste management for residential properties." />
         <link rel="canonical" href="https://karrcholai.com/cholai" />
       </Helmet>
       <Navbar />
@@ -141,7 +141,7 @@ const Cholai = () => {
               <div className="flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-8">
                 <div className="h-[1px] w-8 md:w-12 bg-secondary/50" />
                 <p className="text-white/70 text-[10px] md:text-lg font-light tracking-[0.2em] uppercase max-w-[250px] md:max-w-2xl">
-                  Environmentally responsible solutions for a greener tomorrow
+                  Sustainable solutions for homes — landscape, water, energy, and waste management across Tamil Nadu
                 </p>
                 <div className="h-[1px] w-8 md:w-12 bg-secondary/50" />
               </div>
@@ -174,10 +174,13 @@ const Cholai = () => {
                 <span className="w-8 h-[1px] bg-secondary" />
               </p>
               <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-dark leading-[1.2] md:leading-[1.1] mb-8 italic max-w-5xl mx-auto">
-                The Cholai division focuses on 
-                <span className="text-primary not-italic"> environmentally responsible </span>
-                <span className="text-primary/40 not-italic">solutions.</span>
+                The Cholai division delivers
+                <span className="text-primary not-italic"> practical, environmentally responsible </span>
+                <span className="text-primary/40 not-italic">solutions for residential properties.</span>
               </h2>
+              <p className="text-dark/60 text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto mb-8">
+                From outdoor landscaping and rainwater systems to solar energy and waste management — we help homeowners build and maintain homes that are functional, sustainable, and suited to Tamil Nadu's climate.
+              </p>
               <div className="w-20 h-1 bg-secondary/20 mx-auto" />
             </motion.div>
           </div>
@@ -282,7 +285,7 @@ const Cholai = () => {
                         className="absolute -bottom-6 -right-6 md:right-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-dark/5 hidden sm:block"
                       >
                         <p className="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-1">Impact</p>
-                        <p className="text-sm font-bold text-dark uppercase tracking-widest">100% Sustainable</p>
+                        <p className="text-sm font-bold text-dark uppercase tracking-widest">Eco-Conscious Design</p>
                       </motion.div>
                     </motion.div>
                   </div>
@@ -326,13 +329,13 @@ const Cholai = () => {
               transition={{ duration: 0.8 }}
             >
               <h3 className="text-3xl md:text-5xl lg:text-7xl font-black mb-10 leading-[1.1] md:leading-[0.95] tracking-tighter">
-                Ready to transform <br className="hidden md:block" />
-                your home into a <br className="hidden md:block" />
-                <span className="font-black italic text-secondary">sustainable sanctuary?</span>
+                Ready to upgrade <br className="hidden md:block" />
+                your home with <br className="hidden md:block" />
+                <span className="font-black italic text-secondary">sustainable solutions?</span>
               </h3>
               
               <p className="text-white/50 text-lg font-light mb-12 max-w-2xl mx-auto leading-relaxed">
-                Join our mission for responsible living. These systems help homeowners reduce dependency and support sustainable management of our planet's resources.
+                Whether you are building new or improving an existing property, we will assess your site and recommend practical solutions for landscape, water, energy, and waste management.
               </p>
 
               <div className="flex flex-wrap justify-center gap-6">

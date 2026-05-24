@@ -6,7 +6,7 @@ import { blogPosts } from '../data/blogData';
 
 const HomeBlogSection = () => {
   // Show only 2 blogs as requested
-  const displayPosts = blogPosts.slice(0, 2);
+  const displayPosts = blogPosts.filter(post => post.category === 'Engineering Legends').slice(0, 2);
 
   return (
     <section className="py-24 md:py-32 bg-white relative overflow-hidden">
@@ -50,7 +50,7 @@ const HomeBlogSection = () => {
             className="hidden md:block text-right"
           >
             <p className="text-dark/40 text-sm font-light max-w-xs">
-              Stay updated with the latest trends in construction, sustainable living, and architectural excellence.
+              Engineering stories and construction insights from the Karrcholai team.
             </p>
           </motion.div>
         </div>

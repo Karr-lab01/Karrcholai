@@ -119,7 +119,7 @@ const ManaiyadiCalculator = () => {
                   <FiActivity size={16} />
                 </div>
                 <p className="text-[11px] text-dark/50 leading-relaxed font-medium">
-                  Manaiyadi calculations determine the <span className="text-dark font-black">Life Energy</span> of your space. Ensure Income (Ayam) exceeds Expense (Vyayam).
+                  Manaiyadi calculations compare <span className="text-dark font-black">Ayam (income)</span> and <span className="text-dark font-black">Vyayam (expense)</span>. A favourable result typically means Ayam is greater than Vyayam.
                 </p>
               </div>
             </div>
@@ -143,7 +143,7 @@ const ManaiyadiCalculator = () => {
                     </div>
                     <div className={`flex items-center gap-2 ${results.isAuspicious ? 'text-primary' : 'text-secondary'}`}>
                       <FiShield size={18} />
-                      <span className="text-[11px] font-black uppercase tracking-[0.3em]">{results.isAuspicious ? 'Highly Auspicious' : 'Needs Optimization'}</span>
+                      <span className="text-[11px] font-black uppercase tracking-[0.3em]">{results.isAuspicious ? 'Favourable Result' : 'Review Recommended'}</span>
                     </div>
                   </div>
 
@@ -191,7 +191,7 @@ const ManaiyadiCalculator = () => {
 
                   {/* Bottom Message */}
                   <div className="mt-8 text-center">
-                    <p className="text-[9px] font-bold text-dark/20 uppercase tracking-[0.4em]">Ancient Architectural Algorithm · v2.0</p>
+                    <p className="text-[9px] font-bold text-dark/20 uppercase tracking-[0.4em]">Based on traditional Manaiyadi formulas</p>
                   </div>
                 </motion.div>
               )}

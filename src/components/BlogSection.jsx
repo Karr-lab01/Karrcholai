@@ -5,7 +5,7 @@ import { FiArrowRight } from 'react-icons/fi';
 import { blogPosts } from '../data/blogData';
 
 const BlogSection = () => {
-  const displayPosts = blogPosts.slice(0, 3);
+  const displayPosts = blogPosts.filter(post => post.category === 'Engineering Legends').slice(0, 3);
   return (
     <section id="insights" className="py-24 md:py-32 bg-[#FAF6F0] relative overflow-hidden">
       {/* Decorative Watermark */}

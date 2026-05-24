@@ -49,26 +49,26 @@ export default function Projects() {
 
   const p1Images = [prj11, prj20, prj23, prj6, prj2, prj8]
   const p1Captions = [
-    "01 / Primary Front Elevation Facade",
-    "02 / Structural Pillar Column Supports",
-    "03 / Double-Height Open Ceiling Span",
-    "04 / High-Density Custom Granite Masonry",
-    "05 / Internal Structural Span Layout",
-    "06 / Modern Courtyard Concrete Frame"
+    "01 / Front Elevation",
+    "02 / Structural Columns",
+    "03 / Double-Height Living Area",
+    "04 / Granite Masonry Work",
+    "05 / Internal Structural Layout",
+    "06 / Courtyard Structure"
   ]
 
   const p2Images = [prj24, prj25, prj26]
   const p2Captions = [
-    "01 / Panoramic Biophilic Facade Elevation",
-    "02 / Natural Cross-Ventilation Open Interiors",
-    "03 / Subterranean Rainwater Aquifer Courtyard"
+    "01 / Front Facade",
+    "02 / Open Interior Spaces",
+    "03 / Rainwater Harvesting Courtyard"
   ]
 
   return (
     <div ref={containerRef} className="min-h-screen overflow-x-hidden font-sans select-none" style={{ background: CREAM, color: BRONZE }}>
       <Helmet>
-        <title>Signature Client Projects | Karrcholai Construction</title>
-        <meta name="description" content="Explore Karrcholai Construction's signature client residences. A cinematic portfolio showcasing structural integrity, biophilic planning, and modern luxury." />
+        <title>Our Projects | Karrcholai Construction</title>
+        <meta name="description" content="Explore completed residential projects by Karrcholai — independent homes and villas across Tamil Nadu, built with structural integrity and disciplined execution." />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;600;900&family=Oswald:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -120,7 +120,7 @@ export default function Projects() {
               className="text-white/90 text-sm md:text-lg max-w-xl mx-auto font-normal leading-relaxed border-t border-white/20 pt-6 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
               style={{ fontFamily: "'Outfit', sans-serif" }}
             >
-              Signature residential estates engineered with unyielding concrete strength and bespoke biophilic planning.
+              Residential projects across Tamil Nadu — built with strong structure, careful planning, and quality execution.
             </p>
           </motion.div>
         </div>
@@ -151,7 +151,7 @@ export default function Projects() {
               className="text-[10px] font-black tracking-[0.35em] uppercase" 
               style={{ color: TERRA, fontFamily: "'Outfit', sans-serif" }}
             >
-              Case Study 01 // Structural Integration
+              Case Study 01 // Residential Construction
             </span>
             <h2 
               className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight mt-2 leading-none" 
@@ -266,59 +266,59 @@ export default function Projects() {
                     >
                       {activeTabP1 === 'vision' && (
                         <>
-                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept & Philosophy</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept</h4>
                           <p>
-                            Commissioned to serve as an enduring ancestral landmark, the Mohanavalli Residence represents a masterclass in modern luxury and uncompromised structural integrity.
+                            The ECR Residence is a large-scale independent home designed for open living, structural strength, and long-term durability along Chennai's East Coast Road.
                           </p>
                           <p>
-                            The layout challenge lay in crafting wide-span, open social spaces that seamlessly connect the indoor living pavilions with the outdoor swimming pools, all while maintaining perfect thermal resilience under Erode's harsh summer climate.
+                            The layout connects indoor living areas with outdoor spaces including the pool zone, while addressing ventilation and thermal comfort for the coastal climate.
                           </p>
                         </>
                       )}
 
                       {activeTabP1 === 'structural' && (
                         <>
-                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Structural & Engineering Excellence</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Structural & Engineering</h4>
                           <p>
-                            By deploying advanced post-tensioned slab technology and pre-stressed steel cables, our engineering team eliminated the need for load-bearing partition walls, resulting in a majestic double-height living room with a continuous 40-foot column-free span.
+                            The structure uses post-tensioned slab technology to achieve wide, column-free spans in the main living area — allowing flexible interior planning without compromising load-bearing capacity.
                           </p>
                           <p className="font-bold border-l-2 pl-3 border-[#B85C38]" style={{ color: BRONZE }}>
-                            Anchored into solid Fe-550 high-seismic reinforced steel foundations.
+                            Foundation and reinforcement designed with Fe-550 grade steel for seismic resilience.
                           </p>
                         </>
                       )}
 
                       {activeTabP1 === 'material' && (
                         <>
-                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Premium Materials & Finishes</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Materials & Finishes</h4>
                           <p>
-                            The entire structure is wrapped in high-density local Erode granite cavity walls, providing an exceptional natural thermal barrier that drops peak summer indoor temperatures by up to 6°C.
+                            External walls use high-density local granite cavity construction, providing natural thermal insulation and reducing peak indoor temperatures during summer.
                           </p>
                           <p>
-                            The interior integrates hand-selected Italian statuario marble flooring with a centralized smart home automation grid that operates HVAC, motorized lighting, and automated security.
+                            Interiors feature premium marble flooring, with integrated systems for HVAC, lighting, and security — planned and executed to client specifications.
                           </p>
                         </>
                       )}
 
                       {activeTabP1 === 'timeline' && (
                         <>
-                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Construction Timeline & Milestones</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Construction Timeline</h4>
                           <ul className="space-y-2 text-xs">
                             <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
-                              <span><strong>Phase 1:</strong> Blueprints & Excavation</span>
-                              <span>Month 1-3</span>
+                              <span><strong>Phase 1:</strong> Planning & Excavation</span>
+                              <span>Month 1–3</span>
                             </li>
                             <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
-                              <span><strong>Phase 2:</strong> Substructure & Post-tensioning</span>
-                              <span>Month 4-8</span>
+                              <span><strong>Phase 2:</strong> Substructure & Post-Tensioning</span>
+                              <span>Month 4–8</span>
                             </li>
                             <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
-                              <span><strong>Phase 3:</strong> Masonry & Cavity Wall System</span>
-                              <span>Month 9-12</span>
+                              <span><strong>Phase 3:</strong> Masonry & Wall Systems</span>
+                              <span>Month 9–12</span>
                             </li>
                             <li className="flex justify-between" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
-                              <span><strong>Phase 4:</strong> Marble Flooring & Handover</span>
-                              <span>Month 13-16</span>
+                              <span><strong>Phase 4:</strong> Finishing & Handover</span>
+                              <span>Month 13–16</span>
                             </li>
                           </ul>
                         </>
@@ -380,7 +380,7 @@ export default function Projects() {
               className="text-[9px] font-bold tracking-[0.35em] uppercase" 
               style={{ color: SAGE, fontFamily: "'Outfit', sans-serif" }}
             >
-              Case Study 02 // Ecological Architecture
+              Case Study 02 // Sustainable Design
             </span>
             <h2 
               className="text-3xl sm:text-5xl font-bold tracking-tight mt-1" 
@@ -464,9 +464,9 @@ export default function Projects() {
                   <div className="flex border-b pb-3 sm:pb-4 mb-5 sm:mb-6 gap-3 overflow-x-auto hide-scrollbar" style={{ borderColor: 'rgba(58,58,56,0.06)' }}>
                     {[
                       { id: 'vision', label: '01 / Vision' },
-                      { id: 'structural', label: '02 / Eco Core' },
+                      { id: 'structural', label: '02 / Systems' },
                       { id: 'material', label: '03 / Materials' },
-                      { id: 'timeline', label: '04 / Logistics' }
+                      { id: 'timeline', label: '04 / Timeline' }
                     ].map((tab) => (
                       <button
                         key={tab.id}
@@ -493,59 +493,59 @@ export default function Projects() {
                     >
                       {activeTabP2 === 'vision' && (
                         <>
-                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept & Vision</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept</h4>
                           <p>
-                            The Karthiga Devi Residence is a breakthrough achievement in eco-friendly architecture and self-sustaining engineering. Nestled within Coimbatore's biophilic landscape, the design focuses on building a carbon-neutral sanctuary.
+                            The Karthiga Devi Residence in Coimbatore was designed as a sustainable home that balances comfortable living with responsible resource use.
                           </p>
                           <p>
-                            Every engineering element is optimized for circular resource management, showing that premium contemporary luxury can live in perfect harmony with the environment.
+                            The plan integrates natural ventilation, solar energy, and rainwater harvesting — demonstrating that practical eco-friendly design can work well for modern residential living.
                           </p>
                         </>
                       )}
 
                       {activeTabP2 === 'structural' && (
                         <>
-                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Eco Engineering & Solar Infrastructure</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Sustainable Systems</h4>
                           <p>
-                            Built with seamless, roof-integrated monocrystalline solar tiles working in tandem with smart lithium battery banks (12.5 kWp). The system captures clean solar radiation to fuel over 80% of daily domestic loads.
+                            Roof-integrated monocrystalline solar panels with battery storage (12.5 kWp) supply a significant portion of daily household electricity needs.
                           </p>
                           <p>
-                            Water security is integrated via a heavy-duty monsoonal rainwater harvesting system that channels runoff through a three-stage bio-filtration aquifer into a 50,000L subterranean cell.
+                            A rainwater harvesting system collects and filters monsoon runoff through a three-stage process into a 50,000-litre underground storage tank for reuse.
                           </p>
                         </>
                       )}
 
                       {activeTabP2 === 'material' && (
                         <>
-                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Low-Carbon Materiality</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Materials & Ventilation</h4>
                           <p>
-                            Constructed utilizing high-performance compressed earth blocks (CSEBs) and custom-cast sustainable bamboo columns.
+                            The build uses compressed stabilised earth blocks (CSEBs) and bamboo structural elements where appropriate — reducing embodied carbon while maintaining strength.
                           </p>
                           <p>
-                            Architectural footprints are aligned along natural wind corridors, utilizing double-height air shafts and strategically placed native timber trees to maximize cross-ventilation drafts.
+                            The layout follows natural wind paths, with double-height ventilation shafts and native planting to improve cross-ventilation and reduce dependence on mechanical cooling.
                           </p>
                         </>
                       )}
 
                       {activeTabP2 === 'timeline' && (
                         <>
-                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Engineering Milestones</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Construction Timeline</h4>
                           <ul className="space-y-2 text-xs">
                             <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
-                              <span><strong>Phase 1:</strong> Biophilic Site Orientation Study</span>
-                              <span>Month 1-2</span>
+                              <span><strong>Phase 1:</strong> Site Planning & Orientation</span>
+                              <span>Month 1–2</span>
                             </li>
                             <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
-                              <span><strong>Phase 2:</strong> Subterranean Harvester Aquifer</span>
-                              <span>Month 3-6</span>
+                              <span><strong>Phase 2:</strong> Rainwater System Installation</span>
+                              <span>Month 3–6</span>
                             </li>
                             <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
-                              <span><strong>Phase 3:</strong> CSEB Earth Block Masonry</span>
-                              <span>Month 7-11</span>
+                              <span><strong>Phase 3:</strong> CSEB Masonry Work</span>
+                              <span>Month 7–11</span>
                             </li>
                             <li className="flex justify-between" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
-                              <span><strong>Phase 4:</strong> Active Solar PV Integration</span>
-                              <span>Month 12-14</span>
+                              <span><strong>Phase 4:</strong> Solar Integration & Handover</span>
+                              <span>Month 12–14</span>
                             </li>
                           </ul>
                         </>
@@ -639,7 +639,7 @@ export default function Projects() {
             className="text-xs md:text-base font-light leading-relaxed mb-12 text-white/70 max-w-xl mx-auto"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            Let's turn your vision into an enduring architectural landmark. Walk through every step of your custom construction journey — from blueprints to possession.
+            Let's turn your project into a home built with clarity, structure, and care — from initial planning through to handover.
           </p>
 
           <motion.div

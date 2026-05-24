@@ -25,7 +25,7 @@ const Manaiyadi = () => {
     <div className="bg-[#fdfbf7] min-h-screen text-dark selection:bg-secondary selection:text-white font-sans overflow-x-hidden">
       <Helmet>
         <title>Manaiyadi Sastram Calculator | Karrcholai Construction</title>
-        <meta name="description" content="Use our free Manaiyadi Sastram calculator to find auspicious dimensions for your home. Karrcholai integrates ancient Tamil architectural wisdom with modern construction." />
+        <meta name="description" content="Use our Manaiyadi Sastram calculator to find auspicious room and building dimensions. Karrcholai applies traditional Tamil architectural principles to modern residential construction." />
         <link rel="canonical" href="https://karrcholai.com/manaiyadi" />
       </Helmet>
       <Navbar />
@@ -54,14 +54,14 @@ const Manaiyadi = () => {
               transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="mt-16"
             >
-              <h2 className="text-white font-black tracking-[0.5em] md:tracking-[0.8em] uppercase text-[10px] md:text-xs mb-6 md:mb-8">Architectural Wisdom</h2>
+              <h2 className="text-white font-black tracking-[0.5em] md:tracking-[0.8em] uppercase text-[10px] md:text-xs mb-6 md:mb-8">Traditional Tamil Architecture</h2>
               <h1 className="text-4xl md:text-7xl lg:text-8xl font-black text-white leading-[0.85] tracking-tighter mb-8 md:mb-12 uppercase mix-blend-difference whitespace-normal md:whitespace-nowrap">
                 Manaiyadi <br className="md:hidden" /> <span className="text-transparent stroke-text-white italic">Sastram.</span>
               </h1>
               <div className="flex flex-col md:flex-row items-center justify-center gap-8">
                 <div className="w-[1px] h-20 bg-white/20 hidden md:block"></div>
                 <p className="text-white font-medium text-sm md:text-lg max-w-xl font-light leading-relaxed tracking-wide drop-shadow-md">
-                  The ancient Tamil science of vibrational measurement for modern dwellings.
+                  A traditional Tamil system for choosing auspicious room and building dimensions — applied to modern home construction.
                 </p>
               </div>
             </motion.div>
@@ -90,19 +90,19 @@ const Manaiyadi = () => {
                   <span className="w-8 h-[1px] bg-secondary"></span> Introduction
                 </h3>
                 <h2 className="text-4xl md:text-6xl font-black text-dark leading-tight tracking-tighter">
-                  Ancient <br /> <span className="text-primary italic">Heritage.</span>
+                  Tamil <br /> <span className="text-primary italic">Heritage.</span>
                 </h2>
               </div>
               <div className="md:w-2/3">
                 <p className="text-lg md:text-2xl font-light text-dark/70 leading-relaxed mb-6 md:mb-8">
-                  <span className="text-dark font-black">Manaiyadi Sastram (மனையடி சாஸ்திரம்)</span> is a profound Tamil architectural science that governs how building dimensions influence human life. 
+                  <span className="text-dark font-black">Manaiyadi Sastram (மனையடி சாஸ்திரம்)</span> is a traditional Tamil architectural practice that guides room dimensions, wall heights, and building proportions for residential construction.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-dark/50 text-xs md:text-sm leading-relaxed">
                   <p>
-                    Practiced for over a millennium, it prescribes specific measurements for rooms and wall heights to ensure prosperity, health, and happiness. It is based on the principle that dimensions carry vibrational frequencies that interact with cosmic energy.
+                    For centuries, families and builders in Tamil Nadu have consulted these measurements before constructing homes. Specific lengths and heights are associated with favourable or unfavourable outcomes for health, prosperity, and family well-being.
                   </p>
                   <p>
-                    By selecting favorable measurements, we harmonize the dwelling with the residents' well-being, transforming a simple structure into a sanctuary of positive energy and success.
+                    At Karrcholai, we respect this tradition and help clients apply Manaiyadi principles during planning — alongside modern structural engineering, so your home is both culturally aligned and technically sound.
                   </p>
                 </div>
               </div>
@@ -124,23 +124,23 @@ const Manaiyadi = () => {
                       <img src={vastuDetail} alt="Vastu Architecture" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent"></div>
                       <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
-                        <p className="text-white font-black uppercase tracking-[0.3em] text-[9px] mb-2 opacity-60">Visual Harmony</p>
-                        <p className="text-white text-xl md:text-2xl font-black tracking-tighter uppercase italic leading-tight">Structural <br/> Divinity.</p>
+                        <p className="text-white font-black uppercase tracking-[0.3em] text-[9px] mb-2 opacity-60">Design Principle</p>
+                        <p className="text-white text-xl md:text-2xl font-black tracking-tighter uppercase italic leading-tight">Proportion <br/> & Balance.</p>
                       </div>
                     </motion.div>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                       <div className="p-8 md:p-10 bg-[#fdfbf7] border border-dark/5 rounded-[2.5rem] md:rounded-[3rem] shadow-xl grain">
-                         <h4 className="text-[10px] font-black uppercase tracking-widest text-primary mb-4">Historical Precision</h4>
+                         <h4 className="text-[10px] font-black uppercase tracking-widest text-primary mb-4">Historical Roots</h4>
                          <p className="text-xs md:text-sm text-dark/60 leading-relaxed italic">
-                           Roots in ancient Tamil texts like <span className="font-bold">Manasara</span>. Precision applied to your home.
+                           Based on classical Tamil texts such as <span className="font-bold">Manasara</span>, adapted for residential planning today.
                          </p>
                       </div>
                       <div className="p-8 md:p-10 bg-dark text-white rounded-[2.5rem] md:rounded-[3rem] shadow-2xl relative overflow-hidden">
                          <div className="absolute -bottom-10 -right-10 opacity-5"><FiCompass size={160}/></div>
-                         <h4 className="text-[10px] font-black uppercase tracking-widest text-secondary mb-4">Cultural Excellence</h4>
+                         <h4 className="text-[10px] font-black uppercase tracking-widest text-secondary mb-4">Before Construction</h4>
                          <p className="text-xs md:text-sm text-white/60 leading-relaxed font-light">
-                           Traditionally consulted before construction, ensuring sanctuaries of wealth and growth.
+                           Traditionally consulted before laying foundations — to align dimensions with family wishes and cultural practice.
                          </p>
                       </div>
                     </div>
@@ -148,14 +148,14 @@ const Manaiyadi = () => {
 
                  {/* Right Column: Philosophy Text */}
                  <motion.div {...fadeInUp} className="lg:pl-12">
-                    <h3 className="text-secondary font-black uppercase tracking-[0.4em] text-[10px] mb-6 md:mb-8">The Philosophy</h3>
-                    <h2 className="text-3xl md:text-7xl font-black text-dark mb-6 md:mb-10 tracking-tighter uppercase leading-none">Vibrational <br/> <span className="text-primary italic">Synchronicity.</span></h2>
+                    <h3 className="text-secondary font-black uppercase tracking-[0.4em] text-[10px] mb-6 md:mb-8">Core Principle</h3>
+                    <h2 className="text-3xl md:text-7xl font-black text-dark mb-6 md:mb-10 tracking-tighter uppercase leading-none">Measured <br/> <span className="text-primary italic">Dimensions.</span></h2>
                     <p className="text-dark/40 text-base md:text-lg font-light leading-relaxed mb-6 md:mb-8">
-                       Every dimension—width, length, or height—carries a specific vibrational frequency that interacts with cosmic energies. 
+                       Each room length, width, and wall height is evaluated against traditional formulas. The resulting numbers indicate whether a dimension is considered favourable, neutral, or unfavourable for the household.
                     </p>
                     <div className="w-12 h-px bg-dark/10 mb-8"></div>
                     <p className="text-dark/60 text-sm italic">
-                       "Architecture is the reach for truth, and Manaiyadi Sastram is the mathematical path to it."
+                       "Good planning respects both engineering requirements and the measurements our families have trusted for generations."
                     </p>
                  </motion.div>
               </div>
@@ -170,8 +170,8 @@ const Manaiyadi = () => {
           <div className="container mx-auto max-w-6xl relative z-10">
             <div className="text-center mb-16 md:mb-24">
               <motion.div {...fadeInUp}>
-                <h3 className="text-secondary font-black tracking-[0.3em] md:tracking-[0.5em] uppercase text-[10px] mb-4 md:mb-6">Precision Tooling</h3>
-                <h2 className="text-4xl md:text-8xl font-black text-dark mb-6 md:mb-8 tracking-tighter uppercase">Algorithm <br className="md:hidden" /> <span className="text-primary italic">Engine.</span></h2>
+                <h3 className="text-secondary font-black tracking-[0.3em] md:tracking-[0.5em] uppercase text-[10px] mb-4 md:mb-6">Manaiyadi Calculator</h3>
+                <h2 className="text-4xl md:text-8xl font-black text-dark mb-6 md:mb-8 tracking-tighter uppercase">Dimension <br className="md:hidden" /> <span className="text-primary italic">Calculator.</span></h2>
                 <div className="w-12 h-1 bg-primary mx-auto mb-10"></div>
               </motion.div>
             </div>
@@ -200,10 +200,10 @@ const Manaiyadi = () => {
                     <h2 className="text-3xl md:text-4xl font-black text-dark mb-8 md:mb-12 tracking-tight uppercase leading-none">Common <br/> <span className="italic">Mistakes.</span></h2>
                     <ul className="space-y-6 md:space-y-8">
                        {[
-                         "Including Wall Thickness in calculations",
-                         "Mixing favorable and unfavorable pairs",
-                         "Ignoring the importance of ceiling height",
-                         "Focusing only on plot size rather than rooms"
+                         "Including wall thickness in room measurements",
+                         "Mixing favourable and unfavourable dimension pairs",
+                         "Ignoring recommended ceiling height",
+                         "Applying plot size only, without checking individual rooms"
                        ].map((item, i) => (
                          <li key={i} className="flex items-start gap-4 md:gap-6 text-[10px] md:text-sm font-bold text-dark/60 uppercase tracking-widest leading-tight">
                             <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-1 flex-shrink-0"></span>
@@ -214,13 +214,13 @@ const Manaiyadi = () => {
                  </div>
                  <div className="p-8 md:p-16 bg-primary/5 border border-primary/10 rounded-[3rem] md:rounded-[4rem] relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-8 text-primary/10"><FiCheckCircle size={80}/></div>
-                    <h3 className="text-primary font-black uppercase tracking-[0.4em] text-[10px] mb-8 md:mb-10">Scientific Perspective</h3>
-                    <h2 className="text-3xl md:text-4xl font-black text-dark mb-8 md:mb-12 tracking-tight uppercase leading-none">Cultural <br/> <span className="italic">Confidence.</span></h2>
+                    <h3 className="text-primary font-black uppercase tracking-[0.4em] text-[10px] mb-8 md:mb-10">Practical Perspective</h3>
+                    <h2 className="text-3xl md:text-4xl font-black text-dark mb-8 md:mb-12 tracking-tight uppercase leading-none">Tradition & <br/> <span className="italic">Construction.</span></h2>
                     <p className="text-xs md:text-sm text-dark/40 leading-relaxed font-light mb-6 md:mb-8">
-                       While rooted in traditional beliefs, Manaiyadi Sastram represents a sophisticated system of architectural planning that has stood the test of time.
+                       Manaiyadi Sastram is a respected system of architectural planning that many Tamil families follow when building a home.
                     </p>
                     <p className="text-xs md:text-sm text-dark/40 leading-relaxed font-light">
-                       The psychological comfort and cultural confidence that auspicious measurements provide translate into real benefits for mental well-being and family harmony.
+                       When combined with proper structural design and site supervision, auspicious dimensions can give families confidence and peace of mind throughout the construction process.
                     </p>
                  </div>
               </div>
@@ -241,10 +241,10 @@ const Manaiyadi = () => {
               </div>
               <div className="relative z-10">
                 <h2 className="text-2xl sm:text-3xl md:text-6xl font-black mb-6 tracking-tighter uppercase leading-[1.1]">
-                  Begin Your <br className="sm:hidden" /> <span className="text-secondary italic">Auspicious</span> <br className="sm:hidden" /> Journey.
+                  Plan Your Home <br className="sm:hidden" /> <span className="text-secondary italic">with Confidence.</span>
                 </h2>
                 <p className="text-white/40 text-xs md:text-base mb-10 max-w-lg mx-auto font-light leading-relaxed">
-                  Our master planners are ready to harmonize your vision with ancient structural integrity.
+                  Our team can help you apply Manaiyadi principles during planning — alongside structural engineering and quality construction.
                 </p>
                 <motion.button
                   whileHover={{ scale: 1.05, backgroundColor: '#ffffff', color: '#1a1a1a' }}

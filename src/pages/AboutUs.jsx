@@ -289,14 +289,14 @@ const AboutUs = () => {
                   Our Core <span className="font-medium">Philosophy</span>
                 </h3>
               </div>
-              <p className="text-dark/40 text-xs uppercase tracking-widest font-semibold">Excellence by design</p>
+              <p className="text-dark/40 text-xs uppercase tracking-widest font-semibold">Three principles we stand by</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {[
-                { icon: <FaHardHat size={24} />, title: "Meticulous Planning", desc: "Every successful build starts long before the foundation is poured. We focus heavily on pre-construction analysis and precise blueprint execution." },
-                { icon: <FaShieldAlt size={24} />, title: "Uncompromising Quality", desc: "We implement rigorous, multi-stage quality control checks throughout the lifecycle of the project to ensure structural and aesthetic perfection." },
-                { icon: <FaDollarSign size={24} />, title: "Transparent Value", desc: "Cost control is paramount. We provide clear, detailed financial oversight to prevent budget overruns without sacrificing the integrity of the build." }
+                { icon: <FaHardHat size={24} />, title: "Structured Planning", desc: "Every successful project begins with thorough pre-construction planning. We review drawings, budgets, and timelines with you before work begins — ensuring clarity and alignment from the start." },
+                { icon: <FaShieldAlt size={24} />, title: "Stage-wise Quality Control", desc: "Quality is verified at each critical stage — foundation, structure, roofing, and finishing. Our team maintains on-site supervision to ensure materials and workmanship meet agreed standards." },
+                { icon: <FaDollarSign size={24} />, title: "Transparent Cost Management", desc: "We provide detailed cost breakdowns and proactive updates on any variations. Our clients always know where their investment is going, with no unexpected charges mid-project." }
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -351,14 +351,14 @@ const AboutUs = () => {
                   </div>
 
                   <h3 className="text-4xl md:text-5xl font-light leading-[1.1] mb-8 tracking-tighter">
-                    Expertise that <br />
-                    <span className="font-bold italic text-white">empowers</span> <br />
-                    <span className="text-secondary italic">your vision.</span>
+                    Engineering expertise <br />
+                    <span className="font-bold italic text-white">you can trust</span> <br />
+                    <span className="text-secondary italic">from day one.</span>
                   </h3>
 
                   <div className="p-6 bg-white/[0.02] border-l border-secondary/40 backdrop-blur-md rounded-r-xl">
                     <p className="text-sm md:text-base text-white/50 font-light leading-relaxed">
-                      We fuse technical mastery with disciplined oversight to transform blueprints into architectural reality.
+                      Karrcholai was built on the belief that residential construction requires engineering discipline and consistent site supervision. With over 12 years of experience, we deliver structured project management, transparent communication, and quality execution at every stage.
                     </p>
                   </div>
                 </motion.div>
@@ -368,10 +368,10 @@ const AboutUs = () => {
               <div className="lg:col-span-7">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
                   {[
-                    { title: "Plan Effectively", icon: <FaProjectDiagram />, delay: 0 },
-                    { title: "Control Costs", icon: <FaHandHoldingUsd />, delay: 0.1 },
-                    { title: "Maintain Quality", icon: <FaShieldAlt />, delay: 0.2 },
-                    { title: "Complete On Time", icon: <FaClock />, delay: 0.3 }
+                    { title: "Structured Planning", icon: <FaProjectDiagram />, delay: 0 },
+                    { title: "Cost Transparency", icon: <FaHandHoldingUsd />, delay: 0.1 },
+                    { title: "Quality Supervision", icon: <FaShieldAlt />, delay: 0.2 },
+                    { title: "Timely Delivery", icon: <FaClock />, delay: 0.3 }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
@@ -403,7 +403,7 @@ const AboutUs = () => {
                   transition={{ delay: 0.5 }}
                   className="mt-8 text-[9px] uppercase tracking-[0.5em] text-white/20 text-center lg:text-left"
                 >
-                  Disciplined Execution • 12+ Years Experience
+                  Engineering-led execution • 12+ years in residential construction
                 </motion.p>
               </div>
 
@@ -427,7 +427,7 @@ const AboutUs = () => {
                 <span className="w-8 h-[1px] bg-secondary" />
               </p>
               <h3 className="text-3xl md:text-5xl font-light text-dark tracking-tight">
-                The Journey to <span className="font-medium">Completion</span>
+                From Consultation to <span className="font-medium">Handover</span>
               </h3>
             </motion.div>
 
@@ -445,11 +445,11 @@ const AboutUs = () => {
               />
 
               {[
-                { step: "01", title: "Consultation & Scope", desc: "Understanding your vision, lifestyle needs, and project constraints to build a solid foundation of expectations." },
-                { step: "02", title: "Design & Engineering", desc: "Collaborating with top-tier architects to finalize structurally sound, aesthetically brilliant blueprints." },
-                { step: "03", title: "Site Preparation", desc: "Meticulous clearing, excavating, and laying the groundwork with precise geographical measurements." },
-                { step: "04", title: "Construction Phase", desc: "Executing the build with strict adherence to timelines, safety protocols, and unyielding quality standards." },
-                { step: "05", title: "Final Handover", desc: "A comprehensive walk-through and inspection ensuring every single detail exceeds your expectations." }
+                { step: "01", title: "Consultation & Scope", desc: "We begin by understanding your requirements, budget, and timeline. This initial consultation establishes a clear project scope and sets realistic expectations for all parties involved." },
+                { step: "02", title: "Design & Engineering", desc: "We develop or review structural drawings and coordinate with your architect to ensure the design is practical, structurally sound, and ready for execution on site." },
+                { step: "03", title: "Site Preparation", desc: "The site is cleared, surveyed, and prepared for foundation work. Soil assessment and levelling are completed to ensure a stable and reliable base for construction." },
+                { step: "04", title: "Construction Phase", desc: "Construction proceeds through defined stages — foundation, structure, roofing, and finishes — with consistent site supervision and regular progress updates throughout." },
+                { step: "05", title: "Final Handover", desc: "Upon completion, we conduct a detailed walkthrough with you, address any remaining items, and hand over your home only when all agreed quality standards are fully met." }
               ].map((item, i) => (
                 <motion.div
                   key={i}

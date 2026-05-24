@@ -33,9 +33,9 @@ const MeasurementTable = () => {
       <section className="px-0 sm:px-4">
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end gap-12 mb-12 md:mb-16 px-6 sm:px-0">
           <div className="max-w-xl text-center lg:text-left">
-            <h3 className="text-secondary font-black tracking-[0.5em] uppercase text-[10px] mb-4">Registry 01</h3>
+            <h3 className="text-secondary font-black tracking-[0.5em] uppercase text-[10px] mb-4">Reference 01</h3>
             <h2 className="text-4xl md:text-7xl font-black text-dark leading-[0.9] tracking-tighter uppercase">
-              The Master <br /> <span className="text-transparent stroke-text-dark italic">Registry.</span>
+              Dimension <br /> <span className="text-transparent stroke-text-dark italic">Guide.</span>
             </h2>
           </div>
 
@@ -99,7 +99,7 @@ const MeasurementTable = () => {
                 onClick={() => setShowAllCards(true)}
                 className="w-full py-4 mt-4 bg-dark text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-lg flex items-center justify-center gap-3 active:scale-95 transition-transform"
               >
-                Show Entire Registry ({filteredMeasurements.length} items)
+                Show All Measurements ({filteredMeasurements.length} items)
                 <FiArrowRight />
               </button>
            )}
@@ -158,12 +158,12 @@ const MeasurementTable = () => {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12 md:mb-20">
-             <h3 className="text-secondary font-black tracking-[0.5em] uppercase text-[10px] mb-4">Analysis 02</h3>
+             <h3 className="text-secondary font-black tracking-[0.5em] uppercase text-[10px] mb-4">Reference 02</h3>
              <h2 className="text-4xl md:text-7xl font-black text-dark tracking-tighter uppercase leading-none">
-                Vertical <span className="text-primary italic">Elevation.</span>
+                Wall <span className="text-primary italic">Height.</span>
              </h2>
              <p className="mt-6 text-dark/40 text-base md:text-lg font-light max-w-2xl mx-auto italic">
-                How wall heights dictate the vertical energy flow of a sanctuary.
+                Recommended ceiling heights according to traditional Manaiyadi practice.
              </p>
           </div>
 
@@ -206,10 +206,10 @@ const MeasurementTable = () => {
               <div className="mt-16 relative z-10 pt-12 border-t border-white/5">
                 <div className="flex items-center gap-4 text-white/20 mb-6">
                    <FiActivity size={24} />
-                   <span className="text-[9px] font-black uppercase tracking-[0.3em]">Vertical Dynamics</span>
+                   <span className="text-[9px] font-black uppercase tracking-[0.3em]">Height Guidelines</span>
                 </div>
                 <p className="text-white/60 text-sm font-light leading-relaxed">
-                  Wall height dictates the vertical volume of life energy. Standard heights ensure status and wealth.
+                  Wall height is an important factor in Manaiyadi calculations. Selecting a recommended height supports favourable outcomes for the household.
                 </p>
               </div>
               <div className="absolute bottom-0 right-0 p-12 opacity-5 text-white"><FiArrowUp size={200} /></div>
@@ -241,7 +241,7 @@ const MeasurementTable = () => {
                        <FiX size={24} />
                     </div>
                     <p className="text-xs font-bold leading-relaxed opacity-80">
-                      Heights of 7, 9, 15, 18, 19, 23, 24, and 26 feet are associated with desolate conditions.
+                      Heights of 7, 9, 15, 18, 19, 23, 24, and 26 feet are traditionally considered unfavourable for residential buildings.
                     </p>
                   </div>
 
@@ -252,7 +252,7 @@ const MeasurementTable = () => {
                        <FiCheck size={24} />
                     </div>
                     <p className="text-xs font-bold leading-relaxed opacity-80">
-                      A 10-foot ceiling is the gold standard for residential prosperity and mental peace.
+                      A 10-foot ceiling is widely recommended for residential homes — balancing comfort, proportion, and traditional practice.
                     </p>
                   </div>
                </div>

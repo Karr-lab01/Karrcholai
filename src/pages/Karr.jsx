@@ -60,29 +60,29 @@ const Karr = () => {
   };
 
   const residentialServices = [
-    { title: "Turnkey house construction", icon: FiHome },
-    { title: "Structural construction work", icon: FiLayout },
-    { title: "Finishing works", icon: FiEdit3 },
-    { title: "Renovation and house extensions", icon: FiRefreshCw },
-    { title: "Site execution and supervision", icon: FiUserCheck },
-    { title: "Quality control and inspection", icon: FiCheckCircle }
+    { title: "Turnkey Home Construction", icon: FiHome },
+    { title: "Structural Construction Work", icon: FiLayout },
+    { title: "Finishing Works", icon: FiEdit3 },
+    { title: "Renovation & House Extensions", icon: FiRefreshCw },
+    { title: "Site Execution & Supervision", icon: FiUserCheck },
+    { title: "Quality Control & Inspection", icon: FiCheckCircle }
   ];
 
   const pmcServices = [
-    { title: "Project planning and scheduling", icon: FiLayout },
-    { title: "Construction cost estimation", icon: FiDollarSign },
-    { title: "Contractor coordination", icon: FiUserCheck },
-    { title: "Material planning and procurement support", icon: FiBriefcase },
-    { title: "Site supervision and inspection", icon: FiSearch },
-    { title: "Quality control", icon: FiCheckCircle },
-    { title: "Project progress monitoring", icon: FiEdit3 }
+    { title: "Project Planning & Scheduling", icon: FiLayout },
+    { title: "Construction Cost Estimation", icon: FiDollarSign },
+    { title: "Contractor Coordination", icon: FiUserCheck },
+    { title: "Material Planning & Procurement", icon: FiBriefcase },
+    { title: "Site Supervision & Inspection", icon: FiSearch },
+    { title: "Quality Control", icon: FiCheckCircle },
+    { title: "Progress Monitoring & Reporting", icon: FiEdit3 }
   ];
 
   return (
     <div ref={containerRef} className="bg-[#fdfbf7] min-h-screen text-[#1a1a1a] selection:bg-[#B85C38] selection:text-white overflow-x-hidden font-sans">
       <Helmet>
-        <title>Karr | Strong Residential Construction & PMC</title>
-        <meta name="description" content="Karr division of Karrcholai focuses on durable residential construction and expert project management consultancy (PMC) in Tamil Nadu." />
+        <title>Karr | Residential Construction & Project Management</title>
+        <meta name="description" content="Karr is the construction division of Karrcholai — residential building, renovation, project management, and cost estimation across Tamil Nadu." />
         <link rel="canonical" href="https://karrcholai.com/karr" />
       </Helmet>
       <Navbar />
@@ -130,7 +130,7 @@ const Karr = () => {
                 <span className="text-white/30 italic">Construction.</span>
               </h1>
               <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-                The Karr division focuses on providing strong, durable, and professionally managed residential construction services.
+                The Karr division delivers residential construction and project management services — built on structural integrity, transparent planning, and disciplined site execution across Tamil Nadu.
               </p>
             </motion.div>
           </div>
@@ -151,8 +151,8 @@ const Karr = () => {
               <motion.div {...fadeInUp} className="max-w-xl">
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block">Residential Construction</span>
                 <h2 className="text-4xl md:text-6xl font-bold leading-none tracking-tight">
-                  Crafting <br />
-                  <span className="text-[#1a1a1a]/20 italic">Exceptional Homes.</span>
+                  Building Strong <br />
+                  <span className="text-[#1a1a1a]/20 italic">Residential Homes.</span>
                 </h2>
               </motion.div>
               <motion.p 
@@ -160,7 +160,7 @@ const Karr = () => {
                 transition={{ delay: 0.2 }}
                 className="text-[#1a1a1a]/50 text-base max-w-xs font-light border-l border-[#B85C38]/30 pl-8"
               >
-                Karrcholai Construction provides complete residential construction services for independent houses and villas. We ensure every project is built with quality materials, durable structures, and professional workmanship.
+                We handle complete construction for independent houses and villas — from foundation to finishing. Every project is managed with verified structural work, quality materials, and consistent on-site supervision.
               </motion.p>
             </div>
 
@@ -201,18 +201,18 @@ const Karr = () => {
               <motion.div {...fadeInUp}>
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block">Project Management Consultancy (PMC)</span>
                 <h2 className="text-4xl md:text-7xl font-bold leading-none tracking-tight mb-8">
-                  Efficiency in <br />
-                  <span className="text-white/30 italic">Execution.</span>
+                  Professional Project <br />
+                  <span className="text-white/30 italic">Management.</span>
                 </h2>
                 <p className="text-white/40 text-lg font-light leading-relaxed mb-12 max-w-lg">
-                  Our Project Management Consultancy (PMC) services help homeowners manage their construction projects efficiently.
+                  Our Project Management Consultancy (PMC) provides expert oversight for homeowners who need structured planning, cost control, and quality supervision — without managing the build day to day themselves.
                 </p>
                 
                 <div className="space-y-6">
                   {[
-                    "Save time",
-                    "Control costs",
-                    "Ensure construction quality"
+                    "Structured timelines and progress tracking",
+                    "Transparent cost monitoring",
+                    "Rigorous quality supervision"
                   ].map((text, i) => (
                     <div key={i} className="flex items-center gap-4 text-white/80 group">
                       <div className="w-2 h-2 rounded-full bg-[#B85C38] group-hover:scale-150 transition-transform" />
@@ -273,19 +273,19 @@ const Karr = () => {
               <motion.div {...fadeInUp} transition={{ delay: 0.3 }} className="w-full lg:w-1/2">
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block">Renovation & Remodelling</span>
                 <h2 className="text-4xl md:text-6xl font-bold leading-none tracking-tight mb-8">
-                  Revitalize Your <br />
-                  <span className="text-[#1a1a1a]/20 italic">Living Space.</span>
+                  Renovation & <br />
+                  <span className="text-[#1a1a1a]/20 italic">Remodelling Services.</span>
                 </h2>
                 <p className="text-[#1a1a1a]/50 text-lg font-light leading-relaxed mb-12">
-                  Our renovation solutions enhance the functionality, durability, and appearance of existing homes.
+                  We upgrade and extend existing homes — improving layout, repairing structure, and updating interiors while maintaining the integrity of the building.
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                   {[
-                    { title: "House renovation", icon: FiHome },
-                    { title: "Structural repair", icon: FiTool },
-                    { title: "Interior works", icon: FiLayout },
-                    { title: "House extensions", icon: FiRefreshCw }
+                    { title: "House Renovation", icon: FiHome },
+                    { title: "Structural Repair", icon: FiTool },
+                    { title: "Interior Works", icon: FiLayout },
+                    { title: "House Extensions", icon: FiRefreshCw }
                   ].map((item, i) => (
                     <div key={i} className="flex gap-4 items-start">
                       <div className="mt-1 text-[#B85C38]"><item.icon size={18} /></div>
@@ -311,8 +311,8 @@ const Karr = () => {
               <motion.div {...fadeInUp}>
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block text-center">Planning & Estimation</span>
                 <h2 className="text-4xl md:text-7xl font-bold leading-none tracking-tighter">
-                  Financial <br />
-                  <span className="text-[#1a1a1a]/20 italic text-center">Clarity.</span>
+                  Planning & <br />
+                  <span className="text-[#1a1a1a]/20 italic text-center">Budget Clarity.</span>
                 </h2>
               </motion.div>
             </div>
@@ -325,15 +325,15 @@ const Karr = () => {
                 <div className="absolute top-10 right-10 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity">
                   <FiDollarSign size={120} />
                 </div>
-                <h3 className="text-2xl font-bold mb-6">Detailed Forecasting</h3>
+                <h3 className="text-2xl font-bold mb-6">Construction Cost Estimation</h3>
                 <p className="text-[#1a1a1a]/50 font-light leading-relaxed mb-10 max-w-sm">
-                  Proper planning is essential for a successful construction project. This allows homeowners to plan their investment confidently before starting construction.
+                  Accurate estimation is the foundation of every successful build. We prepare detailed cost breakdowns so you can plan your investment with confidence before construction begins.
                 </p>
                 <ul className="space-y-6">
                   {[
-                    "Detailed construction cost estimation",
+                    "Itemised construction cost estimation",
                     "Project planning and scheduling",
-                    "Material quantity estimation",
+                    "Material quantity assessment",
                     "Budget planning and cost control"
                   ].map((text, i) => (
                     <li key={i} className="flex items-center gap-4 text-sm font-bold text-[#2D4B37]">
@@ -351,9 +351,9 @@ const Karr = () => {
               >
                 <div className="absolute inset-0 stone-texture opacity-10" />
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-bold mb-6 leading-tight">Ready to build <br /> your vision?</h3>
+                  <h3 className="text-3xl font-bold mb-6 leading-tight">Ready to begin <br /> your project?</h3>
                   <p className="text-white/60 font-light mb-12">
-                    Connect with our construction specialists for a comprehensive site visit and initial estimation.
+                    Schedule a consultation and site visit. We will review your requirements and provide an initial scope and cost estimate.
                   </p>
                   <button className="w-full py-5 bg-white text-[#1a1a1a] text-[10px] font-bold tracking-[0.4em] uppercase hover:bg-[#B85C38] hover:text-white transition-all duration-500 rounded-full">
                     Book Consultation
