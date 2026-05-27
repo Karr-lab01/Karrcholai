@@ -84,7 +84,7 @@ const WelcomeSection = () => {
               </div>
               <div className="border-l-4 border-secondary pl-6 py-2">
                 <h4 className="text-3xl font-black text-secondary mb-1">
-                  <Counter to={150} suffix="+" />
+                  <Counter to={40} suffix="+" />
                 </h4>
                 <p className="text-[10px] text-dark/40 font-black tracking-widest uppercase">Visions Realized</p>
               </div>
@@ -135,7 +135,7 @@ const WelcomeSection = () => {
               >
                 <svg className="w-full h-full text-primary fill-current opacity-90" viewBox="0 0 100 100">
                   <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />
-                  <text className="text-[9.5px] font-black tracking-[3px] uppercase">
+                  <text className="text-[7.2px] font-black tracking-[2px] uppercase">
                     <textPath xlinkHref="#circlePath">
                       ✦ DISCIPLINE ✦ DESIGN ✦ CONSTRUCTION ✦
                     </textPath>

@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { 
   FiMapPin, FiCalendar, FiMaximize, FiUser, FiArrowRight, 
-  FiCheckCircle, FiShield, FiCpu, FiSun, FiDroplet, FiZap, FiActivity, FiCompass 
+  FiCheckCircle, FiShield, FiCpu, FiSun, FiDroplet, FiZap, FiActivity, FiCompass,
+  FiChevronLeft, FiChevronRight
 } from 'react-icons/fi'
 import { FaStar, FaQuoteLeft } from 'react-icons/fa'
 import Navbar from '../components/Navbar'
@@ -12,17 +13,28 @@ import FootprintMapSection from '../components/FootprintMapSection'
 import { Helmet } from 'react-helmet-async'
 
 // Image imports from root assets
-import prj11 from '../../assets/prj11.jpeg'
 import prj20 from '../../assets/prj20.jpeg'
 import prj23 from '../../assets/prj23.jpeg'
 import prj6 from '../../assets/prj6.jpeg'
 import prj2 from '../../assets/prj2.jpeg'
 import prj8 from '../../assets/prj8.jpeg'
 import prj5 from '../../assets/prj5.jpeg'
+import prj10 from '../../assets/prj10.jpeg'
+import prj9 from '../../assets/prj9.jpeg'
+import prj7 from '../../assets/prj7.jpeg'
 
-import prj24 from '../../assets/prj24.jpeg'
 import prj25 from '../../assets/prj25.jpeg'
 import prj26 from '../../assets/prj26.jpeg'
+import pr2_1 from '../../assets/2-pr-1.jpeg'
+import pr2_2 from '../../assets/2-pr-2.jpeg'
+import pr2_3 from '../../assets/2-pr-3.jpeg'
+import pr2_4 from '../../assets/2-pr-4.jpeg'
+import pr2_5 from '../../assets/2-pr-5.jpeg'
+import pr2_6 from '../../assets/2-pr-6.jpeg'
+import pr2_7 from '../../assets/2-pr-7.jpeg'
+import pr2_8 from '../../assets/2-pr-8.jpeg'
+import pr2_9 from '../../assets/2-pr-9.jpeg'
+import pr2_10 from '../../assets/2-pr-10.jpeg'
 import heroImg from '../../assets/img1.jpg'
 
 // Bright Luxury Color Palette
@@ -43,26 +55,74 @@ export default function Projects() {
   // Interactive Gallery States
   const [activeImgP1, setActiveImgP1] = useState(0)
   const [activeTabP1, setActiveTabP1] = useState('vision')
+  const [isP1Paused, setIsP1Paused] = useState(false)
 
   const [activeImgP2, setActiveImgP2] = useState(0)
   const [activeTabP2, setActiveTabP2] = useState('vision')
+  const [isP2Paused, setIsP2Paused] = useState(false)
 
-  const p1Images = [prj11, prj20, prj23, prj6, prj2, prj8]
+  const p1Images = [prj20, prj23, prj6, prj2, prj8, prj5, prj10, prj9, prj7]
   const p1Captions = [
-    "01 / Front Elevation",
-    "02 / Structural Columns",
-    "03 / Double-Height Living Area",
-    "04 / Granite Masonry Work",
-    "05 / Internal Structural Layout",
-    "06 / Courtyard Structure"
+    "01 / Structural Columns",
+    "02 / Double-Height Living Area",
+    "03 / Granite Masonry Work",
+    "04 / Internal Structural Layout",
+    "05 / Courtyard Structure",
+    "06 / Boundary Wall Construction",
+    "07 / Formwork and Shuttering",
+    "08 / Reinforcement Steel Detailing",
+    "09 / Concrete Pouring & Curing"
   ]
 
-  const p2Images = [prj24, prj25, prj26]
+  const p2Images = [
+    prj25, prj26,
+    pr2_1, pr2_2, pr2_3, pr2_4, pr2_5, pr2_6, pr2_7, pr2_8, pr2_9, pr2_10
+  ]
   const p2Captions = [
     "01 / Front Facade",
     "02 / Open Interior Spaces",
-    "03 / Rainwater Harvesting Courtyard"
+    "03 / Rainwater Harvesting Courtyard",
+    "04 / Site Layout and Planning",
+    "05 / Foundation Excavation",
+    "06 / Column Reinforcement Placing",
+    "07 / Grade Beam Concrete Pouring",
+    "08 / Brick Masonry Wall Progress",
+    "09 / Lintels and Sunshade Casting",
+    "10 / Roof Slab Formwork Setup",
+    "11 / Electric Conduit Laying",
+    "12 / Internal Plastering Work",
+    "13 / External Elevation Plastering"
   ]
+
+  // Auto slideshow timers
+  useEffect(() => {
+    if (isP1Paused) return
+    const timer = setInterval(() => {
+      setActiveImgP1(prev => (prev + 1) % p1Images.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [isP1Paused, p1Images.length])
+
+  useEffect(() => {
+    if (isP2Paused) return
+    const timer = setInterval(() => {
+      setActiveImgP2(prev => (prev + 1) % p2Images.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [isP2Paused, p2Images.length])
+
+  // Manual nav helpers (reset auto timer by briefly pausing)
+  const navP1 = useCallback((dir) => {
+    setIsP1Paused(true)
+    setActiveImgP1(prev => (prev + dir + p1Images.length) % p1Images.length)
+    setTimeout(() => setIsP1Paused(false), 6000)
+  }, [p1Images.length])
+
+  const navP2 = useCallback((dir) => {
+    setIsP2Paused(true)
+    setActiveImgP2(prev => (prev + dir + p2Images.length) % p2Images.length)
+    setTimeout(() => setIsP2Paused(false), 6000)
+  }, [p2Images.length])
 
   return (
     <div ref={containerRef} className="min-h-screen overflow-x-hidden font-sans select-none" style={{ background: CREAM, color: BRONZE }}>
@@ -201,6 +261,37 @@ export default function Projects() {
                     transition={{ duration: 0.5, ease: 'easeInOut' }}
                   />
                 </AnimatePresence>
+
+                {/* Left / Right Arrow Controls */}
+                <button
+                  onClick={() => navP1(-1)}
+                  aria-label="Previous image"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#fdfbf7]/85 backdrop-blur-sm border border-dark/10 flex items-center justify-center shadow-md hover:bg-white hover:scale-110 transition-all duration-200"
+                >
+                  <FiChevronLeft className="text-base sm:text-lg" style={{ color: '#2A2A28' }} />
+                </button>
+                <button
+                  onClick={() => navP1(1)}
+                  aria-label="Next image"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#fdfbf7]/85 backdrop-blur-sm border border-dark/10 flex items-center justify-center shadow-md hover:bg-white hover:scale-110 transition-all duration-200"
+                >
+                  <FiChevronRight className="text-base sm:text-lg" style={{ color: '#2A2A28' }} />
+                </button>
+
+                {/* Slideshow Progress Dots */}
+                <div className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 z-20 flex gap-1.5">
+                  {p1Images.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => { setIsP1Paused(true); setActiveImgP1(i); setTimeout(() => setIsP1Paused(false), 6000) }}
+                      className={`rounded-full transition-all duration-300 ${
+                        activeImgP1 === i ? 'w-4 h-1.5 bg-[#B85C38]' : 'w-1.5 h-1.5 bg-white/60 hover:bg-white'
+                      }`}
+                      aria-label={`Go to image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+
                 {/* Active Caption Badge */}
                 <div 
                   className="absolute bottom-4 left-4 sm:bottom-5 sm:left-5 bg-[#fdfbf7]/95 backdrop-blur-md text-dark text-[8px] sm:text-[9px] uppercase tracking-widest px-3 sm:px-4 py-1.5 sm:py-2 rounded-md font-black border border-dark/5 shadow-sm"
@@ -210,8 +301,8 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* Symmetrical Row of Interactive Thumbnails (Updated to grid-cols-6 with responsive touch swiping) */}
-              <div className="flex overflow-x-auto lg:grid lg:grid-cols-6 gap-3 flex-shrink-0 pb-2 lg:pb-0 hide-scrollbar snap-x">
+              {/* Symmetrical Row of Interactive Thumbnails (Updated to grid-cols-9 with responsive touch swiping) */}
+              <div className="flex overflow-x-auto lg:grid lg:grid-cols-9 gap-3 flex-shrink-0 pb-2 lg:pb-0 hide-scrollbar snap-x">
                 {p1Images.map((img, idx) => (
                   <button
                     key={idx}
@@ -347,7 +438,6 @@ export default function Projects() {
 
                 <div className="pt-4 border-t flex items-center justify-between gap-4" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
                   <div>
-                    <h4 className="font-bold text-xs tracking-wide" style={{ color: BRONZE }}>Mrs. Elumalai Mohanavalli</h4>
                     <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Erode</p>
                   </div>
                   <div className="flex flex-col items-end flex-shrink-0">
@@ -429,6 +519,37 @@ export default function Projects() {
                     transition={{ duration: 0.5, ease: 'easeInOut' }}
                   />
                 </AnimatePresence>
+
+                {/* Left / Right Arrow Controls */}
+                <button
+                  onClick={() => navP2(-1)}
+                  aria-label="Previous image"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#fdfbf7]/85 backdrop-blur-sm border border-dark/10 flex items-center justify-center shadow-md hover:bg-white hover:scale-110 transition-all duration-200"
+                >
+                  <FiChevronLeft className="text-base sm:text-lg" style={{ color: '#2A2A28' }} />
+                </button>
+                <button
+                  onClick={() => navP2(1)}
+                  aria-label="Next image"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#fdfbf7]/85 backdrop-blur-sm border border-dark/10 flex items-center justify-center shadow-md hover:bg-white hover:scale-110 transition-all duration-200"
+                >
+                  <FiChevronRight className="text-base sm:text-lg" style={{ color: '#2A2A28' }} />
+                </button>
+
+                {/* Slideshow Progress Dots */}
+                <div className="absolute bottom-4 right-4 z-20 flex gap-1.5">
+                  {p2Images.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => { setIsP2Paused(true); setActiveImgP2(i); setTimeout(() => setIsP2Paused(false), 6000) }}
+                      className={`rounded-full transition-all duration-300 ${
+                        activeImgP2 === i ? 'w-4 h-1.5 bg-[#2D4B37]' : 'w-1.5 h-1.5 bg-white/60 hover:bg-white'
+                      }`}
+                      aria-label={`Go to image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+
                 <div 
                   className="absolute bottom-4 left-4 bg-[#fdfbf7]/95 backdrop-blur-md text-dark text-[8px] sm:text-[9px] uppercase tracking-widest px-3 py-1.5 rounded font-black border border-dark/5 shadow-sm"
                   style={{ fontFamily: "'Outfit', sans-serif" }}
@@ -437,8 +558,8 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* Symmetrical Row of 3 Interactive Thumbnails (with mobile horizontal touch scrolling) */}
-              <div className="flex overflow-x-auto lg:grid lg:grid-cols-3 gap-3 sm:gap-5 pb-2 lg:pb-0 hide-scrollbar snap-x">
+              {/* Symmetrical Row of Interactive Thumbnails (Updated to grid-cols-7 with responsive touch swiping) */}
+              <div className="flex overflow-x-auto lg:grid lg:grid-cols-7 gap-3 sm:gap-5 pb-2 lg:pb-0 hide-scrollbar snap-x">
                 {p2Images.map((img, idx) => (
                   <button
                     key={idx}
@@ -574,7 +695,6 @@ export default function Projects() {
 
                 <div className="pt-4 border-t flex items-center justify-between gap-4" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
                   <div>
-                    <h4 className="font-bold text-xs tracking-wide" style={{ color: BRONZE }}>Mrs. Naatrayan Karthiga Devi</h4>
                     <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Coimbatore</p>
                   </div>
                   <div className="flex flex-col items-end flex-shrink-0">

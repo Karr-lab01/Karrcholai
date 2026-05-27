@@ -256,7 +256,7 @@ const AboutUs = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-8 divide-x-0 md:divide-x divide-white/10">
               {[
                 { number: "12+", label: "Years Experience" },
-                { number: "150+", label: "Projects Completed" },
+                { number: "40+", label: "Projects Completed" },
                 { number: "100%", label: "Client Satisfaction" },
                 { number: "24/7", label: "Project Support" }
               ].map((stat, i) => (

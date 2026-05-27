@@ -9,7 +9,7 @@ import {
 import renovationImg from '../../assets/renovation.jpg.jpeg'
 import pmcImg from '../../assets/pmc.jpeg'
 import img6 from '../../assets/img6.jpg'
-import residential from '../../assets/image resiential.jpg.jpeg'
+import residential from '../../assets/pr_3.jpeg'
 
 const TERRA = '#B85C38'
 const FOREST = '#2D4B37'
@@ -143,7 +143,7 @@ const KarrHomeSection = () => {
                 <img
                   src={current.image}
                   alt={current.label}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain bg-[#fdfbf7]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/70 via-transparent to-transparent" />
 
