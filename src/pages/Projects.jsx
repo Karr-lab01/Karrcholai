@@ -454,12 +454,12 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* ── PROJECT 02: COIMBATORE RESIDENCE ── */}
+      {/* ── PROJECT 02: KARUR RESIDENCE ── */}
       <section className="py-16 sm:py-28 md:py-40 relative" style={{ background: '#FAF8F5' }}>
         
         {/* Decorative Grid coordinate marker */}
         <div className="absolute right-12 top-12 text-[10px] font-black text-dark/15 tracking-widest uppercase hidden md:block" style={{ fontFamily: "'Outfit', sans-serif" }}>
-          LATITUDE 11.01° N // LONGITUDE 76.95° E // COIMBATORE, TN
+          LATITUDE 10.96° N // LONGITUDE 78.08° E // KARUR, TN
         </div>
 
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -476,7 +476,7 @@ export default function Projects() {
               className="text-3xl sm:text-5xl font-bold tracking-tight mt-1" 
               style={{ color: BRONZE, fontFamily: "'Oswald', sans-serif" }}
             >
-              Coimbatore Residence
+              Karur Residence
             </h2>
             <div className="w-16 h-[2px] mt-4" style={{ background: SAGE }} />
           </div>
@@ -485,7 +485,7 @@ export default function Projects() {
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl sm:rounded-3xl border shadow-sm mb-10 sm:mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
             {[
               { icon: FiMaximize, label: "Total Built Space", value: "5,100 Sq.Ft", accent: SAGE },
-              { icon: FiMapPin, label: "Geographic Site", value: "Coimbatore, TN", accent: SAGE },
+              { icon: FiMapPin, label: "Geographic Site", value: "Karur, TN", accent: SAGE },
               { icon: FiCalendar, label: "Year Completed", value: "2024", accent: SAGE }
             ].map((spec, idx) => (
               <div key={idx} className="p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-dark/[0.02] bg-[#FCFBF9] flex items-center gap-3 sm:gap-4 hover:border-dark/10 transition-all duration-300">
@@ -616,7 +616,7 @@ export default function Projects() {
                         <>
                           <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept</h4>
                           <p>
-                            The Coimbatore Residence was designed as a sustainable home that balances comfortable living with responsible resource use.
+                            The Karur Residence was designed as a sustainable home that balances comfortable living with responsible resource use.
                           </p>
                           <p>
                             The plan integrates natural ventilation, solar energy, and rainwater harvesting — demonstrating that practical eco-friendly design can work well for modern residential living.
@@ -695,7 +695,7 @@ export default function Projects() {
 
                 <div className="pt-4 border-t flex items-center justify-between gap-4" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
                   <div>
-                    <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Coimbatore</p>
+                    <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Karur</p>
                   </div>
                   <div className="flex flex-col items-end flex-shrink-0">
                     <span className="text-[8px] sm:text-[9px] font-black px-2.5 py-1 rounded bg-[#2D4B37]/08 text-[#2D4B37] uppercase tracking-wider" style={{ fontFamily: "'Outfit', sans-serif" }}>Verified Review</span>
