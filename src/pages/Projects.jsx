@@ -454,7 +454,7 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* ── PROJECT 02: THE KARTHIGA DEVI RESIDENCE (COIMBATORE) ── */}
+      {/* ── PROJECT 02: COIMBATORE RESIDENCE ── */}
       <section className="py-16 sm:py-28 md:py-40 relative" style={{ background: '#FAF8F5' }}>
         
         {/* Decorative Grid coordinate marker */}
@@ -476,7 +476,7 @@ export default function Projects() {
               className="text-3xl sm:text-5xl font-bold tracking-tight mt-1" 
               style={{ color: BRONZE, fontFamily: "'Oswald', sans-serif" }}
             >
-              The Karthiga Devi Residence
+              Coimbatore Residence
             </h2>
             <div className="w-16 h-[2px] mt-4" style={{ background: SAGE }} />
           </div>
@@ -616,7 +616,7 @@ export default function Projects() {
                         <>
                           <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept</h4>
                           <p>
-                            The Karthiga Devi Residence in Coimbatore was designed as a sustainable home that balances comfortable living with responsible resource use.
+                            The Coimbatore Residence was designed as a sustainable home that balances comfortable living with responsible resource use.
                           </p>
                           <p>
                             The plan integrates natural ventilation, solar energy, and rainwater harvesting — demonstrating that practical eco-friendly design can work well for modern residential living.
