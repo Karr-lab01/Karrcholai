@@ -195,12 +195,12 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* ── PROJECT 01: THE MOHANAVALLI RESIDENCE (ERODE) ── */}
+      {/* ── PROJECT 01: ECR RESIDENCE ── */}
       <section className="py-16 sm:py-28 md:py-40 border-b relative" style={{ borderColor: BORDER_COLOR }}>
         
         {/* Decorative Grid coordinate marker */}
         <div className="absolute right-12 top-12 text-[10px] font-black text-dark/15 tracking-widest uppercase hidden md:block" style={{ fontFamily: "'Outfit', sans-serif" }}>
-          LATITUDE 11.34° N // LONGITUDE 77.71° E // ERODE, TN
+          LATITUDE 12.92° N // LONGITUDE 80.25° E // CHENNAI ECR, TN
         </div>
 
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -438,7 +438,7 @@ export default function Projects() {
 
                 <div className="pt-4 border-t flex items-center justify-between gap-4" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
                   <div>
-                    <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Erode</p>
+                    <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Chennai ECR</p>
                   </div>
                   <div className="flex flex-col items-end flex-shrink-0">
                     <span className="text-[8px] sm:text-[9px] font-black px-2.5 py-1 rounded bg-[#B85C38]/08 text-[#B85C38] uppercase tracking-wider" style={{ fontFamily: "'Outfit', sans-serif" }}>Verified Review</span>
