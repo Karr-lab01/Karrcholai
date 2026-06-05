@@ -41,7 +41,7 @@ const AppContent = ({ loading, setLoading }) => {
       </a>
 
       <AnimatePresence mode="wait">
-        {loading && <Preloader onComplete={() => setLoading(false)} />}
+        {loading && <Preloader key="preloader" onComplete={() => setLoading(false)} />}
       </AnimatePresence>
 
       {!loading && (
