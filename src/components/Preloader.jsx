@@ -1,12 +1,21 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import logoAnimation from '../../assets/logo aniamtion.mp4'
+import portraitAnimation from '../../assets/portrsit animation.mp4'
 
 const FADE_DURATION = 0.8 // seconds — must match exit transition below
+
+// Detect portrait / mobile: width <= 768px OR device is in portrait orientation
+const isMobilePortrait = () =>
+  window.innerWidth <= 768 ||
+  (window.matchMedia && window.matchMedia('(orientation: portrait)').matches)
 
 const Preloader = ({ onComplete }) => {
   const videoRef = useRef(null)
   const [visible, setVisible] = useState(true)
+  const [videoSrc, setVideoSrc] = useState(() =>
+    isMobilePortrait() ? portraitAnimation : logoAnimation
+  )
 
   useEffect(() => {
     // After fade-out animation finishes, tell App we're done
@@ -57,7 +66,7 @@ const Preloader = ({ onComplete }) => {
         >
           <video
             ref={videoRef}
-            src={logoAnimation}
+            src={videoSrc}
             autoPlay
             muted
             playsInline
