@@ -17,6 +17,9 @@ const Cholai    = lazy(() => import('./pages/Cholai'))
 const Blog      = lazy(() => import('./pages/Blog'))
 const BlogDetail = lazy(() => import('./pages/BlogDetail'))
 const Manaiyadi  = lazy(() => import('./pages/Manaiyadi'))
+const ManaiyadiCalculatorPage = lazy(() => import('./pages/ManaiyadiCalculatorPage'))
+const ManaiyadiDimensionGuide = lazy(() => import('./pages/ManaiyadiDimensionGuide'))
+const ManaiyadiIntroduction   = lazy(() => import('./pages/ManaiyadiIntroduction'))
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
 const NotFound   = lazy(() => import('./pages/NotFound'))
 
@@ -60,6 +63,9 @@ const AppContent = ({ loading, setLoading }) => {
                 <Route path="/blog"    element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogDetail />} />
                 <Route path="/manaiyadi" element={<Manaiyadi />} />
+                <Route path="/manaiyadi/calculator"     element={<ManaiyadiCalculatorPage />} />
+                <Route path="/manaiyadi/dimension-guide" element={<ManaiyadiDimensionGuide />} />
+                <Route path="/manaiyadi/introduction"   element={<ManaiyadiIntroduction />} />
                 <Route path="/projects/:id" element={<ProjectDetail />} />
                 <Route path="*"        element={<NotFound />} />
               </Routes>
