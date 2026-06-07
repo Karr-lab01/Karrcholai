@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight } from 'react-icons/fa'
-import { FiArrowUpRight, FiCheckCircle } from 'react-icons/fi'
+import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight, FaLightbulb } from 'react-icons/fa'
+import { FiArrowUpRight } from 'react-icons/fi'
 
 import newLandscape from '../../assets/lancape.jpg.jpeg'
 import newRainwater from '../../assets/rainwater.jpg.jpeg'
 import newSolar from '../../assets/solar panel.jpg.jpeg'
 import newWaste from '../../assets/WhatsApp Image 2026-05-17 at 16.41.22.jpeg'
+import newLighting from '../../assets/lighting.jpg'
 
 const SERVICES = [
   {
@@ -61,6 +62,19 @@ const SERVICES = [
     images: [newWaste],
     accent: '#8B7355',
     lightBg: 'from-amber-500/10 to-stone-500/10',
+  },
+  {
+    id: 'lighting',
+    icon: <FaLightbulb />,
+    label: 'Lighting',
+    title: 'Smart Lighting',
+    subtitle: 'Illuminate Thoughtfully',
+    desc: 'Energy-efficient lighting design that transforms spaces while minimising power consumption. We integrate smart controls, LED systems, and natural light strategies for beautiful, sustainable homes.',
+    items: ['LED & energy-efficient fixtures', 'Smart lighting controls', 'Natural light optimisation'],
+    impact: '80% Energy Saved',
+    images: [newLighting],
+    accent: '#D4A017',
+    lightBg: 'from-yellow-400/10 to-amber-300/10',
   },
 ]
 

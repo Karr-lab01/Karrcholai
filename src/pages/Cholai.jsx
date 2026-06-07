@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
-import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight } from 'react-icons/fa'
+import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight, FaLightbulb } from 'react-icons/fa'
 
 // Images from the assets folder
 import landscapeImg from '../assets/cholai/landscape.png'
@@ -14,6 +14,7 @@ import rainwater2 from '../assets/cholai/rainwater_2.jpg'
 import solarImg from '../assets/cholai/solar.png'
 import solar1 from '../assets/cholai/solar_image.jpg'
 import wasteImg from '../assets/cholai/waste.png'
+import lightingImg from '../../assets/lighting.jpg'
 import cholaiVideo from '../assets/cholai/cholai_video.mp4'
 import { Helmet } from 'react-helmet-async'
 
@@ -90,6 +91,16 @@ const Cholai = () => {
       items: ["Waste Segregation Systems", "Composting Solutions", "Sustainable Waste Planning"],
       icon: <FaRecycle />,
       color: "from-brown-500/20 to-stone-500/20"
+    },
+    {
+      id: "lighting",
+      title: "Smart Lighting",
+      subtitle: "Illuminate Thoughtfully",
+      description: "Energy-efficient lighting transforms the feel of a home while cutting power consumption. We design and integrate LED systems, smart controls, and natural light strategies tailored to each space.",
+      image: lightingImg,
+      items: ["LED & Energy-Efficient Fixtures", "Smart Lighting Controls", "Natural Light Optimisation"],
+      icon: <FaLightbulb />,
+      color: "from-yellow-400/20 to-amber-300/20"
     }
   ]
 
@@ -141,7 +152,7 @@ const Cholai = () => {
               <div className="flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-8">
                 <div className="h-[1px] w-8 md:w-12 bg-secondary/50" />
                 <p className="text-white/70 text-[10px] md:text-lg font-light tracking-[0.2em] uppercase max-w-[250px] md:max-w-2xl">
-                  Sustainable solutions for homes — landscape, water, energy, and waste management across Tamil Nadu
+                  Sustainable solutions for homes — landscape, water, energy, waste management, and smart lighting across Tamil Nadu
                 </p>
                 <div className="h-[1px] w-8 md:w-12 bg-secondary/50" />
               </div>
@@ -179,7 +190,7 @@ const Cholai = () => {
                 <span className="text-primary/40 not-italic">solutions for residential properties.</span>
               </h2>
               <p className="text-dark/60 text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto mb-8">
-                From outdoor landscaping and rainwater systems to solar energy and waste management — we help homeowners build and maintain homes that are functional, sustainable, and suited to Tamil Nadu's climate.
+                From outdoor landscaping and rainwater systems to solar energy, waste management, and smart lighting — we help homeowners build and maintain homes that are functional, sustainable, and suited to Tamil Nadu's climate.
               </p>
               <div className="w-20 h-1 bg-secondary/20 mx-auto" />
             </motion.div>

@@ -128,24 +128,27 @@ const WelcomeSection = () => {
               </motion.div>
 
               {/* Rotating Experience Badge */}
-              <motion.div 
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="hidden sm:flex absolute -left-6 md:-left-12 -bottom-6 md:-bottom-12 z-30 w-28 md:w-40 h-28 md:h-40 items-center justify-center"
-              >
-                <svg className="w-full h-full text-primary fill-current opacity-90" viewBox="0 0 100 100">
+              <div className="hidden sm:flex absolute -left-6 md:-left-12 -bottom-6 md:-bottom-12 z-30 w-28 md:w-40 h-28 md:h-40 items-center justify-center">
+                {/* Only the circular text rotates */}
+                <motion.svg
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute w-full h-full text-primary fill-current opacity-90"
+                  viewBox="0 0 100 100"
+                >
                   <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />
-                  <text className="text-[7.2px] font-black tracking-[2px] uppercase">
-                    <textPath xlinkHref="#circlePath">
-                      ✦ DISCIPLINE ✦ DESIGN ✦ CONSTRUCTION ✦
+                  <text style={{ fontSize: '7px', fontWeight: '900' }} textAnchor="start">
+                    <textPath xlinkHref="#circlePath" textLength="251" lengthAdjust="spacing">
+                      ✦ DISCIPLINE ✦ DESIGN ✦ CONSTRUCTION
                     </textPath>
                   </text>
-                </svg>
+                </motion.svg>
+                {/* Static inner circle — does not rotate */}
                 <div className="absolute flex flex-col items-center justify-center bg-white w-20 h-20 rounded-full shadow-xl">
                   <span className="text-2xl font-black text-secondary">12</span>
                   <span className="text-[8px] font-black uppercase tracking-tighter">Years</span>
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Decorative background number */}
