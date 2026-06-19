@@ -13,9 +13,10 @@ const isMobilePortrait = () =>
 const Preloader = ({ onComplete }) => {
   const videoRef = useRef(null)
   const [visible, setVisible] = useState(true)
-  const [videoSrc, setVideoSrc] = useState(() =>
+  const [videoSrc] = useState(() =>
     isMobilePortrait() ? portraitAnimation : logoAnimation
   )
+  const isMobile = isMobilePortrait()
 
   useEffect(() => {
     // After fade-out animation finishes, tell App we're done
@@ -59,10 +60,21 @@ const Preloader = ({ onComplete }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: FADE_DURATION, ease: 'easeInOut' }}
           onAnimationComplete={(def) => {
-            // When exit animation fully completes, fire onComplete
             if (def === 'exit') onComplete()
           }}
-          className="fixed inset-0 z-[1000] bg-[#0d0d0b] flex items-center justify-center"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 1000,
+            background: '#0d0d0b',
+            // Use dvh so mobile browser toolbar doesn't cause gaps
+            width: '100dvw',
+            height: '100dvh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+          }}
         >
           <video
             ref={videoRef}
@@ -70,7 +82,15 @@ const Preloader = ({ onComplete }) => {
             autoPlay
             muted
             playsInline
-            className="w-full h-full object-cover"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              // fill: stretches video to fill the exact container — no crop, no bars
+              objectFit: isMobile ? 'fill' : 'cover',
+            }}
           />
         </motion.div>
       )}
