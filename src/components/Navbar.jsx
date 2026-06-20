@@ -136,7 +136,6 @@ const Navbar = () => {
           zIndex: 100,
           background: '#FAF9F6',
           boxShadow: scrolled ? '0 4px 32px rgba(0,0,0,0.08)' : '0 2px 16px rgba(0,0,0,0.04)',
-          borderBottom: '1px solid rgba(0,0,0,0.06)',
           transition: 'box-shadow 0.4s ease',
         }}
       >
@@ -161,6 +160,7 @@ const Navbar = () => {
             style={{
               background: 'none',
               border: 'none',
+              outline: 'none',
               cursor: 'pointer',
               padding: '6px 8px',
               display: 'flex',
@@ -175,9 +175,9 @@ const Navbar = () => {
               animate={{
                 boxShadow: [
                   '0 0 0px 0px rgba(201,117,74,0)',
-                  '0 0 18px 6px rgba(201,117,74,0.35)',
-                  '0 0 32px 10px rgba(201,117,74,0.15)',
-                  '0 0 18px 6px rgba(201,117,74,0.35)',
+                  '0 0 24px 10px rgba(201,117,74,0.45)',
+                  '0 0 40px 16px rgba(201,117,74,0.2)',
+                  '0 0 24px 10px rgba(201,117,74,0.45)',
                   '0 0 0px 0px rgba(201,117,74,0)',
                 ],
               }}
