@@ -37,24 +37,94 @@ const UnifiedFooter = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 items-start mb-16">
           {/* Column 1: Branding */}
           <div className="lg:col-span-1 flex flex-col items-start">
-            <button onClick={openLogoVideo} aria-label="Play logo animation" className="inline-flex items-center justify-center mb-1 cursor-pointer border-0 outline-none bg-transparent p-0">
-              <motion.img
-                src={logoImg}
-                alt="Karrcholai Construction logo"
-                className="h-28 md:h-36 w-auto object-contain"
+            {/* Logo with dust/smoke ground effect */}
+            <div style={{ position: 'relative', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', marginBottom: '4px' }}>
+
+              {/* Logo — highest z-index so nothing overlaps it */}
+              <button
+                onClick={openLogoVideo}
+                aria-label="Play logo animation"
+                className="inline-flex items-center justify-center cursor-pointer border-0 outline-none bg-transparent p-0"
+                style={{ position: 'relative', zIndex: 10 }}
+              >
+                <motion.img
+                  src={logoImg}
+                  alt="Karrcholai Construction logo"
+                  className="h-28 md:h-36 w-auto object-contain"
+                  animate={{
+                    scale: [1, 1.05, 1.03, 1.05, 1],
+                    filter: [
+                      'drop-shadow(0 0 0px rgba(201,117,74,0))',
+                      'drop-shadow(0 0 6px rgba(201,117,74,0.35)) drop-shadow(0 0 14px rgba(201,117,74,0.15))',
+                      'drop-shadow(0 0 10px rgba(201,117,74,0.45)) drop-shadow(0 0 22px rgba(201,117,74,0.2))',
+                      'drop-shadow(0 0 6px rgba(201,117,74,0.35)) drop-shadow(0 0 14px rgba(201,117,74,0.15))',
+                      'drop-shadow(0 0 0px rgba(201,117,74,0))',
+                    ],
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                />
+              </button>
+
+              {/* Ground shadow reflection — sits strictly below logo */}
+              <motion.span
                 animate={{
-                  scale: [1, 1.05, 1.03, 1.05, 1],
-                  filter: [
-                    'drop-shadow(0 0 0px rgba(201,117,74,0))',
-                    'drop-shadow(0 0 6px rgba(201,117,74,0.35)) drop-shadow(0 0 14px rgba(201,117,74,0.15))',
-                    'drop-shadow(0 0 10px rgba(201,117,74,0.45)) drop-shadow(0 0 22px rgba(201,117,74,0.2)) drop-shadow(0 0 38px rgba(201,117,74,0.07))',
-                    'drop-shadow(0 0 6px rgba(201,117,74,0.35)) drop-shadow(0 0 14px rgba(201,117,74,0.15))',
-                    'drop-shadow(0 0 0px rgba(201,117,74,0))',
-                  ],
+                  opacity: [0, 0.25, 0.4, 0.25, 0],
+                  scaleX: [0.4, 1.2, 1.8, 1.2, 0.4],
                 }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                style={{
+                  position: 'absolute',
+                  bottom: '-10px',
+                  left: '50%',
+                  translateX: '-50%',
+                  width: '180px',
+                  height: '22px',
+                  borderRadius: '50%',
+                  background: 'radial-gradient(ellipse, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 45%, transparent 75%)',
+                  filter: 'blur(7px)',
+                  pointerEvents: 'none',
+                  zIndex: 1,
+                }}
               />
-            </button>
+
+              {/* Dust particles — only spread sideways from the base, never cover logo */}
+              {[...Array(6)].map((_, i) => {
+                const side = i % 2 === 0 ? 1 : -1
+                const spread = 20 + i * 14
+                return (
+                  <motion.span
+                    key={i}
+                    animate={{
+                      x: [0, side * spread * 0.5, side * spread],
+                      y: [0, -8, -18],
+                      opacity: [0, 0.35, 0],
+                      scale: [0.4, 1.6, 2.4],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: 'easeOut',
+                      delay: i * 0.4,
+                      repeatDelay: 0.2,
+                    }}
+                    style={{
+                      position: 'absolute',
+                      bottom: '0px',
+                      left: '50%',
+                      translateX: '-50%',
+                      width: `${10 + i * 5}px`,
+                      height: `${10 + i * 5}px`,
+                      borderRadius: '50%',
+                      background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 55%, transparent 80%)',
+                      filter: 'blur(3px)',
+                      pointerEvents: 'none',
+                      zIndex: 1,
+                    }}
+                  />
+                )
+              })}
+            </div>
+
             <p className="text-[9px] font-black tracking-[0.4em] uppercase text-secondary/90 leading-relaxed mb-6 pl-6">
               From Stone to <span className="text-secondary tracking-[0.6em] brightness-125">Oasis</span>
             </p>

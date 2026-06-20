@@ -40,22 +40,6 @@ const Preloader = ({ onComplete }) => {
             overflow: 'hidden',
           }}
         >
-          {/* Ambient background glow blob */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: [0, 0.06, 0.1, 0.08, 0.06], scale: [0.5, 1.2, 1.6, 1.4, 1.2] }}
-            transition={{ duration: 6, ease: 'easeInOut' }}
-            style={{
-              position: 'absolute',
-              width: '600px',
-              height: '600px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(201,117,74,0.6) 0%, rgba(184,92,56,0.2) 40%, transparent 70%)',
-              filter: 'blur(60px)',
-              pointerEvents: 'none',
-            }}
-          />
-
           {/* Logo container */}
           <motion.div
             initial={{ opacity: 0, scale: 0.6, y: 30 }}
@@ -63,19 +47,11 @@ const Preloader = ({ onComplete }) => {
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
           >
-            {/* Logo image with glow pulse */}
+            {/* Logo image with scale pulse */}
             <motion.img
               src={logoImg}
               alt="KARRCHOLAI"
               animate={{
-                filter: [
-                  'drop-shadow(0 0 0px rgba(201,117,74,0))',
-                  'drop-shadow(0 0 8px rgba(201,117,74,0.5)) drop-shadow(0 0 18px rgba(201,117,74,0.2))',
-                  'drop-shadow(0 0 12px rgba(201,117,74,0.65)) drop-shadow(0 0 28px rgba(201,117,74,0.28)) drop-shadow(0 0 50px rgba(201,117,74,0.1))',
-                  'drop-shadow(0 0 8px rgba(201,117,74,0.5)) drop-shadow(0 0 18px rgba(201,117,74,0.2))',
-                  'drop-shadow(0 0 12px rgba(201,117,74,0.65)) drop-shadow(0 0 28px rgba(201,117,74,0.28)) drop-shadow(0 0 50px rgba(201,117,74,0.1))',
-                  'drop-shadow(0 0 4px rgba(201,117,74,0.3)) drop-shadow(0 0 10px rgba(201,117,74,0.12))',
-                ],
                 scale: [1, 1.04, 1.07, 1.04, 1.07, 1.02],
               }}
               transition={{ duration: 5.5, ease: 'easeInOut', delay: 0.5 }}
