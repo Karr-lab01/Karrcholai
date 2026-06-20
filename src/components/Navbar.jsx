@@ -21,6 +21,11 @@ const manaiyadiDropdown = [
     path: '/manaiyadi/dimension-guide',
     desc: 'Reference tables & wall heights',
   },
+  {
+    name: 'Direction Compass',
+    path: '/vastu-compass',
+    desc: "Check your plot's Vastu alignment",
+  },
 ]
 
 const navLinks = [
@@ -61,7 +66,7 @@ const Navbar = () => {
       setActiveLink('Contact');
     } else if (currentPath === '/' && !hash) {
       setActiveLink('Home');
-    } else if (currentPath.startsWith('/manaiyadi')) {
+    } else if (currentPath.startsWith('/manaiyadi') || currentPath === '/vastu-compass') {
       setActiveLink('Manaiyadi');
     }
   }, [location.pathname, location.hash]);

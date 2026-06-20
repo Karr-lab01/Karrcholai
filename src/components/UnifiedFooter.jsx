@@ -5,42 +5,63 @@ import logoImg from '../../assets/KARRCHOLAI LOGO.png'
 import texGreen from '../assets/tex-green.jpg'
 import { LogoVideoContext } from '../App'
 
+// Shared animation timing — logo glow and wall reflection pulse in sync
+const GLOW_DURATION = 3
+
 const UnifiedFooter = () => {
   const { openLogoVideo } = useContext(LogoVideoContext)
 
   return (
     <footer className="relative bg-primary text-white pt-16 pb-8 overflow-hidden font-sans border-t border-white/5">
-      {/* Background Image: tex-green asset */}
+
+      {/* ── Background Image: tex-green texture ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center" 
-          style={{ 
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
             backgroundImage: `url(${texGreen})`,
             opacity: 0.95,
-            mixBlendMode: 'multiply'
-          }} 
+            mixBlendMode: 'multiply',
+          }}
         />
-        
-        {/* Subtle fibrous overlay to enhance the texture */}
-        <div className="absolute inset-0 opacity-[0.2] mix-blend-overlay" 
-             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='feltNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23feltNoise)'/%3E%3C/svg%3E")` }} />
+
+        {/* Subtle fibrous overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.2] mix-blend-overlay"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='feltNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23feltNoise)'/%3E%3C/svg%3E")`,
+          }}
+        />
+
+        {/* ── Full-footer green light reflection ──
+             Lives inside the background container so mixBlendMode only
+             composites against the texture — never touches the logo or text. ── */}
+        <motion.div
+          aria-hidden="true"
+          animate={{ opacity: [0, 0.35, 0.55, 0.35, 0] }}
+          transition={{ duration: GLOW_DURATION + 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'radial-gradient(ellipse 120% 120% at 25% 40%, rgba(100,200,80,0.9) 0%, rgba(60,160,50,0.5) 30%, rgba(30,110,30,0.2) 60%, transparent 80%)',
+            pointerEvents: 'none',
+            mixBlendMode: 'screen',
+          }}
+        />
       </div>
-      
-      {/* Dynamic Glows - Enhanced for a "Bright" feel */}
-      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-secondary/10 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-white/5 blur-[100px] rounded-full pointer-events-none" />
 
       {/* Elegant Top Divider */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      
+
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 items-start mb-16">
+
           {/* Column 1: Branding */}
           <div className="lg:col-span-1 flex flex-col items-start">
-            {/* Logo with dust/smoke ground effect */}
+            {/* Logo wrapper — glow lives inside here so it's always behind the logo */}
             <div style={{ position: 'relative', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', marginBottom: '4px' }}>
 
-              {/* Logo — highest z-index so nothing overlaps it */}
+              {/* Logo */}
               <button
                 onClick={openLogoVideo}
                 aria-label="Play logo animation"
@@ -61,68 +82,10 @@ const UnifiedFooter = () => {
                       'drop-shadow(0 0 0px rgba(201,117,74,0))',
                     ],
                   }}
-                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  transition={{ duration: GLOW_DURATION, repeat: Infinity, ease: 'easeInOut' }}
                 />
               </button>
 
-              {/* Ground shadow reflection — sits strictly below logo */}
-              <motion.span
-                animate={{
-                  opacity: [0, 0.25, 0.4, 0.25, 0],
-                  scaleX: [0.4, 1.2, 1.8, 1.2, 0.4],
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                style={{
-                  position: 'absolute',
-                  bottom: '-10px',
-                  left: '50%',
-                  translateX: '-50%',
-                  width: '180px',
-                  height: '22px',
-                  borderRadius: '50%',
-                  background: 'radial-gradient(ellipse, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 45%, transparent 75%)',
-                  filter: 'blur(7px)',
-                  pointerEvents: 'none',
-                  zIndex: 1,
-                }}
-              />
-
-              {/* Dust particles — only spread sideways from the base, never cover logo */}
-              {[...Array(6)].map((_, i) => {
-                const side = i % 2 === 0 ? 1 : -1
-                const spread = 20 + i * 14
-                return (
-                  <motion.span
-                    key={i}
-                    animate={{
-                      x: [0, side * spread * 0.5, side * spread],
-                      y: [0, -8, -18],
-                      opacity: [0, 0.35, 0],
-                      scale: [0.4, 1.6, 2.4],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'easeOut',
-                      delay: i * 0.4,
-                      repeatDelay: 0.2,
-                    }}
-                    style={{
-                      position: 'absolute',
-                      bottom: '0px',
-                      left: '50%',
-                      translateX: '-50%',
-                      width: `${10 + i * 5}px`,
-                      height: `${10 + i * 5}px`,
-                      borderRadius: '50%',
-                      background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 55%, transparent 80%)',
-                      filter: 'blur(3px)',
-                      pointerEvents: 'none',
-                      zIndex: 1,
-                    }}
-                  />
-                )
-              })}
             </div>
 
             <p className="text-[9px] font-black tracking-[0.4em] uppercase text-secondary/90 leading-relaxed mb-6 pl-6">

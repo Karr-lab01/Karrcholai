@@ -23,6 +23,7 @@ const ManaiyadiCalculatorPage = lazy(() => import('./pages/ManaiyadiCalculatorPa
 const ManaiyadiDimensionGuide = lazy(() => import('./pages/ManaiyadiDimensionGuide'))
 const ManaiyadiIntroduction   = lazy(() => import('./pages/ManaiyadiIntroduction'))
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
+const VastuCompassPage = lazy(() => import('./pages/VastuCompassPage'))
 const NotFound   = lazy(() => import('./pages/NotFound'))
 
 // Minimal fallback while lazy page loads
@@ -65,6 +66,7 @@ const AppContent = ({ videoOpen, setVideoOpen }) => {
             <Route path="/manaiyadi/dimension-guide" element={<ManaiyadiDimensionGuide />} />
             <Route path="/manaiyadi/introduction"   element={<ManaiyadiIntroduction />} />
             <Route path="/projects/:id" element={<ProjectDetail />} />
+            <Route path="/vastu-compass" element={<VastuCompassPage />} />
             <Route path="*"        element={<NotFound />} />
           </Routes>
         </Suspense>
