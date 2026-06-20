@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import logoImg from '../../assets/KARRCHOLAI LOGO.png'
 import { LogoVideoContext } from '../App'
 
@@ -86,8 +86,28 @@ const Navbar = () => {
 
   /* ── Lock body scroll when mobile menu open ── */
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    if (mobileOpen) {
+      const scrollY = window.scrollY
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.width = '100%'
+      document.body.style.overflowY = 'scroll'
+    } else {
+      const scrollY = document.body.style.top
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      document.body.style.overflowY = ''
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+      }
+    }
+    return () => {
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      document.body.style.overflowY = ''
+    }
   }, [mobileOpen])
 
   /* ── Close menu on route change ── */
@@ -157,62 +177,41 @@ const Navbar = () => {
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            className="logo-btn"
             style={{
-              background: 'none',
+              background: 'transparent',
+              backgroundColor: 'transparent',
               border: 'none',
               outline: 'none',
+              boxShadow: 'none',
               cursor: 'pointer',
-              padding: '6px 8px',
+              padding: 0,
+              margin: 0,
               display: 'flex',
               alignItems: 'center',
               flexShrink: 0,
-              position: 'relative',
-              borderRadius: '14px',
             }}
           >
-            {/* Ambient glow ring — pulses continuously */}
-            <motion.span
-              animate={{
-                boxShadow: [
-                  '0 0 0px 0px rgba(201,117,74,0)',
-                  '0 0 24px 10px rgba(201,117,74,0.45)',
-                  '0 0 40px 16px rgba(201,117,74,0.2)',
-                  '0 0 24px 10px rgba(201,117,74,0.45)',
-                  '0 0 0px 0px rgba(201,117,74,0)',
-                ],
-              }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              style={{
-                position: 'absolute',
-                inset: 0,
-                borderRadius: '14px',
-                pointerEvents: 'none',
-              }}
-            />
-            {/* Subtle warm background pill */}
-            <motion.span
-              animate={{ opacity: [0.45, 0.75, 0.45] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              style={{
-                position: 'absolute',
-                inset: 0,
-                borderRadius: '14px',
-                background: 'radial-gradient(ellipse at center, rgba(201,117,74,0.12) 0%, transparent 75%)',
-                pointerEvents: 'none',
-              }}
-            />
             <motion.img
               src={logoImg}
               alt="KARRCHOLAI"
-              animate={{ filter: ['drop-shadow(0 0 0px rgba(201,117,74,0))', 'drop-shadow(0 0 8px rgba(201,117,74,0.6))', 'drop-shadow(0 0 0px rgba(201,117,74,0))'] }}
+              animate={{
+                scale: [1, 1.05, 1.03, 1.05, 1],
+                filter: [
+                  'drop-shadow(0 0 0px rgba(201,117,74,0))',
+                  'drop-shadow(0 0 10px rgba(201,117,74,0.7)) drop-shadow(0 0 24px rgba(201,117,74,0.4))',
+                  'drop-shadow(0 0 16px rgba(201,117,74,0.9)) drop-shadow(0 0 40px rgba(201,117,74,0.5)) drop-shadow(0 0 65px rgba(201,117,74,0.2))',
+                  'drop-shadow(0 0 10px rgba(201,117,74,0.7)) drop-shadow(0 0 24px rgba(201,117,74,0.4))',
+                  'drop-shadow(0 0 0px rgba(201,117,74,0))',
+                ],
+              }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               style={{
                 height: scrolled ? 'var(--logo-height-scrolled, 64px)' : 'var(--logo-height, 84px)',
                 width: 'auto',
                 objectFit: 'contain',
                 transition: 'height 0.4s ease',
-                position: 'relative',
-                zIndex: 1,
+                display: 'block',
               }}
             />
           </motion.button>
@@ -469,19 +468,13 @@ const Navbar = () => {
       <AnimatePresence>
         {mobileOpen && (
           <>
-            {/* Backdrop */}
-            <motion.div
-              key="backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
+            {/* Backdrop — tap outside to close */}
+            <div
               style={{
                 position: 'fixed',
                 inset: 0,
                 zIndex: 98,
-                background: 'rgba(0,0,0,0.7)',
-                backdropFilter: 'blur(8px)',
+                background: 'rgba(0,0,0,0.6)',
               }}
               onClick={() => setMobileOpen(false)}
             />
@@ -492,7 +485,7 @@ const Navbar = () => {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ type: 'tween', duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 position: 'fixed',
                 top: 0,
@@ -501,138 +494,176 @@ const Navbar = () => {
                 zIndex: 99,
                 width: '85vw',
                 maxWidth: '320px',
-                background: 'rgba(18, 18, 18, 0.95)',
-                backdropFilter: 'blur(20px)',
+                background: '#121212',
                 display: 'flex',
                 flexDirection: 'column',
-                boxShadow: '-20px 0 60px rgba(0,0,0,0.4)',
+                boxShadow: '-20px 0 60px rgba(0,0,0,0.5)',
                 borderLeft: '1px solid rgba(255,255,255,0.08)',
-                paddingTop: '80px',
+                overflowY: 'auto',
+                WebkitOverflowScrolling: 'touch',
               }}
             >
-              <nav style={{
-                flex: 1,
-                padding: '2rem 2.5rem',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                gap: '1rem',
-              }}>
-                {[...navLinks, { name: 'Contact', path: '/contact' }].map((link, i) => (
-                  <React.Fragment key={link.name}>
-                    <motion.button
-                      initial={{ opacity: 0, x: 24 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.055 + 0.1, duration: 0.4 }}
-                      onClick={() => {
-                        if (link.hasDropdown) {
-                          setDropdownOpen(v => !v)
-                        } else {
-                          handleNavClick(link.path, link.name)
-                        }
-                      }}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        textAlign: 'left',
-                        padding: '0.85rem 0',
-                        borderBottom: '1px solid rgba(255,255,255,0.05)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        width: '100%',
-                      }}
-                    >
-                      <span style={{
-                        fontSize: '0.85rem',
-                        fontWeight: '600',
-                        letterSpacing: '0.35em',
-                        textTransform: 'uppercase',
-                        color: activeLink === link.name ? '#B85C38' : 'rgba(255,255,255,0.7)',
-                        transition: 'color 0.3s',
-                      }}>
-                        <span className="text-[0.65rem] opacity-35 mr-3 font-mono">0{i+1}</span>
-                        {link.name}
-                      </span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        {link.hasDropdown && (
-                          <motion.span
-                            animate={{ rotate: dropdownOpen ? 180 : 0 }}
-                            transition={{ duration: 0.25 }}
-                            style={{ color: 'rgba(255,255,255,0.4)', display: 'flex' }}
-                          >
-                            <FiChevronDown size={14} />
-                          </motion.span>
-                        )}
-                        {activeLink === link.name && (
-                          <motion.div
-                            layoutId="mobileActiveLine"
+              {/* Close button at top */}
+              <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '1.25rem 1.5rem 0' }}>
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  style={{
+                    background: 'rgba(255,255,255,0.08)',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '40px',
+                    height: '40px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <FiX size={20} />
+                </button>
+              </div>
+
+              <nav style={{ flex: 1, padding: '1rem 0 2rem' }}>
+                {/* Regular nav links */}
+                {[...navLinks].map((link, i) => (
+                  <div key={link.name}>
+                    {link.hasDropdown ? (
+                      <>
+                        {/* Manaiyadi toggle */}
+                        <button
+                          onClick={() => setDropdownOpen(v => !v)}
+                          style={{
+                            width: '100%',
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            textAlign: 'left',
+                            padding: '1rem 2rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            borderBottom: '1px solid rgba(255,255,255,0.05)',
+                          }}
+                        >
+                          <span style={{
+                            fontSize: '0.8rem',
+                            fontWeight: '700',
+                            letterSpacing: '0.25em',
+                            textTransform: 'uppercase',
+                            color: activeLink === link.name ? '#B85C38' : 'rgba(255,255,255,0.75)',
+                          }}>
+                            <span style={{ fontSize: '0.6rem', opacity: 0.35, marginRight: '0.75rem', fontFamily: 'monospace' }}>0{i+1}</span>
+                            {link.name}
+                          </span>
+                          <FiChevronDown
+                            size={16}
                             style={{
-                              width: '12px',
-                              height: '12px',
-                              borderRadius: '50%',
-                              background: '#B85C38',
+                              color: 'rgba(255,255,255,0.4)',
+                              transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                              transition: 'transform 0.25s ease',
                             }}
                           />
-                        )}
-                      </span>
-                    </motion.button>
+                        </button>
 
-                    {/* Mobile Manaiyadi sub-items */}
-                    <AnimatePresence>
-                      {link.hasDropdown && dropdownOpen && (
-                        <motion.div
-                          key="mobile-manaiyadi-sub"
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          style={{ overflow: 'hidden' }}
-                        >
-                          {manaiyadiDropdown.map((sub, si) => (
-                            <motion.button
-                              key={sub.path}
-                              initial={{ opacity: 0, x: 12 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: si * 0.05 }}
-                              onClick={() => {
-                                setDropdownOpen(false)
-                                handleNavClick(sub.path, 'Manaiyadi')
-                              }}
-                              style={{
-                                width: '100%',
-                                background: 'none',
-                                border: 'none',
-                                cursor: 'pointer',
-                                textAlign: 'left',
-                                padding: '0.6rem 0 0.6rem 1.5rem',
-                                borderBottom: '1px solid rgba(255,255,255,0.03)',
-                                display: 'block',
-                              }}
-                            >
-                              <span style={{
-                                fontSize: '0.7rem',
-                                fontWeight: '600',
-                                letterSpacing: '0.2em',
-                                textTransform: 'uppercase',
-                                color: location.pathname === sub.path ? '#B85C38' : 'rgba(255,255,255,0.45)',
-                              }}>
+                        {/* Manaiyadi sub-links — always rendered, height toggled */}
+                        {dropdownOpen && (
+                          <div style={{ background: 'rgba(255,255,255,0.03)' }}>
+                            {manaiyadiDropdown.map((sub) => (
+                              <Link
+                                key={sub.path}
+                                to={sub.path}
+                                onClick={() => {
+                                  setMobileOpen(false)
+                                  setDropdownOpen(false)
+                                  setActiveLink('Manaiyadi')
+                                }}
+                                style={{
+                                  display: 'block',
+                                  padding: '0.85rem 2rem 0.85rem 3rem',
+                                  textDecoration: 'none',
+                                  borderBottom: '1px solid rgba(255,255,255,0.04)',
+                                  color: location.pathname === sub.path ? '#B85C38' : 'rgba(255,255,255,0.5)',
+                                  fontSize: '0.7rem',
+                                  fontWeight: '600',
+                                  letterSpacing: '0.2em',
+                                  textTransform: 'uppercase',
+                                }}
+                              >
                                 — {sub.name}
-                              </span>
-                            </motion.button>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </React.Fragment>
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <Link
+                        to={link.path}
+                        onClick={() => {
+                          setMobileOpen(false)
+                          setActiveLink(link.name)
+                        }}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          padding: '1rem 2rem',
+                          textDecoration: 'none',
+                          borderBottom: '1px solid rgba(255,255,255,0.05)',
+                          color: activeLink === link.name ? '#B85C38' : 'rgba(255,255,255,0.75)',
+                          fontSize: '0.8rem',
+                          fontWeight: '700',
+                          letterSpacing: '0.25em',
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        <span>
+                          <span style={{ fontSize: '0.6rem', opacity: 0.35, marginRight: '0.75rem', fontFamily: 'monospace' }}>0{i+1}</span>
+                          {link.name}
+                        </span>
+                        {activeLink === link.name && (
+                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#B85C38' }} />
+                        )}
+                      </Link>
+                    )}
+                  </div>
                 ))}
+
+                {/* Contact */}
+                <Link
+                  to="/contact"
+                  onClick={() => {
+                    setMobileOpen(false)
+                    setActiveLink('Contact')
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '1rem 2rem',
+                    textDecoration: 'none',
+                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                    color: activeLink === 'Contact' ? '#B85C38' : 'rgba(255,255,255,0.75)',
+                    fontSize: '0.8rem',
+                    fontWeight: '700',
+                    letterSpacing: '0.25em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  <span>
+                    <span style={{ fontSize: '0.6rem', opacity: 0.35, marginRight: '0.75rem', fontFamily: 'monospace' }}>08</span>
+                    Contact
+                  </span>
+                  {activeLink === 'Contact' && (
+                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#B85C38' }} />
+                  )}
+                </Link>
               </nav>
 
               {/* Drawer footer */}
               <div style={{
-                padding: '2rem 2.5rem',
+                padding: '1.5rem 2rem',
                 borderTop: '1px solid rgba(255,255,255,0.05)',
-                textAlign: 'left',
               }}>
                 <p style={{
                   fontSize: '0.65rem',
@@ -640,7 +671,7 @@ const Navbar = () => {
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
                   fontWeight: '600',
-                  marginBottom: '6px',
+                  marginBottom: '4px',
                 }}>
                   Karrcholai Construction
                 </p>
@@ -687,6 +718,20 @@ const Navbar = () => {
         @media (max-width: 899px) {
           .desktop-nav-links { display: none !important; }
           .mobile-hamburger  { display: flex !important; }
+        }
+
+        /* Logo button — no border, no outline, no ring, no background */
+        .logo-btn,
+        .logo-btn:focus,
+        .logo-btn:focus-visible,
+        .logo-btn:active,
+        .logo-btn:hover {
+          border: none !important;
+          outline: none !important;
+          box-shadow: none !important;
+          background: transparent !important;
+          background-color: transparent !important;
+          -webkit-tap-highlight-color: transparent;
         }
 
         /* Hover effect for desktop nav links */

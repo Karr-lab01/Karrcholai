@@ -65,27 +65,27 @@ const KarrHomeSection = () => {
   const current = tabs[active]
 
   return (
-    <section className="py-24 md:py-36 bg-[#fdfbf7] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <section className="py-16 sm:py-24 md:py-36 bg-[#fdfbf7] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
 
         {/* ── Header ── */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-10 mb-10 sm:mb-16">
           <div>
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="flex items-center gap-4 mb-5"
+              className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5"
             >
-              <span className="w-12 h-px bg-[#B85C38]" />
-              <span className="text-[#B85C38] font-black text-[10px] tracking-[0.5em] uppercase">Division I · Karr Construction</span>
+              <span className="w-8 sm:w-12 h-px bg-[#B85C38]" />
+              <span className="text-[#B85C38] font-black text-[9px] sm:text-[10px] tracking-[0.35em] sm:tracking-[0.5em] uppercase">Division I · Karr Construction</span>
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-black leading-none tracking-tighter text-[#1a1a1a]"
+              className="text-4xl sm:text-5xl md:text-7xl font-black leading-none tracking-tighter text-[#1a1a1a]"
             >
               KARR <br />
               <span className="italic text-[#1a1a1a]/15">Construction.</span>
@@ -99,7 +99,7 @@ const KarrHomeSection = () => {
             transition={{ delay: 0.3 }}
             className="max-w-xs"
           >
-            <p className="text-[#1a1a1a]/45 text-sm font-light leading-relaxed mb-6">
+            <p className="text-[#1a1a1a]/45 text-sm font-light leading-relaxed mb-5 sm:mb-6">
               The Karr division focuses on strong, durable, and professionally managed residential construction services across Tamil Nadu.
             </p>
             <Link to="/karr">
@@ -111,12 +111,12 @@ const KarrHomeSection = () => {
         </div>
 
         {/* ── Tab Switcher ── */}
-        <div className="flex gap-2 mb-12 bg-white/60 border border-[#1a1a1a]/5 rounded-2xl p-2 w-fit shadow-sm">
+        <div className="flex gap-2 mb-12 bg-white/60 border border-[#1a1a1a]/5 rounded-2xl p-2 w-full sm:w-fit shadow-sm overflow-x-auto scrollbar-none">
           {tabs.map((tab, i) => (
             <button
               key={tab.id}
               onClick={() => setActive(i)}
-              className={`px-7 py-3 rounded-xl text-[10px] font-black tracking-[0.3em] uppercase transition-all duration-300 ${
+              className={`flex-1 sm:flex-none px-5 sm:px-7 py-3 rounded-xl text-[10px] font-black tracking-[0.3em] uppercase transition-all duration-300 whitespace-nowrap ${
                 active === i
                   ? 'bg-[#1a1a1a] text-white shadow-lg'
                   : 'text-[#1a1a1a]/40 hover:text-[#1a1a1a]'
@@ -139,27 +139,27 @@ const KarrHomeSection = () => {
           >
             {/* Left: Image */}
             <div className="lg:col-span-5 relative">
-              <div className="relative aspect-[3/4] lg:aspect-auto lg:h-full min-h-[400px] rounded-[2.5rem] overflow-hidden shadow-2xl">
+              <div className="relative aspect-[4/3] sm:aspect-[3/4] lg:aspect-auto lg:h-full min-h-[260px] sm:min-h-[360px] lg:min-h-[400px] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl">
                 <img
                   src={current.image}
                   alt={current.label}
-                  className="w-full h-full object-contain bg-[#fdfbf7]"
+                  className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/70 via-transparent to-transparent" />
 
                 {/* Floating tag */}
-                <div className="absolute top-6 left-6">
-                  <span className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[9px] font-black tracking-widest uppercase rounded-full">
+                <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
+                  <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[8px] sm:text-[9px] font-black tracking-widest uppercase rounded-full">
                     {current.label}
                   </span>
                 </div>
 
                 {/* Bottom stat */}
-                <div className="absolute bottom-8 left-8">
-                  <p className="text-white/50 text-[9px] font-black tracking-widest uppercase mb-1">
+                <div className="absolute bottom-5 left-5 sm:bottom-8 sm:left-8">
+                  <p className="text-white/50 text-[8px] sm:text-[9px] font-black tracking-widest uppercase mb-1">
                     {active === 0 ? 'Homes Built' : active === 1 ? 'Projects Managed' : 'Projects Renovated'}
                   </p>
-                  <p className="text-5xl font-black text-white leading-none">
+                  <p className="text-4xl sm:text-5xl font-black text-white leading-none">
                     {active === 0 ? '200+' : active === 1 ? '85+' : '60+'}
                   </p>
                 </div>
@@ -167,21 +167,21 @@ const KarrHomeSection = () => {
             </div>
 
             {/* Right: Details */}
-            <div className="lg:col-span-7 flex flex-col justify-between gap-10">
+            <div className="lg:col-span-7 flex flex-col justify-between gap-8 sm:gap-10">
               <div>
-                <h3 className="text-4xl md:text-5xl font-black text-[#1a1a1a] leading-tight tracking-tight mb-6">
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#1a1a1a] leading-tight tracking-tight mb-4 sm:mb-6">
                   {current.headline.split(' ').slice(0, -1).join(' ')}{' '}
                   <span className="italic text-[#1a1a1a]/20">
                     {current.headline.split(' ').slice(-1)}
                   </span>
                 </h3>
-                <p className="text-[#1a1a1a]/50 text-base font-light leading-relaxed max-w-xl">
+                <p className="text-[#1a1a1a]/50 text-sm sm:text-base font-light leading-relaxed max-w-xl">
                   {current.desc}
                 </p>
               </div>
 
               {/* Service Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {current.services.map((srv, i) => {
                   const Icon = srv.icon
                   return (
@@ -190,10 +190,10 @@ const KarrHomeSection = () => {
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.07 }}
-                      className="group flex items-center gap-5 p-5 bg-white rounded-2xl border border-[#1a1a1a]/5 hover:border-[#B85C38]/30 hover:shadow-lg transition-all duration-400 hover:-translate-y-0.5"
+                      className="group flex items-center gap-4 sm:gap-5 p-4 sm:p-5 bg-white rounded-2xl border border-[#1a1a1a]/5 hover:border-[#B85C38]/30 hover:shadow-lg transition-all duration-400 hover:-translate-y-0.5"
                     >
-                      <div className="w-11 h-11 rounded-xl bg-[#fdfbf7] flex items-center justify-center text-[#1a1a1a]/30 group-hover:bg-[#B85C38] group-hover:text-white transition-all duration-400 flex-shrink-0">
-                        <Icon size={18} />
+                      <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#fdfbf7] flex items-center justify-center text-[#1a1a1a]/30 group-hover:bg-[#B85C38] group-hover:text-white transition-all duration-400 flex-shrink-0">
+                        <Icon size={17} />
                       </div>
                       <span className="text-sm font-bold text-[#2D4B37] group-hover:text-[#B85C38] transition-colors leading-snug">
                         {srv.title}
@@ -208,12 +208,12 @@ const KarrHomeSection = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="flex gap-6 flex-wrap"
+                  className="flex gap-3 sm:gap-6 flex-wrap"
                 >
                   {['Save Time', 'Control Costs', 'Ensure Quality'].map((txt, i) => (
-                    <div key={i} className="flex items-center gap-3 bg-[#2D4B37]/5 border border-[#2D4B37]/10 rounded-full px-5 py-2.5">
+                    <div key={i} className="flex items-center gap-2 sm:gap-3 bg-[#2D4B37]/5 border border-[#2D4B37]/10 rounded-full px-4 sm:px-5 py-2 sm:py-2.5">
                       <div className="w-2 h-2 rounded-full bg-[#B85C38]" />
-                      <span className="text-[10px] font-black tracking-widest uppercase text-[#2D4B37]">{txt}</span>
+                      <span className="text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-[#2D4B37]">{txt}</span>
                     </div>
                   ))}
                 </motion.div>
@@ -221,9 +221,9 @@ const KarrHomeSection = () => {
 
               {/* Estimation Highlights */}
               {active === 0 && (
-                <div className="p-6 bg-[#2D4B37] rounded-2xl text-white">
-                  <p className="text-[10px] font-black tracking-widest uppercase text-white/40 mb-4">Our Process Includes</p>
-                  <div className="grid grid-cols-2 gap-3">
+                <div className="p-5 sm:p-6 bg-[#2D4B37] rounded-2xl text-white">
+                  <p className="text-[10px] font-black tracking-widest uppercase text-white/40 mb-3 sm:mb-4">Our Process Includes</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     {['Detailed cost estimation', 'Project planning', 'Material scheduling', 'Budget control'].map((t, i) => (
                       <div key={i} className="flex items-center gap-3 text-white/80 text-sm font-light">
                         <FiCheckCircle size={13} className="text-[#B85C38] flex-shrink-0" /> {t}

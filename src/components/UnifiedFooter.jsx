@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
 import logoImg from '../../assets/KARRCHOLAI LOGO.png'
 import texGreen from '../assets/tex-green.jpg'
 import { LogoVideoContext } from '../App'
@@ -37,34 +37,27 @@ const UnifiedFooter = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 items-start mb-16">
           {/* Column 1: Branding */}
           <div className="lg:col-span-1 flex flex-col items-start">
-            <button onClick={openLogoVideo} aria-label="Play logo animation" className="inline-flex items-center justify-center mb-4 group bg-white overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 p-2 border-0 cursor-pointer">
-              <img 
-                src={logoImg} 
-                alt="Karrcholai Construction logo" 
-                className="h-28 md:h-36 w-auto object-contain transition-all duration-500 group-hover:scale-[1.05]"
+            <button onClick={openLogoVideo} aria-label="Play logo animation" className="inline-flex items-center justify-center mb-1 cursor-pointer border-0 outline-none bg-transparent p-0">
+              <motion.img
+                src={logoImg}
+                alt="Karrcholai Construction logo"
+                className="h-28 md:h-36 w-auto object-contain"
+                animate={{
+                  scale: [1, 1.05, 1.03, 1.05, 1],
+                  filter: [
+                    'drop-shadow(0 0 0px rgba(201,117,74,0))',
+                    'drop-shadow(0 0 6px rgba(201,117,74,0.35)) drop-shadow(0 0 14px rgba(201,117,74,0.15))',
+                    'drop-shadow(0 0 10px rgba(201,117,74,0.45)) drop-shadow(0 0 22px rgba(201,117,74,0.2)) drop-shadow(0 0 38px rgba(201,117,74,0.07))',
+                    'drop-shadow(0 0 6px rgba(201,117,74,0.35)) drop-shadow(0 0 14px rgba(201,117,74,0.15))',
+                    'drop-shadow(0 0 0px rgba(201,117,74,0))',
+                  ],
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               />
             </button>
-            <div className="mt-1 pl-2 mb-6">
-              <p className="text-[9px] font-black tracking-[0.4em] uppercase text-secondary/90 leading-relaxed">
-                From Stone to <span className="text-secondary tracking-[0.6em] brightness-125">Oasis</span>
-              </p>
-            </div>
-            
-            {/* Social Links */}
-            <div className="flex gap-4 pl-2">
-              <a href="https://facebook.com/karrcholai" target="_blank" rel="noopener noreferrer" aria-label="Karrcholai on Facebook" className="text-white/60 hover:text-white transition-colors">
-                <FaFacebook size={18} />
-              </a>
-              <a href="https://instagram.com/karrcholai" target="_blank" rel="noopener noreferrer" aria-label="Karrcholai on Instagram" className="text-white/60 hover:text-white transition-colors">
-                <FaInstagram size={18} />
-              </a>
-              <a href="https://wa.me/919741416747" target="_blank" rel="noopener noreferrer" aria-label="Chat with Karrcholai on WhatsApp" className="text-white/60 hover:text-white transition-colors">
-                <FaWhatsapp size={18} />
-              </a>
-              <a href="https://linkedin.com/company/karrcholai" target="_blank" rel="noopener noreferrer" aria-label="Karrcholai on LinkedIn" className="text-white/60 hover:text-white transition-colors">
-                <FaLinkedin size={18} />
-              </a>
-            </div>
+            <p className="text-[9px] font-black tracking-[0.4em] uppercase text-secondary/90 leading-relaxed mb-6 pl-6">
+              From Stone to <span className="text-secondary tracking-[0.6em] brightness-125">Oasis</span>
+            </p>
           </div>
 
           {/* Column 2 & 3: Quick Links - Horizontal */}
