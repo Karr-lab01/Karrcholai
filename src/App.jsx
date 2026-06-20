@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop'
 import WhatsAppButton from './components/WhatsAppButton'
 import LogoVideoModal from './components/LogoVideoModal'
+import Preloader from './components/Preloader'
 import { usePageTracking } from './hooks/usePageTracking'
 
 export const LogoVideoContext = createContext({ openLogoVideo: () => {} })
@@ -75,9 +76,11 @@ const AppContent = ({ videoOpen, setVideoOpen }) => {
 
 function App() {
   const [videoOpen, setVideoOpen] = useState(false)
+  const [preloaderDone, setPreloaderDone] = useState(false)
 
   return (
     <LogoVideoContext.Provider value={{ openLogoVideo: () => setVideoOpen(true) }}>
+      {!preloaderDone && <Preloader onComplete={() => setPreloaderDone(true)} />}
       <Router>
         <AppContent videoOpen={videoOpen} setVideoOpen={setVideoOpen} />
       </Router>
