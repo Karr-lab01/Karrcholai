@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
 import logoImg from '../../assets/KARRCHOLAI LOGO.png'
 import texGreen from '../assets/tex-green.jpg'
+import { LogoVideoContext } from '../App'
 
 const UnifiedFooter = () => {
+  const { openLogoVideo } = useContext(LogoVideoContext)
+
   return (
     <footer className="relative bg-primary text-white pt-16 pb-8 overflow-hidden font-sans border-t border-white/5">
       {/* Background Image: tex-green asset */}
@@ -34,13 +37,13 @@ const UnifiedFooter = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 items-start mb-16">
           {/* Column 1: Branding */}
           <div className="lg:col-span-1 flex flex-col items-start">
-            <Link to="/" className="inline-flex items-center justify-center mb-4 group bg-white overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 p-2">
+            <button onClick={openLogoVideo} aria-label="Play logo animation" className="inline-flex items-center justify-center mb-4 group bg-white overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 p-2 border-0 cursor-pointer">
               <img 
                 src={logoImg} 
                 alt="Karrcholai Construction logo" 
                 className="h-28 md:h-36 w-auto object-contain transition-all duration-500 group-hover:scale-[1.05]"
               />
-            </Link>
+            </button>
             <div className="mt-1 pl-2 mb-6">
               <p className="text-[9px] font-black tracking-[0.4em] uppercase text-secondary/90 leading-relaxed">
                 From Stone to <span className="text-secondary tracking-[0.6em] brightness-125">Oasis</span>

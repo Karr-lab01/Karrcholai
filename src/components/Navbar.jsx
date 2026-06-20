@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi'
 import { useNavigate, useLocation } from 'react-router-dom'
 import logoImg from '../../assets/KARRCHOLAI LOGO.png'
+import { LogoVideoContext } from '../App'
 
 const manaiyadiDropdown = [
   {
@@ -43,6 +44,7 @@ const Navbar = () => {
   const dropdownRef = useRef(null)
   const navigate  = useNavigate()
   const location  = useLocation()
+  const { openLogoVideo } = useContext(LogoVideoContext)
 
   const isSolid = true // Always solid — no transparent state
 
@@ -117,12 +119,7 @@ const Navbar = () => {
   }
 
   const handleLogoClick = () => {
-    if (location.pathname !== '/') {
-      navigate('/')
-      setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 350)
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
+    openLogoVideo()
   }
 
   return (
@@ -155,30 +152,70 @@ const Navbar = () => {
         }}>
 
           {/* ── Logo ── */}
-          <button
+          <motion.button
             onClick={handleLogoClick}
+            aria-label="Play logo animation"
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             style={{
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              padding: 0,
+              padding: '6px 8px',
               display: 'flex',
               alignItems: 'center',
               flexShrink: 0,
+              position: 'relative',
+              borderRadius: '14px',
             }}
-            aria-label="Go to home"
           >
-            <img
+            {/* Ambient glow ring — pulses continuously */}
+            <motion.span
+              animate={{
+                boxShadow: [
+                  '0 0 0px 0px rgba(201,117,74,0)',
+                  '0 0 18px 6px rgba(201,117,74,0.35)',
+                  '0 0 32px 10px rgba(201,117,74,0.15)',
+                  '0 0 18px 6px rgba(201,117,74,0.35)',
+                  '0 0 0px 0px rgba(201,117,74,0)',
+                ],
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                borderRadius: '14px',
+                pointerEvents: 'none',
+              }}
+            />
+            {/* Subtle warm background pill */}
+            <motion.span
+              animate={{ opacity: [0.45, 0.75, 0.45] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                borderRadius: '14px',
+                background: 'radial-gradient(ellipse at center, rgba(201,117,74,0.12) 0%, transparent 75%)',
+                pointerEvents: 'none',
+              }}
+            />
+            <motion.img
               src={logoImg}
               alt="KARRCHOLAI"
+              animate={{ filter: ['drop-shadow(0 0 0px rgba(201,117,74,0))', 'drop-shadow(0 0 8px rgba(201,117,74,0.6))', 'drop-shadow(0 0 0px rgba(201,117,74,0))'] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               style={{
                 height: scrolled ? 'var(--logo-height-scrolled, 64px)' : 'var(--logo-height, 84px)',
                 width: 'auto',
                 objectFit: 'contain',
                 transition: 'height 0.4s ease',
+                position: 'relative',
+                zIndex: 1,
               }}
             />
-          </button>
+          </motion.button>
 
           {/* ── Desktop Nav Links ── */}
           <div className="desktop-nav-links" style={{
@@ -625,18 +662,18 @@ const Navbar = () => {
       {/* ─────────────────────────────────────────── */}
       <style>{`
         :root {
-          --nav-height: 100px;
-          --nav-height-scrolled: 84px;
-          --logo-height: 84px;
-          --logo-height-scrolled: 64px;
+          --nav-height: 120px;
+          --nav-height-scrolled: 96px;
+          --logo-height: 110px;
+          --logo-height-scrolled: 82px;
         }
 
         @media (max-width: 899px) {
           :root {
-            --nav-height: 76px;
-            --nav-height-scrolled: 64px;
-            --logo-height: 52px;
-            --logo-height-scrolled: 44px;
+            --nav-height: 88px;
+            --nav-height-scrolled: 72px;
+            --logo-height: 70px;
+            --logo-height-scrolled: 56px;
           }
         }
 

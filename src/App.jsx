@@ -1,10 +1,11 @@
-import { useState, lazy, Suspense, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
+import { useState, lazy, Suspense, createContext } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop'
 import WhatsAppButton from './components/WhatsAppButton'
-import Preloader from './components/Preloader'
+import LogoVideoModal from './components/LogoVideoModal'
 import { usePageTracking } from './hooks/usePageTracking'
+
+export const LogoVideoContext = createContext({ openLogoVideo: () => {} })
 
 // Lazy-load all pages — only Home loads eagerly
 import Home from './pages/Home'
@@ -31,9 +32,9 @@ const PageFallback = () => (
 )
 
 // Inner component to access hooks
-const AppContent = ({ loading, setLoading }) => {
+const AppContent = ({ videoOpen, setVideoOpen }) => {
   usePageTracking();
-  
+
   return (
     <>
       <a
@@ -43,48 +44,44 @@ const AppContent = ({ loading, setLoading }) => {
         Skip to main content
       </a>
 
-      <AnimatePresence mode="wait">
-        {loading && <Preloader key="preloader" onComplete={() => setLoading(false)} />}
-      </AnimatePresence>
+      <LogoVideoModal open={videoOpen} onClose={() => setVideoOpen(false)} />
 
-      {!loading && (
-        <>
-          <ScrollToTop />
-          <main id="main-content">
-            <Suspense fallback={<PageFallback />}>
-              <Routes>
-                <Route path="/"        element={<Home />} />
-                <Route path="/about"   element={<AboutUs />} />
-                <Route path="/contact" element={<ContactUs />} />
-                <Route path="/services"element={<Services />} />
-                <Route path="/karr"    element={<Karr />} />
-                <Route path="/projects"element={<Projects />} />
-                <Route path="/cholai"  element={<Cholai />} />
-                <Route path="/blog"    element={<Blog />} />
-                <Route path="/blog/:id" element={<BlogDetail />} />
-                <Route path="/manaiyadi" element={<Manaiyadi />} />
-                <Route path="/manaiyadi/calculator"     element={<ManaiyadiCalculatorPage />} />
-                <Route path="/manaiyadi/dimension-guide" element={<ManaiyadiDimensionGuide />} />
-                <Route path="/manaiyadi/introduction"   element={<ManaiyadiIntroduction />} />
-                <Route path="/projects/:id" element={<ProjectDetail />} />
-                <Route path="*"        element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </main>
-          <WhatsAppButton />
-        </>
-      )}
+      <ScrollToTop />
+      <main id="main-content">
+        <Suspense fallback={<PageFallback />}>
+          <Routes>
+            <Route path="/"        element={<Home />} />
+            <Route path="/about"   element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/services"element={<Services />} />
+            <Route path="/karr"    element={<Karr />} />
+            <Route path="/projects"element={<Projects />} />
+            <Route path="/cholai"  element={<Cholai />} />
+            <Route path="/blog"    element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogDetail />} />
+            <Route path="/manaiyadi" element={<Manaiyadi />} />
+            <Route path="/manaiyadi/calculator"     element={<ManaiyadiCalculatorPage />} />
+            <Route path="/manaiyadi/dimension-guide" element={<ManaiyadiDimensionGuide />} />
+            <Route path="/manaiyadi/introduction"   element={<ManaiyadiIntroduction />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
+            <Route path="*"        element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </main>
+      <WhatsAppButton />
     </>
   )
 }
 
 function App() {
-  const [loading, setLoading] = useState(true)
+  const [videoOpen, setVideoOpen] = useState(false)
 
   return (
-    <Router>
-      <AppContent loading={loading} setLoading={setLoading} />
-    </Router>
+    <LogoVideoContext.Provider value={{ openLogoVideo: () => setVideoOpen(true) }}>
+      <Router>
+        <AppContent videoOpen={videoOpen} setVideoOpen={setVideoOpen} />
+      </Router>
+    </LogoVideoContext.Provider>
   )
 }
 
