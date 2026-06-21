@@ -18,7 +18,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import {
   FiCompass, FiUpload, FiRotateCcw, FiInfo, FiChevronDown,
   FiCheckCircle, FiAlertTriangle, FiXCircle, FiSun, FiZap,
-  FiMaximize2, FiSliders, FiX, FiChevronRight
+  FiMaximize2, FiSliders, FiX, FiChevronRight, FiZoomIn
 } from 'react-icons/fi'
 import { DIRECTIONS, ROOMS, scoreRoomPlacement, RATING_CONFIG } from '../../data/vastuData'
 
@@ -42,28 +42,41 @@ function computeOverallScore(assignments) {
   return Math.round(total / assigned.length)
 }
 
-// ─── SVG Compass Dial ─────────────────────────────────────────────────────────
-// Faithful reproduction of a classic nautical compass rose:
-//   • Two-layer outer bezel ring with fine tick marks (every 5°)
-//   • 8-point star: 4 long cardinal points + 4 shorter intercardinal points
-//   • Cardinal points: N red/crimson, S teal/slate, E/W dark navy-blue
-//   • Intercardinal points: medium navy-blue, slightly shorter
-//   • Dashed inner reference circle
-//   • Labels: N/S/E/W large outside bezel, NW/NE/SE/SW smaller
-//   • Centre hub: white ring + dark dot
+// ─── Authentic Vastu Compass Dial ────────────────────────────────────────────
+// 16 colour-coded zones, Sanskrit names, deity ring, element ring,
+// Brahmasthan lotus centre, degree bezel, pointer needles
+
+// 16 Vastu zones clockwise from North — each 22.5° wide
+const VASTU_16 = [
+  { id:'N',   abbr:'N',   sanskrit:'Kubera',   deity:'Kubera',   element:'Water', color:'#3B82F6', light:'#DBEAFE', deg:0    },
+  { id:'NNE', abbr:'NNE', sanskrit:'Saumya',   deity:'Mukhya',   element:'Water', color:'#60A5FA', light:'#EFF6FF', deg:22.5 },
+  { id:'NE',  abbr:'NE',  sanskrit:'Ishan',    deity:'Shiva',    element:'Space', color:'#818CF8', light:'#EEF2FF', deg:45   },
+  { id:'ENE', abbr:'ENE', sanskrit:'Jayanta',  deity:'Jayanta',  element:'Air',   color:'#A78BFA', light:'#F5F3FF', deg:67.5 },
+  { id:'E',   abbr:'E',   sanskrit:'Indra',    deity:'Indra',    element:'Air',   color:'#F59E0B', light:'#FEF3C7', deg:90   },
+  { id:'ESE', abbr:'ESE', sanskrit:'Vitatha',  deity:'Vitatha',  element:'Air',   color:'#FBBF24', light:'#FFFBEB', deg:112.5},
+  { id:'SE',  abbr:'SE',  sanskrit:'Agneya',   deity:'Agni',     element:'Fire',  color:'#EF4444', light:'#FEE2E2', deg:135  },
+  { id:'SSE', abbr:'SSE', sanskrit:'Grihaksh', deity:'Pushan',   element:'Fire',  color:'#F87171', light:'#FEF2F2', deg:157.5},
+  { id:'S',   abbr:'S',   sanskrit:'Yama',     deity:'Yama',     element:'Earth', color:'#92400E', light:'#FEF3C7', deg:180  },
+  { id:'SSW', abbr:'SSW', sanskrit:'Nirriti',  deity:'Nirriti',  element:'Earth', color:'#B45309', light:'#FFFBEB', deg:202.5},
+  { id:'SW',  abbr:'SW',  sanskrit:'Nairuta',  deity:'Nirriti',  element:'Earth', color:'#78350F', light:'#FEF3C7', deg:225  },
+  { id:'WSW', abbr:'WSW', sanskrit:'Sugriva',  deity:'Sugriva',  element:'Earth', color:'#9A3412', light:'#FFF7ED', deg:247.5},
+  { id:'W',   abbr:'W',   sanskrit:'Varuna',   deity:'Varuna',   element:'Air',   color:'#0EA5E9', light:'#E0F2FE', deg:270  },
+  { id:'WNW', abbr:'WNW', sanskrit:'Pushpdnt', deity:'Pushp.',   element:'Air',   color:'#38BDF8', light:'#F0F9FF', deg:292.5},
+  { id:'NW',  abbr:'NW',  sanskrit:'Vayavya',  deity:'Vayu',     element:'Air',   color:'#10B981', light:'#D1FAE5', deg:315  },
+  { id:'NNW', abbr:'NNW', sanskrit:'Bhallata', deity:'Bhallat',  element:'Water', color:'#34D399', light:'#ECFDF5', deg:337.5},
+]
 
 function CompassDial({ rotation, assignments, onRotate }) {
-  const CX = 200, CY = 200
-  // Ring radii
-  const R_OUTER = 178   // outer bezel edge
-  const R_INNER = 160   // inner bezel edge / tick base
-  const R_LABEL = 148   // where direction labels sit (outside ticks, inside outer ring)
-  const R_DASH  = 108   // dashed inner circle radius
-
-  // Star point tip radii
-  const R_CARD_TIP   = 150  // cardinal point tip (long)
-  const R_INTER_TIP  = 120  // intercardinal tip (shorter)
-  const STAR_WAIST   = 18   // half-angle of waist between points (degrees)
+  const CX = 240, CY = 240
+  // Radii sized so every text band has ≥22px height
+  const R_BEZEL_OUT = 228   // outer chrome ring
+  const R_BEZEL_IN  = 210   // inner edge of degree-tick band
+  const R_SEG_OUT   = 209   // outer edge of direction-abbrev ring  (≈18px wide)
+  const R_SEG_MID   = 172   // boundary between abbrev & Sanskrit rings (≈37px wide outer band)
+  const R_INNER_MID = 136   // boundary between Sanskrit & element rings (≈36px inner band)
+  const R_SEG_IN    = 110   // inner edge of element band           (≈26px)
+  const R_NEEDLE    = 102   // needle tip
+  const R_HUB       = 24    // hub radius
 
   // drag state
   const dragging = useRef(false)
@@ -108,190 +121,258 @@ function CompassDial({ rotation, assignments, onRotate }) {
     window.removeEventListener('pointerup', onPointerUp)
   }, [onPointerMove, onPointerUp])
 
-  // Build one compass-rose point as a diamond path:
-  //   tip at (CX,CY - tipR), waist notches at ±waistAngle from tip direction,
-  //   base back at centre
-  const makePt = (aimDeg, tipR, waistR, waistHalfAngle) => {
-    const tip   = polar(CX, CY, tipR, aimDeg)
-    const wL    = polar(CX, CY, waistR, aimDeg - waistHalfAngle)
-    const wR    = polar(CX, CY, waistR, aimDeg + waistHalfAngle)
-    return `M ${CX} ${CY} L ${wL.x} ${wL.y} L ${tip.x} ${tip.y} L ${wR.x} ${wR.y} Z`
+  // ── build a pie-slice path for one 22.5° segment ──────────────────────────
+  const slicePath = (rOuter, rInner, startDeg, endDeg) => {
+    const s1 = polar(CX, CY, rOuter, startDeg)
+    const e1 = polar(CX, CY, rOuter, endDeg)
+    const s2 = polar(CX, CY, rInner, endDeg)
+    const e2 = polar(CX, CY, rInner, startDeg)
+    return [
+      `M ${s1.x} ${s1.y}`,
+      `A ${rOuter} ${rOuter} 0 0 1 ${e1.x} ${e1.y}`,
+      `L ${s2.x} ${s2.y}`,
+      `A ${rInner} ${rInner} 0 0 0 ${e2.x} ${e2.y}`,
+      'Z'
+    ].join(' ')
   }
 
-  // Cardinal directions: 0=N,90=E,180=S,270=W
-  // N gets two halves (red front, dark back); E/W dark navy; S teal
-  const cardinals = [
-    { deg: 0,   colorFront: '#B22234', colorBack: '#B22234' }, // N — red
-    { deg: 90,  colorFront: '#1E3A5F', colorBack: '#2B4F7A' }, // E — navy
-    { deg: 180, colorFront: '#4A7C8A', colorBack: '#4A7C8A' }, // S — teal-slate
-    { deg: 270, colorFront: '#1E3A5F', colorBack: '#2B4F7A' }, // W — navy
-  ]
+  // ── needle diamond helper ────────────────────────────────────────────────
+  const needle = (aimDeg, tip, base, halfW) => {
+    const t  = polar(CX, CY, tip,  aimDeg)
+    const b  = polar(CX, CY, base, aimDeg)
+    const wL = polar(CX, CY, halfW, aimDeg - 90)
+    const wR = polar(CX, CY, halfW, aimDeg + 90)
+    return `M ${b.x} ${b.y} L ${wL.x} ${wL.y} L ${t.x} ${t.y} L ${wR.x} ${wR.y} Z`
+  }
 
-  // Intercardinal: NE,SE,SW,NW — all shorter, navy
-  const intercardinals = [45, 135, 225, 315]
-
-  // Tick generation — 72 ticks (every 5°); longer at 45° multiples, medium at 10°
+  // ticks every 5° in the bezel
   const ticks = Array.from({ length: 72 }, (_, i) => {
-    const deg = i * 5
-    const is45 = deg % 45 === 0
-    const is10 = deg % 10 === 0 && !is45
-    const tickLen = is45 ? 14 : is10 ? 9 : 5
-    const outer = polar(CX, CY, R_INNER, deg)
-    const inner = polar(CX, CY, R_INNER - tickLen, deg)
-    return { deg, outer, inner, is45, is10 }
+    const deg   = i * 5
+    const is45  = deg % 45 === 0
+    const is22  = deg % 22.5 === 0 && !is45
+    const len   = is45 ? 13 : is22 ? 9 : 5
+    const outer = polar(CX, CY, R_BEZEL_IN, deg)
+    const inner = polar(CX, CY, R_BEZEL_IN - len, deg)
+    return { deg, outer, inner, is45, is22 }
   })
 
-  // Dashed circle dash array
-  const dashCirc = 2 * Math.PI * R_DASH
-  const dashOn = 6, dashOff = 6
-
-  // Direction labels: N/S/E/W outside ring, NW etc. inside between ring and star
-  const labelDirs = [
-    { id: 'N',  deg: 0,   label: 'N',  r: R_LABEL - 6, big: true },
-    { id: 'NE', deg: 45,  label: 'NE', r: R_LABEL - 8, big: false },
-    { id: 'E',  deg: 90,  label: 'E',  r: R_LABEL - 6, big: true },
-    { id: 'SE', deg: 135, label: 'SE', r: R_LABEL - 8, big: false },
-    { id: 'S',  deg: 180, label: 'S',  r: R_LABEL - 6, big: true },
-    { id: 'SW', deg: 225, label: 'SW', r: R_LABEL - 8, big: false },
-    { id: 'W',  deg: 270, label: 'W',  r: R_LABEL - 6, big: true },
-    { id: 'NW', deg: 315, label: 'NW', r: R_LABEL - 8, big: false },
-  ]
+  // which 8-direction IDs have rooms assigned
+  const assignedIds = new Set(Object.values(assignments).filter(Boolean))
 
   return (
     <svg
       ref={svgRef}
-      viewBox="0 0 400 400"
+      viewBox="0 0 480 480"
       className="w-full h-full select-none touch-none cursor-grab active:cursor-grabbing"
       onPointerDown={onPointerDown}
       role="img"
       aria-label={`Vastu compass rotated ${Math.round(rotation)}°. Drag to rotate and align North.`}
     >
       <defs>
-        {/* Subtle drop shadow for the star */}
-        <filter id="rose-shadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2" stdDeviation="4" floodColor="#00000033" />
+        <filter id="vc-shadow" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="0" dy="3" stdDeviation="5" floodColor="#00000022" />
         </filter>
-        {/* Red gradient for N point (front face) */}
-        <linearGradient id="grad-north" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"   stopColor="#8B0000" />
-          <stop offset="50%"  stopColor="#C8202A" />
-          <stop offset="100%" stopColor="#8B0000" />
-        </linearGradient>
-        {/* Teal gradient for S point */}
-        <linearGradient id="grad-south" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"   stopColor="#2E5F6A" />
-          <stop offset="50%"  stopColor="#5B9DAD" />
-          <stop offset="100%" stopColor="#2E5F6A" />
-        </linearGradient>
-        {/* Navy gradient for E/W */}
-        <linearGradient id="grad-ew" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stopColor="#152D4A" />
-          <stop offset="50%"  stopColor="#2D5080" />
-          <stop offset="100%" stopColor="#152D4A" />
-        </linearGradient>
-        {/* Navy gradient for intercardinals */}
-        <linearGradient id="grad-inter" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%"   stopColor="#1A3560" />
-          <stop offset="100%" stopColor="#3A608A" />
-        </linearGradient>
-        {/* White/grey for background disc */}
-        <radialGradient id="bg-disc" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stopColor="#f0f2f4" />
-          <stop offset="100%" stopColor="#e2e6ea" />
+        <radialGradient id="vc-bg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stopColor="#FAFBFC" />
+          <stop offset="100%" stopColor="#E8EBF0" />
+        </radialGradient>
+        <radialGradient id="vc-hub" cx="35%" cy="30%" r="65%">
+          <stop offset="0%"   stopColor="#FFFFFF" />
+          <stop offset="100%" stopColor="#BEC5CF" />
         </radialGradient>
       </defs>
 
-      {/* ── Background ── */}
-      <circle cx={CX} cy={CY} r={R_OUTER + 16} fill="url(#bg-disc)" />
+      {/* ── Background disc with shadow ── */}
+      <circle cx={CX} cy={CY} r={R_BEZEL_OUT + 6} fill="url(#vc-bg)" filter="url(#vc-shadow)" />
+      <circle cx={CX} cy={CY} r={R_BEZEL_OUT}     fill="#FFFFFF" stroke="#CBD5E1" strokeWidth={2} />
 
-      {/* ── Outer double bezel ring ── */}
-      <circle cx={CX} cy={CY} r={R_OUTER} fill="none" stroke="#2C3E50" strokeWidth={2} />
-      <circle cx={CX} cy={CY} r={R_INNER} fill="none" stroke="#2C3E50" strokeWidth={1} />
-      {/* Thin fill between the two rings */}
-      <circle cx={CX} cy={CY} r={R_OUTER} fill="#ffffff" stroke="none" />
-      <circle cx={CX} cy={CY} r={R_INNER} fill="#f0f2f4" stroke="none" />
-      {/* Re-draw strokes on top */}
-      <circle cx={CX} cy={CY} r={R_OUTER} fill="none" stroke="#2C3E50" strokeWidth={2.5} />
-      <circle cx={CX} cy={CY} r={R_INNER} fill="none" stroke="#2C3E50" strokeWidth={1.5} />
-
-      {/* ── Everything inside rotates ── */}
+      {/* ══════════════════════════════════════
+          ROTATING GROUP — all compass content
+          ══════════════════════════════════════ */}
       <g transform={`rotate(${rotation}, ${CX}, ${CY})`}>
 
-        {/* ── Tick marks (inside the inner bezel ring, above disc) ── */}
-        {ticks.map(({ deg, outer, inner, is45, is10 }) => (
-          <line
-            key={deg}
-            x1={outer.x} y1={outer.y}
-            x2={inner.x} y2={inner.y}
-            stroke="#2C3E50"
-            strokeWidth={is45 ? 1.8 : is10 ? 1.2 : 0.8}
-            strokeOpacity={is45 ? 1 : is10 ? 0.8 : 0.55}
-          />
-        ))}
-
-        {/* ── Direction labels ── */}
-        {labelDirs.map(({ id, deg, label, r, big }) => {
-          const p = polar(CX, CY, r, deg)
+        {/* ── BAND 1: Outer colour segments (abbrev band) ── */}
+        {VASTU_16.map((z) => {
+          const s = z.deg - 11.25, e = z.deg + 11.25
+          const isAssigned = assignedIds.has(z.id)
           return (
-            <text
-              key={id}
+            <path key={`b1-${z.id}`}
+              d={slicePath(R_SEG_OUT, R_SEG_MID, s, e)}
+              fill={isAssigned ? z.color : z.light}
+              stroke="#FFFFFF" strokeWidth={1.8}
+            />
+          )
+        })}
+
+        {/* ── BAND 2: Middle Sanskrit name band ── */}
+        {VASTU_16.map((z) => {
+          const s = z.deg - 11.25, e = z.deg + 11.25
+          return (
+            <path key={`b2-${z.id}`}
+              d={slicePath(R_SEG_MID, R_INNER_MID, s, e)}
+              fill={z.light}
+              stroke="#FFFFFF" strokeWidth={1.2}
+              opacity={0.92}
+            />
+          )
+        })}
+
+        {/* ── BAND 3: Inner element band ── */}
+        {VASTU_16.map((z) => {
+          const s = z.deg - 11.25, e = z.deg + 11.25
+          return (
+            <path key={`b3-${z.id}`}
+              d={slicePath(R_INNER_MID, R_SEG_IN, s, e)}
+              fill={z.light}
+              stroke="#FFFFFF" strokeWidth={1}
+              opacity={0.7}
+            />
+          )
+        })}
+
+        {/* ── Zone divider spokes ── */}
+        {VASTU_16.map((z) => {
+          const boundary = z.deg - 11.25
+          const op = polar(CX, CY, R_SEG_OUT, boundary)
+          const ip = polar(CX, CY, R_SEG_IN,  boundary)
+          return (
+            <line key={`sp-${z.id}`}
+              x1={op.x} y1={op.y} x2={ip.x} y2={ip.y}
+              stroke="#FFFFFF" strokeWidth={1.5}
+            />
+          )
+        })}
+
+        {/* ── Ring border circles ── */}
+        <circle cx={CX} cy={CY} r={R_SEG_OUT}   fill="none" stroke="#E2E8F0" strokeWidth={0.8} />
+        <circle cx={CX} cy={CY} r={R_SEG_MID}   fill="none" stroke="#E2E8F0" strokeWidth={0.8} />
+        <circle cx={CX} cy={CY} r={R_INNER_MID} fill="none" stroke="#E2E8F0" strokeWidth={0.8} />
+        <circle cx={CX} cy={CY} r={R_SEG_IN}    fill="none" stroke="#E2E8F0" strokeWidth={0.8} />
+
+        {/* ── BAND 1 TEXT: Direction abbreviation ── */}
+        {VASTU_16.map((z) => {
+          const isCardinal = ['N','E','S','W'].includes(z.id)
+          const isInter    = ['NE','SE','SW','NW'].includes(z.id)
+          const p = polar(CX, CY, (R_SEG_OUT + R_SEG_MID) / 2, z.deg)
+          // counter-rotate so label stays horizontal
+          return (
+            <text key={`t1-${z.id}`}
               x={p.x} y={p.y}
-              textAnchor="middle"
-              dominantBaseline="central"
-              fontSize={big ? 17 : 11}
-              fontWeight={big ? 800 : 700}
-              fill="#1A2B3C"
-              fontFamily="Georgia, serif"
-              letterSpacing={big ? 1 : 0.5}
+              textAnchor="middle" dominantBaseline="central"
+              fontSize={isCardinal ? 14 : isInter ? 11 : 9}
+              fontWeight={isCardinal ? 900 : 700}
+              fill={isCardinal ? '#0F172A' : '#1E293B'}
+              fontFamily="Georgia, 'Times New Roman', serif"
+              transform={`rotate(${-rotation}, ${p.x}, ${p.y})`}
             >
-              {label}
+              {z.abbr}
             </text>
           )
         })}
 
-        {/* ── Dashed inner reference circle ── */}
-        <circle
-          cx={CX} cy={CY} r={R_DASH}
-          fill="none"
-          stroke="#2C3E50"
-          strokeWidth={1.2}
-          strokeOpacity={0.45}
-          strokeDasharray={`${dashOn} ${dashOff}`}
-        />
+        {/* ── BAND 2 TEXT: Sanskrit / deity name ── */}
+        {VASTU_16.map((z) => {
+          const p = polar(CX, CY, (R_SEG_MID + R_INNER_MID) / 2, z.deg)
+          return (
+            <text key={`t2-${z.id}`}
+              x={p.x} y={p.y}
+              textAnchor="middle" dominantBaseline="central"
+              fontSize={8}
+              fontWeight={600}
+              fill="#475569"
+              fontFamily="Georgia, serif"
+              transform={`rotate(${-rotation}, ${p.x}, ${p.y})`}
+            >
+              {z.sanskrit}
+            </text>
+          )
+        })}
 
-        {/* ── 8-point compass rose star ── */}
-        {/* Render intercardinal points first (behind cardinals) */}
-        {intercardinals.map((deg) => (
-          <path
-            key={`inter-${deg}`}
-            d={makePt(deg, R_INTER_TIP, 22, 8)}
-            fill="url(#grad-inter)"
-            stroke="#0F2040"
-            strokeWidth={0.6}
-            filter="url(#rose-shadow)"
+        {/* ── BAND 3 TEXT: Element emoji ── */}
+        {VASTU_16.map((z) => {
+          const p = polar(CX, CY, (R_INNER_MID + R_SEG_IN) / 2, z.deg)
+          const sym = { Water:'💧', Air:'🌬', Fire:'🔥', Earth:'🌍', Space:'✨' }[z.element] ?? ''
+          return (
+            <text key={`t3-${z.id}`}
+              x={p.x} y={p.y}
+              textAnchor="middle" dominantBaseline="central"
+              fontSize={10}
+              transform={`rotate(${-rotation}, ${p.x}, ${p.y})`}
+            >
+              {sym}
+            </text>
+          )
+        })}
+
+        {/* ── Degree tick marks in bezel ── */}
+        {ticks.map(({ deg, outer, inner, is45, is22 }) => (
+          <line key={`tk-${deg}`}
+            x1={outer.x} y1={outer.y} x2={inner.x} y2={inner.y}
+            stroke="#64748B"
+            strokeWidth={is45 ? 2.2 : is22 ? 1.4 : 0.7}
+            strokeOpacity={is45 ? 1 : is22 ? 0.75 : 0.45}
           />
         ))}
 
-        {/* Cardinal E — left half dark, right half slightly lighter */}
-        <path d={makePt(90, R_CARD_TIP, 22, 9)}  fill="url(#grad-ew)"    stroke="#0F2040" strokeWidth={0.6} filter="url(#rose-shadow)" />
-        {/* Cardinal W */}
-        <path d={makePt(270, R_CARD_TIP, 22, 9)} fill="url(#grad-ew)"    stroke="#0F2040" strokeWidth={0.6} filter="url(#rose-shadow)" />
-        {/* Cardinal S — teal */}
-        <path d={makePt(180, R_CARD_TIP, 22, 9)} fill="url(#grad-south)" stroke="#1A4050" strokeWidth={0.6} filter="url(#rose-shadow)" />
-        {/* Cardinal N — red (on top of all) */}
-        <path d={makePt(0, R_CARD_TIP, 22, 9)}   fill="url(#grad-north)" stroke="#6B0010" strokeWidth={0.6} filter="url(#rose-shadow)" />
+        {/* ── Degree numbers at 45° intervals (always horizontal) ── */}
+        {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
+          const p = polar(CX, CY, R_BEZEL_IN - 14, deg)
+          return (
+            <text key={`dn-${deg}`}
+              x={p.x} y={p.y}
+              textAnchor="middle" dominantBaseline="central"
+              fontSize={8} fontWeight={700}
+              fill="#94A3B8" fontFamily="monospace"
+              transform={`rotate(${-rotation}, ${p.x}, ${p.y})`}
+            >
+              {deg}°
+            </text>
+          )
+        })}
 
-        {/* ── Centre hub ── */}
-        {/* Outer grey ring */}
-        <circle cx={CX} cy={CY} r={20} fill="#e8eaec" stroke="#2C3E50" strokeWidth={1.5} />
-        {/* White mid ring */}
-        <circle cx={CX} cy={CY} r={14} fill="#ffffff" stroke="#aab0b8" strokeWidth={1} />
-        {/* Dark inner dot */}
-        <circle cx={CX} cy={CY} r={7}  fill="#1A2B3C" />
-        {/* Tiny highlight */}
-        <circle cx={CX - 2} cy={CY - 2} r={2} fill="rgba(255,255,255,0.35)" />
+        {/* ── Cardinal needles ── */}
+        {/* N — red */}
+        <path d={needle(0,   R_NEEDLE, R_HUB + 5, 8)} fill="#DC2626" stroke="#7F1D1D" strokeWidth={0.8} />
+        {/* S — blue */}
+        <path d={needle(180, R_NEEDLE, R_HUB + 5, 8)} fill="#2563EB" stroke="#1E3A8A" strokeWidth={0.8} />
+        {/* E — amber */}
+        <path d={needle(90,  R_NEEDLE, R_HUB + 5, 7)} fill="#D97706" stroke="#78350F" strokeWidth={0.7} />
+        {/* W — sky */}
+        <path d={needle(270, R_NEEDLE, R_HUB + 5, 7)} fill="#0284C7" stroke="#0C4A6E" strokeWidth={0.7} />
 
-      </g>{/* end rotating group */}
+        {/* ── Intercardinal needles (shorter, grey) ── */}
+        {[45, 135, 225, 315].map(deg => (
+          <path key={`in-${deg}`}
+            d={needle(deg, Math.round(R_NEEDLE * 0.75), R_HUB + 3, 4.5)}
+            fill="#94A3B8" stroke="#475569" strokeWidth={0.5}
+          />
+        ))}
+
+        {/* ── Brahmasthan lotus petals ── */}
+        {Array.from({ length: 8 }, (_, i) => {
+          const pd  = i * 45
+          const tip = polar(CX, CY, R_HUB - 2, pd)
+          const wL  = polar(CX, CY, R_HUB - 12, pd - 16)
+          const wR  = polar(CX, CY, R_HUB - 12, pd + 16)
+          return (
+            <path key={`p-${i}`}
+              d={`M ${CX} ${CY} L ${wL.x} ${wL.y} Q ${tip.x} ${tip.y} ${wR.x} ${wR.y} Z`}
+              fill={i % 2 === 0 ? '#FCD34D' : '#FDE68A'}
+              stroke="#F59E0B" strokeWidth={0.5}
+            />
+          )
+        })}
+
+        {/* ── Hub rings ── */}
+        <circle cx={CX} cy={CY} r={R_HUB}    fill="url(#vc-hub)" stroke="#CBD5E1" strokeWidth={1.5} />
+        <circle cx={CX} cy={CY} r={8}         fill="#1E293B" />
+        <circle cx={CX-2.5} cy={CY-2.5} r={3} fill="rgba(255,255,255,0.45)" />
+
+      </g>{/* ── end rotating group ── */}
+
+      {/* ── Bezel border drawn on top (non-rotating) ── */}
+      <circle cx={CX} cy={CY} r={R_BEZEL_OUT} fill="none" stroke="#94A3B8" strokeWidth={2.5} />
+      <circle cx={CX} cy={CY} r={R_BEZEL_IN}  fill="none" stroke="#CBD5E1" strokeWidth={1} />
 
     </svg>
   )
@@ -730,10 +811,98 @@ const TABS = [
 ]
 
 // ─── Main export ───────────────────────────────────────────────────────────────
+// ─── Compass Popup Modal ───────────────────────────────────────────────────────
+function CompassModal({ rotation, assignments, onRotate, onClose }) {
+  const prefersReduced = useReducedMotion()
+
+  // Lock body scroll while open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = '' }
+  }, [])
+
+  // Close on Escape key
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(6px)' }}
+      onClick={onClose}
+    >
+      <motion.div
+        initial={prefersReduced ? {} : { scale: 0.85, opacity: 0, y: 30 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={prefersReduced ? {} : { scale: 0.85, opacity: 0, y: 30 }}
+        transition={{ type: 'spring', stiffness: 260, damping: 28 }}
+        className="relative bg-white rounded-3xl shadow-2xl flex flex-col gap-4 p-5"
+        style={{ width: 'min(90vw, 560px)', maxHeight: '92vh' }}
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between shrink-0">
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-widest text-stone-400">Vastu Compass</p>
+            <p className="text-sm font-black text-stone-800">Drag to align True North</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-9 h-9 rounded-2xl bg-stone-100 hover:bg-stone-200 flex items-center justify-center transition-colors"
+            aria-label="Close compass"
+          >
+            <FiX size={16} className="text-stone-600" />
+          </button>
+        </div>
+
+        {/* Large compass */}
+        <div className="w-full aspect-square" style={{ maxWidth: '100%' }}>
+          <CompassDial rotation={rotation} assignments={assignments} onRotate={onRotate} />
+        </div>
+
+        {/* Degree readout */}
+        <div className="text-center shrink-0">
+          <span className="font-mono text-3xl font-black text-stone-800">
+            {String(Math.round(normDeg(rotation))).padStart(3, '0')}°
+          </span>
+          <span className="text-sm text-stone-400 font-medium ml-2">rotation</span>
+        </div>
+
+        {/* Slider */}
+        <div className="shrink-0 px-2">
+          <input
+            type="range" min="0" max="359" step="1"
+            value={Math.round(normDeg(rotation))}
+            onChange={e => onRotate(Number(e.target.value))}
+            className="w-full accent-amber-500 cursor-pointer h-2 rounded-full"
+            aria-label="Compass rotation in degrees"
+          />
+          <div className="flex justify-between text-[9px] text-stone-300 font-mono mt-1">
+            <span>0°</span><span>90°</span><span>180°</span><span>270°</span><span>359°</span>
+          </div>
+        </div>
+
+        {/* Close hint */}
+        <p className="text-center text-[10px] text-stone-300 font-medium shrink-0">
+          Tap outside or press <kbd className="px-1 py-0.5 bg-stone-100 rounded text-stone-400 font-mono text-[9px]">Esc</kbd> to close
+        </p>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 export default function VastuCompass() {
   const [rotation, setRotation]       = useState(0)
   const [assignments, setAssignments] = useState({})
   const [activeTab, setActiveTab]     = useState('compass')
+  const [compassModal, setCompassModal] = useState(false)
   const prefersReduced = useReducedMotion()
 
   // assign / clear a room→direction
@@ -756,6 +925,18 @@ export default function VastuCompass() {
 
   return (
     <div className="w-full max-w-6xl mx-auto font-sans">
+
+      {/* ── Compass Popup Modal ── */}
+      <AnimatePresence>
+        {compassModal && (
+          <CompassModal
+            rotation={rotation}
+            assignments={assignments}
+            onRotate={setRotation}
+            onClose={() => setCompassModal(false)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* ── Tab Navigation ── */}
       <div className="flex gap-1 p-1 bg-stone-100 rounded-2xl mb-6" role="tablist">
@@ -832,18 +1013,38 @@ export default function VastuCompass() {
                     <p className="text-[10px] font-black uppercase tracking-widest text-stone-400">Step 1</p>
                     <p className="text-sm font-black text-stone-800">Align True North</p>
                   </div>
-                  <button
-                    onClick={reset}
-                    className="flex items-center gap-1.5 text-[10px] font-black text-stone-400 hover:text-stone-600 transition-colors"
-                    aria-label="Reset compass rotation"
-                  >
-                    <FiRotateCcw size={12} /> Reset
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setCompassModal(true)}
+                      className="flex items-center gap-1.5 text-[10px] font-black text-amber-600 hover:text-amber-700 transition-colors px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200"
+                      aria-label="Open compass in fullscreen"
+                    >
+                      <FiZoomIn size={12} /> Expand
+                    </button>
+                    <button
+                      onClick={reset}
+                      className="flex items-center gap-1.5 text-[10px] font-black text-stone-400 hover:text-stone-600 transition-colors"
+                      aria-label="Reset compass rotation"
+                    >
+                      <FiRotateCcw size={12} /> Reset
+                    </button>
+                  </div>
                 </div>
 
                 {/* compass */}
-                <div className="w-full aspect-square max-w-xs mx-auto">
+                <div
+                  className="w-full aspect-square max-w-sm mx-auto relative group cursor-pointer"
+                  onClick={() => setCompassModal(true)}
+                  title="Click to expand compass"
+                >
                   <CompassDial rotation={rotation} assignments={assignments} onRotate={setRotation} />
+                  {/* Expand hint overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-full">
+                    <div className="bg-black/50 text-white rounded-2xl px-3 py-2 flex items-center gap-2 text-xs font-black shadow-lg backdrop-blur-sm">
+                      <FiZoomIn size={14} />
+                      Click to expand
+                    </div>
+                  </div>
                 </div>
 
                 {/* degree readout */}
