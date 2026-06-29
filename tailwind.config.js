@@ -15,8 +15,10 @@ export default {
         stone: "#8a7f72",
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Inter', 'sans-serif'],
+        sans: ['Barlow', 'sans-serif'],
+        serif: ['Barlow', 'sans-serif'],
+        mono: ['Barlow', 'sans-serif'],
+        condensed: ['Barlow Condensed', 'sans-serif'],
       },
       keyframes: {
         shimmer: {

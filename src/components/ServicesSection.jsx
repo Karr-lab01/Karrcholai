@@ -63,7 +63,7 @@ const ServicesSection = () => {
             <span className="text-secondary font-bold tracking-[0.6em] uppercase text-[10px] mb-4 block">Our Expertise</span>
             <h2 className="text-4xl sm:text-5xl md:text-8xl font-bold text-white tracking-tighter leading-none">
               Our <br />
-              <span className="text-white/30 italic">Services.</span>
+              <span className="text-white/30 font-light">Services.</span>
             </h2>
           </motion.div>
           
@@ -112,14 +112,14 @@ const ServicesSection = () => {
 
               {/* Technical Annotation Line */}
               <div className="absolute top-0 right-0 p-8">
-                <span className="text-[10px] font-mono text-white/10">0{s.id}</span>
+                <span className="text-[10px] font-bold tracking-widest text-white/10" style={{ fontFamily: 'Barlow, sans-serif' }}>0{s.id}</span>
               </div>
             </motion.div>
           ))}
           
           {/* Empty Cell for Aesthetic Balance with Goal text */}
           <div className="hidden lg:flex p-10 border border-white/5 rounded-[32px] flex-col justify-center bg-white/[0.01]">
-            <p className="text-white/30 text-xs italic leading-relaxed text-center font-light">
+            <p className="text-white/30 text-xs leading-relaxed text-center font-light">
               "Our goal is to make the construction process smooth, transparent, and stress-free for homeowners."
             </p>
           </div>

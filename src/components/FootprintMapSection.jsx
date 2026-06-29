@@ -44,7 +44,7 @@ export default function FootprintMapSection() {
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
               Building Across <br/>
-              <span style={{ color: TERRA, fontStyle: 'italic' }}>The Region.</span>
+              <span style={{ color: TERRA, fontWeight: 300 }}>The Region.</span>
             </h2>
             
             <p className="text-sm font-light leading-relaxed mb-8" style={{ color: `${STONE}80` }}>

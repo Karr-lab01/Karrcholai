@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ─── index.css ───────────────────────────────────────────────────────────
+   Global typography and utility overrides — imported after global.css
+   Tailwind directives live in global.css only (v4 syntax)
+──────────────────────────────────────────────────────────────────────── */
 
 :root {
   --primary: #2D4B37;
@@ -10,9 +11,7 @@
   scroll-behavior: smooth;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   font-family: 'Barlow', sans-serif !important;
@@ -26,15 +25,14 @@ body {
 /* NUCLEAR OVERRIDE: Force Barlow on absolutely everything */
 *, *::before, *::after {
   font-family: 'Barlow', sans-serif !important;
-  font-style: normal !important;    /* kill all italic */
+  font-style: normal !important;
 }
 
-/* Headings: Barlow Black 900, tight tracking */
+/* Headings: Barlow bold, tight tracking — NO !important so components can override */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 900 !important;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  font-style: normal !important;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 /* Body text: Regular weight, comfortable reading */
@@ -49,9 +47,8 @@ strong, b {
 }
 
 /* Buttons, inputs inherit */
-button, a, label, input, select, textarea {
+button, a, label, input, select, textarea, span, div {
   font-family: 'Barlow', sans-serif !important;
-  font-style: normal !important;
 }
 
 /* ── Textures ── */
@@ -150,7 +147,13 @@ button, a, label, input, select, textarea {
 
 /* ── Button styles ── */
 .btn-primary {
-  @apply bg-secondary text-white font-bold tracking-wider px-8 py-4 rounded-sm transition-all duration-300;
+  background-color: var(--secondary);
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 1rem 2rem;
+  border-radius: 2px;
+  transition: all 0.3s ease;
   box-shadow: 0 0 0 0 rgba(219, 127, 80, 0.4);
 }
 .btn-primary:hover {
@@ -159,10 +162,17 @@ button, a, label, input, select, textarea {
 }
 
 .btn-outline {
-  @apply border-2 border-white text-white font-bold tracking-wider px-8 py-4 rounded-sm transition-all duration-300;
+  border: 2px solid white;
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 1rem 2rem;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 .btn-outline:hover {
-  @apply bg-white text-dark;
+  background: white;
+  color: var(--dark);
 }
 
 /* ── Stat counter card ── */
@@ -184,9 +194,7 @@ button, a, label, input, select, textarea {
   transition: clip-path 0.7s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-@layer base {
-  html { -webkit-tap-highlight-color: transparent; }
-}
+html { -webkit-tap-highlight-color: transparent; }
 
 /* ── Mobile responsive globals ── */
 @media (max-width: 640px) {
@@ -195,7 +203,8 @@ button, a, label, input, select, textarea {
   h3 { font-size: clamp(1.2rem, 6vw, 2rem); }
 
   .btn-primary, .btn-outline {
-    @apply px-5 py-3 text-xs;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.75rem;
   }
 
   section { overflow-x: hidden; }

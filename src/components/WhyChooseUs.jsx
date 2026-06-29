@@ -39,7 +39,7 @@ const WhyChooseUs = () => {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-dark leading-none mb-6 md:mb-10"
             >
               Why <br/>
-              <span className="text-secondary italic">Trust</span> Us?
+              <span className="text-secondary font-light">Trust</span> Us?
             </motion.h2>
 
             <motion.p 

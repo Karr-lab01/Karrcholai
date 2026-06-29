@@ -58,9 +58,9 @@ const WelcomeSection = () => {
                 <span className="text-secondary font-black text-[11px] tracking-[0.4em] uppercase">The Karrcholai Story</span>
               </div>
               
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-dark leading-[0.95] mb-6 md:mb-8 italic">
-                Crafting <span className="text-primary not-italic">Exceptional</span> <br/>
-                Living <span className="text-primary/40 not-italic">Spaces.</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-dark leading-[0.95] mb-6 md:mb-8">
+                Crafting <span className="text-primary">Exceptional</span> <br/>
+                Living <span className="text-primary/40">Spaces.</span>
               </h2>
 
               <p className="text-dark/70 text-base md:text-xl font-light leading-relaxed max-w-xl">
@@ -137,7 +137,7 @@ const WelcomeSection = () => {
                   viewBox="0 0 100 100"
                 >
                   <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />
-                  <text style={{ fontSize: '7px', fontWeight: '900' }} textAnchor="start">
+                  <text style={{ fontSize: '7px', fontWeight: '900', fontFamily: 'Barlow, sans-serif' }} textAnchor="start">
                     <textPath xlinkHref="#circlePath" textLength="251" lengthAdjust="spacing">
                       ✦ DISCIPLINE ✦ DESIGN ✦ CONSTRUCTION
                     </textPath>
