@@ -32,28 +32,26 @@ const UnifiedFooter = () => {
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='feltNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23feltNoise)'/%3E%3C/svg%3E")`,
           }}
         />
-
-        {/* ── Full-footer green light reflection ──
-             Lives inside the background container so mixBlendMode only
-             composites against the texture — never touches the logo or text. ── */}
-        <motion.div
-          aria-hidden="true"
-          animate={{ opacity: [0, 0.35, 0.55, 0.35, 0] }}
-          transition={{ duration: GLOW_DURATION + 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'radial-gradient(ellipse 120% 120% at 25% 40%, rgba(100,200,80,0.9) 0%, rgba(60,160,50,0.5) 30%, rgba(30,110,30,0.2) 60%, transparent 80%)',
-            pointerEvents: 'none',
-            mixBlendMode: 'screen',
-          }}
-        />
       </div>
+
+      {/* ── Green light reflection — isolated layer, no blendMode so it can't wash out logo ── */}
+      <motion.div
+        aria-hidden="true"
+        animate={{ opacity: [0, 0.18, 0.28, 0.18, 0] }}
+        transition={{ duration: GLOW_DURATION + 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(ellipse 120% 120% at 25% 40%, rgba(80,180,60,0.7) 0%, rgba(50,140,40,0.35) 35%, rgba(20,90,20,0.12) 65%, transparent 85%)',
+          pointerEvents: 'none',
+          zIndex: 1,
+        }}
+      />
 
       {/* Elegant Top Divider */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 items-start mb-16">
 
           {/* Column 1: Branding */}
@@ -72,14 +70,15 @@ const UnifiedFooter = () => {
                   src={logoImg}
                   alt="Karrcholai Construction logo"
                   className="h-28 md:h-36 w-auto object-contain"
+                  style={{ filter: 'brightness(1.15) contrast(1.1)' }}
                   animate={{
                     scale: [1, 1.05, 1.03, 1.05, 1],
                     filter: [
-                      'drop-shadow(0 0 0px rgba(201,117,74,0))',
-                      'drop-shadow(0 0 6px rgba(201,117,74,0.35)) drop-shadow(0 0 14px rgba(201,117,74,0.15))',
-                      'drop-shadow(0 0 10px rgba(201,117,74,0.45)) drop-shadow(0 0 22px rgba(201,117,74,0.2))',
-                      'drop-shadow(0 0 6px rgba(201,117,74,0.35)) drop-shadow(0 0 14px rgba(201,117,74,0.15))',
-                      'drop-shadow(0 0 0px rgba(201,117,74,0))',
+                      'brightness(1.15) contrast(1.1) drop-shadow(0 0 0px rgba(201,117,74,0))',
+                      'brightness(1.25) contrast(1.1) drop-shadow(0 0 8px rgba(201,117,74,0.5)) drop-shadow(0 0 20px rgba(201,117,74,0.25))',
+                      'brightness(1.3) contrast(1.1) drop-shadow(0 0 14px rgba(201,117,74,0.65)) drop-shadow(0 0 30px rgba(201,117,74,0.3))',
+                      'brightness(1.25) contrast(1.1) drop-shadow(0 0 8px rgba(201,117,74,0.5)) drop-shadow(0 0 20px rgba(201,117,74,0.25))',
+                      'brightness(1.15) contrast(1.1) drop-shadow(0 0 0px rgba(201,117,74,0))',
                     ],
                   }}
                   transition={{ duration: GLOW_DURATION, repeat: Infinity, ease: 'easeInOut' }}

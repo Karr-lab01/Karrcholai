@@ -78,11 +78,19 @@ const AppContent = ({ videoOpen, setVideoOpen }) => {
 
 function App() {
   const [videoOpen, setVideoOpen] = useState(false)
-  const [preloaderDone, setPreloaderDone] = useState(false)
+  // Skip preloader if already shown this session (e.g. after mobile nav page reload)
+  const [preloaderDone, setPreloaderDone] = useState(
+    () => typeof sessionStorage !== 'undefined' && !!sessionStorage.getItem('preloader_done')
+  )
+
+  const handlePreloaderComplete = () => {
+    if (typeof sessionStorage !== 'undefined') sessionStorage.setItem('preloader_done', '1')
+    setPreloaderDone(true)
+  }
 
   return (
     <LogoVideoContext.Provider value={{ openLogoVideo: () => setVideoOpen(true) }}>
-      {!preloaderDone && <Preloader onComplete={() => setPreloaderDone(true)} />}
+      {!preloaderDone && <Preloader onComplete={handlePreloaderComplete} />}
       <Router>
         <AppContent videoOpen={videoOpen} setVideoOpen={setVideoOpen} />
       </Router>
