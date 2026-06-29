@@ -924,7 +924,7 @@ export default function VastuCompass() {
   const fadeUp = { initial: { opacity: 0, y: 16 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }
 
   return (
-    <div className="w-full max-w-6xl mx-auto font-sans">
+    <div className="w-full max-w-6xl mx-auto font-sans" data-compass-tool>
 
       {/* ── Compass Popup Modal ── */}
       <AnimatePresence>
