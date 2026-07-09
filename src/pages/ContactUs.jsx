@@ -9,6 +9,7 @@ import modernHouse from '../../assets/MORDEN HOUSE.jpg'
 import contact3 from '../../assets/contact3.jpg'
 import contact4 from '../../assets/contact4.jpg'
 import contact5 from '../../assets/contact5.jpg'
+import { RoosterSuccess } from '../components/RoosterMascot'
 
 const FOREST = '#3F5F4A'
 const TERRA = '#C9754A'
@@ -363,11 +364,33 @@ export default function ContactUs() {
                   <textarea rows={3} placeholder="Tell us about your project, location, and timeline..." className={inp + ' resize-none'} required />
                 </Field>
                 <div className="pt-2">
-                  <motion.button type="submit" whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.97 }}
-                    className="w-full py-4 rounded-xl font-black text-sm tracking-[0.2em] uppercase text-white flex items-center justify-center gap-2"
-                    style={{ background: sent ? FOREST : `linear-gradient(135deg, ${TERRA}, ${FOREST})`, boxShadow: `0 8px 24px ${TERRA}40` }}>
-                    {sent ? <><span>Sent!</span><motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}>✓</motion.span></> : <><FiSend size={14} />Send Message</>}
-                  </motion.button>
+                  <AnimatePresence mode="wait">
+                    {sent ? (
+                      <motion.div
+                        key="success-state"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="flex flex-col items-center py-2"
+                      >
+                        <RoosterSuccess visible={sent} />
+                      </motion.div>
+                    ) : (
+                      <motion.button
+                        key="submit-btn"
+                        type="submit"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        whileHover={{ scale: 1.02, y: -2 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="w-full py-4 rounded-xl font-black text-sm tracking-[0.2em] uppercase text-white flex items-center justify-center gap-2"
+                        style={{ background: `linear-gradient(135deg, ${TERRA}, ${FOREST})`, boxShadow: `0 8px 24px ${TERRA}40` }}
+                      >
+                        <FiSend size={14} />Send Message
+                      </motion.button>
+                    )}
+                  </AnimatePresence>
                 </div>
               </form>
             </motion.div>

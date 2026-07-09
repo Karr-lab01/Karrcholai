@@ -6,11 +6,11 @@ import KarrHomeSection from '../components/KarrHomeSection'
 import CholaiHomeSection from '../components/CholaiHomeSection'
 import ServicesSection from '../components/ServicesSection'
 import WhyChooseUs from '../components/WhyChooseUs'
-
 import HomeBlogSection from '../components/HomeBlogSection'
 import HomeManaiadiSection from '../components/HomeManaiadiSection'
 import FootprintMapSection from '../components/FootprintMapSection'
 import HomeProjectsSection from '../components/HomeProjectsSection'
+import RoosterBanner from '../components/RoosterBanner'
 import UnifiedFooter from '../components/UnifiedFooter'
 import { Helmet } from 'react-helmet-async'
 
@@ -74,8 +74,7 @@ const Home = () => {
  </section>
 
 
-
-
+ <RoosterBanner />
  <UnifiedFooter />
 
  {/* ── Decorative gradient orbs ── */}

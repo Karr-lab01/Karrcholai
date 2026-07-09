@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import homeHeroImage from '../../assets/pexels-kawserhamid-176342.jpg'
+import HangingWorker from './HangingWorker'
 
 
 const HeroSection = () => {
@@ -93,6 +94,9 @@ const HeroSection = () => {
  </motion.div>
  </div>
  </div>
+
+ {/* ── Hanging construction worker ad ── */}
+ <HangingWorker />
 
  {/* ── Scroll cue ── */}
  <motion.div

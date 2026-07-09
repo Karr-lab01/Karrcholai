@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import logoImg from '../../assets/KARRCHOLAI LOGO.png'
@@ -162,6 +162,7 @@ const UnifiedFooter = () => {
           </div>
         </div>
       </div>
+
     </footer>
   )
 }
