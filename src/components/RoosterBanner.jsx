@@ -1,91 +1,11 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import cockVideo from '../../assets/Cock.mp4'
 
 /**
  * RoosterBanner — CTA banner before footer on Home page
- * Uses Cock.mp4 — Lottie-exported MP4 has transparent background natively.
- * No white box, no blend mode hacks needed.
  */
-
-/**
- * RoosterCanvas — renders video to canvas and removes near-white pixels
- * Threshold: pixels with R>230 AND G>230 AND B>230 become transparent
- */
-const RoosterCanvas = ({ src }) => {
-  const videoRef = useRef(null)
-  const canvasRef = useRef(null)
-  const rafRef = useRef(null)
-
-  useEffect(() => {
-    const video = videoRef.current
-    const canvas = canvasRef.current
-    if (!video || !canvas) return
-
-    const ctx = canvas.getContext('2d', { willReadFrequently: true })
-
-    const draw = () => {
-      if (video.readyState >= 2) {
-        const w = video.videoWidth || 400
-        const h = video.videoHeight || 400
-        canvas.width = w
-        canvas.height = h
-        ctx.drawImage(video, 0, 0, w, h)
-
-        // Chroma-key: remove near-white pixels
-        const frame = ctx.getImageData(0, 0, w, h)
-        const d = frame.data
-        for (let i = 0; i < d.length; i += 4) {
-          const r = d[i], g = d[i + 1], b = d[i + 2]
-          // If pixel is near white (all channels > 230), make transparent
-          if (r > 230 && g > 230 && b > 230) {
-            d[i + 3] = 0 // fully transparent
-          } else if (r > 200 && g > 200 && b > 200) {
-            // Semi-transparent for anti-aliasing edge pixels
-            d[i + 3] = Math.round(((255 - r) / 55) * 255)
-          }
-        }
-        ctx.putImageData(frame, 0, 0)
-      }
-      rafRef.current = requestAnimationFrame(draw)
-    }
-
-    video.addEventListener('loadeddata', () => {
-      video.play()
-      draw()
-    })
-
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-    }
-  }, [src])
-
-  return (
-    <div style={{ position: 'relative', zIndex: 2, display: 'inline-flex' }}>
-      {/* Hidden video source */}
-      <video
-        ref={videoRef}
-        src={src}
-        loop
-        muted
-        playsInline
-        style={{ display: 'none' }}
-        crossOrigin="anonymous"
-      />
-      {/* Canvas renders chroma-keyed frames */}
-      <canvas
-        ref={canvasRef}
-        style={{
-          display: 'block',
-          height: 'clamp(200px, 26vw, 340px)',
-          width: 'auto',
-          filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.5)) brightness(1.05) saturate(1.1)',
-        }}
-      />
-    </div>
-  )
-}
 
 const stats = [
   { value: '12+', label: 'Years of Experience' },
@@ -300,8 +220,23 @@ const RoosterBanner = () => {
               pointerEvents: 'none', zIndex: 0,
             }}
           />
-          {/* Canvas white-key renderer */}
-          <RoosterCanvas src={cockVideo} />
+          {/* Video — section bg is dark so white bg blends away with multiply */}
+          <video
+            src={cockVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{
+              display: 'block',
+              height: 'clamp(200px, 26vw, 340px)',
+              width: 'auto',
+              position: 'relative',
+              zIndex: 2,
+              mixBlendMode: 'multiply',
+              filter: 'brightness(1.1) saturate(1.3) contrast(1.05)',
+            }}
+          />
         </motion.div>
 
       </div>
