@@ -10,7 +10,6 @@ import HomeBlogSection from '../components/HomeBlogSection'
 import HomeManaiadiSection from '../components/HomeManaiadiSection'
 import FootprintMapSection from '../components/FootprintMapSection'
 import HomeProjectsSection from '../components/HomeProjectsSection'
-import RoosterBanner from '../components/RoosterBanner'
 import UnifiedFooter from '../components/UnifiedFooter'
 import { Helmet } from 'react-helmet-async'
 
@@ -74,7 +73,6 @@ const Home = () => {
  </section>
 
 
- <RoosterBanner />
  <UnifiedFooter />
 
  {/* ── Decorative gradient orbs ── */}

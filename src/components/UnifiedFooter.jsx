@@ -5,9 +5,6 @@ import logoImg from '../../assets/KARRCHOLAI LOGO.png'
 import texGreen from '../assets/tex-green.jpg'
 import { LogoVideoContext } from '../App'
 
-// Shared animation timing — logo glow and wall reflection pulse in sync
-const GLOW_DURATION = 3
-
 const UnifiedFooter = () => {
   const { openLogoVideo } = useContext(LogoVideoContext)
 
@@ -34,19 +31,7 @@ const UnifiedFooter = () => {
         />
       </div>
 
-      {/* ── Green light reflection — isolated layer, no blendMode so it can't wash out logo ── */}
-      <motion.div
-        aria-hidden="true"
-        animate={{ opacity: [0, 0.18, 0.28, 0.18, 0] }}
-        transition={{ duration: GLOW_DURATION + 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'radial-gradient(ellipse 120% 120% at 25% 40%, rgba(80,180,60,0.7) 0%, rgba(50,140,40,0.35) 35%, rgba(20,90,20,0.12) 65%, transparent 85%)',
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
+
 
       {/* Elegant Top Divider */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -66,22 +51,11 @@ const UnifiedFooter = () => {
                 className="inline-flex items-center justify-center cursor-pointer border-0 outline-none bg-transparent p-0"
                 style={{ position: 'relative', zIndex: 10 }}
               >
-                <motion.img
+                <img
                   src={logoImg}
                   alt="Karrcholai Construction logo"
                   className="h-28 md:h-36 w-auto object-contain"
                   style={{ filter: 'brightness(1.15) contrast(1.1)' }}
-                  animate={{
-                    scale: [1, 1.05, 1.03, 1.05, 1],
-                    filter: [
-                      'brightness(1.15) contrast(1.1) drop-shadow(0 0 0px rgba(201,117,74,0))',
-                      'brightness(1.25) contrast(1.1) drop-shadow(0 0 8px rgba(201,117,74,0.5)) drop-shadow(0 0 20px rgba(201,117,74,0.25))',
-                      'brightness(1.3) contrast(1.1) drop-shadow(0 0 14px rgba(201,117,74,0.65)) drop-shadow(0 0 30px rgba(201,117,74,0.3))',
-                      'brightness(1.25) contrast(1.1) drop-shadow(0 0 8px rgba(201,117,74,0.5)) drop-shadow(0 0 20px rgba(201,117,74,0.25))',
-                      'brightness(1.15) contrast(1.1) drop-shadow(0 0 0px rgba(201,117,74,0))',
-                    ],
-                  }}
-                  transition={{ duration: GLOW_DURATION, repeat: Infinity, ease: 'easeInOut' }}
                 />
               </button>
 
