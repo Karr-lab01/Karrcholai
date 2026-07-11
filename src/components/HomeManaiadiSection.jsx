@@ -117,7 +117,7 @@ const HomeManaiadiSection = () => {
  Vibrational <span className="text-dark/20">Synchronicity.</span>
  </h3>
  <p className="text-dark/50 text-base font-light leading-relaxed mb-6 max-w-lg">
- <strong className="text-dark font-black">Manaiyadi Sastram (à®®à®©à¯ˆà®¯à®Ÿà®¿ à®šà®¾à®¸à¯à®¤à®¿à®°à®®à¯)</strong> prescribes specific measurements for rooms and wall heights to ensure prosperity, health, and happiness. Every dimension carries a vibrational frequency that interacts with cosmic energy.
+ <strong className="text-dark font-black">Manaiyadi Sastram (மனையடி சாஸ்திரம்)</strong> prescribes specific measurements for rooms and wall heights to ensure prosperity, health, and happiness. Every dimension carries a vibrational frequency that interacts with cosmic energy.
  </p>
  <p className="text-dark/40 text-sm border-l-2 border-secondary/30 pl-4">
  "Architecture is the reach for truth, and Manaiyadi Sastram is the mathematical path to it."

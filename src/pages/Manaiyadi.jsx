@@ -95,7 +95,7 @@ const Manaiyadi = () => {
  </div>
  <div className="md:w-2/3">
  <p className="text-lg md:text-2xl font-light text-dark/70 leading-relaxed mb-6 md:mb-8">
- <span className="text-dark font-black">Manaiyadi Sastram (à®®à®©à¯ˆà®¯à®Ÿà®¿ à®šà®¾à®¸à¯à®¤à®¿à®°à®®à¯)</span> is a traditional Tamil architectural practice that guides room dimensions, wall heights, and building proportions for residential construction.
+ <span className="text-dark font-black">Manaiyadi Sastram (மனையடி சாஸ்திரம்)</span> is a traditional Tamil architectural practice that guides room dimensions, wall heights, and building proportions for residential construction.
  </p>
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-dark/50 text-xs md:text-sm leading-relaxed">
  <p>

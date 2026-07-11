@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView, useScroll, useTransform, useSpring } from 'framer-motion'
 import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiArrowRight, FiNavigation, FiChevronDown, FiInstagram, FiFacebook } from 'react-icons/fi'
+import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import heroBg from '../../assets/Exterior of modern luxury house with garden and beautiful sky.jpg'
@@ -114,7 +115,7 @@ function FAQDark({ q, a, i, inView }) {
   )
 }
 
-import { Helmet } from 'react-helmet-async'
+
 
 export default function ContactUs() {
   const [sent, setSent] = useState(false)
