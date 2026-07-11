@@ -62,18 +62,18 @@ const Preloader = ({ onComplete }) => {
             {/* Tagline reveal */}
             <motion.p
               initial={{ opacity: 0, letterSpacing: '0.1em', y: 10 }}
-              animate={{ opacity: 1, letterSpacing: '0.45em', y: 0 }}
+              animate={{ opacity: 1, letterSpacing: '0.35em', y: 0 }}
               transition={{ duration: 1.2, ease: 'easeOut', delay: 1.0 }}
               style={{
                 marginTop: '1.2rem',
-                fontSize: '0.6rem',
+                fontSize: '0.65rem',
                 fontWeight: '800',
                 textTransform: 'uppercase',
                 color: 'rgba(201,117,74,0.85)',
                 fontFamily: 'Barlow, sans-serif',
               }}
             >
-              Single Stone Story
+              Stone &nbsp;·&nbsp; Grove &nbsp;·&nbsp; Living
             </motion.p>
 
             {/* Loading bar */}

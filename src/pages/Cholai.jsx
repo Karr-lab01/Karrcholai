@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
-import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight, FaLightbulb } from 'react-icons/fa'
+import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight, FaLightbulb, FaTh } from 'react-icons/fa'
 
 // Images from the assets folder
 import landscapeImg from '../assets/cholai/landscape.png'
@@ -15,6 +15,7 @@ import solarImg from '../assets/cholai/solar.png'
 import solar1 from '../assets/cholai/solar_image.jpg'
 import wasteImg from '../assets/cholai/waste.png'
 import lightingImg from '../../assets/lighting.jpg'
+import flooringImg from '../../assets/red-floor.jpg'
 import cholaiVideo from '../assets/cholai/cholai_video.mp4'
 import { Helmet } from 'react-helmet-async'
 
@@ -101,6 +102,16 @@ const Cholai = () => {
  items: ["LED & Energy-Efficient Fixtures", "Smart Lighting Controls", "Natural Light Optimisation"],
  icon: <FaLightbulb />,
  color: "from-yellow-400/20 to-amber-300/20"
+ },
+ {
+ id: "flooring",
+ title: "Traditional Flooring",
+ subtitle: "Heritage Underfoot",
+ description: "We bring back the timeless beauty of traditional Tamil flooring — Athangudi tiles, oxide flooring, and natural stone finishes that keep homes cool, durable, and rooted in culture.",
+ image: flooringImg,
+ items: ["Athangudi Tile Installation", "Oxide & Lime Floor Finishing", "Natural Stone & Clay Tile"],
+ icon: <FaTh />,
+ color: "from-amber-700/20 to-stone-600/20"
  }
  ]
 

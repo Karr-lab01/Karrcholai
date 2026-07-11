@@ -84,7 +84,5 @@ export const categories = [
   "Engineering Legends",
   "Construction Tips",
   "Client Stories",
-  "Rainwater Harvesting",
-  "Solar Energy",
-  "Sustainable Living"
+  "Land and Plot Tips"
 ];

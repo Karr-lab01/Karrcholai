@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight, FaLightbulb } from 'react-icons/fa'
+import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight, FaLightbulb, FaTh } from 'react-icons/fa'
 import { FiArrowUpRight } from 'react-icons/fi'
 
 import newLandscape from '../../assets/lancape.jpg.jpeg'
@@ -9,6 +9,7 @@ import newRainwater from '../../assets/rainwater.jpg.jpeg'
 import newSolar from '../../assets/solar panel.jpg.jpeg'
 import newWaste from '../../assets/WhatsApp Image 2026-05-17 at 16.41.22.jpeg'
 import newLighting from '../../assets/lighting.jpg'
+import newFlooring from '../../assets/red-floor.jpg'
 
 const SERVICES = [
   {
@@ -75,6 +76,19 @@ const SERVICES = [
     images: [newLighting],
     accent: '#D4A017',
     lightBg: 'from-yellow-400/10 to-amber-300/10',
+  },
+  {
+    id: 'flooring',
+    icon: <FaTh />,
+    label: 'Flooring',
+    title: 'Traditional Flooring',
+    subtitle: 'Heritage Underfoot',
+    desc: 'We bring back the timeless beauty of traditional Tamil flooring — Athangudi tiles, oxide flooring, and natural stone finishes that keep homes cool, durable, and rooted in culture.',
+    items: ['Athangudi tile installation', 'Oxide & lime floor finishing', 'Natural stone & granite laying'],
+    impact: 'Timeless Craft',
+    images: [newFlooring],
+    accent: '#A0522D',
+    lightBg: 'from-amber-700/10 to-stone-600/10',
   },
 ]
 
