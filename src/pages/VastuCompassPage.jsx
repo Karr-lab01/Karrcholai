@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import VastuCompass from '../components/vastu/VastuCompass'
+import VastuPurushaHero from '../components/vastu/VastuPurushaHero'
 
 const VastuCompassPage = () => {
   return (
@@ -19,8 +20,11 @@ const VastuCompassPage = () => {
       <Navbar />
 
       <main>
-        {/* ── Compass Tool Only ── */}
-        <section data-compass-tool style={{ background: '#F5F2EC' }} className="pt-32 md:pt-36 pb-16 md:pb-24 px-4 md:px-6">
+        {/* ── Vastu Bhagavan Hero Section ── */}
+        <VastuPurushaHero />
+
+        {/* ── Compass Tool ── */}
+        <section id="compass-tool" data-compass-tool style={{ background: '#F5F2EC' }} className="pt-20 pb-16 md:pb-24 px-4 md:px-6">
           <div className="mx-auto max-w-6xl">
             <VastuCompass />
           </div>
@@ -31,7 +35,6 @@ const VastuCompassPage = () => {
     </div>
   )
 }
-
 
 export default VastuCompassPage
 

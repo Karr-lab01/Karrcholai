@@ -6,7 +6,8 @@ import { useState, useRef, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import {
   FiRotateCcw, FiInfo, FiSun, FiXCircle,
-  FiSliders, FiX, FiZoomIn, FiUpload
+  FiSliders, FiX, FiZoomIn, FiUpload,
+  FiDownload, FiMaximize2
 } from 'react-icons/fi'
 
 // ─── tiny helpers ──────────────────────────────────────────────────────────────
@@ -317,11 +318,9 @@ function CompassModal({ rotation, onRotate, onClose }) {
         <div className="w-full aspect-square">
           <CompassDial rotation={rotation} onRotate={onRotate} />
         </div>
-        <div className="text-center shrink-0">
-          <span className="font-mono text-3xl font-black text-stone-800">
-            {String(Math.round(normDeg(rotation))).padStart(3, '0')}°
-          </span>
-          <span className="text-sm text-stone-400 font-medium ml-2">rotation</span>
+        <div className="text-center shrink-0 flex items-center justify-center gap-1.5">
+          <EditableDegree rotation={rotation} onRotate={onRotate} size="lg" />
+          <span className="text-sm text-stone-400 font-medium">rotation</span>
         </div>
         <div className="shrink-0 px-2">
           <input type="range" min="0" max="359" step="1"
@@ -342,10 +341,188 @@ function CompassModal({ rotation, onRotate, onClose }) {
   )
 }
 
+// ─── Floor Plan Zoom + Download Modal ────────────────────────────────────────
+function FloorPlanModal({ imgSrc, rotation, onRotate, onClose, onReplace }) {
+  const prefersReduced = useReducedMotion()
+  const containerRef  = useRef(null)
+  const [downloading, setDownloading] = useState(false)
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = '' }
+  }, [])
+
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  // ── Download: draw image + SVG compass onto a canvas and export ──
+  const handleDownload = async () => {
+    setDownloading(true)
+    try {
+      const SIZE = 1200
+      const canvas = document.createElement('canvas')
+      canvas.width  = SIZE
+      canvas.height = SIZE
+      const ctx = canvas.getContext('2d')
+
+      // 1. Draw the floor plan image (object-contain style)
+      const img = new Image()
+      img.crossOrigin = 'anonymous'
+      await new Promise((resolve, reject) => {
+        img.onload  = resolve
+        img.onerror = reject
+        img.src = imgSrc
+      })
+      const iw = img.naturalWidth, ih = img.naturalHeight
+      const scale = Math.min(SIZE / iw, SIZE / ih)
+      const dw = iw * scale, dh = ih * scale
+      const dx = (SIZE - dw) / 2, dy = (SIZE - dh) / 2
+      ctx.fillStyle = '#F8F8F6'
+      ctx.fillRect(0, 0, SIZE, SIZE)
+      ctx.drawImage(img, dx, dy, dw, dh)
+
+      // 2. Draw the SVG compass on top (centred, 70% of canvas)
+      const compassSize = SIZE * 0.70
+      const compassOff  = (SIZE - compassSize) / 2
+
+      // Build SVG string from our compass definitions
+      const svgNS  = 'http://www.w3.org/2000/svg'
+      const svgEl  = document.createElementNS(svgNS, 'svg')
+      svgEl.setAttribute('xmlns', svgNS)
+      svgEl.setAttribute('viewBox', '0 0 480 480')
+      svgEl.setAttribute('width',  String(compassSize))
+      svgEl.setAttribute('height', String(compassSize))
+
+      // Inline the rendered compass SVG from the DOM if possible
+      const liveSvg = containerRef.current?.querySelector('svg')
+      if (liveSvg) {
+        const clone = liveSvg.cloneNode(true)
+        clone.setAttribute('width',  String(compassSize))
+        clone.setAttribute('height', String(compassSize))
+        // remove interactive attrs
+        clone.removeAttribute('class')
+        clone.style.cursor = ''
+
+        const svgStr  = new XMLSerializer().serializeToString(clone)
+        const svgBlob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' })
+        const svgUrl  = URL.createObjectURL(svgBlob)
+        const svgImg  = new Image()
+        await new Promise((resolve, reject) => {
+          svgImg.onload  = resolve
+          svgImg.onerror = reject
+          svgImg.src = svgUrl
+        })
+        ctx.globalAlpha = 0.88
+        ctx.drawImage(svgImg, compassOff, compassOff, compassSize, compassSize)
+        ctx.globalAlpha = 1
+        URL.revokeObjectURL(svgUrl)
+      }
+
+      // 3. Watermark
+      ctx.font = `bold ${SIZE * 0.018}px sans-serif`
+      ctx.fillStyle = 'rgba(0,0,0,0.28)'
+      ctx.textAlign = 'right'
+      ctx.fillText(`Vastu Compass · ${Math.round(normDeg(rotation))}° · karrcholai.com`, SIZE - 16, SIZE - 12)
+
+      // 4. Trigger download
+      const link    = document.createElement('a')
+      link.download = `vastu-floorplan-${Math.round(normDeg(rotation))}deg.png`
+      link.href     = canvas.toDataURL('image/png')
+      link.click()
+    } catch (err) {
+      console.error('Download failed:', err)
+      alert('Download failed. Please try again.')
+    }
+    setDownloading(false)
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style={{ background: 'rgba(0,0,0,0.82)', backdropFilter: 'blur(8px)' }}
+      onClick={onClose}
+    >
+      <motion.div
+        initial={prefersReduced ? {} : { scale: 0.88, opacity: 0, y: 24 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={prefersReduced ? {} : { scale: 0.88, opacity: 0, y: 24 }}
+        transition={{ type: 'spring', stiffness: 280, damping: 30 }}
+        className="relative bg-white rounded-3xl shadow-2xl flex flex-col"
+        style={{ width: 'min(94vw, 700px)', maxHeight: '95vh' }}
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 pt-4 pb-3 shrink-0 border-b border-stone-100">
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-widest text-stone-400">Floor Plan Overlay</p>
+            <p className="text-sm font-black text-stone-800">Drag compass · then download</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleDownload}
+              disabled={downloading}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 disabled:bg-amber-300 text-white text-[11px] font-black transition-colors shadow"
+              aria-label="Download floor plan with compass overlay"
+            >
+              <FiDownload size={13} />
+              {downloading ? 'Saving…' : 'Download'}
+            </button>
+            <button onClick={onReplace}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-600 text-[11px] font-black transition-colors"
+              aria-label="Replace image"
+            >
+              <FiUpload size={12} /> Replace
+            </button>
+            <button onClick={onClose}
+              className="w-9 h-9 rounded-2xl bg-stone-100 hover:bg-stone-200 flex items-center justify-center transition-colors"
+              aria-label="Close"
+            >
+              <FiX size={16} className="text-stone-600" />
+            </button>
+          </div>
+        </div>
+
+        {/* Compass + image */}
+        <div ref={containerRef} className="relative flex-1 overflow-hidden rounded-b-3xl bg-stone-50 min-h-0">
+          <img
+            src={imgSrc}
+            alt="Floor plan"
+            className="w-full h-full object-contain"
+            style={{ maxHeight: 'calc(95vh - 120px)' }}
+          />
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-3/4 h-3/4" style={{ pointerEvents: 'auto' }}>
+              <CompassDial rotation={rotation} onRotate={onRotate} />
+            </div>
+          </div>
+        </div>
+
+        {/* Degree + slider footer */}
+        <div className="px-5 py-3 shrink-0 border-t border-stone-100 flex items-center gap-4">
+          <EditableDegree rotation={rotation} onRotate={onRotate} size="md" />
+          <input type="range" min="0" max="359" step="1"
+            value={Math.round(normDeg(rotation))}
+            onChange={e => onRotate(Number(e.target.value))}
+            className="flex-1 accent-amber-500 cursor-pointer h-2 rounded-full"
+            aria-label="Compass rotation in degrees"
+          />
+          <span className="text-[9px] text-stone-300 font-mono whitespace-nowrap">0° – 359°</span>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 // ─── Floor Plan Overlay ───────────────────────────────────────────────────────
 function FloorPlanOverlay({ rotation, onRotate }) {
-  const [imgSrc, setImgSrc] = useState(null)
+  const [imgSrc,       setImgSrc]       = useState(null)
   const [draggingFile, setDraggingFile] = useState(false)
+  const [zoomOpen,     setZoomOpen]     = useState(false)
   const fileRef = useRef(null)
 
   const handleFile = (file) => {
@@ -367,16 +544,30 @@ function FloorPlanOverlay({ rotation, onRotate }) {
   const removeImage = () => {
     if (imgSrc) URL.revokeObjectURL(imgSrc)
     setImgSrc(null)
+    setZoomOpen(false)
   }
 
   return (
-    <div className="relative w-full aspect-square rounded-3xl overflow-hidden border-2 border-dashed border-stone-300 bg-stone-50">
+    <>
+      <AnimatePresence>
+        {zoomOpen && imgSrc && (
+          <FloorPlanModal
+            imgSrc={imgSrc}
+            rotation={rotation}
+            onRotate={onRotate}
+            onClose={() => setZoomOpen(false)}
+            onReplace={() => { setZoomOpen(false); setTimeout(() => fileRef.current?.click(), 100) }}
+          />
+        )}
+      </AnimatePresence>
+
       <input ref={fileRef} type="file" accept="image/*" className="hidden"
         onChange={e => { handleFile(e.target.files[0]); e.target.value = '' }}
       />
+
       {!imgSrc && (
         <div
-          className={`absolute inset-0 flex flex-col items-center justify-center gap-3 transition-colors ${draggingFile ? 'bg-amber-50' : 'bg-stone-50'}`}
+          className={`relative w-full aspect-square rounded-3xl overflow-hidden border-2 border-dashed border-stone-300 flex flex-col items-center justify-center gap-3 transition-colors ${draggingFile ? 'bg-amber-50 border-amber-300' : 'bg-stone-50'}`}
           onDragOver={e => { e.preventDefault(); setDraggingFile(true) }}
           onDragLeave={() => setDraggingFile(false)}
           onDrop={onDrop}
@@ -393,15 +584,36 @@ function FloorPlanOverlay({ rotation, onRotate }) {
           </button>
         </div>
       )}
+
       {imgSrc && (
-        <>
+        <div
+          className="relative w-full aspect-square rounded-3xl overflow-hidden border-2 border-stone-200 bg-stone-50 cursor-zoom-in group"
+          onClick={() => setZoomOpen(true)}
+          title="Click to expand and download"
+        >
           <img src={imgSrc} alt="Uploaded floor plan" className="absolute inset-0 w-full h-full object-contain" />
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="w-3/4 h-3/4 opacity-75">
               <CompassDial rotation={rotation} onRotate={onRotate} />
             </div>
           </div>
-          <div className="absolute top-3 right-3 flex gap-2 z-10">
+
+          {/* Hover hint */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="bg-black/55 text-white rounded-2xl px-4 py-2.5 flex items-center gap-2 text-xs font-black shadow-xl backdrop-blur-sm">
+              <FiMaximize2 size={14} /> Click to expand &amp; download
+            </div>
+          </div>
+
+          {/* Corner buttons (stop propagation so they don't open zoom) */}
+          <div className="absolute top-3 right-3 flex gap-2 z-10" onClick={e => e.stopPropagation()}>
+            <button
+              onClick={() => setZoomOpen(true)}
+              className="w-8 h-8 rounded-xl bg-white/90 shadow border border-stone-200 flex items-center justify-center hover:bg-amber-50 hover:border-amber-300 transition-colors"
+              aria-label="Expand and download"
+            >
+              <FiMaximize2 size={12} className="text-stone-500" />
+            </button>
             <button onClick={removeImage}
               className="w-8 h-8 rounded-xl bg-white/90 shadow border border-stone-200 flex items-center justify-center hover:bg-red-50 hover:border-red-300 transition-colors"
               aria-label="Remove floor plan image"
@@ -415,9 +627,9 @@ function FloorPlanOverlay({ rotation, onRotate }) {
               <FiUpload size={12} className="text-stone-500" />
             </button>
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   )
 }
 
@@ -458,6 +670,83 @@ function useDeviceCompass(onHeading) {
   useEffect(() => () => window.removeEventListener('deviceorientation', handleOrientation, true), [handleOrientation])
 
   return { supported, active, error, requestPermission, stop }
+}
+
+// ─── Editable Degree Display ──────────────────────────────────────────────────
+function EditableDegree({ rotation, onRotate, size = 'lg' }) {
+  const [editing, setEditing] = useState(false)
+  const [inputVal, setInputVal] = useState('')
+  const inputRef = useRef(null)
+
+  const current = Math.round(normDeg(rotation))
+
+  const startEdit = () => {
+    setInputVal(String(current))
+    setEditing(true)
+  }
+
+  useEffect(() => {
+    if (editing && inputRef.current) {
+      inputRef.current.focus()
+      inputRef.current.select()
+    }
+  }, [editing])
+
+  const commit = () => {
+    const parsed = parseInt(inputVal, 10)
+    if (!isNaN(parsed)) {
+      onRotate(normDeg(parsed))
+    }
+    setEditing(false)
+  }
+
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter') commit()
+    else if (e.key === 'Escape') setEditing(false)
+    else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      const v = parseInt(inputVal || '0', 10)
+      setInputVal(String(normDeg(v + 1)))
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      const v = parseInt(inputVal || '0', 10)
+      setInputVal(String(normDeg(v - 1)))
+    }
+  }
+
+  const textSize = size === 'lg' ? 'text-3xl' : 'text-2xl'
+  const inputW   = size === 'lg' ? 'w-28' : 'w-24'
+
+  if (editing) {
+    return (
+      <span className="inline-flex items-center gap-1">
+        <input
+          ref={inputRef}
+          type="number"
+          min="0"
+          max="359"
+          value={inputVal}
+          onChange={e => setInputVal(e.target.value)}
+          onBlur={commit}
+          onKeyDown={onKeyDown}
+          className={`${inputW} ${textSize} font-mono font-black text-center text-stone-800 bg-amber-50 border-2 border-amber-400 rounded-xl outline-none focus:ring-2 focus:ring-amber-300 transition-all px-1`}
+          aria-label="Enter compass degree"
+        />
+        <span className={`${textSize} font-mono font-black text-stone-800`}>°</span>
+      </span>
+    )
+  }
+
+  return (
+    <button
+      onClick={startEdit}
+      className={`font-mono ${textSize} font-black text-stone-800 hover:text-amber-600 transition-colors cursor-text border-b-2 border-dashed border-transparent hover:border-amber-400 px-1 rounded`}
+      title="Click to type exact degrees"
+      aria-label={`Current rotation ${current} degrees. Click to edit.`}
+    >
+      {String(current).padStart(3, '0')}°
+    </button>
+  )
 }
 
 // ─── Main export ──────────────────────────────────────────────────────────────
@@ -522,12 +811,13 @@ export default function VastuCompass() {
               </div>
             </div>
 
-            <div className="mt-4 text-center">
-              <span className="font-mono text-2xl font-black text-stone-800">
-                {String(Math.round(normDeg(rotation))).padStart(3, '0')}°
-              </span>
-              <span className="text-xs text-stone-400 font-medium ml-2">rotation</span>
+            <div className="mt-4 text-center flex items-center justify-center gap-1.5">
+              <EditableDegree rotation={rotation} onRotate={setRotation} size="md" />
+              <span className="text-xs text-stone-400 font-medium">rotation</span>
             </div>
+            <p className="text-center text-[9px] text-stone-300 font-medium mt-1">
+              Click the degree to type an exact value · ↑↓ arrow keys to nudge
+            </p>
           </div>
 
           {/* Slider */}
