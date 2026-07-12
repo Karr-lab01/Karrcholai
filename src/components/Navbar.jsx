@@ -10,6 +10,7 @@ const manaiyadiDropdown = [
   { name: 'Dimension Calculator', path: '/manaiyadi/calculator',    desc: 'Check auspicious room dimensions' },
   { name: 'Dimension Guide',      path: '/manaiyadi/dimension-guide', desc: 'Reference tables & wall heights' },
   { name: 'Direction Compass',    path: '/vastu-compass',           desc: "Check your plot's Vastu alignment" },
+  { name: 'Cost Estimator',       path: '/cost-estimator',          desc: '₹ Instant construction cost estimate' },
 ]
 
 const navLinks = [

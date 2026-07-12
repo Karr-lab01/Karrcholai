@@ -1,10 +1,11 @@
 import { useState, lazy, Suspense, createContext } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop'
-import WhatsAppButton from './components/WhatsAppButton'
+import WhatsAppLeadBot from './components/WhatsAppLeadBot'
 import LogoVideoModal from './components/LogoVideoModal'
 import Preloader from './components/Preloader'
 import { usePageTracking } from './hooks/usePageTracking'
+import { Navigate } from 'react-router-dom'
 
 export const LogoVideoContext = createContext({ openLogoVideo: () => {} })
 
@@ -12,7 +13,6 @@ export const LogoVideoContext = createContext({ openLogoVideo: () => {} })
 import Home from './pages/Home'
 const AboutUs   = lazy(() => import('./pages/AboutUs'))
 const ContactUs = lazy(() => import('./pages/ContactUs'))
-const Services  = lazy(() => import('./pages/Services'))
 const Karr      = lazy(() => import('./pages/Karr'))
 const Projects  = lazy(() => import('./pages/Projects'))
 const Cholai    = lazy(() => import('./pages/Cholai'))
@@ -24,6 +24,7 @@ const ManaiyadiDimensionGuide = lazy(() => import('./pages/ManaiyadiDimensionGui
 const ManaiyadiIntroduction   = lazy(() => import('./pages/ManaiyadiIntroduction'))
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
 const VastuCompassPage = lazy(() => import('./pages/VastuCompassPage'))
+const CostEstimatorPage = lazy(() => import('./pages/CostEstimatorPage'))
 const NotFound   = lazy(() => import('./pages/NotFound'))
 
 // Minimal fallback while lazy page loads
@@ -55,7 +56,7 @@ const AppContent = ({ videoOpen, setVideoOpen }) => {
             <Route path="/"        element={<Home />} />
             <Route path="/about"   element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
-            <Route path="/services"element={<Services />} />
+            <Route path="/services" element={<Navigate to="/" replace />} />
             <Route path="/karr"    element={<Karr />} />
             <Route path="/projects"element={<Projects />} />
             <Route path="/cholai"  element={<Cholai />} />
@@ -67,11 +68,12 @@ const AppContent = ({ videoOpen, setVideoOpen }) => {
             <Route path="/manaiyadi/introduction"   element={<ManaiyadiIntroduction />} />
             <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/vastu-compass" element={<VastuCompassPage />} />
+            <Route path="/cost-estimator" element={<CostEstimatorPage />} />
             <Route path="*"        element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
-      <WhatsAppButton />
+      <WhatsAppLeadBot />
     </>
   )
 }

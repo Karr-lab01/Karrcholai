@@ -4,10 +4,10 @@ import WelcomeSection from '../components/WelcomeSection'
 import StatsSection from '../components/StatsSection'
 import KarrHomeSection from '../components/KarrHomeSection'
 import CholaiHomeSection from '../components/CholaiHomeSection'
-import ServicesSection from '../components/ServicesSection'
 import WhyChooseUs from '../components/WhyChooseUs'
 import HomeBlogSection from '../components/HomeBlogSection'
 import HomeManaiadiSection from '../components/HomeManaiadiSection'
+import HomeCostEstimatorSection from '../components/HomeCostEstimatorSection'
 import FootprintMapSection from '../components/FootprintMapSection'
 import HomeProjectsSection from '../components/HomeProjectsSection'
 import UnifiedFooter from '../components/UnifiedFooter'
@@ -39,11 +39,6 @@ const Home = () => {
  <WelcomeSection />
  </section>
 
- {/* ── Services ── */}
- <section id="services">
- <ServicesSection />
- </section>
-
  {/* ── Divisions ── */}
  <section id="divisions">
  <KarrHomeSection />
@@ -65,6 +60,11 @@ const Home = () => {
  {/* ── Manaiyadi Section ── */}
  <section id="manaiyadi">
  <HomeManaiadiSection />
+ </section>
+
+ {/* ── Cost Estimator ── */}
+ <section id="cost-estimator">
+ <HomeCostEstimatorSection />
  </section>
 
  {/* ── Blog / Insights ── */}

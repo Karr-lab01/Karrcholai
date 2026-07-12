@@ -9,7 +9,6 @@ import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 
 // Assets - using relative paths from src/pages/ to assets/
-import servicesVideo from '../../assets/Karcholai Construction Quality Showcase.mp4'
 import imgRes from '../../assets/Residential_construction.jpg'
 import imgPmc from '../../assets/Projectmanagemnt.png'
 import imgReno from '../../assets/img3.jpg'
@@ -19,13 +18,6 @@ import imgSuper from '../../assets/site.jpg'
 import { Helmet } from 'react-helmet-async'
 
 const Services = () => {
- const videoRef = useRef(null)
-
- useEffect(() => {
- if (videoRef.current) {
- videoRef.current.playbackRate = 0.6
- }
- }, [])
 
  const mainServices = [
  {
@@ -101,46 +93,8 @@ const Services = () => {
  <Navbar />
 
  <main>
- {/* 1. HERO SECTION */}
- <section className="relative h-screen flex items-center justify-center bg-black overflow-hidden">
- <motion.div 
- initial={{ opacity: 0 }}
- animate={{ opacity: 0.7 }}
- transition={{ duration: 2 }}
- className="absolute inset-0 z-0"
- >
- <video 
- ref={videoRef}
- autoPlay 
- loop 
- muted 
- playsInline 
- className="absolute inset-0 w-full h-full object-cover"
- >
- <source src={servicesVideo} type="video/mp4" />
- </video>
- </motion.div>
- <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-black/60"></div>
- 
- <div className="relative z-10 container mx-auto px-6 text-center">
- <motion.div
- initial={{ opacity: 0, y: 40 }}
- animate={{ opacity: 1, y: 0 }}
- transition={{ duration: 1, ease: "easeOut" }}
- >
- <h2 className="text-secondary font-black tracking-[0.5em] uppercase text-xs md:text-sm mb-6">Our Expertise</h2>
- <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.95] md:leading-none tracking-tighter mb-8 uppercase">
- Building <br /> <span className="text-transparent stroke-text">Excellence.</span>
- </h1>
- <p className="text-white/60 text-base md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
- We provide comprehensive support throughout the entire construction process, making it smooth, transparent, and stress-free.
- </p>
- </motion.div>
- </div>
- </section>
-
- {/* 2. SERVICES INTRO */}
- <section className="py-24 px-6 bg-[#fdfbf7]">
+ {/* SERVICES INTRO */}
+ <section className="pt-36 pb-16 px-6 bg-[#fdfbf7]">
  <div className="container mx-auto max-w-4xl text-center">
  <motion.div {...fadeInUp}>
  <h2 className="text-3xl md:text-5xl font-black text-dark mb-6 md:mb-8 leading-tight">
