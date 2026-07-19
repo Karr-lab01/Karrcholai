@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
 import Navbar from '../components/Navbar';
 import UnifiedFooter from '../components/UnifiedFooter';
-import { blogPosts, categories } from '../data/blogData';
+import { blogPosts, categories } from '../data/blogData.jsx';
 import { Helmet } from 'react-helmet-async';
 
 const Blog = () => {
@@ -78,26 +78,45 @@ const Blog = () => {
  transition={{ duration: 1 }}
  className="flex flex-col group cursor-pointer"
  >
- <Link to={`/blog/${post.id}`} className="block relative aspect-[4/5] overflow-hidden mb-8 border border-[#1a1a1a]/5">
+ <Link to={post.comicRoute || `/blog/${post.id}`} className="block relative aspect-[4/5] overflow-hidden mb-8 border border-[#1a1a1a]/5">
+ {post.heroType === 'comic-cover' ? (
+ <div className="w-full h-full flex flex-col items-center justify-center relative"
+ style={{ background:'#0D0D0D', backgroundImage:'repeating-linear-gradient(45deg,rgba(255,255,255,0.04) 0,rgba(255,255,255,0.04) 1px,transparent 0,transparent 50%)', backgroundSize:'10px 10px' }}>
+ {/* Speed lines */}
+ <div style={{ position:'absolute', inset:0, overflow:'hidden' }}>
+   {[...Array(8)].map((_,i) => <div key={i} style={{ position:'absolute', left:'50%', top:'50%', width:1, height:'200%', background:'rgba(212,98,42,0.08)', transform:`rotate(${i*22.5}deg)`, transformOrigin:'0 0' }}/>)}
+ </div>
+ <div style={{ position:'relative', zIndex:1, textAlign:'center', padding:'0 16px' }}>
+   <div style={{ fontSize:10, fontWeight:900, color:'#D4622A', letterSpacing:'0.5em', textTransform:'uppercase', marginBottom:10 }}>✦ Comic Story ✦</div>
+   <div style={{ fontSize:32, fontWeight:900, color:'#fff', textShadow:'3px 3px 0 #D4622A', lineHeight:1.1, marginBottom:12 }}>ARUN'S<br/>DREAM<br/>HOME</div>
+   <div style={{ display:'flex', justifyContent:'center', gap:3, marginBottom:10 }}>{['⭐','⭐','⭐','⭐','⭐'].map((s,i)=><span key={i} style={{fontSize:14}}>{s}</span>)}</div>
+   <span style={{ fontSize:9, fontWeight:900, letterSpacing:'0.3em', textTransform:'uppercase', color:'#F5C518', border:'1.5px solid rgba(245,197,24,0.4)', padding:'3px 12px', borderRadius:20, background:'rgba(245,197,24,0.1)' }}>Read the Comic →</span>
+ </div>
+ <div className="absolute inset-0 group-hover:bg-white/5 transition-all" />
+ </div>
+ ) : (
+ <>
  <img 
  src={post.image} 
  alt={post.title} 
  className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" 
  />
  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.02] transition-all" />
+ </>
+ )}
  </Link>
  
  <div className="flex flex-col items-center text-center">
  <span className="text-[#B85C38] text-[9px] font-black tracking-[0.4em] uppercase mb-4">
  {post.category}
  </span>
- <Link to={`/blog/${post.id}`}>
+ <Link to={post.comicRoute || `/blog/${post.id}`}>
  <h3 className="text-xl md:text-2xl uppercase tracking-tight leading-tight mb-6 group-hover:opacity-60 transition-opacity">
  {post.title}
  </h3>
  </Link>
  <div className="w-8 h-[1px] bg-[#1a1a1a]/10 mb-6" />
- <Link to={`/blog/${post.id}`} className="text-[10px] font-black tracking-[0.4em] uppercase text-[#1a1a1a]/30 hover:text-[#1a1a1a] transition-all">
+ <Link to={post.comicRoute || `/blog/${post.id}`} className="text-[10px] font-black tracking-[0.4em] uppercase text-[#1a1a1a]/30 hover:text-[#1a1a1a] transition-all">
  Read Article
  </Link>
  </div>

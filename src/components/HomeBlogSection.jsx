@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiArrowRight } from 'react-icons/fi';
-import { blogPosts } from '../data/blogData';
+import { blogPosts } from '../data/blogData.jsx';
 
 const HomeBlogSection = () => {
  // Show only 2 blogs as requested
