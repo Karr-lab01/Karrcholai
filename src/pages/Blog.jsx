@@ -79,14 +79,25 @@ const Blog = () => {
  className="flex flex-col group cursor-pointer"
  >
  <Link to={`/blog/${post.id}`} className="block relative aspect-[4/5] overflow-hidden mb-8 border border-[#1a1a1a]/5">
- {post.heroType === 'comic-cover' ? (
+ {(post.heroType === 'comic-cover' || post.heroType === 'whatsapp-story') ? (
  <div className="w-full h-full flex flex-col items-center justify-center relative"
- style={{ background:'#1a1a1a', backgroundImage:'repeating-linear-gradient(45deg,rgba(255,255,255,0.04) 0,rgba(255,255,255,0.04) 1px,transparent 0,transparent 50%)', backgroundSize:'10px 10px' }}>
- <div style={{ fontSize:36, fontWeight:900, color:'#fff', textAlign:'center', textShadow:'3px 3px 0 #DB7F50', lineHeight:1.2, padding:'0 16px' }}>
- Arun's<br/>Dream<br/>Home
+ style={{ background:'#1A1A1A' }}>
+ {/* WhatsApp UI preview */}
+ <div style={{ width:'85%', background:'#2D4B37', borderRadius:8, padding:'10px 12px', marginBottom:8 }}>
+ <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:8 }}>
+ <span style={{ fontSize:20 }}>👷</span>
+ <div>
+ <p style={{ color:'#fff', fontSize:11, fontWeight:700, margin:0, lineHeight:1 }}>Karthik (Karrcholai)</p>
+ <p style={{ color:'rgba(255,255,255,0.5)', fontSize:9, margin:0 }}>Online</p>
  </div>
- <div style={{ marginTop:12, display:'flex', gap:3 }}>{['⭐','⭐','⭐','⭐','⭐'].map((s,i)=><span key={i} style={{fontSize:13}}>{s}</span>)}</div>
- <span style={{ marginTop:10, fontSize:9, fontWeight:900, letterSpacing:'0.3em', textTransform:'uppercase', color:'#DB7F50', border:'1.5px solid #DB7F50', padding:'3px 10px', borderRadius:20 }}>Comic Story</span>
+ </div>
+ {[{t:'We can start next Thursday 👍',c:'#DCF8C6'},{t:"That's great! What's the cost?",c:'#fff'},{t:'₹42L all-in. Fixed price. Contract 📋',c:'#DCF8C6'}].map((m,i)=>(
+ <div key={i} style={{ background:m.c, borderRadius:8, padding:'5px 9px', marginBottom:4, maxWidth:'80%', marginLeft:m.c==='#fff'?0:'auto', marginRight:m.c==='#DCF8C6'?0:'auto' }}>
+ <p style={{ fontSize:10, color:'#111', margin:0, lineHeight:1.3 }}>{m.t}</p>
+ </div>
+ ))}
+ </div>
+ <span style={{ fontSize:9, fontWeight:700, letterSpacing:'0.25em', textTransform:'uppercase', color:'#B85C38', border:'1px solid rgba(184,92,56,0.4)', padding:'3px 10px', borderRadius:12 }}>Real Client Story</span>
  <div className="absolute inset-0 group-hover:bg-white/5 transition-all" />
  </div>
  ) : (
