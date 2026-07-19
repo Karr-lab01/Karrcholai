@@ -25,7 +25,6 @@ const ManaiyadiIntroduction   = lazy(() => import('./pages/ManaiyadiIntroduction
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
 const VastuCompassPage = lazy(() => import('./pages/VastuCompassPage'))
 const CostEstimatorPage = lazy(() => import('./pages/CostEstimatorPage'))
-const ComicStory = lazy(() => import('./pages/ComicStory'))
 const NotFound   = lazy(() => import('./pages/NotFound'))
 
 // Minimal fallback while lazy page loads
@@ -70,7 +69,6 @@ const AppContent = ({ videoOpen, setVideoOpen }) => {
             <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/vastu-compass" element={<VastuCompassPage />} />
             <Route path="/cost-estimator" element={<CostEstimatorPage />} />
-            <Route path="/comic-story/aruns-dream-home" element={<ComicStory />} />
             <Route path="*"        element={<NotFound />} />
           </Routes>
         </Suspense>

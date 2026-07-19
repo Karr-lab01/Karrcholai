@@ -494,7 +494,6 @@ export const blogPosts = [
     date: 'July 2026',
     image: null,
     heroType: 'comic-cover',
-    comicRoute: '/comic-story/aruns-dream-home',
     author: 'Karrcholai Team',
     excerpt: 'From 10 years of renting to a Vastu-compliant dream home in 8 months — Arun Kumar\'s journey with Karrcholai, told in comic-book style.',
     gallery: [
