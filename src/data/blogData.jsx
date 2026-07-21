@@ -165,11 +165,11 @@ export const blogPosts = [
     category: 'Client Stories',
     date: 'November 2024',
     image: null,
-    heroType: 'whatsapp-story',
+    heroType: 'arun-story',
     author: 'Karrcholai Team',
     excerpt: "Follow Arun's 8-month journey — from the first site visit to moving day. Arun Kumar's 8-month journey building his family's dream home in Erode.",
     gallery: [
-      { type: 'whatsapp', story: arunWhatsAppStory },
+      { type: 'arun-story' },
     ],
   },
 ];

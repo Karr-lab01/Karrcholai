@@ -79,23 +79,19 @@ const Blog = () => {
  className="flex flex-col group cursor-pointer"
  >
  <Link to={`/blog/${post.id}`} className="block relative aspect-[4/5] overflow-hidden mb-8 border border-[#1a1a1a]/5">
- {(post.heroType === 'comic-cover' || post.heroType === 'whatsapp-story') ? (
+ {(post.heroType === 'comic-cover' || post.heroType === 'arun-story') ? (
  <div className="w-full h-full flex flex-col items-center justify-center relative"
  style={{ background:'#1A1A1A' }}>
- {/* WhatsApp UI preview */}
- <div style={{ width:'85%', background:'#2D4B37', borderRadius:8, padding:'10px 12px', marginBottom:8 }}>
- <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:8 }}>
- <span style={{ fontSize:20 }}>👷</span>
+ {/* Arun story preview */}
+ <div style={{ width:'85%', background:'#2D4B37', borderRadius:8, padding:'14px 16px', marginBottom:10 }}>
+ <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:10 }}>
+ <div style={{ width:32, height:32, borderRadius:'50%', background:'#3a5a8a', display:'flex', alignItems:'center', justifyContent:'center', fontSize:14, fontWeight:900, color:'#fff', flexShrink:0 }}>A</div>
  <div>
- <p style={{ color:'#fff', fontSize:11, fontWeight:700, margin:0, lineHeight:1 }}>Karthik (Karrcholai)</p>
- <p style={{ color:'rgba(255,255,255,0.5)', fontSize:9, margin:0 }}>Online</p>
+ <p style={{ color:'#fff', fontSize:11, fontWeight:700, margin:0, lineHeight:1 }}>Arun Kumar</p>
+ <p style={{ color:'rgba(255,255,255,0.5)', fontSize:9, margin:0 }}>Client · Erode</p>
  </div>
  </div>
- {[{t:'We can start next Thursday 👍',c:'#DCF8C6'},{t:"That's great! What's the cost?",c:'#fff'},{t:'₹42L all-in. Fixed price. Contract 📋',c:'#DCF8C6'}].map((m,i)=>(
- <div key={i} style={{ background:m.c, borderRadius:8, padding:'5px 9px', marginBottom:4, maxWidth:'80%', marginLeft:m.c==='#fff'?0:'auto', marginRight:m.c==='#DCF8C6'?0:'auto' }}>
- <p style={{ fontSize:10, color:'#111', margin:0, lineHeight:1.3 }}>{m.t}</p>
- </div>
- ))}
+ <p style={{ color:'rgba(255,255,255,0.7)', fontSize:10, margin:0, lineHeight:1.5, fontStyle:'italic' }}>"10 years of renting. One call. Eight months. And now every morning I wake up in a house that is completely ours."</p>
  </div>
  <span style={{ fontSize:9, fontWeight:700, letterSpacing:'0.25em', textTransform:'uppercase', color:'#B85C38', border:'1px solid rgba(184,92,56,0.4)', padding:'3px 10px', borderRadius:12 }}>Real Client Story</span>
  <div className="absolute inset-0 group-hover:bg-white/5 transition-all" />

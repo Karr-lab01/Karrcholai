@@ -23,18 +23,21 @@ import prj10 from '../../assets/prj10.jpeg'
 import prj9 from '../../assets/prj9.jpeg'
 import prj7 from '../../assets/prj7.jpeg'
 
-import prj25 from '../../assets/prj25.jpeg'
-import prj26 from '../../assets/prj26.jpeg'
-import pr2_1 from '../../assets/2-pr-1.jpeg'
-import pr2_2 from '../../assets/2-pr-2.jpeg'
-import pr2_3 from '../../assets/2-pr-3.jpeg'
-import pr2_4 from '../../assets/2-pr-4.jpeg'
-import pr2_5 from '../../assets/2-pr-5.jpeg'
-import pr2_6 from '../../assets/2-pr-6.jpeg'
-import pr2_7 from '../../assets/2-pr-7.jpeg'
-import pr2_8 from '../../assets/2-pr-8.jpeg'
-import pr2_9 from '../../assets/2-pr-9.jpeg'
-import pr2_10 from '../../assets/2-pr-10.jpeg'
+import kr_3d from '../../assets/Karur Residance/3D Exterior Model.jpeg'
+import kr_carportico from '../../assets/Karur Residance/Car Portico.jpeg'
+import kr_footing from '../../assets/Karur Residance/Footing.jpeg'
+import kr_brickwork from '../../assets/Karur Residance/Ground Floor Brick Work.jpeg'
+import kr_column from '../../assets/Karur Residance/Ground Floor Column.jpeg'
+import kr_roof from '../../assets/Karur Residance/Ground Floor Roof.jpeg'
+import kr_groundfloor from '../../assets/Karur Residance/Ground Floor.jpeg'
+import kr_kitchen from '../../assets/Karur Residance/Kitchen.jpeg'
+import kr_living from '../../assets/Karur Residance/Living.jpeg'
+import kr_maindoor from '../../assets/Karur Residance/Main Door.jpeg'
+import kr_masterbath from '../../assets/Karur Residance/Master Bath.jpeg'
+import kr_masterbedroom from '../../assets/Karur Residance/Master Bedroom.jpeg'
+import kr_plinthbeam from '../../assets/Karur Residance/Plinth beam.jpeg'
+import kr_pooja from '../../assets/Karur Residance/Pooja.jpeg'
+import kr_vasthupooja from '../../assets/Karur Residance/Vasthu Pooja.jpeg'
 import heroImg from '../../assets/img1.jpg'
 
 // Bright Luxury Color Palette
@@ -75,23 +78,26 @@ export default function Projects() {
  ]
 
  const p2Images = [
- prj25, prj26,
- pr2_1, pr2_2, pr2_3, pr2_4, pr2_5, pr2_6, pr2_7, pr2_8, pr2_9, pr2_10
+ kr_3d, kr_carportico, kr_footing, kr_brickwork, kr_column,
+ kr_roof, kr_groundfloor, kr_kitchen, kr_living, kr_maindoor,
+ kr_masterbath, kr_masterbedroom, kr_plinthbeam, kr_pooja, kr_vasthupooja
  ]
  const p2Captions = [
- "01 / Front Facade",
- "02 / Open Interior Spaces",
- "03 / Rainwater Harvesting Courtyard",
- "04 / Site Layout and Planning",
- "05 / Foundation Excavation",
- "06 / Column Reinforcement Placing",
- "07 / Grade Beam Concrete Pouring",
- "08 / Brick Masonry Wall Progress",
- "09 / Lintels and Sunshade Casting",
- "10 / Roof Slab Formwork Setup",
- "11 / Electric Conduit Laying",
- "12 / Internal Plastering Work",
- "13 / External Elevation Plastering"
+ "01 / 3D Exterior Model",
+ "02 / Car Portico",
+ "03 / Footing",
+ "04 / Ground Floor Brick Work",
+ "05 / Ground Floor Column",
+ "06 / Ground Floor Roof",
+ "07 / Ground Floor",
+ "08 / Kitchen",
+ "09 / Living",
+ "10 / Main Door",
+ "11 / Master Bath",
+ "12 / Master Bedroom",
+ "13 / Plinth Beam",
+ "14 / Pooja",
+ "15 / Vasthu Pooja"
  ]
 
  // Auto slideshow timers
@@ -499,9 +505,9 @@ export default function Projects() {
  <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
  
  {/* Left Panel: Symmetrical Image Gallery with Interactive Thumbnails (7/12 Width) */}
- <div className="lg:col-span-7 space-y-4 sm:space-y-5">
+ <div className="lg:col-span-7 flex flex-col justify-between self-stretch gap-5 sm:gap-6">
  {/* Primary Active Showcase Frame */}
- <div className="overflow-hidden rounded-2xl shadow-sm aspect-[16/10] group relative bg-stone-100 border border-dark/5">
+ <div className="overflow-hidden rounded-2xl sm:rounded-[28px] shadow-lg aspect-[16/10] group relative bg-stone-100 border border-dark/5 flex-1 flex items-stretch">
  <AnimatePresence mode="wait">
  <motion.img
  key={activeImgP2}
@@ -552,13 +558,13 @@ export default function Projects() {
  </div>
  </div>
 
- {/* Symmetrical Row of Interactive Thumbnails (Updated to grid-cols-7 with responsive touch swiping) */}
- <div className="flex overflow-x-auto lg:grid lg:grid-cols-7 gap-3 sm:gap-5 pb-2 lg:pb-0 hide-scrollbar snap-x">
+ {/* Symmetrical Row of Interactive Thumbnails */}
+ <div className="flex overflow-x-auto gap-3 flex-shrink-0 pb-2 hide-scrollbar snap-x">
  {p2Images.map((img, idx) => (
  <button
  key={idx}
  onClick={() => setActiveImgP2(idx)}
- className={`overflow-hidden rounded-xl shadow-sm aspect-[3/2] relative bg-stone-100 border transition-all duration-300 flex-shrink-0 w-24 sm:w-32 lg:w-auto snap-center ${
+ className={`overflow-hidden rounded-xl sm:rounded-2xl shadow-sm aspect-[4/3] relative bg-stone-100 border transition-all duration-300 flex-shrink-0 w-16 sm:w-20 snap-center ${
  activeImgP2 === idx ? 'border-[#2D4B37] scale-103 ring-2 ring-[#2D4B37]/20' : 'border-dark/5 opacity-70 hover:opacity-100'
  }`}
  >
