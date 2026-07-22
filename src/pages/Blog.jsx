@@ -21,9 +21,12 @@ const Blog = () => {
  return (
  <motion.div className="bg-white min-h-screen text-[#1a1a1a] font-sans selection:bg-[#B85C38] selection:text-white">
  <Helmet>
- <title>The Journal | Karrcholai Construction Blog</title>
- <meta name="description" content="Read engineering stories, construction insights, and building knowledge from Karrcholai — residential construction specialists in Tamil Nadu." />
- <link rel="canonical" href="https://karrcholai.com/blog" />
+ <title>The Journal | Construction Insights &amp; Stories | Karrcholai</title>
+ <meta name="description" content="Read engineering legends, construction tips, and real client stories from Karrcholai — residential construction specialists in Tamil Nadu." />
+ <link rel="canonical" href="https://karrcholai-sepia.vercel.app/blog" />
+ <meta property="og:title" content="The Journal | Construction Insights & Stories | Karrcholai" />
+ <meta property="og:description" content="Read engineering legends, construction tips, and real client stories from Karrcholai — residential construction specialists in Tamil Nadu." />
+ <meta property="og:url" content="https://karrcholai-sepia.vercel.app/blog" />
  </Helmet>
  <Navbar />
 

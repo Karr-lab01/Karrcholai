@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import Navbar from '../components/Navbar';
 import UnifiedFooter from '../components/UnifiedFooter';
 import { blogPosts } from '../data/blogData.jsx';
@@ -38,8 +39,23 @@ const BlogDetail = () => {
 
   const isArunStory = post.heroType === 'arun-story';
 
+  const pageTitle = isArunStory
+    ? `How Arun Built His Dream Home — A Client Story | Karrcholai`
+    : `${post.title} | Karrcholai Journal`
+  const pageDesc = post.excerpt || `Read this article from the Karrcholai construction journal — engineering insights, client stories and building knowledge from Tamil Nadu.`
+  const canonicalId = post.id
+
   return (
     <div style={{ background: CREAM, minHeight: '100vh', color: INK, fontFamily: 'Barlow, sans-serif', overflowX: 'hidden' }}>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDesc} />
+        <link rel="canonical" href={`https://karrcholai-sepia.vercel.app/blog/${canonicalId}`} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDesc} />
+        <meta property="og:url" content={`https://karrcholai-sepia.vercel.app/blog/${canonicalId}`} />
+        {post.image && <meta property="og:image" content={post.image} />}
+      </Helmet>
       <Navbar />
       <main>
 
@@ -122,7 +138,7 @@ const BlogDetail = () => {
                   <motion.div key={idx} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
                     viewport={{ once: true }} transition={{ duration: 0.8 }}
                     style={{ width: '100%', aspectRatio: '21/9', overflow: 'hidden' }}>
-                    <img src={item.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={item.image} alt="Karrcholai construction project photo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </motion.div>
                 );
                 if (item.type === 'double') return (
@@ -131,7 +147,7 @@ const BlogDetail = () => {
                     style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                     {item.images.map((img, i) => (
                       <div key={i} style={{ aspectRatio: '3/2', overflow: 'hidden' }}>
-                        <img src={img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <img src={img} alt={`Sir M. Visvesvaraya — engineering heritage photo ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       </div>
                     ))}
                   </motion.div>

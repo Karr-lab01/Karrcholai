@@ -80,7 +80,7 @@ const HomeManaiadiSection = () => {
  className="lg:col-span-5 relative"
  >
  <div className="relative aspect-[3/4] rounded-[3rem] overflow-hidden shadow-2xl group">
- <img src={vastuDetail} alt="Vastu Architecture" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+ <img src={vastuDetail} alt="Vastu architectural diagram showing proportion and structural balance" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
  <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/10 to-transparent" />
  <div className="absolute bottom-8 left-8">
  <p className="text-white/50 text-[9px] font-black tracking-widest uppercase mb-2">Visual Harmony</p>

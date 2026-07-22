@@ -54,7 +54,7 @@ const HomeProjectsSection = () => {
               <div className="aspect-[4/3] w-full">
                 <img
                   src={pr_1}
-                  alt="Featured Project"
+                  alt="Featured Karrcholai residential project — Tamil Nadu"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>

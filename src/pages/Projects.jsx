@@ -78,26 +78,26 @@ export default function Projects() {
  ]
 
  const p2Images = [
- kr_3d, kr_carportico, kr_footing, kr_brickwork, kr_column,
- kr_roof, kr_groundfloor, kr_kitchen, kr_living, kr_maindoor,
- kr_masterbath, kr_masterbedroom, kr_plinthbeam, kr_pooja, kr_vasthupooja
+ kr_3d, kr_vasthupooja, kr_footing, kr_plinthbeam, kr_groundfloor,
+ kr_column, kr_brickwork, kr_roof, kr_carportico, kr_living,
+ kr_kitchen, kr_masterbedroom, kr_masterbath, kr_pooja, kr_maindoor
  ]
  const p2Captions = [
  "01 / 3D Exterior Model",
- "02 / Car Portico",
+ "02 / Vasthu Pooja",
  "03 / Footing",
- "04 / Ground Floor Brick Work",
- "05 / Ground Floor Column",
- "06 / Ground Floor Roof",
- "07 / Ground Floor",
- "08 / Kitchen",
- "09 / Living",
- "10 / Main Door",
- "11 / Master Bath",
+ "04 / Plinth Beam",
+ "05 / Ground Floor",
+ "06 / Ground Floor Column",
+ "07 / Ground Floor Brick Work",
+ "08 / Ground Floor Roof",
+ "09 / Car Portico",
+ "10 / Living",
+ "11 / Kitchen",
  "12 / Master Bedroom",
- "13 / Plinth Beam",
+ "13 / Master Bath",
  "14 / Pooja",
- "15 / Vasthu Pooja"
+ "15 / Main Door"
  ]
 
  // Auto slideshow timers
@@ -133,11 +133,13 @@ export default function Projects() {
  return (
  <div ref={containerRef} className="min-h-screen overflow-x-hidden font-sans select-none" style={{ background: CREAM, color: BRONZE }}>
  <Helmet>
- <title>Our Projects | Karrcholai Construction</title>
- <meta name="description" content="Explore completed residential projects by Karrcholai — independent homes and villas across Tamil Nadu, built with structural integrity and disciplined execution." />
+ <title>Residential Construction Projects | Karrcholai Tamil Nadu</title>
+ <meta name="description" content="Explore completed residential projects by Karrcholai — ECR Chennai and Karur residences built with structural integrity, sustainable design, and disciplined execution." />
  <link rel="preconnect" href="https://fonts.googleapis.com" />
-
-        <link rel="canonical" href="https://karrcholai.com/projects" />
+ <link rel="canonical" href="https://karrcholai-sepia.vercel.app/projects" />
+ <meta property="og:title" content="Residential Construction Projects | Karrcholai Tamil Nadu" />
+ <meta property="og:description" content="Explore completed residential projects by Karrcholai — ECR Chennai and Karur residences built with structural integrity, sustainable design, and disciplined execution." />
+ <meta property="og:url" content="https://karrcholai-sepia.vercel.app/projects" />
  </Helmet>
 
  {/* Luxury Progress Scroll Bar */}
@@ -313,7 +315,7 @@ export default function Projects() {
  activeImgP1 === idx ? 'border-[#B85C38] scale-103 ring-2 ring-[#B85C38]/20' : 'border-dark/5 opacity-70 hover:opacity-100'
  }`}
  >
- <img src={img} alt={`Thumbnail ${idx}`} className="w-full h-full object-cover" />
+ <img src={img} alt={`ECR Residence construction stage ${idx + 1}`} className="w-full h-full object-cover" />
  </button>
  ))}
  </div>
@@ -568,7 +570,7 @@ export default function Projects() {
  activeImgP2 === idx ? 'border-[#2D4B37] scale-103 ring-2 ring-[#2D4B37]/20' : 'border-dark/5 opacity-70 hover:opacity-100'
  }`}
  >
- <img src={img} alt={`Thumbnail ${idx}`} className="w-full h-full object-cover" />
+ <img src={img} alt={`Karur Residence construction stage ${idx + 1}`} className="w-full h-full object-cover" />
  </button>
  ))}
  </div>

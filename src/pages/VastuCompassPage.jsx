@@ -9,12 +9,15 @@ const VastuCompassPage = () => {
   return (
     <div className="min-h-screen font-sans overflow-x-hidden" style={{ background: '#F5F2EC' }}>
       <Helmet>
-        <title>Vastu Bhagavan — Direction Compass | Karrcholai</title>
+        <title>Vastu Direction Compass | Karrcholai</title>
         <meta
           name="description"
-          content="Explore the sacred Vastu Purusha Mandala. Check if your home or plot follows Vastu Shastra principles with our interactive compass — room mapping, scoring, and Vedic remedies."
+          content="Interactive Vastu Purusha Mandala compass — map your rooms to compass directions, score your home's Vastu compliance, and get Vedic remedy suggestions. Free tool by Karrcholai."
         />
-        <link rel="canonical" href="https://karrcholai.com/vastu-compass" />
+        <link rel="canonical" href="https://karrcholai-sepia.vercel.app/vastu-compass" />
+        <meta property="og:title" content="Vastu Direction Compass | Karrcholai" />
+        <meta property="og:description" content="Interactive Vastu Purusha Mandala compass — map your rooms to compass directions, score your home's Vastu compliance, and get Vedic remedy suggestions. Free tool by Karrcholai." />
+        <meta property="og:url" content="https://karrcholai-sepia.vercel.app/vastu-compass" />
       </Helmet>
 
       <Navbar />

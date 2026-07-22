@@ -24,9 +24,12 @@ const Manaiyadi = () => {
  return (
  <div className="bg-[#fdfbf7] min-h-screen text-dark selection:bg-secondary selection:text-white font-sans overflow-x-hidden">
  <Helmet>
- <title>Manaiyadi Sastram Calculator | Karrcholai Construction</title>
- <meta name="description" content="Use our Manaiyadi Sastram calculator to find auspicious room and building dimensions. Karrcholai applies traditional Tamil architectural principles to modern residential construction." />
- <link rel="canonical" href="https://karrcholai.com/manaiyadi" />
+ <title>Manaiyadi Sastram | Tamil Architecture Dimensions | Karrcholai</title>
+ <meta name="description" content="Discover Manaiyadi Sastram — the traditional Tamil system for auspicious room dimensions and wall heights. Free calculator and reference tables for modern home construction." />
+ <link rel="canonical" href="https://karrcholai-sepia.vercel.app/manaiyadi" />
+ <meta property="og:title" content="Manaiyadi Sastram | Tamil Architecture Dimensions | Karrcholai" />
+ <meta property="og:description" content="Discover Manaiyadi Sastram — the traditional Tamil system for auspicious room dimensions and wall heights. Free calculator and reference tables for modern home construction." />
+ <meta property="og:url" content="https://karrcholai-sepia.vercel.app/manaiyadi" />
  </Helmet>
  <Navbar />
 
@@ -41,7 +44,7 @@ const Manaiyadi = () => {
  >
  <img 
  src={heroBg} 
- alt="Luxury Architecture" 
+ alt="Traditional Manaiyadi Sastram architectural principles — Tamil Nadu" 
  className="w-full h-full object-cover"
  />
  <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80"></div>
@@ -54,7 +57,7 @@ const Manaiyadi = () => {
  transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
  className="mt-16"
  >
- <h2 className="text-white font-black tracking-[0.5em] md:tracking-[0.8em] uppercase text-[10px] md:text-xs mb-6 md:mb-8">Traditional Tamil Architecture</h2>
+ <p className="text-white font-black tracking-[0.5em] md:tracking-[0.8em] uppercase text-[10px] md:text-xs mb-6 md:mb-8">Traditional Tamil Architecture</p>
  <h1 className="text-4xl md:text-7xl lg:text-8xl font-black text-white leading-[0.85] tracking-tighter mb-8 md:mb-12 uppercase mix-blend-difference whitespace-normal md:whitespace-nowrap">
  Manaiyadi <br className="md:hidden" /> <span className="text-transparent stroke-text-white">Sastram.</span>
  </h1>
@@ -121,7 +124,7 @@ const Manaiyadi = () => {
  {...fadeInUp}
  className="relative h-[300px] md:h-[400px] rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl group"
  >
- <img src={vastuDetail} alt="Vastu Architecture" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+ <img src={vastuDetail} alt="Vastu and Manaiyadi architectural detail showing proportion and balance" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
  <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent"></div>
  <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
  <p className="text-white font-black uppercase tracking-[0.3em] text-[9px] mb-2 opacity-60">Design Principle</p>

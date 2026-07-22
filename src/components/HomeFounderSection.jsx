@@ -26,7 +26,7 @@ const HomeFounderSection = () => {
                   whileInView={{ scale: 1 }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
                   src={founderImg} 
-                  alt="Founder" 
+                  alt="Saravanakumar B., founder of Karrcholai Construction" 
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/5 transition-opacity duration-700 group-hover:bg-black/10" />

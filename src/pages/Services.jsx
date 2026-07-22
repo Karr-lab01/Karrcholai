@@ -88,7 +88,7 @@ const Services = () => {
  <Helmet>
  <title>Our Services | Karrcholai Construction</title>
  <meta name="description" content="Karrcholai provides premium residential construction services in Tamil Nadu, including custom home building, renovation, landscape design, and architectural planning." />
- <link rel="canonical" href="https://karrcholai.com/services" />
+ <link rel="canonical" href="https://karrcholai-sepia.vercel.app/services" />
  </Helmet>
  <Navbar />
 

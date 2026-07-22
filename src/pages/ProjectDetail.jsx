@@ -1,6 +1,7 @@
 ﻿import React, { useEffect, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
+import { Helmet } from 'react-helmet-async'
 import { FiArrowLeft, FiMapPin, FiCalendar, FiMaximize, FiTag, FiClock, FiCheckCircle } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
@@ -57,6 +58,14 @@ const ProjectDetail = () => {
 
  return (
  <div ref={containerRef} className="bg-[#F5F2EC] min-h-screen text-[#1C1C1A] selection:bg-[#C9754A] selection:text-white font-sans overflow-x-hidden">
+ <Helmet>
+ <title>{project.title} | Project Detail | Karrcholai</title>
+ <meta name="description" content={`${project.description} — Karrcholai residential construction project in ${project.location}.`} />
+ <link rel="canonical" href={`https://karrcholai-sepia.vercel.app/projects/${project.id}`} />
+ <meta property="og:title" content={`${project.title} | Karrcholai`} />
+ <meta property="og:description" content={project.description} />
+ <meta property="og:url" content={`https://karrcholai-sepia.vercel.app/projects/${project.id}`} />
+ </Helmet>
  <Navbar />
 
  {/* Progress Bar */}
@@ -212,7 +221,7 @@ const ProjectDetail = () => {
  transition={{ delay: i * 0.2, duration: 0.8 }}
  className={`relative overflow-hidden rounded-[2rem] shadow-xl ${i === 0 ? 'md:col-span-2 md:row-span-2 aspect-video' : 'aspect-square'}`}
  >
- <img src={img} alt={`Gallery image ${i + 1}`} className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105" />
+ <img src={img} alt={`${project.title} — construction gallery image ${i + 1}`} className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105" />
  <div className="absolute inset-0 bg-black/10 hover:bg-transparent transition-colors duration-500" />
  </motion.div>
  ))}

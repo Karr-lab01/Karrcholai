@@ -9,12 +9,15 @@ const ManaiyadiCalculatorPage = () => {
  return (
  <div className="bg-[#fdfbf7] min-h-screen text-dark font-sans overflow-x-hidden">
  <Helmet>
- <title>Dimension Calculator | Manaiyadi Sastram | Karrcholai</title>
+ <title>Manaiyadi Dimension Calculator | Karrcholai</title>
  <meta
  name="description"
- content="Calculate auspicious room dimensions using the traditional Manaiyadi Sastram formula. Instantly check Ayam, Vyayam, Nakshatra, and more."
+ content="Free Manaiyadi Sastram dimension calculator — enter your room measurements and instantly check whether they are auspicious, neutral, or unfavourable for Tamil home construction."
  />
- <link rel="canonical" href="https://karrcholai.com/manaiyadi/calculator" />
+ <link rel="canonical" href="https://karrcholai-sepia.vercel.app/manaiyadi/calculator" />
+ <meta property="og:title" content="Manaiyadi Dimension Calculator | Karrcholai" />
+ <meta property="og:description" content="Free Manaiyadi Sastram dimension calculator — enter your room measurements and instantly check whether they are auspicious, neutral, or unfavourable for Tamil home construction." />
+ <meta property="og:url" content="https://karrcholai-sepia.vercel.app/manaiyadi/calculator" />
  </Helmet>
 
  <Navbar />

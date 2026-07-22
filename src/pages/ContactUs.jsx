@@ -142,9 +142,12 @@ export default function ContactUs() {
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ background: CREAM, color: DARK }}>
       <Helmet>
-        <title>Contact Us | Karrcholai Construction</title>
-        <meta name="description" content="Get in touch with Karrcholai Construction for premium residential projects in Tamil Nadu. Schedule a free consultation for your dream home." />
-        <link rel="canonical" href="https://karrcholai.com/contact" />
+        <title>Contact Us | Book a Free Consultation | Karrcholai</title>
+        <meta name="description" content="Contact Karrcholai Construction for premium residential projects in Tamil Nadu. Schedule a free consultation — Karur, Chennai, Coimbatore & beyond." />
+        <link rel="canonical" href="https://karrcholai-sepia.vercel.app/contact" />
+        <meta property="og:title" content="Contact Us | Book a Free Consultation | Karrcholai" />
+        <meta property="og:description" content="Contact Karrcholai Construction for premium residential projects in Tamil Nadu. Schedule a free consultation — Karur, Chennai, Coimbatore & beyond." />
+        <meta property="og:url" content="https://karrcholai-sepia.vercel.app/contact" />
       </Helmet>
 
       {/* ── Scroll progress bar ── */}
@@ -162,7 +165,7 @@ export default function ContactUs() {
         <motion.div className="absolute inset-0 z-0" style={{ y: heroY }}>
           <motion.img
             src={heroVid}
-            alt="Contact Us Background"
+            alt="Karrcholai Construction — luxury residential project exterior"
             className="absolute inset-0 w-full h-full object-cover object-center"
             initial={{ scale: 1.15, opacity: 0 }}
             animate={{ scale: 1.08, opacity: 1 }}
@@ -293,18 +296,18 @@ export default function ContactUs() {
             <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={introInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
-              <img src={contact3} alt="Karrcholai" className="w-full h-full object-cover" />
+              <img src={contact3} alt="Karrcholai completed residential project in Tamil Nadu" className="w-full h-full object-cover" />
               <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${FOREST}22, transparent)` }} />
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30, y: -20 }} animate={introInView ? { opacity: 1, x: 0, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.5 }}
               className="absolute -top-4 -right-4 sm:-right-8 w-36 sm:w-44 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-              <img src={contact4} alt="" className="w-full h-28 sm:h-36 object-cover" />
+              <img src={contact4} alt="Karrcholai residential construction detail" className="w-full h-28 sm:h-36 object-cover" />
             </motion.div>
             <motion.div initial={{ opacity: 0, x: -30, y: 20 }} animate={introInView ? { opacity: 1, x: 0, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.65 }}
               className="absolute -bottom-4 -left-4 sm:-left-8 w-40 sm:w-52 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-              <img src={contact5} alt="" className="w-full h-24 sm:h-32 object-cover" />
+              <img src={contact5} alt="Karrcholai premium construction Tamil Nadu" className="w-full h-24 sm:h-32 object-cover" />
               <div className="p-3" style={{ background: DARK }}>
                 <p className="text-[9px] font-black tracking-widest uppercase" style={{ color: TERRA }}>Tamil Nadu</p>
                 <p className="text-xs font-bold text-white">Premium Construction</p>

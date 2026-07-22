@@ -9,12 +9,15 @@ const ManaiyadiDimensionGuide = () => {
  return (
  <div className="bg-[#fdfbf7] min-h-screen text-dark font-sans overflow-x-hidden">
  <Helmet>
- <title>Dimension Guide & Wall Height | Manaiyadi Sastram | Karrcholai</title>
+ <title>Dimension Guide &amp; Wall Height | Manaiyadi Sastram | Karrcholai</title>
  <meta
  name="description"
- content="Explore the complete Manaiyadi Dimension Guide and Wall Height reference — favourable and unfavourable measurements for traditional Tamil home construction."
+ content="Complete Manaiyadi Sastram reference tables — favourable and unfavourable room dimensions and ceiling heights for traditional Tamil residential construction."
  />
- <link rel="canonical" href="https://karrcholai.com/manaiyadi/dimension-guide" />
+ <link rel="canonical" href="https://karrcholai-sepia.vercel.app/manaiyadi/dimension-guide" />
+ <meta property="og:title" content="Dimension Guide & Wall Height | Manaiyadi Sastram | Karrcholai" />
+ <meta property="og:description" content="Complete Manaiyadi Sastram reference tables — favourable and unfavourable room dimensions and ceiling heights for traditional Tamil residential construction." />
+ <meta property="og:url" content="https://karrcholai-sepia.vercel.app/manaiyadi/dimension-guide" />
  </Helmet>
 
  <Navbar />

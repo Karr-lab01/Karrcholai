@@ -118,9 +118,12 @@ const Cholai = () => {
  return (
  <div ref={containerRef} className="bg-[#fcfcf9] min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
  <Helmet>
- <title>Cholai | Sustainable Home Solutions in Tamil Nadu</title>
- <meta name="description" content="Cholai is the sustainability division of Karrcholai — landscape development, rainwater harvesting, solar energy, and waste management for residential properties." />
- <link rel="canonical" href="https://karrcholai.com/cholai" />
+ <title>Cholai | Landscape, Solar &amp; Sustainable Home Solutions | Karrcholai</title>
+ <meta name="description" content="Cholai is Karrcholai's sustainability division — landscape development, rainwater harvesting, solar energy, waste management, smart lighting & traditional flooring for homes in Tamil Nadu." />
+ <link rel="canonical" href="https://karrcholai-sepia.vercel.app/cholai" />
+ <meta property="og:title" content="Cholai | Landscape, Solar & Sustainable Home Solutions | Karrcholai" />
+ <meta property="og:description" content="Cholai is Karrcholai's sustainability division — landscape development, rainwater harvesting, solar energy, waste management, smart lighting & traditional flooring for homes in Tamil Nadu." />
+ <meta property="og:url" content="https://karrcholai-sepia.vercel.app/cholai" />
  </Helmet>
  <Navbar />
 
@@ -156,7 +159,7 @@ const Cholai = () => {
  animate={{ opacity: 1, y: 0 }}
  transition={{ duration: 1, ease: "easeOut" }}
  >
- <h2 className="text-secondary font-black tracking-[0.4em] uppercase text-[10px] md:text-sm mb-4 md:mb-6 block">Sustainable Living</h2>
+ <p className="text-secondary font-black tracking-[0.4em] uppercase text-[10px] md:text-sm mb-4 md:mb-6 block">Sustainable Living</p>
  <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-[0.95] mb-6 md:mb-8">
  CHOLAI <br className="md:hidden" /> <span className="text-transparent stroke-text">Solutions</span>
  </h1>

@@ -17,9 +17,12 @@ const Home = () => {
  return (
  <div className="font-sans text-dark min-h-screen overflow-x-hidden">
  <Helmet>
- <title>Karrcholai | Premium Residential Construction in Tamil Nadu</title>
- <meta name="description" content="Karrcholai is a premier residential construction company in Tamil Nadu. We specialise in custom home building, renovation, interior design, and sustainable building." />
- <link rel="canonical" href="https://karrcholai.com/" />
+ <title>Karrcholai | Premium Residential Construction &amp; Architecture</title>
+ <meta name="description" content="Karrcholai Construction & Architecture — residential building, renovation, landscaping, solar energy & rainwater harvesting in Tamil Nadu. Free Vastu compass & Manaiyadi Sastram tools." />
+ <link rel="canonical" href="https://karrcholai-sepia.vercel.app/" />
+ <meta property="og:title" content="Karrcholai | Premium Residential Construction & Architecture" />
+ <meta property="og:description" content="Full-service construction & architecture: Residential, PMC, Renovation, Landscape, Rainwater Harvesting, Solar Energy, Waste Management, Lighting & Flooring. Plus free Vastu tools & Manaiyadi Sastram calculator." />
+ <meta property="og:url" content="https://karrcholai-sepia.vercel.app/" />
  </Helmet>
  <Navbar />
 

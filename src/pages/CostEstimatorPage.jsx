@@ -10,10 +10,13 @@ export default function CostEstimatorPage() {
   return (
     <div className="bg-[#fdfbf7] min-h-screen text-dark overflow-x-hidden">
       <Helmet>
-        <title>House Construction Cost Estimator Tamil Nadu | Karrcholai</title>
+        <title>Construction Cost Estimator | Karrcholai</title>
         <meta name="description"
-          content="Free instant construction cost estimator for Tamil Nadu. Get a breakdown of residential construction costs by plot size, floors, finish quality and city — Karrcholai Construction." />
-        <link rel="canonical" href="https://karrcholai.com/cost-estimator" />
+          content="Free instant construction cost estimator for Tamil Nadu homes. Get a detailed ₹ estimate by plot size, floors, finish quality and city — 2025 rates. No sign-up required." />
+        <link rel="canonical" href="https://karrcholai-sepia.vercel.app/cost-estimator" />
+        <meta property="og:title" content="Construction Cost Estimator | Karrcholai" />
+        <meta property="og:description" content="Free instant construction cost estimator for Tamil Nadu homes. Get a detailed ₹ estimate by plot size, floors, finish quality and city — 2025 rates. No sign-up required." />
+        <meta property="og:url" content="https://karrcholai-sepia.vercel.app/cost-estimator" />
       </Helmet>
       <Navbar />
 

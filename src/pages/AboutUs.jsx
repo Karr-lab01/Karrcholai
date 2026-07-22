@@ -53,9 +53,12 @@ const AboutUs = () => {
  return (
  <div ref={containerRef} className="bg-cream min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
  <Helmet>
- <title>About Us | Karrcholai Construction</title>
- <meta name="description" content="Learn about Karrcholai Construction, a premier residential builder in Tamil Nadu. Led by Saravanakumar B., we focus on strength, sustainability, and peaceful living." />
- <link rel="canonical" href="https://karrcholai.com/about" />
+ <title>About Karrcholai | Our Story, Founder &amp; Philosophy</title>
+ <meta name="description" content="Meet Saravanakumar B., founder of Karrcholai Construction. 12+ years of residential construction in Tamil Nadu — built on strength, transparency, and sustainable living." />
+ <link rel="canonical" href="https://karrcholai-sepia.vercel.app/about" />
+ <meta property="og:title" content="About Karrcholai | Our Story, Founder & Philosophy" />
+ <meta property="og:description" content="Meet Saravanakumar B., founder of Karrcholai Construction. 12+ years of residential construction in Tamil Nadu — built on strength, transparency, and sustainable living." />
+ <meta property="og:url" content="https://karrcholai-sepia.vercel.app/about" />
  </Helmet>
  <Navbar />
 
@@ -79,7 +82,7 @@ const AboutUs = () => {
  animate={{ opacity: 1, y: 0 }}
  transition={{ duration: 1.2, ease: "easeOut" }}
  >
- <h2 className="text-secondary font-bold tracking-[0.4em] md:tracking-[0.6em] uppercase text-[10px] md:text-sm mb-4 md:mb-6 block">Building Excellence</h2>
+ <p className="text-secondary font-bold tracking-[0.4em] md:tracking-[0.6em] uppercase text-[10px] md:text-sm mb-4 md:mb-6 block">Building Excellence</p>
  <h1 className="text-5xl md:text-9xl font-black text-white uppercase tracking-tighter leading-tight md:leading-none mb-6 md:mb-8">
  ABOUT <span className="text-transparent stroke-text inline-block ml-2">US</span>
  </h1>
@@ -122,7 +125,7 @@ const AboutUs = () => {
  whileInView={{ scale: 1 }}
  transition={{ duration: 1.2, ease: "easeOut" }}
  src={founderImg}
- alt="Founder"
+ alt="Saravanakumar B., founder of Karrcholai Construction"
  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
  />
  <div className="absolute inset-0 bg-black/5 transition-opacity duration-700 group-hover:bg-black/10" />
@@ -236,7 +239,7 @@ const AboutUs = () => {
  whileInView={{ scale: 1 }}
  transition={{ duration: 1.2, ease: "easeOut" }}
  src={courtyardImg}
- alt="Courtyard Construction"
+ alt="Karrcholai completed home courtyard — quality residential construction"
  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
  />
  <div className="absolute inset-0 bg-black/5 transition-opacity duration-700 group-hover:bg-black/10" />

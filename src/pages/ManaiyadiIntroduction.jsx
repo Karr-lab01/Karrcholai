@@ -22,9 +22,12 @@ const ManaiyadiIntroduction = () => {
  <title>Introduction to Manaiyadi Sastram | Karrcholai Construction</title>
  <meta
  name="description"
- content="A complete introduction to Manaiyadi Sastram â€” the traditional Tamil architectural practice. Learn about dimensions, wall heights, yoga unions, and room archetypes."
+ content="A complete introduction to Manaiyadi Sastram — the traditional Tamil architectural practice. Learn about auspicious dimensions, wall heights, yoga unions, and room archetypes for modern home planning."
  />
- <link rel="canonical" href="https://karrcholai.com/manaiyadi/introduction" />
+ <link rel="canonical" href="https://karrcholai-sepia.vercel.app/manaiyadi/introduction" />
+ <meta property="og:title" content="Introduction to Manaiyadi Sastram | Karrcholai Construction" />
+ <meta property="og:description" content="A complete introduction to Manaiyadi Sastram — the traditional Tamil architectural practice. Learn about auspicious dimensions, wall heights, yoga unions, and room archetypes for modern home planning." />
+ <meta property="og:url" content="https://karrcholai-sepia.vercel.app/manaiyadi/introduction" />
  </Helmet>
 
  <Navbar />
@@ -38,7 +41,7 @@ const ManaiyadiIntroduction = () => {
  transition={{ duration: 2, ease: 'easeOut' }}
  className="absolute inset-0 z-0"
  >
- <img src={heroBg} alt="Manaiyadi Sastram" className="w-full h-full object-cover" />
+ <img src={heroBg} alt="Traditional Tamil home design — Manaiyadi Sastram hero image" className="w-full h-full object-cover" />
  <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80"></div>
  </motion.div>
 
@@ -49,9 +52,9 @@ const ManaiyadiIntroduction = () => {
  transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
  className="mt-16"
  >
- <h2 className="text-white font-black tracking-[0.5em] md:tracking-[0.8em] uppercase text-[10px] md:text-xs mb-6 md:mb-8">
+ <p className="text-white font-black tracking-[0.5em] md:tracking-[0.8em] uppercase text-[10px] md:text-xs mb-6 md:mb-8">
  Traditional Tamil Architecture
- </h2>
+ </p>
  <h1 className="text-4xl md:text-7xl lg:text-8xl font-black text-white leading-[0.85] tracking-tighter mb-8 md:mb-12 uppercase whitespace-normal md:whitespace-nowrap">
  Manaiyadi <br className="md:hidden" />{' '}
  <span className="text-transparent stroke-text-white">Sastram.</span>
@@ -127,7 +130,7 @@ const ManaiyadiIntroduction = () => {
  >
  <img
  src={vastuDetail}
- alt="Vastu Architecture"
+ alt="Vastu and Manaiyadi architectural detail showing proportion and balance"
  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
  />
  <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent"></div>

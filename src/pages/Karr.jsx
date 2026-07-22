@@ -81,9 +81,12 @@ const Karr = () => {
  return (
  <div ref={containerRef} className="bg-[#fdfbf7] min-h-screen text-[#1a1a1a] selection:bg-[#B85C38] selection:text-white overflow-x-hidden font-sans">
  <Helmet>
- <title>Karr | Residential Construction & Project Management</title>
- <meta name="description" content="Karr is the construction division of Karrcholai — residential building, renovation, project management, and cost estimation across Tamil Nadu." />
- <link rel="canonical" href="https://karrcholai.com/karr" />
+ <title>Karr | Residential Construction &amp; Project Management | Karrcholai</title>
+ <meta name="description" content="Karr is Karrcholai's construction division — turnkey residential building, structural work, renovation, PMC, and cost estimation across Tamil Nadu." />
+ <link rel="canonical" href="https://karrcholai-sepia.vercel.app/karr" />
+ <meta property="og:title" content="Karr | Residential Construction & Project Management | Karrcholai" />
+ <meta property="og:description" content="Karr is Karrcholai's construction division — turnkey residential building, structural work, renovation, PMC, and cost estimation across Tamil Nadu." />
+ <meta property="og:url" content="https://karrcholai-sepia.vercel.app/karr" />
  </Helmet>
  <Navbar />
 
@@ -263,7 +266,7 @@ const Karr = () => {
  whileHover={{ scale: 1.05 }}
  transition={{ duration: 0.6 }}
  src={kar2} 
- alt="Renovation" 
+ alt="Karrcholai renovation and remodelling project" 
  className="w-full h-full object-cover" 
  />
  <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/40 to-transparent" />
