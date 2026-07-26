@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import UnifiedFooter from '../components/UnifiedFooter';
 import { blogPosts } from '../data/blogData.jsx';
 import ComicSection from '../components/ComicSection.jsx';
+import FirstStoneSection from '../components/FirstStoneSection.jsx';
 
 /* Site palette */
 const FOREST  = '#2D4B37';
@@ -37,10 +38,13 @@ const BlogDetail = () => {
     </div>
   );
 
-  const isArunStory = post.heroType === 'arun-story';
+  const isArunStory    = post.heroType === 'arun-story';
+  const isFirstStone   = post.heroType === 'first-stone';
 
   const pageTitle = isArunStory
     ? `How Arun Built His Dream Home — A Client Story | Karrcholai`
+    : isFirstStone
+    ? `The First Stone — Professional Plan Analysis | Karrcholai`
     : `${post.title} | Karrcholai Journal`
   const pageDesc = post.excerpt || `Read this article from the Karrcholai construction journal — engineering insights, client stories and building knowledge from Tamil Nadu.`
   const canonicalId = post.id
@@ -104,6 +108,61 @@ const BlogDetail = () => {
           </div>
         )}
 
+        {/* ── First Stone hero ── */}
+        {isFirstStone && (
+          <div ref={heroRef} style={{ background: '#0f1a0f', position: 'relative', overflow: 'hidden',
+            borderBottom: `3px solid ${TERRA}` }}>
+            <div style={{ position: 'absolute', inset: 0, opacity: 0.06,
+              backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(255,255,255,0.04) 30px, rgba(255,255,255,0.04) 31px),
+                                repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(255,255,255,0.04) 30px, rgba(255,255,255,0.04) 31px)`,
+              pointerEvents: 'none' }} />
+            <motion.div style={{ y: heroY, opacity: heroOp, position: 'relative', zIndex: 1,
+              padding: 'clamp(60px,10vw,100px) 24px clamp(36px,6vw,56px)', textAlign: 'center' }}>
+              {/* Chapter badge */}
+              <motion.div
+                initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+                <div style={{ height: 1, width: 32, background: `${TERRA}60` }} />
+                <span style={{
+                  fontSize: 9, fontWeight: 900, letterSpacing: '0.5em', textTransform: 'uppercase',
+                  color: TERRA, background: `${TERRA}18`, border: `1px solid ${TERRA}40`,
+                  borderRadius: 20, padding: '5px 14px'
+                }}>Chapter 1</span>
+                <div style={{ height: 1, width: 32, background: `${TERRA}60` }} />
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 }}
+                style={{ color: 'rgba(255,255,255,0.35)', fontSize: 10, fontWeight: 900, letterSpacing: '0.55em',
+                  textTransform: 'uppercase', marginBottom: 14 }}>
+                Single Stone Stories · Karrcholai
+              </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.45, duration: 0.7 }}
+                style={{ color: '#fff', fontSize: 'clamp(2rem,7vw,4.5rem)', fontWeight: 900,
+                  lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 18px',
+                  maxWidth: 760, marginLeft: 'auto', marginRight: 'auto' }}>
+                The First Stone
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }}
+                style={{ color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(0.85rem,2vw,1.1rem)',
+                  fontWeight: 400, maxWidth: 520, marginLeft: 'auto', marginRight: 'auto',
+                  lineHeight: 1.7, marginBottom: 22 }}>
+                Is this 30′ × 65′ plan right for your family? A room-by-room review before the first column is cast.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
+                style={{ color: 'rgba(255,255,255,0.3)', fontSize: 11, fontWeight: 700,
+                  letterSpacing: '0.3em', textTransform: 'uppercase' }}>
+                2 BHK · Ground Floor · 30′ × 65′ Site
+              </motion.p>
+            </motion.div>
+          </div>
+        )}
+
         {/* ── Post header ── */}
         <div style={{ maxWidth: 720, margin: '0 auto', padding: '40px 24px 0', textAlign: 'center' }}>
           <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
@@ -111,7 +170,7 @@ const BlogDetail = () => {
               textTransform: 'uppercase', display: 'block', marginBottom: 14 }}>
             {post.category}
           </motion.span>
-          {!isArunStory && (
+          {!isArunStory && !isFirstStone && (
             <motion.h1 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               style={{ fontSize: 'clamp(1.8rem,5vw,3.5rem)', textTransform: 'uppercase',
@@ -119,7 +178,7 @@ const BlogDetail = () => {
               {post.title}
             </motion.h1>
           )}
-          {isArunStory && (
+          {(isArunStory || isFirstStone) && (
             <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
               style={{ fontSize: 15, color: 'rgba(0,0,0,0.5)', lineHeight: 1.7, maxWidth: 560,
                 margin: '0 auto 20px', fontWeight: 400 }}>
@@ -160,6 +219,9 @@ const BlogDetail = () => {
                 );
                 if (item.type === 'arun-story') return (
                   <div key={idx}><ComicSection /></div>
+                );
+                if (item.type === 'first-stone') return (
+                  <div key={idx}><FirstStoneSection /></div>
                 );
                 return null;
               })}

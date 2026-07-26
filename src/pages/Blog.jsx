@@ -82,10 +82,16 @@ const Blog = () => {
  className="flex flex-col group cursor-pointer"
  >
  <Link to={`/blog/${post.id}`} className="block relative aspect-[4/5] overflow-hidden mb-8 border border-[#1a1a1a]/5">
- {(post.heroType === 'comic-cover' || post.heroType === 'arun-story') ? (
+ {post.heroType === 'first-stone' ? (
+ <div className="w-full h-full flex flex-col items-center justify-center relative"
+ style={{ background: '#111' }}>
+ <p style={{ fontSize:9, fontWeight:900, letterSpacing:'0.45em', textTransform:'uppercase', color:'#B85C38', margin:'0 0 14px' }}>Single Stone Stories</p>
+ <p style={{ fontSize:'clamp(1.1rem,3.5vw,1.5rem)', fontWeight:900, color:'#fff', margin:0, letterSpacing:'-0.01em', textAlign:'center', padding:'0 16px' }}>The First Stone</p>
+ <div className="absolute inset-0 group-hover:bg-white/5 transition-all duration-500" />
+ </div>
+ ) : (post.heroType === 'comic-cover' || post.heroType === 'arun-story') ? (
  <div className="w-full h-full flex flex-col items-center justify-center relative"
  style={{ background:'#1A1A1A' }}>
- {/* Arun story preview */}
  <div style={{ width:'85%', background:'#2D4B37', borderRadius:8, padding:'14px 16px', marginBottom:10 }}>
  <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:10 }}>
  <div style={{ width:32, height:32, borderRadius:'50%', background:'#3a5a8a', display:'flex', alignItems:'center', justifyContent:'center', fontSize:14, fontWeight:900, color:'#fff', flexShrink:0 }}>A</div>

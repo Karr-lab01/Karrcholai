@@ -160,16 +160,16 @@ export const blogPosts = [
     ],
   },
   {
-    id: 602,
-    title: "How Arun Built His Dream Home — The Full Story",
-    category: 'Client Stories',
-    date: 'November 2024',
+    id: 603,
+    title: "The First Stone — Is This House Plan Right for My Family?",
+    category: 'Single Stone Stories',
+    date: 'July 2026',
     image: null,
-    heroType: 'arun-story',
+    heroType: 'first-stone',
     author: 'Karrcholai Team',
-    excerpt: "Follow Arun's 8-month journey — from the first site visit to moving day. Arun Kumar's 8-month journey building his family's dream home in Erode.",
+    excerpt: "A professional room-by-room analysis of a 30' × 65' proposed ground floor plan. Karrcholai walks through every space — what works, what needs review, and why a plan should fit the family, not just the plot.",
     gallery: [
-      { type: 'arun-story' },
+      { type: 'first-stone' },
     ],
   },
 ];
@@ -178,7 +178,7 @@ export const categories = [
   'All Insights',
   'Engineering Legends',
   'Construction Tips',
-  'Client Stories',
+  'Single Stone Stories',
   'Land and Plot Tips',
 ];
 
