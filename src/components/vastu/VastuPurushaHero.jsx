@@ -5,7 +5,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { motion, useReducedMotion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion'
-import animeVastuImg from '../../assets/anime-vastu.png'
+import animeVastuImg from '../../assets/vastu-anime.jpeg'
 
 // ── Sanskrit / Vedic rune characters that orbit ──────────────────────────────
 const RUNES = ['ॐ','᳚','ऐं','श्री','ह्रीं','क्लीं','ॐ','᳚','ऐं','᳚','ॐ','᳚']
@@ -142,36 +142,9 @@ function RuneOrbit({ radius, duration, runes, clockwise = true, color }) {
   )
 }
 
-// ── 3-D tilt card with mouse parallax ────────────────────────────────────────
+// ── 3-D tilt card — tilt disabled to prevent shaking on hover ────────────────
 function TiltCard({ children }) {
-  const ref = useRef(null)
-  const mx = useMotionValue(0)
-  const my = useMotionValue(0)
-  const sx = useSpring(mx, { stiffness: 120, damping: 22 })
-  const sy = useSpring(my, { stiffness: 120, damping: 22 })
-  const rotX = useTransform(sy, [-0.5, 0.5], ['12deg', '-12deg'])
-  const rotY = useTransform(sx, [-0.5, 0.5], ['-12deg', '12deg'])
-
-  const onMove = useCallback((e) => {
-    const el   = ref.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    mx.set(((e.clientX - rect.left) / rect.width)  - 0.5)
-    my.set(((e.clientY - rect.top)  / rect.height) - 0.5)
-  }, [mx, my])
-
-  const onLeave = useCallback(() => { mx.set(0); my.set(0) }, [mx, my])
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      style={{ rotateX: rotX, rotateY: rotY, transformStyle: 'preserve-3d', perspective: '900px' }}
-    >
-      {children}
-    </motion.div>
-  )
+  return <div>{children}</div>
 }
 
 // ── Glitch text effect component ─────────────────────────────────────────────
@@ -224,14 +197,122 @@ function AuraPulse() {
   )
 }
 
+// ── Tamil Vastu date labels that float around the image on hover/click ────────
+const VASTU_DATES = [
+  { ta: 'வாஸ்து',   en: 'Vastu',    angle:   0, color: '#F59E0B', delay: 0    },
+  { ta: 'அஷ்டமி',  en: 'Ashtami',  angle:  90, color: '#C9754A', delay: 0.1  },
+  { ta: 'நவமி',    en: 'Navami',   angle: 180, color: '#818CF8', delay: 0.2  },
+  { ta: 'பௌர்ணமி', en: 'Pournami', angle: 270, color: '#34D399', delay: 0.3  },
+]
+
+function VastuDateOrbit({ active }) {
+  // Fixed pixel offsets from image centre for each cardinal direction
+  // These are applied via absolute positioning on a full-overlay div
+  const positions = [
+    { top: '-72px',    left: '50%',    transform: 'translateX(-50%)' }, // top — centred
+    { top: '50%',      right: '-100px', transform: 'translateY(-50%)' }, // right
+    { bottom: '-72px', left: '50%',    transform: 'translateX(-50%)' }, // bottom — centred
+    { top: '50%',      left: '-100px', transform: 'translateY(-50%)' }, // left
+  ]
+
+  return (
+    <AnimatePresence>
+      {active && VASTU_DATES.map((item, i) => (
+        // Plain div handles absolute position + CSS transform (framer won't override it)
+        <div
+          key={item.en}
+          style={{
+            position: 'absolute',
+            ...positions[i],
+            pointerEvents: 'none',
+            zIndex: 30,
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
+            transition={{ duration: 0.45, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '4px',
+            }}
+          >
+          {/* Pill background */}
+          <motion.div
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: i * 0.4 }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '2px',
+              background: 'rgba(10, 8, 5, 0.82)',
+              border: `1.5px solid ${item.color}55`,
+              borderRadius: '12px',
+              padding: '8px 14px',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              boxShadow: `0 4px 20px rgba(0,0,0,0.5), 0 0 12px ${item.color}33`,
+            }}
+          >
+            {/* Dot */}
+            <motion.div
+              animate={{ scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.3, ease: 'easeInOut' }}
+              style={{
+                width: '6px', height: '6px', borderRadius: '50%',
+                background: item.color,
+                boxShadow: `0 0 10px ${item.color}`,
+              }}
+            />
+            {/* Tamil */}
+            <span style={{
+              fontSize: '14px',
+              fontFamily: '"Noto Sans Tamil", "Latha", serif',
+              fontWeight: 700,
+              color: item.color,
+              whiteSpace: 'nowrap',
+              lineHeight: 1.2,
+            }}>
+              {item.ta}
+            </span>
+            {/* English */}
+            <span style={{
+              fontSize: '8px',
+              fontWeight: 700,
+              letterSpacing: '0.15em',
+              color: 'rgba(255,255,255,0.5)',
+              whiteSpace: 'nowrap',
+              textTransform: 'uppercase',
+            }}>
+              {item.en}
+            </span>
+          </motion.div>
+          </motion.div>
+        </div>
+      ))}
+    </AnimatePresence>
+  )
+}
+
 // ── Vastu Bhagavan image panel ────────────────────────────────────────────────
 function VastuBhagavanPanel() {
   const [revealed, setRevealed] = useState(false)
+  const [active, setActive]     = useState(false)
+
   useEffect(() => { const t = setTimeout(() => setRevealed(true), 300); return () => clearTimeout(t) }, [])
 
   return (
     <TiltCard>
-      <div style={{ position: 'relative', width: '100%', maxWidth: '500px', margin: '0 auto' }}>
+      <div
+        style={{ position: 'relative', width: '100%', maxWidth: '440px', margin: '0 auto' }}
+        onMouseEnter={() => setActive(true)}
+        onMouseLeave={() => setActive(false)}
+        onClick={() => setActive(v => !v)}
+      >
 
         {/* Outer slow-spin halo */}
         <motion.div
@@ -261,54 +342,25 @@ function VastuBhagavanPanel() {
 
         {/* Main image container */}
         <div style={{
-          position: 'relative', borderRadius: '20px', overflow: 'hidden',
-          border: '1.5px solid rgba(201,117,74,0.5)',
-          boxShadow: '0 0 80px rgba(201,117,74,0.2), 0 0 160px rgba(79,70,229,0.1), inset 0 0 40px rgba(240,192,64,0.05)',
-          transformStyle: 'preserve-3d',
+          position: 'relative', borderRadius: '20px', overflow: 'visible',
         }}>
-          {/* Scanline overlay */}
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 10, pointerEvents: 'none',
-            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px)',
-          }} />
+          {/* Tamil vastu date labels — appear on hover / click */}
+          <VastuDateOrbit active={active} />
 
-          {/* Radial aura glow behind image */}
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: 'radial-gradient(ellipse at 50% 60%, rgba(240,192,64,0.22) 0%, rgba(201,117,74,0.1) 35%, transparent 70%)',
-            pointerEvents: 'none',
-          }} />
-
-          {/* The anime-vastu image */}
-          <AnimatePresence>
-            {revealed && (
-              <motion.img
-                src={animeVastuImg}
-                alt="Vastu Bhagavan — Vedic deity of sacred architecture"
-                initial={{ opacity: 0, filter: 'brightness(3) saturate(0) blur(12px)', scale: 1.08 }}
-                animate={{ opacity: 1, filter: 'brightness(1) saturate(1) blur(0px)', scale: 1 }}
-                transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  width: '100%', display: 'block', objectFit: 'cover',
-                  filter: 'drop-shadow(0 0 40px rgba(240,192,64,0.5)) drop-shadow(0 0 80px rgba(201,117,74,0.3))',
-                }}
-              />
-            )}
-          </AnimatePresence>
-
-          {/* Colour-shift gradient shimmer that sweeps across */}
-          <motion.div
-            style={{
-              position: 'absolute', inset: 0, pointerEvents: 'none',
-              background: 'linear-gradient(105deg, transparent 30%, rgba(240,192,64,0.12) 50%, transparent 70%)',
-            }}
-            animate={{ x: ['-100%', '200%'] }}
-            transition={{ duration: 3.5, repeat: Infinity, repeatDelay: 4, ease: 'easeInOut' }}
-          />
-
-          {/* Aura pulses */}
-          <div style={{ position: 'absolute', inset: '15%', borderRadius: '50%', pointerEvents: 'none' }}>
-            <AuraPulse />
+          {/* Image wrapper keeps overflow hidden for the image itself */}
+          <div style={{ borderRadius: '20px', overflow: 'hidden' }}>
+            <AnimatePresence>
+              {revealed && (
+                <motion.img
+                  src={animeVastuImg}
+                  alt="Vastu Bhagavan — Vedic deity of sacred architecture"
+                  initial={{ opacity: 0, scale: 1.08 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ width: '100%', display: 'block', objectFit: 'cover' }}
+                />
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Corner ornaments */}
@@ -324,17 +376,7 @@ function VastuBhagavanPanel() {
           ))}
         </div>
 
-        {/* Caption */}
-        <motion.p
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 1 }}
-          style={{
-            textAlign: 'center', marginTop: '14px',
-            fontSize: '8px', letterSpacing: '0.22em',
-            color: 'rgba(201,117,74,0.45)', fontFamily: 'Georgia,serif', fontWeight: 700,
-          }}
-        >
-          SREE VASTU BHAGWAN · VASTU PURUSHA MANDALA · 45 DEVATAS
-        </motion.p>
+
       </div>
     </TiltCard>
   )
