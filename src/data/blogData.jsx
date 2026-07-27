@@ -22,7 +22,7 @@ const conversation = [
 
   { type: 'client', text: "Hi, I got your number from Ravi. He said you built his cousin's house in Karur? I'm looking to build in Erode — 1800 sq.ft, 2 floors. Is that something you handle?", time: '10:14 AM', read: true },
 
-  { type: 'engineer', text: "Yes, that's exactly what we do at Karrcholai. Residential construction, full turnkey — foundation to handover. Ravi's cousin is our Karur project, completed last October ✅", time: '10:18 AM' },
+  { type: 'engineer', text: "Yes, that's exactly what we do at Karrcholai. Residential construction, full turnkey — foundation to handover. Ravi's cousin is our Karur project, completed last October ✅", time: '10:18 AM' }, 
 
   { type: 'engineer', text: "Happy to discuss your requirements. Can we do a free site visit this week? We come to the plot, assess, and give you a detailed estimate — same day, no cost, no obligation.", time: '10:19 AM' },
 

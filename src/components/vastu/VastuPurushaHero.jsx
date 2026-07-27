@@ -199,98 +199,94 @@ function AuraPulse() {
 
 // ── Tamil Vastu date labels that float around the image on hover/click ────────
 const VASTU_DATES = [
-  { ta: 'வாஸ்து',   en: 'Vastu',    angle:   0, color: '#F59E0B', delay: 0    },
-  { ta: 'அஷ்டமி',  en: 'Ashtami',  angle:  90, color: '#C9754A', delay: 0.1  },
-  { ta: 'நவமி',    en: 'Navami',   angle: 180, color: '#818CF8', delay: 0.2  },
-  { ta: 'பௌர்ணமி', en: 'Pournami', angle: 270, color: '#34D399', delay: 0.3  },
+  { ta: 'வாஸ்து',   en: 'Vastu',    color: '#F59E0B' },
+  { ta: 'அஷ்டமி',  en: 'Ashtami',  color: '#C9754A' },
+  { ta: 'நவமி',    en: 'Navami',   color: '#818CF8' },
+  { ta: 'பௌர்ணமி', en: 'Pournami', color: '#34D399' },
 ]
 
-function VastuDateOrbit({ active }) {
-  // Fixed pixel offsets from image centre for each cardinal direction
-  // These are applied via absolute positioning on a full-overlay div
-  const positions = [
-    { top: '-72px',    left: '50%',    transform: 'translateX(-50%)' }, // top — centred
-    { top: '50%',      right: '-100px', transform: 'translateY(-50%)' }, // right
-    { bottom: '-72px', left: '50%',    transform: 'translateX(-50%)' }, // bottom — centred
-    { top: '50%',      left: '-100px', transform: 'translateY(-50%)' }, // left
-  ]
+// CSS classes injected once for the pill positions — desktop only
+const PILL_CSS = `
+.vd-pill { position:absolute; pointer-events:none; z-index:30; display:flex; align-items:center; justify-content:center; }
+.vd-pill-top    { top:0;   left:50%; transform:translate(-50%,-110%); }
+.vd-pill-right  { top:50%; right:0;  transform:translate(110%,-50%);  }
+.vd-pill-bottom { bottom:0;left:50%; transform:translate(-50%,110%);  }
+.vd-pill-left   { top:50%; left:0;   transform:translate(-110%,-50%); }
 
+/* On mobile: smaller pill offset so pills sit tighter to the image */
+@media (max-width: 1023px) {
+  .vd-pill-top    { transform:translate(-50%,-105%); }
+  .vd-pill-right  { transform:translate(105%,-50%);  }
+  .vd-pill-bottom { transform:translate(-50%,105%);  }
+  .vd-pill-left   { transform:translate(-105%,-50%); }
+}
+`
+
+const PILL_CLASSES = ['vd-pill vd-pill-top','vd-pill vd-pill-right','vd-pill vd-pill-bottom','vd-pill vd-pill-left']
+
+if (typeof document !== 'undefined' && !document.getElementById('vd-pill-style')) {
+  const s = document.createElement('style')
+  s.id = 'vd-pill-style'
+  s.textContent = PILL_CSS
+  document.head.appendChild(s)
+}
+
+// Shared pill inner content — `small` prop renders compact mobile version
+function PillInner({ item, small }) {
+  return (
+    <div style={{
+      display: 'inline-flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: small ? '1px' : '2px',
+      background: 'rgba(6, 4, 1, 0.85)',
+      border: `1px solid ${item.color}50`,
+      borderRadius: small ? '6px' : '8px',
+      padding: small ? '3px 7px' : '5px 11px',
+      backdropFilter: 'blur(12px)',
+      WebkitBackdropFilter: 'blur(12px)',
+      boxShadow: `0 2px 12px rgba(0,0,0,0.6), 0 0 8px ${item.color}20`,
+      whiteSpace: 'nowrap',
+      lineHeight: 1,
+    }}>
+      <div style={{
+        width: small ? '3px' : '4px',
+        height: small ? '3px' : '4px',
+        borderRadius: '50%',
+        background: item.color,
+        boxShadow: `0 0 5px ${item.color}`,
+        marginBottom: '1px',
+      }} />
+      <span style={{
+        fontSize: small ? '9px' : '12px',
+        fontFamily: '"Noto Sans Tamil", "Latha", serif',
+        fontWeight: 700,
+        color: item.color,
+      }}>{item.ta}</span>
+      <span style={{
+        fontSize: small ? '6px' : '7px',
+        fontWeight: 700,
+        letterSpacing: '0.08em',
+        color: 'rgba(255,255,255,0.4)',
+        textTransform: 'uppercase',
+      }}>{item.en}</span>
+    </div>
+  )
+}
+
+// Desktop: floating pills around the image edges
+function VastuDateOrbit({ active, small }) {
   return (
     <AnimatePresence>
       {active && VASTU_DATES.map((item, i) => (
-        // Plain div handles absolute position + CSS transform (framer won't override it)
-        <div
-          key={item.en}
-          style={{
-            position: 'absolute',
-            ...positions[i],
-            pointerEvents: 'none',
-            zIndex: 30,
-          }}
-        >
+        <div key={item.en} className={PILL_CLASSES[i]}>
           <motion.div
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
-            transition={{ duration: 0.45, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '4px',
-            }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            transition={{ duration: 0.35, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
           >
-          {/* Pill background */}
-          <motion.div
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: i * 0.4 }}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '2px',
-              background: 'rgba(10, 8, 5, 0.82)',
-              border: `1.5px solid ${item.color}55`,
-              borderRadius: '12px',
-              padding: '8px 14px',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              boxShadow: `0 4px 20px rgba(0,0,0,0.5), 0 0 12px ${item.color}33`,
-            }}
-          >
-            {/* Dot */}
-            <motion.div
-              animate={{ scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.3, ease: 'easeInOut' }}
-              style={{
-                width: '6px', height: '6px', borderRadius: '50%',
-                background: item.color,
-                boxShadow: `0 0 10px ${item.color}`,
-              }}
-            />
-            {/* Tamil */}
-            <span style={{
-              fontSize: '14px',
-              fontFamily: '"Noto Sans Tamil", "Latha", serif',
-              fontWeight: 700,
-              color: item.color,
-              whiteSpace: 'nowrap',
-              lineHeight: 1.2,
-            }}>
-              {item.ta}
-            </span>
-            {/* English */}
-            <span style={{
-              fontSize: '8px',
-              fontWeight: 700,
-              letterSpacing: '0.15em',
-              color: 'rgba(255,255,255,0.5)',
-              whiteSpace: 'nowrap',
-              textTransform: 'uppercase',
-            }}>
-              {item.en}
-            </span>
-          </motion.div>
+            <PillInner item={item} small={small} />
           </motion.div>
         </div>
       ))}
@@ -302,18 +298,31 @@ function VastuDateOrbit({ active }) {
 function VastuBhagavanPanel() {
   const [revealed, setRevealed] = useState(false)
   const [active, setActive]     = useState(false)
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 1024 : false
+  )
 
-  useEffect(() => { const t = setTimeout(() => setRevealed(true), 300); return () => clearTimeout(t) }, [])
+  useEffect(() => {
+    const t = setTimeout(() => setRevealed(true), 300)
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    window.addEventListener('resize', check)
+    return () => { clearTimeout(t); window.removeEventListener('resize', check) }
+  }, [])
 
   return (
     <TiltCard>
+      {/*
+        px-12 on mobile = 48px per side — enough room for small pills,
+        while keeping the image noticeably larger than before.
+        lg:px-0 restores full width on desktop.
+      */}
       <div
+        className="px-16 lg:px-0"
         style={{ position: 'relative', width: '100%', maxWidth: '440px', margin: '0 auto' }}
         onMouseEnter={() => setActive(true)}
         onMouseLeave={() => setActive(false)}
         onClick={() => setActive(v => !v)}
       >
-
         {/* Outer slow-spin halo */}
         <motion.div
           animate={{ rotate: 360 }}
@@ -340,15 +349,14 @@ function VastuBhagavanPanel() {
           <RuneOrbit radius={52} duration={38} runes={RUNES.slice(6,12)} clockwise={false} color="rgba(130,100,220,0.5)" />
         </div>
 
-        {/* Main image container */}
-        <div style={{
-          position: 'relative', borderRadius: '20px', overflow: 'visible',
-        }}>
-          {/* Tamil vastu date labels — appear on hover / click */}
-          <VastuDateOrbit active={active} />
+        {/* Image container — overflow:visible so pills protrude outside */}
+        <div style={{ position: 'relative', borderRadius: '20px', overflow: 'visible' }}>
 
-          {/* Image wrapper keeps overflow hidden for the image itself */}
-          <div style={{ borderRadius: '20px', overflow: 'hidden' }}>
+          {/* Pills always visible — positioned around the image edges */}
+          <VastuDateOrbit active={active} small={isMobile} />
+
+          {/* Image */}
+          <div style={{ borderRadius: '20px', overflow: 'hidden', position: 'relative' }}>
             <AnimatePresence>
               {revealed && (
                 <motion.img
@@ -375,8 +383,6 @@ function VastuBhagavanPanel() {
             }} />
           ))}
         </div>
-
-
       </div>
     </TiltCard>
   )
@@ -402,7 +408,7 @@ export default function VastuPurushaHero() {
     <section style={{
       background: 'radial-gradient(ellipse at 50% 0%, #1C120A 0%, #0D0A06 55%, #080608 100%)',
       minHeight: '100vh', paddingTop: '80px',
-      position: 'relative', overflow: 'hidden',
+      position: 'relative', overflow: 'clip',
     }}>
       {/* Canvas particle field + sacred geometry */}
       {!prefersReduced && <SacredCanvas />}
@@ -601,7 +607,8 @@ export default function VastuPurushaHero() {
             initial={prefersReduced ? {} : { opacity: 0, scale: 0.85, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            className="py-12 lg:py-0"
+            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'visible' }}
           >
             <VastuBhagavanPanel />
           </motion.div>
