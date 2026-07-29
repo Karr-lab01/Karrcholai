@@ -1,14 +1,44 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
-import { FiCompass, FiAlertTriangle, FiCheckCircle } from 'react-icons/fi'
+import { FiCompass, FiAlertTriangle, FiCheckCircle, FiCalendar, FiClock, FiSun } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 
 import heroBg from '../assets/manaiyadi_hero.png'
 import vastuDetail from '../assets/vastu_detail.png'
 
+// ── AUSPICIOUS DATES DATA ──
+const auspiciousDates = [
+  { month: 'ஜனவரி',    tamil: 'January',   dates: [28] },
+  { month: 'பிப்ரவரி',  tamil: 'February',  dates: [6, 8, 13, 15, 16, 20] },
+  { month: 'மார்ச்',   tamil: 'March',      dates: [5, 6, 8, 15, 16, 25] },
+  { month: 'ஏப்ரல்',   tamil: 'April',      dates: [6, 12, 13, 16, 20, 23, 30] },
+  { month: 'மே',       tamil: 'May',        dates: [8, 13, 14, 18, 28, 29] },
+  { month: 'ஜூன்',     tamil: 'June',       dates: [4, 7, 17, 18, 24, 25] },
+  { month: 'ஜூலை',    tamil: 'July',       dates: [2, 5, 12] },
+  { month: 'ஆகஸ்ட்',  tamil: 'August',     dates: [23, 30, 31] },
+  { month: 'செப்டம்பர்', tamil: 'September', dates: [7, 13, 17] },
+  { month: 'அக்டோபர்', tamil: 'October',    dates: [25, 30] },
+  { month: 'நவம்பர்',  tamil: 'November',   dates: [1, 11, 13, 15, 16, 20, 29] },
+  { month: 'டிசம்பர்', tamil: 'December',   dates: [4, 6, 10, 13, 14] },
+]
+
+// ── VASTU CONSTRUCTION DAYS DATA ──
+const vastuDays = [
+  { tamilMonth: 'தை',    date: 12, weekday: 'திங்கள்', engDate: '26.01.26', time: '10.41 - 11.17' },
+  { tamilMonth: 'மாசி',  date: 22, weekday: 'வெள்ளி',  engDate: '06.03.26', time: '10.32 - 11.08' },
+  { tamilMonth: 'சித்திரை', date: 10, weekday: 'வியாழன்', engDate: '23.04.26', time: '8.54 - 9.30' },
+  { tamilMonth: 'வைகாசி', date: 21, weekday: 'வியாழன்', engDate: '04.06.26', time: '9.58 - 10.34' },
+  { tamilMonth: 'ஆடி',   date: 11, weekday: 'திங்கள்', engDate: '27.07.26', time: '7.44 - 8.20' },
+  { tamilMonth: 'ஆவணி',  date: 6,  weekday: 'ஞாயிறு', engDate: '23.08.26', time: '7.23 - 7.59' },
+  { tamilMonth: 'ஐப்பசி', date: 11, weekday: 'புதன்',  engDate: '28.10.26', time: '7.44 - 8.20' },
+  { tamilMonth: 'கார்த்தி', date: 8, weekday: 'செவ்வாய்', engDate: '24.11.26', time: '11.29 - 12.05' },
+]
+
 const ManaiyadiIntroduction = () => {
+  const [activeMonth, setActiveMonth] = useState(null)
+
  const fadeInUp = {
  initial: { opacity: 0, y: 60 },
  whileInView: { opacity: 1, y: 0 },
@@ -231,6 +261,124 @@ const ManaiyadiIntroduction = () => {
  </div>
  </div>
  </section>
+
+        {/* AUSPICIOUS MUHURTHA DAYS */}
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fffde7]">
+          <div className="mx-auto max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              {/* Title bar — yellow bg, blue border text */}
+              <div className="border-2 border-[#1565c0] bg-[#fff176] rounded-t-lg px-6 py-3 text-center mb-0">
+                <h2 className="text-xl md:text-2xl font-bold text-[#1565c0]">
+                  சுபமுகூர்த்த தினங்கள்
+                </h2>
+              </div>
+
+              {/* Table */}
+              <div className="border-2 border-[#1565c0] rounded-b-lg overflow-hidden">
+                <table className="w-full border-collapse bg-white">
+                  <tbody>
+                    {auspiciousDates.map((item, i) => (
+                      <tr key={i} className="border-b border-[#90caf9] last:border-b-0">
+                        {/* Tamil month name */}
+                        <td className="py-2.5 px-4 md:px-6 w-32 md:w-40 font-bold text-[#111] text-sm md:text-base border-r border-[#90caf9] bg-white">
+                          {item.month}
+                        </td>
+                        {/* Dates — alternating blue and pink */}
+                        <td className="py-2.5 px-4 md:px-6">
+                          <div className="flex flex-wrap gap-x-3 gap-y-1">
+                            {item.dates.map((d, j) => (
+                              <span
+                                key={j}
+                                className="text-sm md:text-base font-bold"
+                                style={{ color: j % 2 === 0 ? '#1565c0' : '#c2185b' }}
+                              >
+                                {d}
+                              </span>
+                            ))}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Footer note */}
+              <p className="mt-3 text-xs text-[#c2185b] font-semibold flex items-center gap-2">
+                <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#c2185b]"></span>
+                வளர்பிறை முகூர்த்தங்கள் &mdash; Waxing moon auspicious dates
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* VASTU CONSTRUCTION DAYS */}
+        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fffde7]">
+          <div className="mx-auto max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              {/* Title bar — cyan bg, dark text */}
+              <div className="bg-[#00bcd4] rounded-t-lg px-6 py-3 text-center mb-0">
+                <h2 className="text-xl md:text-2xl font-bold text-[#1a1a1a]">
+                  வாஸ்து செய்யும் நாட்கள்
+                </h2>
+              </div>
+
+              {/* Table */}
+              <div className="border-2 border-[#00bcd4] rounded-b-lg overflow-hidden">
+                <table className="w-full border-collapse bg-white text-sm md:text-base">
+                  {/* Header row */}
+                  <thead>
+                    <tr className="bg-white border-b-2 border-[#00bcd4]">
+                      <th className="py-2.5 px-3 md:px-5 text-left font-bold text-[#c2185b] border-r border-[#b2ebf2]">மாதம்</th>
+                      <th className="py-2.5 px-3 md:px-5 text-left font-bold text-[#c2185b] border-r border-[#b2ebf2]">தேதி</th>
+                      <th className="py-2.5 px-3 md:px-5 text-left font-bold text-[#c2185b] border-r border-[#b2ebf2]">கிழமை</th>
+                      <th className="py-2.5 px-3 md:px-5 text-left font-bold text-[#c2185b] border-r border-[#b2ebf2]">ஆ.தேதி</th>
+                      <th className="py-2.5 px-3 md:px-5 text-left font-bold text-[#c2185b]">நேரம் (காலை)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {vastuDays.map((row, i) => (
+                      <tr key={i} className="border-b border-[#b2ebf2] last:border-b-0">
+                        {/* Tamil month */}
+                        <td className="py-2.5 px-3 md:px-5 font-bold text-[#111] border-r border-[#b2ebf2]">
+                          {row.tamilMonth}
+                        </td>
+                        {/* Date — magenta/pink */}
+                        <td className="py-2.5 px-3 md:px-5 font-bold text-[#c2185b] border-r border-[#b2ebf2]">
+                          {row.date}
+                        </td>
+                        {/* Weekday — black */}
+                        <td className="py-2.5 px-3 md:px-5 font-bold text-[#111] border-r border-[#b2ebf2]">
+                          {row.weekday}
+                        </td>
+                        {/* Eng date — blue */}
+                        <td className="py-2.5 px-3 md:px-5 font-bold text-[#1565c0] border-r border-[#b2ebf2]">
+                          {row.engDate}
+                        </td>
+                        {/* Time — magenta */}
+                        <td className="py-2.5 px-3 md:px-5 font-bold text-[#c2185b]">
+                          {row.time}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+
 
  {/* â”€â”€ CTA â”€â”€ */}
  <section className="py-12 md:py-24 px-4 md:px-6 bg-white">
