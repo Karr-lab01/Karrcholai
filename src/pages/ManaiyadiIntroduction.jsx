@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async'
 import { FiCompass, FiAlertTriangle, FiCheckCircle, FiCalendar, FiClock, FiSun } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
+import VastuPurushaHero from '../components/vastu/VastuPurushaHero'
 
 import heroBg from '../assets/manaiyadi_hero.png'
 import vastuDetail from '../assets/vastu_detail.png'
@@ -263,122 +264,218 @@ const ManaiyadiIntroduction = () => {
  </section>
 
         {/* AUSPICIOUS MUHURTHA DAYS */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fffde7]">
-          <div className="mx-auto max-w-4xl">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              {/* Title bar — yellow bg, blue border text */}
-              <div className="border-2 border-[#1565c0] bg-[#fff176] rounded-t-lg px-6 py-3 text-center mb-0">
-                <h2 className="text-xl md:text-2xl font-bold text-[#1565c0]">
-                  சுபமுகூர்த்த தினங்கள்
+        <section className="py-24 md:py-40 px-6">
+          <div className="mx-auto max-w-7xl">
+
+            {/* Header */}
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-12 md:mb-16">
+              <div>
+                <h3 className="text-secondary font-black tracking-[0.5em] uppercase text-[10px] mb-4">Almanac 2026</h3>
+                <h2 className="text-4xl md:text-7xl font-black text-dark leading-[0.9] tracking-tighter uppercase">
+                  சுப முகூர்த்த <br />
+                  <span className="text-primary italic">தினங்கள்.</span>
                 </h2>
               </div>
-
-              {/* Table */}
-              <div className="border-2 border-[#1565c0] rounded-b-lg overflow-hidden">
-                <table className="w-full border-collapse bg-white">
-                  <tbody>
-                    {auspiciousDates.map((item, i) => (
-                      <tr key={i} className="border-b border-[#90caf9] last:border-b-0">
-                        {/* Tamil month name */}
-                        <td className="py-2.5 px-4 md:px-6 w-32 md:w-40 font-bold text-[#111] text-sm md:text-base border-r border-[#90caf9] bg-white">
-                          {item.month}
-                        </td>
-                        {/* Dates — alternating blue and pink */}
-                        <td className="py-2.5 px-4 md:px-6">
-                          <div className="flex flex-wrap gap-x-3 gap-y-1">
-                            {item.dates.map((d, j) => (
-                              <span
-                                key={j}
-                                className="text-sm md:text-base font-bold"
-                                style={{ color: j % 2 === 0 ? '#1565c0' : '#c2185b' }}
-                              >
-                                {d}
-                              </span>
-                            ))}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Footer note */}
-              <p className="mt-3 text-xs text-[#c2185b] font-semibold flex items-center gap-2">
-                <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#c2185b]"></span>
-                வளர்பிறை முகூர்த்தங்கள் &mdash; Waxing moon auspicious dates
+              <p className="text-dark/40 text-base font-light max-w-sm leading-relaxed lg:text-right">
+                Auspicious dates recommended for foundation-laying and construction commencement — traditional Tamil almanac, 2026.
               </p>
-            </motion.div>
+            </div>
+
+            {/* Desktop Table */}
+            <div className="hidden md:block bg-white rounded-[3rem] border border-dark/5 shadow-2xl overflow-hidden">
+              <table className="w-full border-collapse">
+                <thead className="bg-dark text-white">
+                  <tr>
+                    <th className="px-10 py-6 text-left text-[10px] font-black uppercase tracking-[0.3em] w-48">Month</th>
+                    <th className="px-10 py-6 text-left text-[10px] font-black uppercase tracking-[0.3em]">Auspicious Dates</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-dark/5">
+                  {auspiciousDates.map((item, i) => (
+                    <motion.tr
+                      key={i}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.04 }}
+                      className="group hover:bg-cream/50 transition-colors"
+                    >
+                      <td className="px-10 py-7">
+                        <p className="text-lg font-black text-dark group-hover:text-primary transition-colors tracking-tight">{item.month}</p>
+                        <p className="text-[10px] font-bold text-dark/25 uppercase tracking-widest mt-0.5">{item.tamil}</p>
+                      </td>
+                      <td className="px-10 py-7">
+                        <div className="flex flex-wrap gap-2">
+                          {item.dates.map((d, j) => (
+                            <span
+                              key={j}
+                              className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-primary/5 border border-primary/15 text-primary text-sm font-black hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 cursor-default"
+                            >
+                              {d}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Cards */}
+            <div className="md:hidden space-y-3">
+              {auspiciousDates.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.04 }}
+                  className="bg-white border border-dark/5 rounded-[1.5rem] p-5 shadow-sm"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <p className="font-black text-dark text-base tracking-tight">{item.month}</p>
+                      <p className="text-[9px] font-bold text-dark/30 uppercase tracking-widest">{item.tamil}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {item.dates.map((d, j) => (
+                      <span key={j} className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-primary/5 border border-primary/15 text-primary text-sm font-black">
+                        {d}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Footer note */}
+            <div className="mt-8 flex items-center gap-4 p-6 bg-primary/5 border border-primary/10 rounded-[1.5rem]">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"></div>
+              <p className="text-xs font-bold text-primary/70 uppercase tracking-[0.25em]">
+                வளர்பிறை முகூர்த்தங்கள் &mdash; Waxing moon phases preferred for all auspicious construction activities
+              </p>
+            </div>
+
           </div>
         </section>
 
         {/* VASTU CONSTRUCTION DAYS */}
-        <section className="py-16 md:py-24 px-4 md:px-8 bg-[#fffde7]">
-          <div className="mx-auto max-w-4xl">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-            >
-              {/* Title bar — cyan bg, dark text */}
-              <div className="bg-[#00bcd4] rounded-t-lg px-6 py-3 text-center mb-0">
-                <h2 className="text-xl md:text-2xl font-bold text-[#1a1a1a]">
-                  வாஸ்து செய்யும் நாட்கள்
+        <section className="py-24 md:py-40 px-6 bg-white border-t border-dark/5">
+          <div className="mx-auto max-w-7xl">
+
+            {/* Header */}
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-12 md:mb-16">
+              <div>
+                <h3 className="text-secondary font-black tracking-[0.5em] uppercase text-[10px] mb-4">Foundation Muhurtham</h3>
+                <h2 className="text-4xl md:text-7xl font-black text-dark leading-[0.9] tracking-tighter uppercase">
+                  வாஸ்து செய்யும் <br />
+                  <span className="text-secondary italic">நாட்கள்.</span>
                 </h2>
               </div>
+              <p className="text-dark/40 text-base font-light max-w-sm leading-relaxed lg:text-right">
+                Precise morning Muhurtham windows for each Tamil month — the exact time to lay your home's first stone.
+              </p>
+            </div>
 
-              {/* Table */}
-              <div className="border-2 border-[#00bcd4] rounded-b-lg overflow-hidden">
-                <table className="w-full border-collapse bg-white text-sm md:text-base">
-                  {/* Header row */}
-                  <thead>
-                    <tr className="bg-white border-b-2 border-[#00bcd4]">
-                      <th className="py-2.5 px-3 md:px-5 text-left font-bold text-[#c2185b] border-r border-[#b2ebf2]">மாதம்</th>
-                      <th className="py-2.5 px-3 md:px-5 text-left font-bold text-[#c2185b] border-r border-[#b2ebf2]">தேதி</th>
-                      <th className="py-2.5 px-3 md:px-5 text-left font-bold text-[#c2185b] border-r border-[#b2ebf2]">கிழமை</th>
-                      <th className="py-2.5 px-3 md:px-5 text-left font-bold text-[#c2185b] border-r border-[#b2ebf2]">ஆ.தேதி</th>
-                      <th className="py-2.5 px-3 md:px-5 text-left font-bold text-[#c2185b]">நேரம் (காலை)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {vastuDays.map((row, i) => (
-                      <tr key={i} className="border-b border-[#b2ebf2] last:border-b-0">
-                        {/* Tamil month */}
-                        <td className="py-2.5 px-3 md:px-5 font-bold text-[#111] border-r border-[#b2ebf2]">
-                          {row.tamilMonth}
-                        </td>
-                        {/* Date — magenta/pink */}
-                        <td className="py-2.5 px-3 md:px-5 font-bold text-[#c2185b] border-r border-[#b2ebf2]">
-                          {row.date}
-                        </td>
-                        {/* Weekday — black */}
-                        <td className="py-2.5 px-3 md:px-5 font-bold text-[#111] border-r border-[#b2ebf2]">
-                          {row.weekday}
-                        </td>
-                        {/* Eng date — blue */}
-                        <td className="py-2.5 px-3 md:px-5 font-bold text-[#1565c0] border-r border-[#b2ebf2]">
-                          {row.engDate}
-                        </td>
-                        {/* Time — magenta */}
-                        <td className="py-2.5 px-3 md:px-5 font-bold text-[#c2185b]">
-                          {row.time}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+            {/* Desktop Table */}
+            <div className="hidden md:block bg-white rounded-[3rem] border border-dark/5 shadow-2xl overflow-hidden">
+              <table className="w-full border-collapse">
+                <thead className="bg-dark text-white">
+                  <tr>
+                    <th className="px-10 py-6 text-left text-[10px] font-black uppercase tracking-[0.3em]">மாதம் / Month</th>
+                    <th className="px-10 py-6 text-left text-[10px] font-black uppercase tracking-[0.3em]">தேதி / Date</th>
+                    <th className="px-10 py-6 text-left text-[10px] font-black uppercase tracking-[0.3em]">கிழமை / Day</th>
+                    <th className="px-10 py-6 text-left text-[10px] font-black uppercase tracking-[0.3em]">ஆ. தேதி</th>
+                    <th className="px-10 py-6 text-left text-[10px] font-black uppercase tracking-[0.3em]">நேரம் (காலை)</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-dark/5">
+                  {vastuDays.map((row, i) => (
+                    <motion.tr
+                      key={i}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.06 }}
+                      className="group hover:bg-cream/50 transition-colors"
+                    >
+                      <td className="px-10 py-8">
+                        <span className="text-2xl font-black text-dark group-hover:text-secondary transition-colors tracking-tighter">{row.tamilMonth}</span>
+                      </td>
+                      <td className="px-10 py-8">
+                        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/5 border border-primary/15 text-primary text-base font-black">{row.date}</span>
+                      </td>
+                      <td className="px-10 py-8">
+                        <span className="text-sm font-bold text-dark/50">{row.weekday}</span>
+                      </td>
+                      <td className="px-10 py-8">
+                        <span className="text-sm font-black text-dark/70 tracking-wide">{row.engDate}</span>
+                      </td>
+                      <td className="px-10 py-8">
+                        <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-secondary/5 border border-secondary/20 text-secondary">
+                          <FiClock size={12} />
+                          <span className="text-[11px] font-black tracking-widest">{row.time}</span>
+                        </div>
+                      </td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Cards */}
+            <div className="md:hidden space-y-4">
+              {vastuDays.map((row, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                  className="bg-white border border-dark/5 rounded-[1.5rem] p-5 shadow-sm"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <span className="w-10 h-10 rounded-full bg-primary/5 border border-primary/15 flex items-center justify-center text-primary font-black text-base flex-shrink-0">
+                        {row.date}
+                      </span>
+                      <div>
+                        <p className="font-black text-dark text-base tracking-tight">{row.tamilMonth}</p>
+                        <p className="text-[10px] text-dark/35 font-bold mt-0.5">{row.weekday}</p>
+                      </div>
+                    </div>
+                    <p className="text-[11px] font-black text-dark/45">{row.engDate}</p>
+                  </div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-dark/5">
+                    <FiClock size={13} className="text-secondary flex-shrink-0" />
+                    <span className="text-sm font-black text-secondary tracking-wide">{row.time}</span>
+                    <span className="ml-auto text-[9px] font-bold text-dark/25 uppercase tracking-widest">காலை</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Disclaimer */}
+            <div className="mt-10 md:mt-14 p-8 md:p-10 bg-dark rounded-[2rem] md:rounded-[2.5rem] flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 shadow-2xl">
+              <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                <FiSun className="text-white/50" size={18} />
               </div>
-            </motion.div>
+              <div>
+                <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60 mb-2">Traditional Guideline</h5>
+                <p className="text-white/40 text-xs md:text-sm font-light leading-relaxed max-w-2xl">
+                  All times shown are <span className="text-white/75 font-semibold">morning (காலை)</span> muhurtham windows.
+                  Consult your family astrologer for personalized alignment with your birth star <span className="text-white/75">(நட்சத்திரம்)</span> before finalizing the date.
+                </p>
+              </div>
+            </div>
+
           </div>
         </section>
 
-
+         {/* VEDIC ARCHITECTURE - VASTU SHASTRA - SREE VASTU BHAGWAN */}
+        <VastuPurushaHero />
 
  {/* â”€â”€ CTA â”€â”€ */}
  <section className="py-12 md:py-24 px-4 md:px-6 bg-white">

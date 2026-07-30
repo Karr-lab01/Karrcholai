@@ -5,6 +5,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { motion, useReducedMotion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import animeVastuImg from '../../assets/vastu-anime.jpeg'
 
 // ── Sanskrit / Vedic rune characters that orbit ──────────────────────────────
@@ -176,7 +177,7 @@ function GlitchText({ children, style }) {
   )
 }
 
-// ── Animated aura pulse rings ─────────────────────────────────────────────────
+// ── Animated aura pulse rings — kept for potential future use ─────────────────
 function AuraPulse() {
   return (
     <>
@@ -294,97 +295,159 @@ function VastuDateOrbit({ active, small }) {
   )
 }
 
+ 
+
+// ── Tool cards data ───────────────────────────────────────────────────────────
+const TOOL_CARDS = [
+  { id:'calculator', icon:'📐', label:'Dimension', sub:'Calculator', desc:'Auspicious room sizes', route:'/manaiyadi/calculator',      color:'#F59E0B', num:'01' },
+  { id:'compass',    icon:'🧭', label:'Direction',  sub:'Compass',    desc:'Score your home Vastu', route:'/vastu-compass',               color:'#818CF8', num:'02' },
+  { id:'guide',      icon:'📏', label:'Dimension',  sub:'Guide',      desc:'Full measurement table', route:'/manaiyadi/dimension-guide',   color:'#34D399', num:'03' },
+  { id:'cost',       icon:'💰', label:'Cost',        sub:'Estimator',  desc:'Plan your budget',       route:'/cost-estimator',              color:'#F472B6', num:'04' },
+]
+
+// ── Single nav card ───────────────────────────────────────────────────────────
+function NavCard({ card, onClick }) {
+  const [hov, setHov] = useState(false)
+  return (
+    <motion.div
+      whileHover={{ scale: 1.04, y: -4 }}
+      whileTap={{ scale: 0.97 }}
+      onHoverStart={() => setHov(true)}
+      onHoverEnd={() => setHov(false)}
+      onClick={() => onClick(card.route)}
+      style={{
+        flex: '1 1 0', minWidth: 0, cursor: 'pointer',
+        background: hov
+          ? `linear-gradient(135deg, rgba(255,255,255,0.07) 0%, ${card.color}12 100%)`
+          : 'rgba(255,255,255,0.04)',
+        border: `1.5px solid ${hov ? card.color + '80' : 'rgba(255,255,255,0.1)'}`,
+        borderRadius: '16px', padding: '16px 14px',
+        boxShadow: hov ? `0 8px 32px ${card.color}30, 0 0 0 1px ${card.color}20` : 'none',
+        transition: 'background 0.25s, border 0.25s, box-shadow 0.25s',
+        position: 'relative', overflow: 'hidden',
+      }}
+    >
+      {/* Shimmer sweep */}
+      {hov && (
+        <motion.div
+          initial={{ x: '-110%' }} animate={{ x: '120%' }}
+          transition={{ duration: 0.55, ease: 'easeInOut' }}
+          style={{
+            position: 'absolute', inset: 0, pointerEvents: 'none',
+            background: `linear-gradient(105deg, transparent 25%, ${card.color}15 50%, transparent 75%)`,
+          }}
+        />
+      )}
+      {/* Number */}
+      <span style={{
+        position: 'absolute', top: '10px', right: '12px',
+        fontSize: '9px', fontWeight: 900, color: `${card.color}50`, letterSpacing: '0.1em',
+      }}>{card.num}</span>
+      {/* Icon */}
+      <div style={{
+        width: '44px', height: '44px', borderRadius: '12px', marginBottom: '10px',
+        background: hov ? `${card.color}20` : 'rgba(255,255,255,0.06)',
+        border: `1.5px solid ${hov ? card.color + '70' : 'rgba(255,255,255,0.1)'}`,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontSize: '20px', transition: 'all 0.25s',
+        boxShadow: hov ? `0 0 20px ${card.color}40` : 'none',
+      }}>{card.icon}</div>
+      {/* Label */}
+      <p style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', color: card.color, textTransform: 'uppercase', margin: '0 0 2px' }}>{card.label}</p>
+      <p style={{ fontSize: '15px', fontWeight: 900, color: '#FAF9F6', letterSpacing: '-0.02em', margin: '0 0 5px', lineHeight: 1.1 }}>{card.sub}</p>
+      <p style={{ fontSize: '10px', color: 'rgba(255,255,255,0.38)', fontWeight: 400, margin: '0 0 10px', lineHeight: 1.4 }}>{card.desc}</p>
+      {/* CTA arrow */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <div style={{ height: '1px', width: hov ? '24px' : '12px', background: card.color, transition: 'width 0.25s', opacity: 0.7 }} />
+        <span style={{ fontSize: '11px', color: card.color, fontWeight: 900, transition: 'transform 0.2s', transform: hov ? 'translateX(3px)' : 'none' }}>→</span>
+      </div>
+      {/* Bottom colour bar */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0, height: '2px',
+        background: `linear-gradient(90deg, transparent, ${card.color}90, transparent)`,
+        opacity: hov ? 1 : 0, transition: 'opacity 0.25s',
+      }} />
+    </motion.div>
+  )
+}
+
 // ── Vastu Bhagavan image panel ────────────────────────────────────────────────
 function VastuBhagavanPanel() {
   const [revealed, setRevealed] = useState(false)
-  const [active, setActive]     = useState(false)
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== 'undefined' ? window.innerWidth < 1024 : false
-  )
+  const navigate = useNavigate()
 
   useEffect(() => {
     const t = setTimeout(() => setRevealed(true), 300)
-    const check = () => setIsMobile(window.innerWidth < 1024)
-    window.addEventListener('resize', check)
-    return () => { clearTimeout(t); window.removeEventListener('resize', check) }
+    return () => clearTimeout(t)
   }, [])
 
-  return (
-    <TiltCard>
-      {/*
-        px-12 on mobile = 48px per side — enough room for small pills,
-        while keeping the image noticeably larger than before.
-        lg:px-0 restores full width on desktop.
-      */}
-      <div
-        className="px-16 lg:px-0"
-        style={{ position: 'relative', width: '100%', maxWidth: '440px', margin: '0 auto' }}
-        onMouseEnter={() => setActive(true)}
-        onMouseLeave={() => setActive(false)}
-        onClick={() => setActive(v => !v)}
-      >
-        {/* Outer slow-spin halo */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
-          style={{
-            position: 'absolute', inset: '-24px', borderRadius: '50%',
-            background: 'conic-gradient(from 0deg, transparent 60%, rgba(201,117,74,0.18) 75%, transparent 90%)',
-            pointerEvents: 'none',
-          }}
-        />
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 140, repeat: Infinity, ease: 'linear' }}
-          style={{
-            position: 'absolute', inset: '-50px', borderRadius: '50%',
-            background: 'conic-gradient(from 180deg, transparent 70%, rgba(130,100,220,0.12) 82%, transparent 94%)',
-            pointerEvents: 'none',
-          }}
-        />
+  const handleNavigate = (route) => {
+    navigate(route)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
-        {/* Rune orbits */}
+  return (
+    <div style={{ width: '100%', maxWidth: '520px', margin: '0 auto' }}>
+      {/* ── Image with halos ── */}
+      <div style={{ position: 'relative', marginBottom: '20px' }}>
+        {/* Spin halos */}
+        <motion.div animate={{ rotate: 360 }} transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
+          style={{ position: 'absolute', inset: '-24px', borderRadius: '50%', pointerEvents: 'none',
+            background: 'conic-gradient(from 0deg, transparent 60%, rgba(201,117,74,0.18) 75%, transparent 90%)' }} />
+        <motion.div animate={{ rotate: -360 }} transition={{ duration: 140, repeat: Infinity, ease: 'linear' }}
+          style={{ position: 'absolute', inset: '-50px', borderRadius: '50%', pointerEvents: 'none',
+            background: 'conic-gradient(from 180deg, transparent 70%, rgba(130,100,220,0.12) 82%, transparent 94%)' }} />
+        {/* Runes */}
         <div style={{ position: 'absolute', inset: '-20px', pointerEvents: 'none' }}>
           <RuneOrbit radius={42} duration={22} runes={RUNES.slice(0,6)}  clockwise={true}  color="rgba(201,117,74,0.7)" />
           <RuneOrbit radius={52} duration={38} runes={RUNES.slice(6,12)} clockwise={false} color="rgba(130,100,220,0.5)" />
         </div>
-
-        {/* Image container — overflow:visible so pills protrude outside */}
-        <div style={{ position: 'relative', borderRadius: '20px', overflow: 'visible' }}>
-
-          {/* Pills always visible — positioned around the image edges */}
-          <VastuDateOrbit active={active} small={isMobile} />
-
-          {/* Image */}
-          <div style={{ borderRadius: '20px', overflow: 'hidden', position: 'relative' }}>
-            <AnimatePresence>
-              {revealed && (
-                <motion.img
-                  src={animeVastuImg}
-                  alt="Vastu Bhagavan — Vedic deity of sacred architecture"
-                  initial={{ opacity: 0, scale: 1.08 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-                  style={{ width: '100%', display: 'block', objectFit: 'cover' }}
-                />
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* Corner ornaments */}
+        {/* Image — always bright */}
+        <div style={{ borderRadius: '20px', overflow: 'hidden', position: 'relative' }}>
+          <AnimatePresence>
+            {revealed && (
+              <motion.img src={animeVastuImg} alt="Vastu Bhagavan — Vedic deity of sacred architecture"
+                initial={{ opacity: 0, scale: 1.08 }} animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+                style={{ width: '100%', display: 'block', objectFit: 'cover' }} />
+            )}
+          </AnimatePresence>
+          {/* Corner brackets */}
           {[['0','0','rotate(0deg)'],['0','auto','rotate(90deg)'],['auto','0','rotate(-90deg)'],['auto','auto','rotate(180deg)']].map(([t,b,rot],i) => (
             <div key={i} style={{
               position: 'absolute', top: t!=='auto'?t:undefined, bottom: b!=='auto'?b:undefined,
               left: i<2?'0':undefined, right: i>=2?'0':undefined,
-              width: '28px', height: '28px', transform: rot, opacity: 0.6,
-              borderTop: '2px solid rgba(201,117,74,0.7)',
-              borderLeft: '2px solid rgba(201,117,74,0.7)',
+              width: '22px', height: '22px', transform: rot,
+              borderTop: '2.5px solid rgba(201,117,74,0.85)', borderLeft: '2.5px solid rgba(201,117,74,0.85)',
               pointerEvents: 'none',
             }} />
           ))}
         </div>
       </div>
-    </TiltCard>
+
+      {/* ── Divider with label ── */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+        <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg,transparent,rgba(201,117,74,0.4))' }} />
+        <span style={{ fontSize: '8.5px', fontWeight: 900, letterSpacing: '0.3em', color: 'rgba(201,117,74,0.8)', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+          🔱 Vastu Tools
+        </span>
+        <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg,rgba(201,117,74,0.4),transparent)' }} />
+      </div>
+
+      {/* ── 4 nav cards in a 2×2 grid ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+        {TOOL_CARDS.map((card, i) => (
+          <motion.div
+            key={card.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.6 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <NavCard card={card} onClick={handleNavigate} />
+          </motion.div>
+        ))}
+      </div>
+    </div>
   )
 }
 
@@ -602,19 +665,19 @@ export default function VastuPurushaHero() {
             </motion.div>
           </div>
 
-          {/* ── RIGHT: Vastu image ── */}
+          {/* ── RIGHT: Vastu image + tool grid ── */}
           <motion.div
             initial={prefersReduced ? {} : { opacity: 0, scale: 0.85, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="py-12 lg:py-0"
-            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'visible' }}
+            className="lg:py-0"
+            style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', overflow: 'visible' }}
           >
             <VastuBhagavanPanel />
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll hint */}
         <motion.div
           initial={prefersReduced ? {} : { opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -622,7 +685,7 @@ export default function VastuPurushaHero() {
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '64px', gap: '8px' }}
         >
           <p style={{ fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.18)', fontWeight: 600 }}>
-            Use the Compass Below
+            Hover the image · Explore Vastu tools
           </p>
           <motion.div
             animate={prefersReduced ? {} : { y: [0, 10, 0], opacity: [0.6, 1, 0.6] }}
