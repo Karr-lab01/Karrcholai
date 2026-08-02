@@ -25,6 +25,9 @@ const ManaiyadiIntroduction   = lazy(() => import('./pages/ManaiyadiIntroduction
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
 const VastuCompassPage = lazy(() => import('./pages/VastuCompassPage'))
 const CostEstimatorPage = lazy(() => import('./pages/CostEstimatorPage'))
+const MuhurthamDatesPage = lazy(() => import('./pages/MuhurthamDatesPage'))
+const VastuDaysPage = lazy(() => import('./pages/VastuDaysPage'))
+const Services   = lazy(() => import('./pages/Services'))
 const NotFound   = lazy(() => import('./pages/NotFound'))
 
 // Minimal fallback while lazy page loads
@@ -56,7 +59,7 @@ const AppContent = ({ videoOpen, setVideoOpen }) => {
             <Route path="/"        element={<Home />} />
             <Route path="/about"   element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
-            <Route path="/services" element={<Navigate to="/" replace />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/karr"    element={<Karr />} />
             <Route path="/projects"element={<Projects />} />
             <Route path="/cholai"  element={<Cholai />} />
@@ -69,6 +72,8 @@ const AppContent = ({ videoOpen, setVideoOpen }) => {
             <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/vastu-compass" element={<VastuCompassPage />} />
             <Route path="/cost-estimator" element={<CostEstimatorPage />} />
+            <Route path="/manaiyadi/muhurtham-dates" element={<MuhurthamDatesPage />} />
+            <Route path="/manaiyadi/vastu-days" element={<VastuDaysPage />} />
             <Route path="*"        element={<NotFound />} />
           </Routes>
         </Suspense>

@@ -7,6 +7,7 @@ import UnifiedFooter from '../components/UnifiedFooter';
 import { blogPosts } from '../data/blogData.jsx';
 import ComicSection from '../components/ComicSection.jsx';
 import FirstStoneSection from '../components/FirstStoneSection.jsx';
+import VastuArticle from '../components/vastu/VastuArticle.jsx';
 
 /* Site palette */
 const FOREST  = '#2D4B37';
@@ -40,11 +41,14 @@ const BlogDetail = () => {
 
   const isArunStory    = post.heroType === 'arun-story';
   const isFirstStone   = post.heroType === 'first-stone';
+  const isVastu        = post.heroType === 'vastu';
 
   const pageTitle = isArunStory
     ? `How Arun Built His Dream Home — A Client Story | Karrcholai`
     : isFirstStone
     ? `The First Stone — Professional Plan Analysis | Karrcholai`
+    : isVastu
+    ? `What Was the Purpose Behind the Creation of the Vastu Shastras? | Karrcholai`
     : `${post.title} | Karrcholai Journal`
   const pageDesc = post.excerpt || `Read this article from the Karrcholai construction journal — engineering insights, client stories and building knowledge from Tamil Nadu.`
   const canonicalId = post.id
@@ -163,6 +167,42 @@ const BlogDetail = () => {
           </div>
         )}
 
+        {/* ── Vastu Shastras hero ── */}
+        {isVastu && (
+          <div ref={heroRef} style={{ position: 'relative', overflow: 'hidden',
+            background: 'linear-gradient(135deg, #1a2e1a 0%, #0d1a0d 60%, #1a0d00 100%)',
+            borderBottom: `3px solid ${TERRA}` }}>
+            <div style={{ position: 'absolute', inset: 0, opacity: 0.07,
+              backgroundImage: 'radial-gradient(circle, #d4af37 1px, transparent 1px)',
+              backgroundSize: '18px 18px', pointerEvents: 'none' }} />
+            <motion.div style={{ y: heroY, opacity: heroOp, position: 'relative', zIndex: 1,
+              padding: 'clamp(70px,11vw,110px) 24px clamp(42px,7vw,62px)', textAlign: 'center' }}>
+              <motion.p
+                initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                style={{ color: TERRA, fontSize: 10, fontWeight: 900, letterSpacing: '0.55em',
+                  textTransform: 'uppercase', marginBottom: 14 }}>
+                Land and Plot Tips · Karrcholai
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                style={{ color: '#d4af37', fontSize: 'clamp(0.9rem,2vw,1.1rem)', fontWeight: 900,
+                  letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 16 }}>
+                Vastu Shastras
+              </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.7 }}
+                style={{ color: '#fff', fontSize: 'clamp(1.6rem,5vw,3.5rem)', fontWeight: 900,
+                  lineHeight: 1.1, letterSpacing: '-0.02em', margin: '0 0 20px',
+                  maxWidth: 720, marginLeft: 'auto', marginRight: 'auto' }}>
+                What Was the Purpose Behind the<br />Creation of the Vastu Shastras?
+              </motion.h1>
+            </motion.div>
+          </div>
+        )}
+
         {/* ── Post header ── */}
         <div style={{ maxWidth: 720, margin: '0 auto', padding: '40px 24px 0', textAlign: 'center' }}>
           <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
@@ -170,7 +210,7 @@ const BlogDetail = () => {
               textTransform: 'uppercase', display: 'block', marginBottom: 14 }}>
             {post.category}
           </motion.span>
-          {!isArunStory && !isFirstStone && (
+          {!isArunStory && !isFirstStone && !isVastu && (
             <motion.h1 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               style={{ fontSize: 'clamp(1.8rem,5vw,3.5rem)', textTransform: 'uppercase',
@@ -178,7 +218,7 @@ const BlogDetail = () => {
               {post.title}
             </motion.h1>
           )}
-          {(isArunStory || isFirstStone) && (
+          {(isArunStory || isFirstStone || isVastu) && (
             <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
               style={{ fontSize: 15, color: 'rgba(0,0,0,0.5)', lineHeight: 1.7, maxWidth: 560,
                 margin: '0 auto 20px', fontWeight: 400 }}>
@@ -222,6 +262,9 @@ const BlogDetail = () => {
                 );
                 if (item.type === 'first-stone') return (
                   <div key={idx}><FirstStoneSection /></div>
+                );
+                if (item.type === 'vastu-article') return (
+                  <div key={idx}><VastuArticle /></div>
                 );
                 return null;
               })}

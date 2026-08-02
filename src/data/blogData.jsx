@@ -145,6 +145,19 @@ export const arunWhatsAppStory = {
 
 export const blogPosts = [
   {
+    id: 701,
+    title: "What Was the Purpose Behind the Creation of the Vastu Shastras?",
+    category: 'Land and Plot Tips',
+    date: 'August 2026',
+    image: null,
+    heroType: 'vastu',
+    author: 'Karrcholai Team',
+    excerpt: "Our ancestors discovered that the movement of stars and planets creates magnetic forces that affect human life. The Vastu Shastras were created to protect humanity — and guide the building of homes that invite blessings from the lords of eight directions.",
+    gallery: [
+      { type: 'vastu-article' },
+    ],
+  },
+  {
     id: 601,
     title: "Sir M. Visvesvaraya — India's Engineering Pioneer",
     category: 'Engineering Legends',

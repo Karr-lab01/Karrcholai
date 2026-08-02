@@ -6,11 +6,13 @@ import logoImg from '../../assets/KARRCHOLAI LOGO.png'
 import { LogoVideoContext } from '../App'
 
 const manaiyadiDropdown = [
-  { name: 'Introduction',        path: '/manaiyadi/introduction',  desc: 'Full overview of Manaiyadi Sastram' },
-  { name: 'Dimension Calculator', path: '/manaiyadi/calculator',    desc: 'Check auspicious room dimensions' },
-  { name: 'Dimension Guide',      path: '/manaiyadi/dimension-guide', desc: 'Reference tables & wall heights' },
-  { name: 'Direction Compass',    path: '/vastu-compass',           desc: "Check your plot's Vastu alignment" },
-  { name: 'Cost Estimator',       path: '/cost-estimator',          desc: '₹ Instant construction cost estimate' },
+  { name: 'Introduction',          path: '/manaiyadi/introduction',    desc: 'Full overview of Manaiyadi Sastram' },
+  { name: 'Dimension Calculator',  path: '/manaiyadi/calculator',      desc: 'Check auspicious room dimensions' },
+  { name: 'Dimension Guide',       path: '/manaiyadi/dimension-guide', desc: 'Reference tables & wall heights' },
+  { name: 'சுப முகூர்த்த தினங்கள்', path: '/manaiyadi/muhurtham-dates', desc: 'Auspicious dates for 2026' },
+  { name: 'வாஸ்து செய்யும் நாட்கள்', path: '/manaiyadi/vastu-days',     desc: 'Foundation muhurtham windows' },
+  { name: 'Direction Compass',     path: '/vastu-compass',             desc: "Check your plot's Vastu alignment" },
+  { name: 'Cost Estimator',        path: '/cost-estimator',            desc: '₹ Instant construction cost estimate' },
 ]
 
 const navLinks = [
@@ -18,6 +20,7 @@ const navLinks = [
   { name: 'About',     path: '/about' },
   { name: 'Karr',      path: '/karr' },
   { name: 'Cholai',    path: '/cholai' },
+  { name: 'Services',  path: '/services' },
   { name: 'Projects',  path: '/projects' },
   { name: 'Manaiyadi', path: '/manaiyadi', hasDropdown: true },
   { name: 'Blog',      path: '/blog' },
@@ -37,6 +40,7 @@ const Navbar = () => {
     const p = location.pathname
     if (p === '/') return 'Home'
     if (p === '/contact') return 'Contact'
+    if (p === '/services') return 'Services'
     if (p.startsWith('/manaiyadi') || p === '/vastu-compass') return 'Manaiyadi'
     const match = navLinks.find(l => l.path !== '/' && p.startsWith(l.path))
     return match ? match.name : ''
@@ -152,7 +156,7 @@ const Navbar = () => {
                           exit={{ opacity: 0, y: 8, scale: 0.97 }}
                           transition={{ duration: 0.2 }}
                           style={{ position: 'absolute', top: 'calc(100% + 8px)', left: '50%',
-                            transform: 'translateX(-50%)', width: '220px', background: '#fff',
+                            transform: 'translateX(-50%)', width: '260px', background: '#fff',
                             borderRadius: '16px', boxShadow: '0 16px 48px rgba(0,0,0,0.12)',
                             border: '1px solid rgba(0,0,0,0.06)', overflow: 'hidden', zIndex: 200 }}
                         >

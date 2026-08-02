@@ -82,7 +82,15 @@ const Blog = () => {
  className="flex flex-col group cursor-pointer"
  >
  <Link to={`/blog/${post.id}`} className="block relative aspect-[4/5] overflow-hidden mb-8 border border-[#1a1a1a]/5">
- {post.heroType === 'first-stone' ? (
+ {post.heroType === 'vastu' ? (
+ <div className="w-full h-full flex flex-col items-center justify-center relative"
+ style={{ background: 'linear-gradient(135deg, #1a2e1a 0%, #0d1a0d 60%, #1a0d00 100%)' }}>
+ <div style={{ position:'absolute', inset:0, opacity:0.07, backgroundImage:'radial-gradient(circle, #d4af37 1px, transparent 1px)', backgroundSize:'18px 18px', pointerEvents:'none' }} />
+ <p style={{ fontSize:9, fontWeight:900, letterSpacing:'0.45em', textTransform:'uppercase', color:'#B85C38', margin:'0 0 12px', position:'relative' }}>Land and Plot Tips</p>
+ <p style={{ fontSize:'clamp(0.85rem,2.5vw,1.1rem)', fontWeight:900, color:'#d4af37', margin:0, letterSpacing:'0.15em', textTransform:'uppercase', position:'relative' }}>Vastu Shastras</p>
+ <div className="absolute inset-0 group-hover:bg-white/5 transition-all duration-500" />
+ </div>
+ ) : post.heroType === 'first-stone' ? (
  <div className="w-full h-full flex flex-col items-center justify-center relative"
  style={{ background: '#111' }}>
  <p style={{ fontSize:9, fontWeight:900, letterSpacing:'0.45em', textTransform:'uppercase', color:'#B85C38', margin:'0 0 14px' }}>Single Stone Stories</p>
