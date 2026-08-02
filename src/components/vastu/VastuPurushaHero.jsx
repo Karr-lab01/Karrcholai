@@ -198,175 +198,271 @@ function AuraPulse() {
   )
 }
 
-// ── Tamil Vastu date labels that float around the image on hover/click ────────
-const VASTU_DATES = [
-  { ta: 'வாஸ்து',   en: 'Vastu',    color: '#F59E0B' },
-  { ta: 'அஷ்டமி',  en: 'Ashtami',  color: '#C9754A' },
-  { ta: 'நவமி',    en: 'Navami',   color: '#818CF8' },
-  { ta: 'பௌர்ணமி', en: 'Pournami', color: '#34D399' },
-]
-
-// CSS classes injected once for the pill positions — desktop only
-const PILL_CSS = `
-.vd-pill { position:absolute; pointer-events:none; z-index:30; display:flex; align-items:center; justify-content:center; }
-.vd-pill-top    { top:0;   left:50%; transform:translate(-50%,-110%); }
-.vd-pill-right  { top:50%; right:0;  transform:translate(110%,-50%);  }
-.vd-pill-bottom { bottom:0;left:50%; transform:translate(-50%,110%);  }
-.vd-pill-left   { top:50%; left:0;   transform:translate(-110%,-50%); }
-
-/* On mobile: smaller pill offset so pills sit tighter to the image */
-@media (max-width: 1023px) {
-  .vd-pill-top    { transform:translate(-50%,-105%); }
-  .vd-pill-right  { transform:translate(105%,-50%);  }
-  .vd-pill-bottom { transform:translate(-50%,105%);  }
-  .vd-pill-left   { transform:translate(-105%,-50%); }
-}
-`
-
-const PILL_CLASSES = ['vd-pill vd-pill-top','vd-pill vd-pill-right','vd-pill vd-pill-bottom','vd-pill vd-pill-left']
-
-if (typeof document !== 'undefined' && !document.getElementById('vd-pill-style')) {
-  const s = document.createElement('style')
-  s.id = 'vd-pill-style'
-  s.textContent = PILL_CSS
-  document.head.appendChild(s)
-}
-
-// Shared pill inner content — `small` prop renders compact mobile version
-function PillInner({ item, small }) {
-  return (
-    <div style={{
-      display: 'inline-flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: small ? '1px' : '2px',
-      background: 'rgba(6, 4, 1, 0.85)',
-      border: `1px solid ${item.color}50`,
-      borderRadius: small ? '6px' : '8px',
-      padding: small ? '3px 7px' : '5px 11px',
-      backdropFilter: 'blur(12px)',
-      WebkitBackdropFilter: 'blur(12px)',
-      boxShadow: `0 2px 12px rgba(0,0,0,0.6), 0 0 8px ${item.color}20`,
-      whiteSpace: 'nowrap',
-      lineHeight: 1,
-    }}>
-      <div style={{
-        width: small ? '3px' : '4px',
-        height: small ? '3px' : '4px',
-        borderRadius: '50%',
-        background: item.color,
-        boxShadow: `0 0 5px ${item.color}`,
-        marginBottom: '1px',
-      }} />
-      <span style={{
-        fontSize: small ? '9px' : '12px',
-        fontFamily: '"Noto Sans Tamil", "Latha", serif',
-        fontWeight: 700,
-        color: item.color,
-      }}>{item.ta}</span>
-      <span style={{
-        fontSize: small ? '6px' : '7px',
-        fontWeight: 700,
-        letterSpacing: '0.08em',
-        color: 'rgba(255,255,255,0.4)',
-        textTransform: 'uppercase',
-      }}>{item.en}</span>
-    </div>
-  )
-}
-
-// Desktop: floating pills around the image edges
-function VastuDateOrbit({ active, small }) {
-  return (
-    <AnimatePresence>
-      {active && VASTU_DATES.map((item, i) => (
-        <div key={item.en} className={PILL_CLASSES[i]}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5 }}
-            transition={{ duration: 0.35, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <PillInner item={item} small={small} />
-          </motion.div>
-        </div>
-      ))}
-    </AnimatePresence>
-  )
-}
-
- 
-
-// ── Tool cards data ───────────────────────────────────────────────────────────
+// ── Tool cards — 4 items, one per side ───────────────────────────────────────
 const TOOL_CARDS = [
-  { id:'calculator', icon:'📐', label:'Dimension', sub:'Calculator', desc:'Auspicious room sizes', route:'/manaiyadi/calculator',      color:'#F59E0B', num:'01' },
-  { id:'compass',    icon:'🧭', label:'Direction',  sub:'Compass',    desc:'Score your home Vastu', route:'/vastu-compass',               color:'#818CF8', num:'02' },
-  { id:'guide',      icon:'📏', label:'Dimension',  sub:'Guide',      desc:'Full measurement table', route:'/manaiyadi/dimension-guide',   color:'#34D399', num:'03' },
-  { id:'cost',       icon:'💰', label:'Cost',        sub:'Estimator',  desc:'Plan your budget',       route:'/cost-estimator',              color:'#F472B6', num:'04' },
+  { id:'calculator', icon:'📐', label:'Dimension Calculator', desc:'Find auspicious room sizes for your home',   route:'/manaiyadi/calculator',     color:'#F59E0B' },
+  { id:'compass',    icon:'🧭', label:'Direction Compass',    desc:'Score your home\'s Vastu compliance',        route:'/vastu-compass',            color:'#818CF8' },
+  { id:'guide',      icon:'📏', label:'Dimension Guide',      desc:'Complete measurement reference table',       route:'/manaiyadi/dimension-guide', color:'#34D399' },
+  { id:'cost',       icon:'💰', label:'Cost Estimator',       desc:'Budget your construction smartly',           route:'/cost-estimator',           color:'#F472B6' },
 ]
 
-// ── Single nav card ───────────────────────────────────────────────────────────
-function NavCard({ card, onClick }) {
+// ── Full-screen modal overlay with 4 tool cards ───────────────────────────────
+function VastuToolsModal({ onClose, onNavigate }) {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  )
+
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    const check = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', check)
+    // Lock body scroll while modal is open
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', handler)
+      window.removeEventListener('resize', check)
+      document.body.style.overflow = prev
+    }
+  }, [onClose])
+
+  return (
+    <motion.div
+      key="vastu-modal"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.35 }}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 998,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        backdropFilter: 'blur(18px)',
+        WebkitBackdropFilter: 'blur(18px)',
+        background: 'rgba(4,2,0,0.78)',
+        padding: '20px',
+        paddingTop: '90px',
+        overflowY: 'auto',
+      }}
+      onClick={onClose}
+    >
+      {/* Modal inner — stop propagation so clicking inside doesn't close */}
+      <motion.div
+        initial={{ scale: 0.88, opacity: 0, y: 30 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        onClick={e => e.stopPropagation()}
+        style={{
+          position: 'relative',
+          width: '100%',
+          maxWidth: '860px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '28px',
+        }}
+      >
+        {/* Close button */}
+        <motion.button
+          whileHover={{ scale: 1.1, rotate: 90 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={onClose}
+          style={{
+            position: 'absolute', top: '-10px', right: '0',
+            width: '36px', height: '36px', borderRadius: '50%',
+            background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
+            color: 'rgba(255,255,255,0.7)', fontSize: '16px', cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            outline: 'none', zIndex: 10,
+          }}
+        >✕</motion.button>
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.05 }}
+          style={{ textAlign: 'center' }}
+        >
+          <h2 style={{ fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 900, color: '#FAF9F6', letterSpacing: '-0.02em', margin: 0 }}>
+            Explore Vastu <span style={{ color: '#C9754A' }}>Tools</span>
+          </h2>
+          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', margin: '6px 0 0', fontWeight: 300 }}>
+            Click any tool below to get started
+          </p>
+        </motion.div>
+
+        {/* Image + 4 cards layout */}
+        {isMobile ? (
+          /* ── MOBILE: image top, 2×2 grid below ── */
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+            {/* Image */}
+            <motion.div
+              initial={{ scale: 0.75, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              style={{ width: '140px', position: 'relative', flexShrink: 0 }}
+            >
+              {[0, 0.5, 1].map((d, i) => (
+                <motion.div key={i}
+                  style={{ position:'absolute', inset:`-${i*8}px`, borderRadius:'16px', border:'1px solid rgba(201,117,74,0.25)', pointerEvents:'none' }}
+                  animate={{ opacity:[0.6,0], scale:[1,1.05+i*0.02] }}
+                  transition={{ duration:2, repeat:Infinity, delay:d, ease:'easeOut' }}
+                />
+              ))}
+              <img src={animeVastuImg} alt="Vastu Bhagavan"
+                style={{ width:'100%', borderRadius:'14px', display:'block',
+                  boxShadow:'0 0 40px rgba(201,117,74,0.25), 0 12px 40px rgba(0,0,0,0.7)' }} />
+            </motion.div>
+            {/* 2×2 card grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', width: '100%' }}>
+              {TOOL_CARDS.map((card, i) => (
+                <ModalCard key={card.id} card={card} index={i} onNavigate={onNavigate} align="left" mobile />
+              ))}
+            </div>
+          </div>
+        ) : (
+          /* ── DESKTOP: 3-col grid with image in center ── */
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr auto 1fr',
+            gridTemplateRows: '1fr auto 1fr',
+            gap: '16px',
+            alignItems: 'center',
+            justifyItems: 'stretch',
+            width: '100%',
+          }}>
+            <ModalCard card={TOOL_CARDS[0]} index={0} onNavigate={onNavigate} align="right" />
+            <div />
+            <ModalCard card={TOOL_CARDS[1]} index={1} onNavigate={onNavigate} align="left" />
+            <div />
+            {/* Center image */}
+            <motion.div
+              initial={{ scale: 0.75, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              style={{ width: '200px', position: 'relative' }}
+            >
+              {[0, 0.5, 1].map((d, i) => (
+                <motion.div key={i}
+                  style={{ position:'absolute', inset:`-${i*10}px`, borderRadius:'20px', border:'1px solid rgba(201,117,74,0.25)', pointerEvents:'none' }}
+                  animate={{ opacity:[0.6,0], scale:[1,1.05+i*0.03] }}
+                  transition={{ duration:2, repeat:Infinity, delay:d, ease:'easeOut' }}
+                />
+              ))}
+              <img src={animeVastuImg} alt="Vastu Bhagavan"
+                style={{ width:'100%', borderRadius:'16px', display:'block',
+                  boxShadow:'0 0 60px rgba(201,117,74,0.25), 0 20px 60px rgba(0,0,0,0.7)' }} />
+            </motion.div>
+            <div />
+            <ModalCard card={TOOL_CARDS[2]} index={2} onNavigate={onNavigate} align="right" />
+            <div />
+            <ModalCard card={TOOL_CARDS[3]} index={3} onNavigate={onNavigate} align="left" />
+          </div>
+        )}
+
+        {/* Footer hint */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          style={{ fontSize: '10px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.15em', textTransform: 'uppercase' }}
+        >
+          Press Esc or click outside to close
+        </motion.p>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+// ── Single modal card ─────────────────────────────────────────────────────────
+function ModalCard({ card, index, onNavigate, align, mobile }) {
   const [hov, setHov] = useState(false)
   return (
     <motion.div
-      whileHover={{ scale: 1.04, y: -4 }}
+      initial={{ opacity: 0, x: align === 'right' ? -30 : 30 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: align === 'right' ? -20 : 20 }}
+      transition={{ duration: 0.38, delay: 0.15 + index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ scale: 1.04, y: -3 }}
       whileTap={{ scale: 0.97 }}
       onHoverStart={() => setHov(true)}
       onHoverEnd={() => setHov(false)}
-      onClick={() => onClick(card.route)}
+      onClick={() => onNavigate(card.route)}
       style={{
-        flex: '1 1 0', minWidth: 0, cursor: 'pointer',
-        background: hov
-          ? `linear-gradient(135deg, rgba(255,255,255,0.07) 0%, ${card.color}12 100%)`
-          : 'rgba(255,255,255,0.04)',
-        border: `1.5px solid ${hov ? card.color + '80' : 'rgba(255,255,255,0.1)'}`,
-        borderRadius: '16px', padding: '16px 14px',
-        boxShadow: hov ? `0 8px 32px ${card.color}30, 0 0 0 1px ${card.color}20` : 'none',
+        cursor: 'pointer',
+        background: hov ? `linear-gradient(135deg,rgba(20,14,6,0.98),${card.color}18)` : 'rgba(12,8,3,0.9)',
+        border: `1.5px solid ${hov ? card.color + '80' : card.color + '30'}`,
+        borderRadius: '16px',
+        padding: mobile ? '12px' : '18px 20px',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        boxShadow: hov
+          ? `0 0 32px ${card.color}30, 0 8px 32px rgba(0,0,0,0.6), inset 0 1px 0 ${card.color}20`
+          : `0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)`,
         transition: 'background 0.25s, border 0.25s, box-shadow 0.25s',
         position: 'relative', overflow: 'hidden',
+        textAlign: mobile ? 'left' : align === 'right' ? 'right' : 'left',
       }}
     >
-      {/* Shimmer sweep */}
+      {/* Shimmer */}
       {hov && (
-        <motion.div
-          initial={{ x: '-110%' }} animate={{ x: '120%' }}
-          transition={{ duration: 0.55, ease: 'easeInOut' }}
-          style={{
-            position: 'absolute', inset: 0, pointerEvents: 'none',
-            background: `linear-gradient(105deg, transparent 25%, ${card.color}15 50%, transparent 75%)`,
-          }}
-        />
+        <motion.div initial={{ x: '-120%' }} animate={{ x: '140%' }} transition={{ duration: 0.5 }}
+          style={{ position:'absolute',inset:0,pointerEvents:'none',
+            background:`linear-gradient(105deg,transparent 30%,${card.color}18 50%,transparent 70%)` }} />
       )}
-      {/* Number */}
-      <span style={{
-        position: 'absolute', top: '10px', right: '12px',
-        fontSize: '9px', fontWeight: 900, color: `${card.color}50`, letterSpacing: '0.1em',
-      }}>{card.num}</span>
-      {/* Icon */}
-      <div style={{
-        width: '44px', height: '44px', borderRadius: '12px', marginBottom: '10px',
-        background: hov ? `${card.color}20` : 'rgba(255,255,255,0.06)',
-        border: `1.5px solid ${hov ? card.color + '70' : 'rgba(255,255,255,0.1)'}`,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: '20px', transition: 'all 0.25s',
-        boxShadow: hov ? `0 0 20px ${card.color}40` : 'none',
-      }}>{card.icon}</div>
-      {/* Label */}
-      <p style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', color: card.color, textTransform: 'uppercase', margin: '0 0 2px' }}>{card.label}</p>
-      <p style={{ fontSize: '15px', fontWeight: 900, color: '#FAF9F6', letterSpacing: '-0.02em', margin: '0 0 5px', lineHeight: 1.1 }}>{card.sub}</p>
-      <p style={{ fontSize: '10px', color: 'rgba(255,255,255,0.38)', fontWeight: 400, margin: '0 0 10px', lineHeight: 1.4 }}>{card.desc}</p>
-      {/* CTA arrow */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-        <div style={{ height: '1px', width: hov ? '24px' : '12px', background: card.color, transition: 'width 0.25s', opacity: 0.7 }} />
-        <span style={{ fontSize: '11px', color: card.color, fontWeight: 900, transition: 'transform 0.2s', transform: hov ? 'translateX(3px)' : 'none' }}>→</span>
+
+      {/* Icon + arrow */}
+      <div style={{ display:'flex', alignItems:'center', justifyContent: mobile || align==='left' ? 'flex-start' : 'flex-end', gap:'8px', marginBottom: mobile ? '6px' : '10px' }}>
+        {(mobile || align === 'left') && (
+          <div style={{ width: mobile?'32px':'40px', height: mobile?'32px':'40px', borderRadius:'11px', fontSize: mobile?'16px':'20px',
+            display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,
+            background:hov?`${card.color}22`:'rgba(255,255,255,0.07)',
+            border:`1.5px solid ${hov?card.color+'70':'rgba(255,255,255,0.1)'}`,
+            boxShadow:hov?`0 0 18px ${card.color}50`:'none',transition:'all 0.25s' }}>
+            {card.icon}
+          </div>
+        )}
+        <div style={{ flex:1, minWidth:0 }}>
+          <p style={{ fontSize: mobile?'9px':'10px', fontWeight:800, color:card.color, letterSpacing:'0.06em', margin:'0 0 2px', textTransform:'uppercase', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>
+            {card.label.split(' ')[0]}
+          </p>
+          <p style={{ fontSize: mobile?'13px':'16px', fontWeight:900, color:'#FAF9F6', letterSpacing:'-0.02em', margin:0, lineHeight:1.1 }}>
+            {card.label.split(' ').slice(1).join(' ')}
+          </p>
+        </div>
+        {!mobile && align === 'right' && (
+          <div style={{ width:'40px',height:'40px',borderRadius:'11px',fontSize:'20px',
+            display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,
+            background:hov?`${card.color}22`:'rgba(255,255,255,0.07)',
+            border:`1.5px solid ${hov?card.color+'70':'rgba(255,255,255,0.1)'}`,
+            boxShadow:hov?`0 0 18px ${card.color}50`:'none',transition:'all 0.25s' }}>
+            {card.icon}
+          </div>
+        )}
       </div>
-      {/* Bottom colour bar */}
-      <div style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0, height: '2px',
-        background: `linear-gradient(90deg, transparent, ${card.color}90, transparent)`,
-        opacity: hov ? 1 : 0, transition: 'opacity 0.25s',
-      }} />
+
+      {/* Description */}
+      {!mobile && (
+        <p style={{ fontSize:'11px',color:hov?`${card.color}BB`:'rgba(255,255,255,0.35)',
+          fontWeight:400,margin:'0 0 10px',lineHeight:1.5,transition:'color 0.25s' }}>
+          {card.desc}
+        </p>
+      )}
+
+      {/* Arrow CTA */}
+      <div style={{ display:'flex',alignItems:'center',gap:'6px',justifyContent: mobile || align==='left' ? 'flex-start' : 'flex-end' }}>
+        <motion.div
+          animate={hov?{width:'28px',opacity:1}:{width:'14px',opacity:0.5}}
+          style={{ height:'1px',background:card.color,transition:'none' }} />
+        <motion.span animate={hov?{x:3}:{x:0}} style={{ fontSize:'13px',color:card.color,fontWeight:900 }}>→</motion.span>
+      </div>
+
+      {/* Bottom glow bar */}
+      <div style={{ position:'absolute',bottom:0,left:0,right:0,height:'2px',borderRadius:'0 0 16px 16px',
+        background:`linear-gradient(90deg,transparent,${card.color},transparent)`,
+        opacity:hov?1:0,transition:'opacity 0.25s' }} />
     </motion.div>
   )
 }
@@ -374,82 +470,128 @@ function NavCard({ card, onClick }) {
 // ── Vastu Bhagavan image panel ────────────────────────────────────────────────
 function VastuBhagavanPanel() {
   const [revealed, setRevealed] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [imgHovered, setImgHovered] = useState(false)
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  )
   const navigate = useNavigate()
 
   useEffect(() => {
     const t = setTimeout(() => setRevealed(true), 300)
-    return () => clearTimeout(t)
+    const check = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', check)
+    return () => { clearTimeout(t); window.removeEventListener('resize', check) }
   }, [])
 
   const handleNavigate = (route) => {
+    setModalOpen(false)
     navigate(route)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
-    <div style={{ width: '100%', maxWidth: '520px', margin: '0 auto' }}>
-      {/* ── Image with halos ── */}
-      <div style={{ position: 'relative', marginBottom: '20px' }}>
+    <>
+      {/* ── Full-screen modal ── */}
+      <AnimatePresence>
+        {modalOpen && (
+          <VastuToolsModal onClose={() => setModalOpen(false)} onNavigate={handleNavigate} />
+        )}
+      </AnimatePresence>
+
+      {/* ── Image trigger ── */}
+      <div style={{ width: '100%', maxWidth: '440px', margin: '0 auto', position: 'relative' }}>
         {/* Spin halos */}
-        <motion.div animate={{ rotate: 360 }} transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
-          style={{ position: 'absolute', inset: '-24px', borderRadius: '50%', pointerEvents: 'none',
-            background: 'conic-gradient(from 0deg, transparent 60%, rgba(201,117,74,0.18) 75%, transparent 90%)' }} />
-        <motion.div animate={{ rotate: -360 }} transition={{ duration: 140, repeat: Infinity, ease: 'linear' }}
-          style={{ position: 'absolute', inset: '-50px', borderRadius: '50%', pointerEvents: 'none',
-            background: 'conic-gradient(from 180deg, transparent 70%, rgba(130,100,220,0.12) 82%, transparent 94%)' }} />
-        {/* Runes */}
-        <div style={{ position: 'absolute', inset: '-20px', pointerEvents: 'none' }}>
+        <motion.div animate={{rotate:360}} transition={{duration:80,repeat:Infinity,ease:'linear'}}
+          style={{ position:'absolute',inset:'-24px',borderRadius:'50%',pointerEvents:'none',
+            background:'conic-gradient(from 0deg,transparent 60%,rgba(201,117,74,0.18) 75%,transparent 90%)' }} />
+        <motion.div animate={{rotate:-360}} transition={{duration:140,repeat:Infinity,ease:'linear'}}
+          style={{ position:'absolute',inset:'-50px',borderRadius:'50%',pointerEvents:'none',
+            background:'conic-gradient(from 180deg,transparent 70%,rgba(130,100,220,0.12) 82%,transparent 94%)' }} />
+
+        {/* Rune orbits */}
+        <div style={{ position:'absolute',inset:'-20px',pointerEvents:'none' }}>
           <RuneOrbit radius={42} duration={22} runes={RUNES.slice(0,6)}  clockwise={true}  color="rgba(201,117,74,0.7)" />
           <RuneOrbit radius={52} duration={38} runes={RUNES.slice(6,12)} clockwise={false} color="rgba(130,100,220,0.5)" />
         </div>
-        {/* Image — always bright */}
-        <div style={{ borderRadius: '20px', overflow: 'hidden', position: 'relative' }}>
-          <AnimatePresence>
-            {revealed && (
-              <motion.img src={animeVastuImg} alt="Vastu Bhagavan — Vedic deity of sacred architecture"
-                initial={{ opacity: 0, scale: 1.08 }} animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-                style={{ width: '100%', display: 'block', objectFit: 'cover' }} />
-            )}
-          </AnimatePresence>
-          {/* Corner brackets */}
+
+        {/* Outer wrapper — scale on hover, NO overflow:hidden here so scale works */}
+        <motion.div
+          animate={{ scale: imgHovered ? 1.04 : 1 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          onMouseEnter={() => setImgHovered(true)}
+          onMouseLeave={() => setImgHovered(false)}
+          onClick={() => setModalOpen(true)}
+          style={{ borderRadius:'20px', position:'relative', cursor:'pointer',
+            boxShadow: imgHovered
+              ? '0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(201,117,74,0.25)'
+              : '0 12px 40px rgba(0,0,0,0.5)',
+            transition: 'box-shadow 0.4s',
+          }}
+        >
+          {/* Image — overflow:hidden on inner div only */}
+          <div style={{ borderRadius:'20px', overflow:'hidden', position:'relative' }}>
+            <AnimatePresence>
+              {revealed && (
+                <motion.img src={animeVastuImg} alt="Vastu Bhagavan — Vedic deity of sacred architecture"
+                  initial={{opacity:0,scale:1.08}} animate={{opacity:1,scale:1}}
+                  transition={{duration:1.6,ease:[0.22,1,0.36,1]}}
+                  style={{ width:'100%',display:'block',objectFit:'cover' }} />
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Corner brackets — outside overflow:hidden */}
           {[['0','0','rotate(0deg)'],['0','auto','rotate(90deg)'],['auto','0','rotate(-90deg)'],['auto','auto','rotate(180deg)']].map(([t,b,rot],i) => (
             <div key={i} style={{
-              position: 'absolute', top: t!=='auto'?t:undefined, bottom: b!=='auto'?b:undefined,
-              left: i<2?'0':undefined, right: i>=2?'0':undefined,
-              width: '22px', height: '22px', transform: rot,
-              borderTop: '2.5px solid rgba(201,117,74,0.85)', borderLeft: '2.5px solid rgba(201,117,74,0.85)',
-              pointerEvents: 'none',
+              position:'absolute',top:t!=='auto'?t:undefined,bottom:b!=='auto'?b:undefined,
+              left:i<2?'0':undefined,right:i>=2?'0':undefined,
+              width:'22px',height:'22px',transform:rot,pointerEvents:'none',
+              borderTop:'2.5px solid rgba(201,117,74,0.9)',borderLeft:'2.5px solid rgba(201,117,74,0.9)',
             }} />
           ))}
-        </div>
-      </div>
 
-      {/* ── Divider with label ── */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-        <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg,transparent,rgba(201,117,74,0.4))' }} />
-        <span style={{ fontSize: '8.5px', fontWeight: 900, letterSpacing: '0.3em', color: 'rgba(201,117,74,0.8)', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
-          🔱 Vastu Tools
-        </span>
-        <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg,rgba(201,117,74,0.4),transparent)' }} />
+          {/* Hover hint — controlled by state, positioned over image */}
+          <AnimatePresence>
+            {imgHovered && (
+              <motion.div
+                key="hint"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.22 }}
+                style={{
+                  position:'absolute', inset:0, borderRadius:'20px',
+                  display:'flex', alignItems:'flex-end', justifyContent:'center',
+                  paddingBottom:'18px',
+                  background:'linear-gradient(to top,rgba(0,0,0,0.62) 0%,transparent 52%)',
+                  pointerEvents:'none', zIndex: 5,
+                }}
+              >
+                <motion.div
+                  initial={{ y: 8, scale: 0.92 }}
+                  animate={{ y: 0, scale: 1 }}
+                  transition={{ duration: 0.3, ease: [0.22,1,0.36,1] }}
+                  style={{ display:'inline-flex',alignItems:'center',gap:'7px',padding:'7px 18px',
+                    borderRadius:'999px',background:'rgba(0,0,0,0.8)',
+                    border:'1px solid rgba(201,117,74,0.8)',
+                    backdropFilter:'blur(12px)' }}
+                >
+                  <motion.span animate={{rotate:[0,20,-20,0]}} transition={{duration:1.5,repeat:Infinity,repeatDelay:1}} style={{fontSize:'12px'}}>✦</motion.span>
+                  <span style={{fontSize:'9px',fontWeight:900,letterSpacing:'0.22em',color:'#C9754A',textTransform:'uppercase'}}>
+                    Click to Explore Tools
+                  </span>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {/* Mobile: always-visible tap badge — removed, hover hint is sufficient */}
+        </motion.div>
       </div>
-
-      {/* ── 4 nav cards in a 2×2 grid ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-        {TOOL_CARDS.map((card, i) => (
-          <motion.div
-            key={card.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.6 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <NavCard card={card} onClick={handleNavigate} />
-          </motion.div>
-        ))}
-      </div>
-    </div>
+    </>
   )
 }
+
 
 // ── Floating fire/water/air energy sparks ─────────────────────────────────────
 const SPARKS = [
@@ -514,13 +656,13 @@ export default function VastuPurushaHero() {
               initial={prefersReduced ? {} : { opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px', minWidth: 0 }}
             >
-              <div style={{ width: '32px', height: '1px', background: 'linear-gradient(90deg,transparent,#C9754A)' }} />
-              <span style={{ fontSize: '9px', fontWeight: 900, letterSpacing: '0.45em', color: '#B85C38', fontFamily: 'sans-serif', textTransform: 'uppercase' }}>
+              <div style={{ width: '24px', flexShrink: 0, height: '1px', background: 'linear-gradient(90deg,transparent,#C9754A)' }} />
+              <span style={{ fontSize: '8px', fontWeight: 900, letterSpacing: '0.25em', color: '#B85C38', fontFamily: 'sans-serif', textTransform: 'uppercase', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 Vedic Architecture · Vastu Shastra
               </span>
-              <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg,#C9754A,transparent)' }} />
+              <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg,#C9754A,transparent)', minWidth: '8px' }} />
             </motion.div>
 
             {/* Main heading with glitch */}
@@ -665,13 +807,12 @@ export default function VastuPurushaHero() {
             </motion.div>
           </div>
 
-          {/* ── RIGHT: Vastu image + tool grid ── */}
+          {/* ── RIGHT: Vastu image (click to open tool modal) ── */}
           <motion.div
             initial={prefersReduced ? {} : { opacity: 0, scale: 0.85, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:py-0"
-            style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', overflow: 'visible' }}
+            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'visible' }}
           >
             <VastuBhagavanPanel />
           </motion.div>
