@@ -2,11 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
     <meta name="theme-color" content="#B85C38" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
 
     <!-- Primary SEO -->
     <title>Karrcholai | Premium Residential Construction in Tamil Nadu</title>
@@ -37,6 +38,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- SEO shell hide rule + mobile-first base styles (no inline styles) -->
+    <link rel="stylesheet" href="/seo-shell.css" />
 
     <!-- Fonts: Barlow — all weights for clean consistent typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -204,18 +208,22 @@
     <!-- SEO semantic shell: rendered in the HTML for crawlers.
          Visually hidden from users AFTER React mounts via JS class.
          Crawlers see real H1/H2/text before any JS executes. -->
-    <style>
-      .seo-shell-hidden { display: none !important; }
-      #seo-shell {
-        font-family: sans-serif;
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 2rem;
-        color: #1a1a1a;
-      }
-    </style>
     <!-- seo-shell-start -->
     <div id="seo-shell">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/services">Services</a>
+        <a href="/projects">Projects</a>
+        <a href="/karr">Karr</a>
+        <a href="/cholai">Cholai</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/vastu-compass">Vastu Compass</a>
+        <a href="/cost-estimator">Cost Estimator</a>
+        <a href="/manaiyadi">Manaiyadi Sastram</a>
+        <a href="/manaiyadi/calculator">Manaiyadi Calculator</a>
+      </nav>
       <h1>Karrcholai | Premium Residential Construction in Tamil Nadu</h1>
       <h2>Expert Home Building &amp; Architecture — Chennai &amp; Tamil Nadu</h2>
       <p>Karrcholai Construction &amp; Architecture offers full-service residential building, renovation,
@@ -234,32 +242,22 @@
       <p>Over 12 years of residential construction experience in Tamil Nadu. 40+ completed projects.
          Expert architects and Vastu consultants. PMC services, renovation, and sustainable building.</p>
       <h2>Contact Karrcholai</h2>
-      <p>Call us at +91-97414-16747. Based in Tamil Nadu, serving Chennai and surrounding districts.</p>
+      <p>Phone: +91-97414-16747. Based in Tamil Nadu, serving Chennai and surrounding districts.</p>
     </div>
     <!-- seo-shell-end -->
-
-    <!-- noscript fallback: keep shell visible when JS is disabled -->
-    <noscript>
-      <div style="background:#fff3cd;padding:1rem;text-align:center;font-family:sans-serif;">
-        JavaScript is required for the full Karrcholai website experience.
-        Please enable JavaScript in your browser to access all features.
-      </div>
-    </noscript>
 
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
     <!-- Hide SEO shell only AFTER React has fully mounted and rendered content -->
     <script>
-      // Wait for React to render before hiding the shell
-      // Use MutationObserver to detect when #root gets children
       (function() {
         var root = document.getElementById('root');
         var shell = document.getElementById('seo-shell');
         if (!root || !shell) return;
         var observer = new MutationObserver(function() {
           if (root.children.length > 0) {
-            shell.classList.add('seo-shell-hidden');
+            shell.setAttribute('hidden', '');
             observer.disconnect();
           }
         });

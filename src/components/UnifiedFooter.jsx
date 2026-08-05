@@ -180,10 +180,10 @@ const UnifiedFooter = () => {
               Stay updated with our latest architectural projects and traditional building insights.
             </p>
             <div className="mb-6">
-              <a href="mailto:info@karrcholai.com"
+              <a href="/contact"
                 className="text-[10px] font-bold text-white/40 hover:text-white transition-colors block uppercase tracking-widest"
-                aria-label="Email Karrcholai Construction">
-                info@karrcholai.com
+                aria-label="Contact Karrcholai Construction">
+                Contact Us
               </a>
             </div>
             <form className="relative w-full max-w-sm lg:max-w-[280px]" onSubmit={(e) => e.preventDefault()}>

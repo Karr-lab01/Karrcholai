@@ -1,0 +1,20 @@
+/* SEO shell — visible to crawlers, hidden after React hydrates */
+#seo-shell[hidden] { display: none; }
+#seo-shell {
+  font-family: sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+  color: #1a1a1a;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+#seo-shell nav { margin-bottom: 1rem; }
+#seo-shell nav a { margin-right: 1rem; color: #B85C38; text-decoration: none; }
+#seo-shell h1 { font-size: 1.5rem; font-weight: 700; margin: 0 0 0.5rem; }
+#seo-shell h2 { font-size: 1.2rem; font-weight: 600; margin: 1rem 0 0.4rem; }
+#seo-shell h3 { font-size: 1rem; font-weight: 600; margin: 0; }
+#seo-shell p, #seo-shell li { font-size: 0.95rem; }
+#seo-shell ul { padding-left: 1.2rem; }

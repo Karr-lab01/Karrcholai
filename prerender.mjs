@@ -203,10 +203,22 @@ function buildRouteHtml(route) {
     `<meta property="og:description" content="${escapeHtml(route.description)}"`
   );
 
-  // 7. Update SEO shell content — fully visible to crawlers, hidden via JS after React mounts
+  // 7. Update SEO shell content — fully visible to crawlers, hidden via hidden attr after React mounts
+  const navLinks = [
+    ['/', 'Home'], ['/about', 'About'], ['/services', 'Services'],
+    ['/projects', 'Projects'], ['/karr', 'Karr'], ['/cholai', 'Cholai'],
+    ['/blog', 'Blog'], ['/contact', 'Contact'],
+    ['/vastu-compass', 'Vastu Compass'], ['/cost-estimator', 'Cost Estimator'],
+    ['/manaiyadi', 'Manaiyadi Sastram'], ['/manaiyadi/calculator', 'Manaiyadi Calculator'],
+  ];
+  const navHtml = navLinks.map(([href, label]) => `<a href="${href}">${escapeHtml(label)}</a>`).join('\n        ');
+
   const seoShell = `
     <!-- seo-shell-start -->
     <div id="seo-shell">
+      <nav>
+        ${navHtml}
+      </nav>
       <h1>${escapeHtml(route.h1)}</h1>
       <h2>${escapeHtml(route.h2)}</h2>
       <p>${escapeHtml(route.bodyText)}</p>
