@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
@@ -14,10 +14,10 @@ const ManaiyadiDimensionGuide = () => {
  name="description"
  content="Complete Manaiyadi Sastram reference tables — favourable and unfavourable room dimensions and ceiling heights for traditional Tamil residential construction."
  />
- <link rel="canonical" href="https://karrcholai-sepia.vercel.app/manaiyadi/dimension-guide" />
+ <link rel="canonical" href="https://karrcholai.com/manaiyadi/dimension-guide" />
  <meta property="og:title" content="Dimension Guide & Wall Height | Manaiyadi Sastram | Karrcholai" />
  <meta property="og:description" content="Complete Manaiyadi Sastram reference tables — favourable and unfavourable room dimensions and ceiling heights for traditional Tamil residential construction." />
- <meta property="og:url" content="https://karrcholai-sepia.vercel.app/manaiyadi/dimension-guide" />
+ <meta property="og:url" content="https://karrcholai.com/manaiyadi/dimension-guide" />
  </Helmet>
 
  <Navbar />

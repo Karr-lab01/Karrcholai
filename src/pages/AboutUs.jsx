@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+﻿import React, { useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
@@ -55,10 +55,10 @@ const AboutUs = () => {
  <Helmet>
  <title>About Karrcholai | Our Story, Founder &amp; Philosophy</title>
  <meta name="description" content="Meet Saravanakumar B., founder of Karrcholai Construction. 12+ years of residential construction in Tamil Nadu — built on strength, transparency, and sustainable living." />
- <link rel="canonical" href="https://karrcholai-sepia.vercel.app/about" />
+ <link rel="canonical" href="https://karrcholai.com/about" />
  <meta property="og:title" content="About Karrcholai | Our Story, Founder & Philosophy" />
  <meta property="og:description" content="Meet Saravanakumar B., founder of Karrcholai Construction. 12+ years of residential construction in Tamil Nadu — built on strength, transparency, and sustainable living." />
- <meta property="og:url" content="https://karrcholai-sepia.vercel.app/about" />
+ <meta property="og:url" content="https://karrcholai.com/about" />
  </Helmet>
  <Navbar />
 

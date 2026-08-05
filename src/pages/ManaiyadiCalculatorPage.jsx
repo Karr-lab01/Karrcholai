@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
@@ -14,10 +14,10 @@ const ManaiyadiCalculatorPage = () => {
  name="description"
  content="Free Manaiyadi Sastram dimension calculator — enter your room measurements and instantly check whether they are auspicious, neutral, or unfavourable for Tamil home construction."
  />
- <link rel="canonical" href="https://karrcholai-sepia.vercel.app/manaiyadi/calculator" />
+ <link rel="canonical" href="https://karrcholai.com/manaiyadi/calculator" />
  <meta property="og:title" content="Manaiyadi Dimension Calculator | Karrcholai" />
  <meta property="og:description" content="Free Manaiyadi Sastram dimension calculator — enter your room measurements and instantly check whether they are auspicious, neutral, or unfavourable for Tamil home construction." />
- <meta property="og:url" content="https://karrcholai-sepia.vercel.app/manaiyadi/calculator" />
+ <meta property="og:url" content="https://karrcholai.com/manaiyadi/calculator" />
  </Helmet>
 
  <Navbar />

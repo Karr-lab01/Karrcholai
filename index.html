@@ -1,8 +1,12 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#B85C38" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
     <!-- Primary SEO -->
     <title>Karrcholai | Premium Residential Construction in Tamil Nadu</title>
@@ -10,14 +14,17 @@
     <meta name="keywords" content="residential construction Tamil Nadu, home building Chennai, renovation Tamil Nadu, Karrcholai construction, Vastu compass, Manaiyadi Sastram, rainwater harvesting, solar energy Tamil Nadu" />
     <meta name="author" content="Karrcholai Construction" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://karrcholai-sepia.vercel.app/" />
+    <link rel="canonical" href="https://karrcholai.com/" />
 
     <!-- Open Graph (Facebook / WhatsApp) -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://karrcholai-sepia.vercel.app/" />
+    <meta property="og:url" content="https://karrcholai.com/" />
     <meta property="og:title" content="Karrcholai Construction & Architecture" />
     <meta property="og:description" content="Full-service construction & architecture: Residential, PMC, Renovation, Landscape, Rainwater Harvesting, Solar Energy, Waste Management, Lighting & Flooring. Plus free Vastu tools & Manaiyadi Sastram calculator." />
-    <meta property="og:image" content="https://karrcholai-sepia.vercel.app/og-image.jpg" />
+    <meta property="og:image" content="https://karrcholai.com/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/svg+xml" />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:site_name" content="Karrcholai Construction" />
 
@@ -25,7 +32,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Karrcholai Construction & Architecture" />
     <meta name="twitter:description" content="Full-service construction & architecture in Tamil Nadu — custom homes, renovation, landscape, solar, rainwater harvesting. Free Vastu compass & Manaiyadi calculator." />
-    <meta name="twitter:image" content="https://karrcholai-sepia.vercel.app/og-image.jpg" />
+    <meta name="twitter:image" content="https://karrcholai.com/og-image.svg" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -51,32 +58,196 @@
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Karrcholai Construction",
-      "url": "https://karrcholai-sepia.vercel.app",
-      "logo": "https://karrcholai-sepia.vercel.app/favicon.png",
+      "url": "https://karrcholai.com",
+      "logo": "https://karrcholai.com/favicon.png",
+      "image": "https://karrcholai.com/og-image.svg",
       "description": "Premier residential construction company in Tamil Nadu specialising in custom homes, renovation, interior design, Vastu Shastra, landscaping and sustainable building practices.",
       "foundingDate": "2019",
       "telephone": "+91-97414-16747",
+      "email": "karrcholai@gmail.com",
+      "priceRange": "₹₹₹",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "10:00",
+          "closes": "16:00"
+        }
+      ],
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "5/20, Puliyampatti, CV Palayam",
+        "addressLocality": "Karur",
         "addressRegion": "Tamil Nadu",
+        "postalCode": "639206",
         "addressCountry": "IN"
       },
-      "areaServed": "Tamil Nadu",
-      "serviceType": [
-        "Residential Construction",
-        "Home Renovation",
-        "Interior Design",
-        "Landscape Design",
-        "Vastu Shastra Consultation",
-        "Rainwater Harvesting",
-        "Architect Design"
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "10.9601",
+        "longitude": "78.0766"
+      },
+      "areaServed": [
+        { "@type": "State", "name": "Tamil Nadu" },
+        { "@type": "City", "name": "Chennai" },
+        { "@type": "City", "name": "Coimbatore" },
+        { "@type": "City", "name": "Karur" },
+        { "@type": "City", "name": "Madurai" },
+        { "@type": "City", "name": "Trichy" },
+        { "@type": "City", "name": "Erode" }
       ],
-      "sameAs": []
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Construction & Architecture Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Residential Construction Tamil Nadu" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Home Renovation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Project Management Consultancy (PMC)" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Interior Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Landscape Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Vastu Shastra Consultation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rainwater Harvesting" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Solar Energy Installation" } }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "12",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "sameAs": [
+        "https://www.facebook.com/karrcholai",
+        "https://www.instagram.com/karrcholai"
+      ]
+    }
+    </script>
+
+    <!-- Structured Data — WebSite (enables Google Sitelinks Search Box) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Karrcholai Construction",
+      "url": "https://karrcholai.com",
+      "description": "Premium residential construction, renovation, Vastu tools, and Manaiyadi Sastram calculator for Tamil Nadu homeowners.",
+      "inLanguage": "en-IN",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://karrcholai.com/blog?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Structured Data — FAQPage (boosts rich results for construction FAQs) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does it cost to build a house in Tamil Nadu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Residential construction in Tamil Nadu costs approximately ₹1,800–₂,200 per sq.ft for basic, ₹2,200–₂,800 for standard, and ₹2,800–₃,500 for premium construction. A 1,200 sq.ft home typically costs ₹26–42 lakhs depending on specification. Contact Karrcholai for a free site visit and detailed estimate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Manaiyadi Sastram?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Manaiyadi Sastram is the traditional Tamil science of home measurement and orientation. It is the Tamil equivalent of Vastu Shastra, providing specific rules for plot selection, door placement, room dimensions, and auspicious proportions based on the owner's details and the plot's orientation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is rainwater harvesting mandatory in Tamil Nadu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Tamil Nadu law requires rainwater harvesting for all buildings on plots of 100 sq.m and above. CMDA and DTCP building plan submissions must include rainwater harvesting details. Karrcholai designs and integrates rainwater harvesting systems as part of every residential project."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does residential construction take in Tamil Nadu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most residential projects take 8–18 months depending on size and complexity. A typical 1,200–1,800 sq.ft home takes approximately 8–10 months. Karrcholai provides a detailed timeline during the initial consultation and sends weekly WhatsApp progress updates with photos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What areas does Karrcholai serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Karrcholai Construction serves all of Tamil Nadu, with a primary focus on Karur, Chennai, Coimbatore, Madurai, Trichy, and Erode. We handle residential construction, renovation, and PMC services across the state."
+          }
+        }
+      ]
     }
     </script>
   </head>
   <body>
+    <!-- SEO semantic shell: visible to crawlers before JS hydration.
+         Styled to be visually hidden but accessible to search engines.
+         React hydrates over this on load. -->
+    <div id="seo-shell" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+      <h1>Karrcholai | Premium Residential Construction in Tamil Nadu</h1>
+      <h2>Expert Home Building &amp; Architecture — Chennai &amp; Tamil Nadu</h2>
+      <p>Karrcholai Construction &amp; Architecture offers full-service residential building, renovation,
+         interior design, landscaping, solar energy installation, and rainwater harvesting across
+         Tamil Nadu. Vastu-compliant design with Manaiyadi Sastram tools.</p>
+      <h2>Our Services</h2>
+      <ul>
+        <li><h3>Residential Construction Tamil Nadu</h3><p>Custom home building and premium residential construction across Tamil Nadu and Chennai.</p></li>
+        <li><h3>Home Renovation</h3><p>Full home renovation and interior remodeling services in Tamil Nadu.</p></li>
+        <li><h3>Vastu Shastra &amp; Manaiyadi Sastram</h3><p>Free Vastu compass tool and Manaiyadi Sastram calculator for traditional Tamil home planning.</p></li>
+        <li><h3>Solar Energy Tamil Nadu</h3><p>Solar panel installation and renewable energy solutions for homes in Tamil Nadu.</p></li>
+        <li><h3>Rainwater Harvesting</h3><p>Rainwater harvesting system design and installation for residential properties.</p></li>
+        <li><h3>Landscape Design</h3><p>Professional landscaping and garden design for residential projects.</p></li>
+      </ul>
+      <h2>Why Choose Karrcholai Construction</h2>
+      <p>Over 12 years of residential construction experience in Tamil Nadu. 40+ completed projects.
+         Expert architects and Vastu consultants. PMC services, renovation, and sustainable building.</p>
+      <h2>Contact Karrcholai</h2>
+      <p>Call us at +91-97414-16747. Based in Tamil Nadu, serving Chennai and surrounding districts.</p>
+    </div>
+
+    <!-- noscript fallback for crawlers that don't execute JavaScript -->
+    <noscript>
+      <style>
+        #seo-shell { position: static !important; width: auto !important; height: auto !important;
+          overflow: visible !important; clip: auto !important; white-space: normal !important;
+          padding: 2rem; font-family: sans-serif; max-width: 900px; margin: 0 auto; }
+      </style>
+      <div style="background:#fff3cd;padding:1rem;text-align:center;font-family:sans-serif;">
+        JavaScript is required for the full Karrcholai website experience.
+        Please enable JavaScript in your browser to access all features.
+      </div>
+    </noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Remove SEO shell after React has hydrated to avoid duplicate content for users -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var shell = document.getElementById('seo-shell');
+        if (shell) { shell.style.display = 'none'; }
+      });
+    </script>
   </body>
 </html>

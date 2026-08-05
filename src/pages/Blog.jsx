@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
@@ -23,10 +23,10 @@ const Blog = () => {
  <Helmet>
  <title>The Journal | Construction Insights &amp; Stories | Karrcholai</title>
  <meta name="description" content="Read engineering legends, construction tips, and real client stories from Karrcholai — residential construction specialists in Tamil Nadu." />
- <link rel="canonical" href="https://karrcholai-sepia.vercel.app/blog" />
+ <link rel="canonical" href="https://karrcholai.com/blog" />
  <meta property="og:title" content="The Journal | Construction Insights & Stories | Karrcholai" />
  <meta property="og:description" content="Read engineering legends, construction tips, and real client stories from Karrcholai — residential construction specialists in Tamil Nadu." />
- <meta property="og:url" content="https://karrcholai-sepia.vercel.app/blog" />
+ <meta property="og:url" content="https://karrcholai.com/blog" />
  </Helmet>
  <Navbar />
 

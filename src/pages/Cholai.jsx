@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+﻿import React, { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
@@ -120,10 +120,10 @@ const Cholai = () => {
  <Helmet>
  <title>Cholai | Landscape, Solar &amp; Sustainable Home Solutions | Karrcholai</title>
  <meta name="description" content="Cholai is Karrcholai's sustainability division — landscape development, rainwater harvesting, solar energy, waste management, smart lighting & traditional flooring for homes in Tamil Nadu." />
- <link rel="canonical" href="https://karrcholai-sepia.vercel.app/cholai" />
+ <link rel="canonical" href="https://karrcholai.com/cholai" />
  <meta property="og:title" content="Cholai | Landscape, Solar & Sustainable Home Solutions | Karrcholai" />
  <meta property="og:description" content="Cholai is Karrcholai's sustainability division — landscape development, rainwater harvesting, solar energy, waste management, smart lighting & traditional flooring for homes in Tamil Nadu." />
- <meta property="og:url" content="https://karrcholai-sepia.vercel.app/cholai" />
+ <meta property="og:url" content="https://karrcholai.com/cholai" />
  </Helmet>
  <Navbar />
 

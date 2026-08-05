@@ -268,6 +268,8 @@ const CholaiHomeSection = () => {
                     key={`${active}-${imgIdx}`}
                     src={current.images[imgIdx]}
                     alt={current.title}
+                    loading="lazy"
+                    decoding="async"
                     initial={{ opacity: 0, scale: 1.05 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}

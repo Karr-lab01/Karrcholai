@@ -113,31 +113,62 @@ const UnifiedFooter = () => {
           {/* Column 1: spacer for the absolutely-positioned logo (desktop only) */}
           <div className="lg:col-span-1 hidden lg:block" />
 
-          {/* Column 2 & 3: Quick Links */}
+          {/* Column 2 & 3: Quick Links — split into Pages + Tools */}
           <div className="lg:col-span-2">
-            <h4 className="text-[9px] font-black tracking-[0.4em] uppercase text-secondary mb-6 brightness-110 border-b border-white/5 pb-3 inline-block">
-              Quick Links
-            </h4>
-            <ul className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 gap-x-4">
-              {[
-                { name: 'Home', path: '/' },
-                { name: 'About', path: '/about' },
-                { name: 'Karr', path: '/karr' },
-                { name: 'Cholai', path: '/cholai' },
-                { name: 'Projects', path: '/projects' },
-                { name: 'Blog', path: '/blog' },
-                { name: 'Manaiyadi', path: '/manaiyadi' },
-                { name: 'Contact', path: '/contact' },
-              ].map((link) => (
-                <li key={link.name}>
-                  <Link to={link.path}
-                    className="text-white/60 hover:text-white text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-2 group uppercase">
-                    <span className="w-1.5 h-1.5 rounded-full bg-secondary/0 group-hover:bg-secondary transition-all duration-300" />
-                    <span className="group-hover:translate-x-1 transition-transform duration-300">{link.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {/* Pages */}
+              <div>
+                <h4 className="text-[9px] font-black tracking-[0.4em] uppercase text-secondary mb-6 brightness-110 border-b border-white/5 pb-3 inline-block">
+                  Pages
+                </h4>
+                <ul className="flex flex-col gap-4">
+                  {[
+                    { name: 'Home', path: '/' },
+                    { name: 'About Us', path: '/about' },
+                    { name: 'Services', path: '/services' },
+                    { name: 'Karr — Construction', path: '/karr' },
+                    { name: 'Cholai — Sustainable', path: '/cholai' },
+                    { name: 'Projects', path: '/projects' },
+                    { name: 'Blog & Insights', path: '/blog' },
+                    { name: 'Contact', path: '/contact' },
+                  ].map((link) => (
+                    <li key={link.name}>
+                      <Link to={link.path}
+                        className="text-white/50 hover:text-white text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-2 group uppercase">
+                        <span className="w-1.5 h-1.5 rounded-full bg-secondary/0 group-hover:bg-secondary transition-all duration-300 flex-shrink-0" />
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">{link.name}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Free Tools */}
+              <div>
+                <h4 className="text-[9px] font-black tracking-[0.4em] uppercase text-secondary mb-6 brightness-110 border-b border-white/5 pb-3 inline-block">
+                  Free Tools
+                </h4>
+                <ul className="flex flex-col gap-4">
+                  {[
+                    { name: 'Vastu Compass', path: '/vastu-compass' },
+                    { name: 'Cost Estimator', path: '/cost-estimator' },
+                    { name: 'Manaiyadi Sastram', path: '/manaiyadi' },
+                    { name: 'Manaiyadi Calculator', path: '/manaiyadi/calculator' },
+                    { name: 'Dimension Guide', path: '/manaiyadi/dimension-guide' },
+                    { name: 'Vastu Days', path: '/manaiyadi/vastu-days' },
+                    { name: 'Muhurtham Dates', path: '/manaiyadi/muhurtham-dates' },
+                  ].map((link) => (
+                    <li key={link.name}>
+                      <Link to={link.path}
+                        className="text-white/50 hover:text-white text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-2 group uppercase">
+                        <span className="w-1.5 h-1.5 rounded-full bg-secondary/0 group-hover:bg-secondary transition-all duration-300 flex-shrink-0" />
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">{link.name}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
 
           {/* Column 4: Newsletter */}
@@ -178,7 +209,7 @@ const UnifiedFooter = () => {
             <a href="#" className="hover:text-white transition-colors">Cookies</a>
           </div>
           <p className="text-white/30 text-[8px] font-black tracking-[0.3em] uppercase text-center">
-            © 2025 Karrcholai Construction. All rights reserved.
+            © 2026 Karrcholai Construction. All rights reserved.
           </p>
           <div className="flex items-center justify-center gap-2 text-white/40 text-[8px] font-black tracking-widest uppercase">
             <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />

@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
-Sitemap: https://karrcholai-sepia.vercel.app/sitemap.xml
+Sitemap: https://karrcholai.com/sitemap.xml

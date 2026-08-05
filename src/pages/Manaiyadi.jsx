@@ -26,10 +26,41 @@ const Manaiyadi = () => {
  <Helmet>
  <title>Manaiyadi Sastram | Tamil Architecture Dimensions | Karrcholai</title>
  <meta name="description" content="Discover Manaiyadi Sastram — the traditional Tamil system for auspicious room dimensions and wall heights. Free calculator and reference tables for modern home construction." />
- <link rel="canonical" href="https://karrcholai-sepia.vercel.app/manaiyadi" />
+ <link rel="canonical" href="https://karrcholai.com/manaiyadi" />
  <meta property="og:title" content="Manaiyadi Sastram | Tamil Architecture Dimensions | Karrcholai" />
  <meta property="og:description" content="Discover Manaiyadi Sastram — the traditional Tamil system for auspicious room dimensions and wall heights. Free calculator and reference tables for modern home construction." />
- <meta property="og:url" content="https://karrcholai-sepia.vercel.app/manaiyadi" />
+ <meta property="og:url" content="https://karrcholai.com/manaiyadi" />
+ <script type="application/ld+json">{JSON.stringify({
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
+     { "@type": "ListItem", "position": 2, "name": "Manaiyadi Sastram", "item": "https://karrcholai.com/manaiyadi" }
+   ]
+ })}</script>
+ <script type="application/ld+json">{JSON.stringify({
+   "@context": "https://schema.org",
+   "@type": "WebPage",
+   "name": "Manaiyadi Sastram — Traditional Tamil Home Planning",
+   "url": "https://karrcholai.com/manaiyadi",
+   "description": "Manaiyadi Sastram is the traditional Tamil science of home measurement and Vastu planning. Includes a free Manaiyadi calculator and dimension reference tables for modern residential construction.",
+   "breadcrumb": {
+     "@type": "BreadcrumbList",
+     "itemListElement": [
+       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
+       { "@type": "ListItem", "position": 2, "name": "Manaiyadi Sastram", "item": "https://karrcholai.com/manaiyadi" }
+     ]
+   },
+   "mainEntity": {
+     "@type": "SoftwareApplication",
+     "name": "Manaiyadi Sastram Calculator",
+     "applicationCategory": "UtilityApplication",
+     "operatingSystem": "Web",
+     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+     "description": "Free Manaiyadi Sastram calculator for Tamil home planning. Calculate auspicious dimensions for doors, rooms, and plots based on traditional Tamil architectural science.",
+     "url": "https://karrcholai.com/manaiyadi/calculator"
+   }
+ })}</script>
  </Helmet>
  <Navbar />
 

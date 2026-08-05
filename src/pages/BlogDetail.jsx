@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
@@ -58,10 +58,10 @@ const BlogDetail = () => {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDesc} />
-        <link rel="canonical" href={`https://karrcholai-sepia.vercel.app/blog/${canonicalId}`} />
+        <link rel="canonical" href={`https://karrcholai.com/blog/${canonicalId}`} />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDesc} />
-        <meta property="og:url" content={`https://karrcholai-sepia.vercel.app/blog/${canonicalId}`} />
+        <meta property="og:url" content={`https://karrcholai.com/blog/${canonicalId}`} />
         {post.image && <meta property="og:image" content={post.image} />}
       </Helmet>
       <Navbar />
@@ -271,6 +271,100 @@ const BlogDetail = () => {
             </div>
           )}
         </div>
+
+        {/* ── Internal linking: Related articles + tool CTAs ── */}
+        {(() => {
+          const relatedPosts = blogPosts
+            .filter(p => p.id !== post.id && p.category === post.category)
+            .slice(0, 2)
+          const otherPosts = blogPosts
+            .filter(p => p.id !== post.id && p.category !== post.category)
+            .slice(0, 2 - relatedPosts.length)
+          const suggested = [...relatedPosts, ...otherPosts].slice(0, 2)
+
+          return (
+            <section style={{ borderTop: '1px solid rgba(0,0,0,0.06)', padding: '56px 24px', background: '#FAF9F6' }}>
+              <div style={{ maxWidth: 720, margin: '0 auto' }}>
+
+                {/* Related posts */}
+                {suggested.length > 0 && (
+                  <div style={{ marginBottom: 48 }}>
+                    <p style={{ fontSize: 9, fontWeight: 900, letterSpacing: '0.5em', textTransform: 'uppercase',
+                      color: 'rgba(0,0,0,0.25)', marginBottom: 24 }}>Continue Reading</p>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+                      {suggested.map(related => (
+                        <Link key={related.id} to={`/blog/${related.id}`}
+                          style={{ display: 'block', padding: '20px 24px', background: '#fff',
+                            border: '1px solid rgba(0,0,0,0.06)', borderRadius: 16, textDecoration: 'none',
+                            transition: 'border-color 0.2s, box-shadow 0.2s' }}
+                          onMouseEnter={e => { e.currentTarget.style.borderColor = '#B85C38'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(184,92,56,0.08)' }}
+                          onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.06)'; e.currentTarget.style.boxShadow = 'none' }}>
+                          <span style={{ fontSize: 8, fontWeight: 900, letterSpacing: '0.4em', textTransform: 'uppercase',
+                            color: '#B85C38', display: 'block', marginBottom: 8 }}>{related.category}</span>
+                          <span style={{ fontSize: 13, fontWeight: 700, color: '#1A1A1A', lineHeight: 1.4,
+                            display: 'block' }}>{related.title}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Free tool CTAs — contextual based on category */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12 }}>
+                  {(post.category === 'Land and Plot Tips' || post.category === 'Construction Tips') && (
+                    <Link to="/vastu-compass"
+                      style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '16px 20px',
+                        background: 'linear-gradient(135deg, #1a2e1a, #0d1a0d)',
+                        borderRadius: 12, textDecoration: 'none' }}>
+                      <span style={{ fontSize: 20 }}>🧭</span>
+                      <div>
+                        <span style={{ fontSize: 8, fontWeight: 900, letterSpacing: '0.35em', textTransform: 'uppercase',
+                          color: '#d4af37', display: 'block', marginBottom: 3 }}>Free Tool</span>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>Vastu Compass</span>
+                      </div>
+                    </Link>
+                  )}
+                  {(post.category === 'Land and Plot Tips' || post.category === 'Single Stone Stories') && (
+                    <Link to="/manaiyadi/calculator"
+                      style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '16px 20px',
+                        background: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',
+                        borderRadius: 12, textDecoration: 'none' }}>
+                      <span style={{ fontSize: 20 }}>📐</span>
+                      <div>
+                        <span style={{ fontSize: 8, fontWeight: 900, letterSpacing: '0.35em', textTransform: 'uppercase',
+                          color: '#B85C38', display: 'block', marginBottom: 3 }}>Free Tool</span>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>Manaiyadi Calculator</span>
+                      </div>
+                    </Link>
+                  )}
+                  {post.category === 'Construction Tips' && (
+                    <Link to="/cost-estimator"
+                      style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '16px 20px',
+                        background: 'linear-gradient(135deg, #B85C38, #8B3A20)',
+                        borderRadius: 12, textDecoration: 'none' }}>
+                      <span style={{ fontSize: 20 }}>🏗️</span>
+                      <div>
+                        <span style={{ fontSize: 8, fontWeight: 900, letterSpacing: '0.35em', textTransform: 'uppercase',
+                          color: 'rgba(255,255,255,0.6)', display: 'block', marginBottom: 3 }}>Free Tool</span>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>Cost Estimator</span>
+                      </div>
+                    </Link>
+                  )}
+                  <Link to="/contact"
+                    style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '16px 20px',
+                      background: '#1A1A1A', borderRadius: 12, textDecoration: 'none' }}>
+                    <span style={{ fontSize: 20 }}>📞</span>
+                    <div>
+                      <span style={{ fontSize: 8, fontWeight: 900, letterSpacing: '0.35em', textTransform: 'uppercase',
+                        color: 'rgba(255,255,255,0.35)', display: 'block', marginBottom: 3 }}>Free Consultation</span>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>Talk to Karrcholai</span>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+            </section>
+          )
+        })()}
 
         {/* ── Back to journal ── */}
         <div style={{ borderTop: '1px solid rgba(0,0,0,0.06)', padding: '56px 24px',

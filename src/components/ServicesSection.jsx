@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import { FiHome, FiBriefcase, FiRefreshCw, FiEdit3, FiShield, FiArrowRight } from 'react-icons/fi'
-import bgImage from '../../assets/img1.jpg'
 
 const services = [
   {
@@ -39,16 +38,13 @@ const ServicesSection = () => {
   return (
     <section id="services" className="relative py-16 md:py-40 overflow-hidden flex items-center bg-black">
       
-      {/* ── High-Visibility Background ── */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src={bgImage} 
-          alt="Architectural Backdrop" 
-          className="w-full h-full object-cover opacity-50"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/20 to-black" />
-        <div className="absolute inset-0 bg-black/30" />
-      </div>
+      {/* ── Background ── */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black via-zinc-900 to-black" />
+      <div className="absolute inset-0 z-0 opacity-20"
+        style={{
+          backgroundImage: `radial-gradient(ellipse at 20% 50%, rgba(201,117,74,0.15) 0%, transparent 60%)`
+        }}
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
         

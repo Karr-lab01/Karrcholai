@@ -115,7 +115,7 @@ const WelcomeSection = () => {
                 style={{ y: y1 }}
                 className="absolute inset-0 z-10 rounded-2xl overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)]"
               >
-                <img src={welcomeImg} className="w-full h-full object-cover scale-110" alt="Karrcholai residential construction project interior" />
+                <img src={welcomeImg} className="w-full h-full object-cover scale-110" alt="Karrcholai residential construction project interior" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
               </motion.div>
 
@@ -124,7 +124,7 @@ const WelcomeSection = () => {
                 style={{ y: y2 }}
                 className="hidden sm:block absolute -right-4 md:-right-10 top-1/2 -translate-y-1/2 w-1/2 aspect-square z-20 rounded-2xl overflow-hidden shadow-2xl border-[8px] md:border-[12px] border-white"
               >
-                <img src={pic5} className="w-full h-full object-cover" alt="Karrcholai construction detail" />
+                <img src={pic5} className="w-full h-full object-cover" alt="Karrcholai premium home construction finish — interior detail Tamil Nadu" loading="lazy" decoding="async" />
               </motion.div>
 
               {/* Rotating Experience Badge */}

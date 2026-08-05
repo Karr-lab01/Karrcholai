@@ -1,4 +1,4 @@
-import Navbar from '../components/Navbar'
+﻿import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import CostEstimator from '../components/CostEstimator'
 import { motion } from 'framer-motion'
@@ -13,10 +13,10 @@ export default function CostEstimatorPage() {
         <title>Construction Cost Estimator | Karrcholai</title>
         <meta name="description"
           content="Free instant construction cost estimator for Tamil Nadu homes. Get a detailed ₹ estimate by plot size, floors, finish quality and city — 2025 rates. No sign-up required." />
-        <link rel="canonical" href="https://karrcholai-sepia.vercel.app/cost-estimator" />
+        <link rel="canonical" href="https://karrcholai.com/cost-estimator" />
         <meta property="og:title" content="Construction Cost Estimator | Karrcholai" />
         <meta property="og:description" content="Free instant construction cost estimator for Tamil Nadu homes. Get a detailed ₹ estimate by plot size, floors, finish quality and city — 2025 rates. No sign-up required." />
-        <meta property="og:url" content="https://karrcholai-sepia.vercel.app/cost-estimator" />
+        <meta property="og:url" content="https://karrcholai.com/cost-estimator" />
       </Helmet>
       <Navbar />
 

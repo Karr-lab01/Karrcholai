@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+﻿import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView, useScroll, useTransform, useSpring } from 'framer-motion'
 import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiArrowRight, FiNavigation, FiChevronDown, FiInstagram, FiFacebook } from 'react-icons/fi'
 import { Helmet } from 'react-helmet-async'
@@ -144,10 +144,10 @@ export default function ContactUs() {
       <Helmet>
         <title>Contact Us | Book a Free Consultation | Karrcholai</title>
         <meta name="description" content="Contact Karrcholai Construction for premium residential projects in Tamil Nadu. Schedule a free consultation — Karur, Chennai, Coimbatore & beyond." />
-        <link rel="canonical" href="https://karrcholai-sepia.vercel.app/contact" />
+        <link rel="canonical" href="https://karrcholai.com/contact" />
         <meta property="og:title" content="Contact Us | Book a Free Consultation | Karrcholai" />
         <meta property="og:description" content="Contact Karrcholai Construction for premium residential projects in Tamil Nadu. Schedule a free consultation — Karur, Chennai, Coimbatore & beyond." />
-        <meta property="og:url" content="https://karrcholai-sepia.vercel.app/contact" />
+        <meta property="og:url" content="https://karrcholai.com/contact" />
       </Helmet>
 
       {/* ── Scroll progress bar ── */}

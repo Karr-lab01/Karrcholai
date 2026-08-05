@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 import { FiCalendar, FiSun } from 'react-icons/fi'
@@ -40,7 +40,7 @@ const MuhurthamDatesPage = () => {
           name="description"
           content="Auspicious Muhurtham dates for foundation-laying and construction commencement in 2026. Traditional Tamil almanac curated by Karrcholai Construction."
         />
-        <link rel="canonical" href="https://karrcholai-sepia.vercel.app/manaiyadi/muhurtham-dates" />
+        <link rel="canonical" href="https://karrcholai.com/manaiyadi/muhurtham-dates" />
       </Helmet>
 
       <Navbar />

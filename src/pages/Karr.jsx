@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+﻿import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { 
  FiHome, FiBriefcase, FiRefreshCw, FiEdit3, 
@@ -83,10 +83,10 @@ const Karr = () => {
  <Helmet>
  <title>Karr | Residential Construction &amp; Project Management | Karrcholai</title>
  <meta name="description" content="Karr is Karrcholai's construction division — turnkey residential building, structural work, renovation, PMC, and cost estimation across Tamil Nadu." />
- <link rel="canonical" href="https://karrcholai-sepia.vercel.app/karr" />
+ <link rel="canonical" href="https://karrcholai.com/karr" />
  <meta property="og:title" content="Karr | Residential Construction & Project Management | Karrcholai" />
  <meta property="og:description" content="Karr is Karrcholai's construction division — turnkey residential building, structural work, renovation, PMC, and cost estimation across Tamil Nadu." />
- <meta property="og:url" content="https://karrcholai-sepia.vercel.app/karr" />
+ <meta property="og:url" content="https://karrcholai.com/karr" />
  </Helmet>
  <Navbar />
 

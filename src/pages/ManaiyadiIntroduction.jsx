@@ -26,10 +26,10 @@ const ManaiyadiIntroduction = () => {
  name="description"
  content="A complete introduction to Manaiyadi Sastram — the traditional Tamil architectural practice. Learn about auspicious dimensions, wall heights, yoga unions, and room archetypes for modern home planning."
  />
- <link rel="canonical" href="https://karrcholai-sepia.vercel.app/manaiyadi/introduction" />
+ <link rel="canonical" href="https://karrcholai.com/manaiyadi/introduction" />
  <meta property="og:title" content="Introduction to Manaiyadi Sastram | Karrcholai Construction" />
  <meta property="og:description" content="A complete introduction to Manaiyadi Sastram — the traditional Tamil architectural practice. Learn about auspicious dimensions, wall heights, yoga unions, and room archetypes for modern home planning." />
- <meta property="og:url" content="https://karrcholai-sepia.vercel.app/manaiyadi/introduction" />
+ <meta property="og:url" content="https://karrcholai.com/manaiyadi/introduction" />
  </Helmet>
 
  <Navbar />

@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async'
 import { FiArrowLeft, FiMapPin, FiCalendar, FiMaximize, FiTag, FiClock, FiCheckCircle } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
+import { SITE_URL } from '../config/site'
 import pr_1 from '../assets/pr_1.jpeg'
 import pr_2 from '../assets/pr_2.jpeg'
 import pr_3 from '../assets/pr_3.jpeg'
@@ -61,10 +62,10 @@ const ProjectDetail = () => {
  <Helmet>
  <title>{project.title} | Project Detail | Karrcholai</title>
  <meta name="description" content={`${project.description} — Karrcholai residential construction project in ${project.location}.`} />
- <link rel="canonical" href={`https://karrcholai-sepia.vercel.app/projects/${project.id}`} />
+ <link rel="canonical" href={`${SITE_URL}/projects/${project.id}`} />
  <meta property="og:title" content={`${project.title} | Karrcholai`} />
  <meta property="og:description" content={project.description} />
- <meta property="og:url" content={`https://karrcholai-sepia.vercel.app/projects/${project.id}`} />
+ <meta property="og:url" content={`${SITE_URL}/projects/${project.id}`} />
  </Helmet>
  <Navbar />
 

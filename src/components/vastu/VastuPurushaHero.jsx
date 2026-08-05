@@ -200,10 +200,10 @@ function AuraPulse() {
 
 // ── Tool cards — 4 items, one per side ───────────────────────────────────────
 const TOOL_CARDS = [
-  { id:'calculator', icon:'📐', label:'Dimension Calculator', desc:'Find auspicious room sizes for your home',   route:'/manaiyadi/calculator',     color:'#F59E0B' },
-  { id:'compass',    icon:'🧭', label:'Direction Compass',    desc:'Score your home\'s Vastu compliance',        route:'/vastu-compass',            color:'#818CF8' },
-  { id:'guide',      icon:'📏', label:'Dimension Guide',      desc:'Complete measurement reference table',       route:'/manaiyadi/dimension-guide', color:'#34D399' },
-  { id:'cost',       icon:'💰', label:'Cost Estimator',       desc:'Budget your construction smartly',           route:'/cost-estimator',           color:'#F472B6' },
+  { id:'calculator',  icon:'📐', label:'Dimension Calculator',      desc:'Find auspicious room sizes for your home',   route:'/manaiyadi/calculator',     color:'#F59E0B' },
+  { id:'muhurtham',   icon:'🌸', label:'சுப முகூர்த்த தினங்கள்',   desc:'வீடு கட்ட சுப நாட்களை அறியுங்கள்',           route:'/manaiyadi/muhurtham-dates', color:'#F87171' },
+  { id:'guide',       icon:'📏', label:'Dimension Guide',           desc:'Complete measurement reference table',       route:'/manaiyadi/dimension-guide',  color:'#34D399' },
+  { id:'vastunaal',   icon:'🪔', label:'வாஸ்து செய்யும் நாட்கள்', desc:'வாஸ்து பூஜைக்கு உரிய நாட்களை தேர்வு செய்யுங்கள்', route:'/manaiyadi/vastu-days',  color:'#A78BFA' },
 ]
 
 // ── Full-screen modal overlay with 4 tool cards ───────────────────────────────
@@ -235,17 +235,26 @@ function VastuToolsModal({ onClose, onNavigate }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.35 }}
       style={{
-        position: 'fixed', inset: 0, zIndex: 998,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        position: 'fixed', inset: 0, zIndex: 9999,
+        overflowY: 'auto',
         backdropFilter: 'blur(18px)',
         WebkitBackdropFilter: 'blur(18px)',
-        background: 'rgba(4,2,0,0.78)',
-        padding: '20px',
-        paddingTop: '90px',
-        overflowY: 'auto',
+        background: 'rgba(4,2,0,0.85)',
+        top: '90px',
       }}
       onClick={onClose}
     >
+      {/* Centering wrapper — pushes content below navbar */}
+      <div
+        style={{
+          minHeight: '100%',
+          display: 'flex',
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+          padding: '16px 20px 40px',
+        }}
+        onClick={onClose}
+      >
       {/* Modal inner — stop propagation so clicking inside doesn't close */}
       <motion.div
         initial={{ scale: 0.88, opacity: 0, y: 30 }}
@@ -260,37 +269,46 @@ function VastuToolsModal({ onClose, onNavigate }) {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '28px',
+          gap: '24px',
         }}
       >
-        {/* Close button */}
-        <motion.button
-          whileHover={{ scale: 1.1, rotate: 90 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={onClose}
-          style={{
-            position: 'absolute', top: '-10px', right: '0',
-            width: '36px', height: '36px', borderRadius: '50%',
-            background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
-            color: 'rgba(255,255,255,0.7)', fontSize: '16px', cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            outline: 'none', zIndex: 10,
-          }}
-        >✕</motion.button>
 
-        {/* Header */}
+        {/* Header row — title centered, close button right */}
         <motion.div
-          initial={{ opacity: 0, y: -16 }}
+          initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05 }}
-          style={{ textAlign: 'center' }}
+          style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', minHeight: '48px' }}
         >
-          <h2 style={{ fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 900, color: '#FAF9F6', letterSpacing: '-0.02em', margin: 0 }}>
-            Explore Vastu <span style={{ color: '#C9754A' }}>Tools</span>
-          </h2>
-          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', margin: '6px 0 0', fontWeight: 300 }}>
-            Click any tool below to get started
-          </p>
+          <div style={{ textAlign: 'center' }}>
+            <h2 style={{ fontSize: 'clamp(1.3rem,3vw,1.8rem)', fontWeight: 900, color: '#FAF9F6', letterSpacing: '-0.02em', margin: 0 }}>
+              Explore Vastu <span style={{ color: '#C9754A' }}>Tools</span>
+            </h2>
+            <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', margin: '4px 0 0', fontWeight: 300 }}>
+              Click any tool below to get started
+            </p>
+          </div>
+          {/* Compact close button */}
+          <motion.button
+            whileHover={{ rotate: 90 }}
+            whileTap={{ scale: 0.92 }}
+            transformTemplate={({ rotate, scale }) =>
+              `translateY(-50%) rotate(${rotate ?? '0deg'}) scale(${scale ?? 1})`
+            }
+            onClick={e => { e.stopPropagation(); onClose() }}
+            style={{
+              position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)',
+              width: '32px', height: '32px', borderRadius: '50%',
+              background: 'rgba(255,255,255,0.1)',
+              border: '1.5px solid rgba(255,255,255,0.35)',
+              color: 'rgba(255,255,255,0.85)', fontSize: '14px', fontWeight: 700,
+              cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              outline: 'none', zIndex: 10,
+              boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
+              lineHeight: 1,
+            }}
+          >✕</motion.button>
         </motion.div>
 
         {/* Image + 4 cards layout */}
@@ -362,16 +380,9 @@ function VastuToolsModal({ onClose, onNavigate }) {
           </div>
         )}
 
-        {/* Footer hint */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          style={{ fontSize: '10px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.15em', textTransform: 'uppercase' }}
-        >
-          Press Esc or click outside to close
-        </motion.p>
+
       </motion.div>
+      </div>
     </motion.div>
   )
 }

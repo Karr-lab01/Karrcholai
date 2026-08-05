@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 import { FiClock, FiSun, FiCompass } from 'react-icons/fi'
@@ -44,7 +44,7 @@ const VastuDaysPage = () => {
           name="description"
           content="Precise Muhurtham windows for Vastu foundation-laying in each Tamil month of 2026. Traditional morning muhurtham times curated by Karrcholai Construction."
         />
-        <link rel="canonical" href="https://karrcholai-sepia.vercel.app/manaiyadi/vastu-days" />
+        <link rel="canonical" href="https://karrcholai.com/manaiyadi/vastu-days" />
       </Helmet>
 
       <Navbar />

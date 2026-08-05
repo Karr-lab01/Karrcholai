@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react'
+﻿import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { 
@@ -136,10 +136,10 @@ export default function Projects() {
  <title>Residential Construction Projects | Karrcholai Tamil Nadu</title>
  <meta name="description" content="Explore completed residential projects by Karrcholai — ECR Chennai and Karur residences built with structural integrity, sustainable design, and disciplined execution." />
  <link rel="preconnect" href="https://fonts.googleapis.com" />
- <link rel="canonical" href="https://karrcholai-sepia.vercel.app/projects" />
+ <link rel="canonical" href="https://karrcholai.com/projects" />
  <meta property="og:title" content="Residential Construction Projects | Karrcholai Tamil Nadu" />
  <meta property="og:description" content="Explore completed residential projects by Karrcholai — ECR Chennai and Karur residences built with structural integrity, sustainable design, and disciplined execution." />
- <meta property="og:url" content="https://karrcholai-sepia.vercel.app/projects" />
+ <meta property="og:url" content="https://karrcholai.com/projects" />
  </Helmet>
 
  {/* Luxury Progress Scroll Bar */}
@@ -315,7 +315,7 @@ export default function Projects() {
  activeImgP1 === idx ? 'border-[#B85C38] scale-103 ring-2 ring-[#B85C38]/20' : 'border-dark/5 opacity-70 hover:opacity-100'
  }`}
  >
- <img src={img} alt={`ECR Residence construction stage ${idx + 1}`} className="w-full h-full object-cover" />
+ <img src={img} alt={`ECR Residence Chennai — construction stage ${idx + 1}: ${p1Captions[idx] || 'residential construction Tamil Nadu'}`} className="w-full h-full object-cover" />
  </button>
  ))}
  </div>
@@ -570,7 +570,7 @@ export default function Projects() {
  activeImgP2 === idx ? 'border-[#2D4B37] scale-103 ring-2 ring-[#2D4B37]/20' : 'border-dark/5 opacity-70 hover:opacity-100'
  }`}
  >
- <img src={img} alt={`Karur Residence construction stage ${idx + 1}`} className="w-full h-full object-cover" />
+ <img src={img} alt={`Karur Residence — construction stage ${idx + 1}: ${p2Captions[idx] || 'sustainable home construction Karur Tamil Nadu'}`} className="w-full h-full object-cover" />
  </button>
  ))}
  </div>
