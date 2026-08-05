@@ -21,10 +21,10 @@
     <meta property="og:url" content="https://karrcholai.com/" />
     <meta property="og:title" content="Karrcholai Construction & Architecture" />
     <meta property="og:description" content="Full-service construction & architecture: Residential, PMC, Renovation, Landscape, Rainwater Harvesting, Solar Energy, Waste Management, Lighting & Flooring. Plus free Vastu tools & Manaiyadi Sastram calculator." />
-    <meta property="og:image" content="https://karrcholai.com/og-image.svg" />
+    <meta property="og:image" content="https://karrcholai.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:site_name" content="Karrcholai Construction" />
 
@@ -32,7 +32,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Karrcholai Construction & Architecture" />
     <meta name="twitter:description" content="Full-service construction & architecture in Tamil Nadu — custom homes, renovation, landscape, solar, rainwater harvesting. Free Vastu compass & Manaiyadi calculator." />
-    <meta name="twitter:image" content="https://karrcholai.com/og-image.svg" />
+    <meta name="twitter:image" content="https://karrcholai.com/og-image.png" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -60,7 +60,7 @@
       "name": "Karrcholai Construction",
       "url": "https://karrcholai.com",
       "logo": "https://karrcholai.com/favicon.png",
-      "image": "https://karrcholai.com/og-image.svg",
+      "image": "https://karrcholai.com/og-image.png",
       "description": "Premier residential construction company in Tamil Nadu specialising in custom homes, renovation, interior design, Vastu Shastra, landscaping and sustainable building practices.",
       "foundingDate": "2019",
       "telephone": "+91-97414-16747",
@@ -201,10 +201,21 @@
     </script>
   </head>
   <body>
-    <!-- SEO semantic shell: visible to crawlers before JS hydration.
-         Styled to be visually hidden but accessible to search engines.
-         React hydrates over this on load. -->
-    <div id="seo-shell" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+    <!-- SEO semantic shell: rendered in the HTML for crawlers.
+         Visually hidden from users AFTER React mounts via JS class.
+         Crawlers see real H1/H2/text before any JS executes. -->
+    <style>
+      .seo-shell-hidden { display: none !important; }
+      #seo-shell {
+        font-family: sans-serif;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+        color: #1a1a1a;
+      }
+    </style>
+    <!-- seo-shell-start -->
+    <div id="seo-shell">
       <h1>Karrcholai | Premium Residential Construction in Tamil Nadu</h1>
       <h2>Expert Home Building &amp; Architecture — Chennai &amp; Tamil Nadu</h2>
       <p>Karrcholai Construction &amp; Architecture offers full-service residential building, renovation,
@@ -225,14 +236,10 @@
       <h2>Contact Karrcholai</h2>
       <p>Call us at +91-97414-16747. Based in Tamil Nadu, serving Chennai and surrounding districts.</p>
     </div>
+    <!-- seo-shell-end -->
 
-    <!-- noscript fallback for crawlers that don't execute JavaScript -->
+    <!-- noscript fallback: keep shell visible when JS is disabled -->
     <noscript>
-      <style>
-        #seo-shell { position: static !important; width: auto !important; height: auto !important;
-          overflow: visible !important; clip: auto !important; white-space: normal !important;
-          padding: 2rem; font-family: sans-serif; max-width: 900px; margin: 0 auto; }
-      </style>
       <div style="background:#fff3cd;padding:1rem;text-align:center;font-family:sans-serif;">
         JavaScript is required for the full Karrcholai website experience.
         Please enable JavaScript in your browser to access all features.
@@ -242,12 +249,22 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!-- Remove SEO shell after React has hydrated to avoid duplicate content for users -->
+    <!-- Hide SEO shell only AFTER React has fully mounted and rendered content -->
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+      // Wait for React to render before hiding the shell
+      // Use MutationObserver to detect when #root gets children
+      (function() {
+        var root = document.getElementById('root');
         var shell = document.getElementById('seo-shell');
-        if (shell) { shell.style.display = 'none'; }
-      });
+        if (!root || !shell) return;
+        var observer = new MutationObserver(function() {
+          if (root.children.length > 0) {
+            shell.classList.add('seo-shell-hidden');
+            observer.disconnect();
+          }
+        });
+        observer.observe(root, { childList: true, subtree: false });
+      })();
     </script>
   </body>
 </html>

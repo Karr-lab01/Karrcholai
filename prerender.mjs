@@ -203,16 +203,19 @@ function buildRouteHtml(route) {
     `<meta property="og:description" content="${escapeHtml(route.description)}"`
   );
 
-  // 7. Update SEO shell content
+  // 7. Update SEO shell content — fully visible to crawlers, hidden via JS after React mounts
   const seoShell = `
-    <div id="seo-shell" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+    <!-- seo-shell-start -->
+    <div id="seo-shell">
       <h1>${escapeHtml(route.h1)}</h1>
       <h2>${escapeHtml(route.h2)}</h2>
       <p>${escapeHtml(route.bodyText)}</p>
-    </div>`;
+    </div>
+    <!-- seo-shell-end -->`;
 
+  // Use sentinel comments to reliably replace the entire shell block
   html = html.replace(
-    /<div id="seo-shell"[\s\S]*?<\/div>/,
+    /<!-- seo-shell-start -->[\s\S]*?<!-- seo-shell-end -->/,
     seoShell
   );
 

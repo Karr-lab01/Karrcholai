@@ -2,6 +2,14 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.karrcholai.com" }],
+      "destination": "https://karrcholai.com/",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
