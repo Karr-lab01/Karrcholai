@@ -37,7 +37,7 @@ const routes = [
     description: 'Karrcholai Construction & Architecture — residential building, renovation, landscaping, solar energy & rainwater harvesting in Tamil Nadu. Free Vastu compass & Manaiyadi Sastram tools.',
     h1: 'Build Your Dream Home with Expert Planning',
     h2: 'Premium Residential Construction & Architecture in Tamil Nadu',
-    bodyText: 'Karrcholai Construction offers custom home building, renovation, interior design, landscaping, solar energy, and rainwater harvesting across Tamil Nadu and Chennai. Vastu-compliant design with Manaiyadi Sastram tools. 12+ years, 40+ completed projects.',
+    bodyText: 'Karrcholai Construction is Tamil Nadu\'s trusted residential construction company. We offer custom home building, renovation, interior design, landscaping, solar energy installation, and rainwater harvesting. Vastu-compliant design with Manaiyadi Sastram tools. 12+ years experience, 40+ completed projects across Karur, Chennai, Coimbatore, Madurai, Trichy and Erode. Construction cost Rs.1800 to Rs.3500 per sq.ft. Free Vastu compass and Manaiyadi Sastram calculator available online.',
   },
   {
     path: '/about',
