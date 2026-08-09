@@ -1,4 +1,4 @@
-ï»¿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
@@ -22,10 +22,10 @@ const Blog = () => {
  <motion.div className="bg-white min-h-screen text-[#1a1a1a] font-sans selection:bg-[#B85C38] selection:text-white">
  <Helmet>
  <title>The Journal | Construction Insights &amp; Stories | Karrcholai</title>
- <meta name="description" content="Read engineering legends, construction tips, and real client stories from Karrcholai â€” residential construction specialists in Tamil Nadu." />
+ <meta name="description" content="Read engineering legends, construction tips, and real client stories from Karrcholai — residential construction specialists in Tamil Nadu." />
  <link rel="canonical" href="https://karrcholai.com/blog" />
  <meta property="og:title" content="The Journal | Construction Insights & Stories | Karrcholai" />
- <meta property="og:description" content="Read engineering legends, construction tips, and real client stories from Karrcholai â€” residential construction specialists in Tamil Nadu." />
+ <meta property="og:description" content="Read engineering legends, construction tips, and real client stories from Karrcholai — residential construction specialists in Tamil Nadu." />
  <meta property="og:url" content="https://karrcholai.com/blog" />
  </Helmet>
  <Navbar />
@@ -81,7 +81,7 @@ const Blog = () => {
  transition={{ duration: 1 }}
  className="flex flex-col group cursor-pointer"
  >
- <Link to={`/blog/${post.id}`} className="block relative aspect-[4/5] overflow-hidden mb-8 border border-[#1a1a1a]/5">
+ <Link to={`/blog/${post.id}`} className="block relative aspect-[4/5] overflow-hidden mb-8 border border-[#1a1a1a]/5 bg-[#1a1a1a]">
  {post.heroType === 'vastu' ? (
  <div className="w-full h-full flex flex-col items-center justify-center relative"
  style={{ background: 'linear-gradient(135deg, #1a2e1a 0%, #0d1a0d 60%, #1a0d00 100%)' }}>
@@ -105,7 +105,7 @@ const Blog = () => {
  <div style={{ width:32, height:32, borderRadius:'50%', background:'#3a5a8a', display:'flex', alignItems:'center', justifyContent:'center', fontSize:14, fontWeight:900, color:'#fff', flexShrink:0 }}>A</div>
  <div>
  <p style={{ color:'#fff', fontSize:11, fontWeight:700, margin:0, lineHeight:1 }}>Arun Kumar</p>
- <p style={{ color:'rgba(255,255,255,0.5)', fontSize:9, margin:0 }}>Client Â· Erode</p>
+ <p style={{ color:'rgba(255,255,255,0.5)', fontSize:9, margin:0 }}>Client · Erode</p>
  </div>
  </div>
  <p style={{ color:'rgba(255,255,255,0.7)', fontSize:10, margin:0, lineHeight:1.5, fontStyle:'italic' }}>"10 years of renting. One call. Eight months. And now every morning I wake up in a house that is completely ours."</p>
@@ -115,10 +115,16 @@ const Blog = () => {
  </div>
  ) : (
  <>
- <img 
- src={post.image} 
- alt={post.title} 
- className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" 
+ <div
+ role="img"
+ aria-label={post.title}
+ className="w-full h-full transition-transform duration-[1.5s] group-hover:scale-105"
+ style={{
+ backgroundImage: `url(${post.image})`,
+ backgroundSize: 'cover',
+ backgroundPosition: 'center top',
+ backgroundRepeat: 'no-repeat',
+ }}
  />
  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.02] transition-all" />
  </>
