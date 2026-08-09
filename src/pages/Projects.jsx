@@ -13,16 +13,6 @@ import FootprintMapSection from '../components/FootprintMapSection'
 import { Helmet } from 'react-helmet-async'
 
 // Image imports from root assets
-import prj20 from '../../assets/prj20.jpeg'
-import prj23 from '../../assets/prj23.jpeg'
-import prj6 from '../../assets/prj6.jpeg'
-import prj2 from '../../assets/prj2.jpeg'
-import prj8 from '../../assets/prj8.jpeg'
-import prj5 from '../../assets/prj5.jpeg'
-import prj10 from '../../assets/prj10.jpeg'
-import prj9 from '../../assets/prj9.jpeg'
-import prj7 from '../../assets/prj7.jpeg'
-
 import kr_3d from '../../assets/Karur Residance/3D Exterior Model.jpeg'
 import kr_carportico from '../../assets/Karur Residance/Car Portico.jpeg'
 import kr_footing from '../../assets/Karur Residance/Footing.jpeg'
@@ -56,26 +46,9 @@ export default function Projects() {
  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 })
 
  // Interactive Gallery States
- const [activeImgP1, setActiveImgP1] = useState(0)
- const [activeTabP1, setActiveTabP1] = useState('vision')
- const [isP1Paused, setIsP1Paused] = useState(false)
-
  const [activeImgP2, setActiveImgP2] = useState(0)
  const [activeTabP2, setActiveTabP2] = useState('vision')
  const [isP2Paused, setIsP2Paused] = useState(false)
-
- const p1Images = [prj20, prj23, prj6, prj2, prj8, prj5, prj10, prj9, prj7]
- const p1Captions = [
- "01 / Structural Columns",
- "02 / Double-Height Living Area",
- "03 / Granite Masonry Work",
- "04 / Internal Structural Layout",
- "05 / Courtyard Structure",
- "06 / Boundary Wall Construction",
- "07 / Formwork and Shuttering",
- "08 / Reinforcement Steel Detailing",
- "09 / Concrete Pouring & Curing"
- ]
 
  const p2Images = [
  kr_3d, kr_vasthupooja, kr_footing, kr_plinthbeam, kr_groundfloor,
@@ -100,15 +73,7 @@ export default function Projects() {
  "15 / Main Door"
  ]
 
- // Auto slideshow timers
- useEffect(() => {
- if (isP1Paused) return
- const timer = setInterval(() => {
- setActiveImgP1(prev => (prev + 1) % p1Images.length)
- }, 5000)
- return () => clearInterval(timer)
- }, [isP1Paused, p1Images.length])
-
+ // Auto slideshow timer
  useEffect(() => {
  if (isP2Paused) return
  const timer = setInterval(() => {
@@ -116,13 +81,6 @@ export default function Projects() {
  }, 5000)
  return () => clearInterval(timer)
  }, [isP2Paused, p2Images.length])
-
- // Manual nav helpers (reset auto timer by briefly pausing)
- const navP1 = useCallback((dir) => {
- setIsP1Paused(true)
- setActiveImgP1(prev => (prev + dir + p1Images.length) % p1Images.length)
- setTimeout(() => setIsP1Paused(false), 6000)
- }, [p1Images.length])
 
  const navP2 = useCallback((dir) => {
  setIsP2Paused(true)
@@ -134,11 +92,11 @@ export default function Projects() {
  <div ref={containerRef} className="min-h-screen overflow-x-hidden font-sans select-none" style={{ background: CREAM, color: BRONZE }}>
  <Helmet>
  <title>Residential Construction Projects | Karrcholai Tamil Nadu</title>
- <meta name="description" content="Explore completed residential projects by Karrcholai — ECR Chennai and Karur residences built with structural integrity, sustainable design, and disciplined execution." />
+ <meta name="description" content="Explore completed residential projects by Karrcholai — Karur Residence built with structural integrity, sustainable design, and disciplined execution." />
  <link rel="preconnect" href="https://fonts.googleapis.com" />
  <link rel="canonical" href="https://karrcholai.com/projects" />
  <meta property="og:title" content="Residential Construction Projects | Karrcholai Tamil Nadu" />
- <meta property="og:description" content="Explore completed residential projects by Karrcholai — ECR Chennai and Karur residences built with structural integrity, sustainable design, and disciplined execution." />
+ <meta property="og:description" content="Explore completed residential projects by Karrcholai — Karur Residence built with structural integrity, sustainable design, and disciplined execution." />
  <meta property="og:url" content="https://karrcholai.com/projects" />
  </Helmet>
 
@@ -200,264 +158,7 @@ export default function Projects() {
  </div>
  </section>
 
- {/* ── PROJECT 01: ECR RESIDENCE ── */}
- <section className="py-16 sm:py-28 md:py-40 border-b relative" style={{ borderColor: BORDER_COLOR }}>
- 
- {/* Decorative Grid coordinate marker */}
- <div className="absolute right-12 top-12 text-[10px] font-black text-dark/15 tracking-widest uppercase hidden md:block">
- LATITUDE 12.92° N // LONGITUDE 80.25° E // CHENNAI ECR, TN
- </div>
-
- <div className="max-w-7xl mx-auto px-6 md:px-12">
- 
- {/* Headline block */}
- <div className="mb-10 sm:mb-14">
- <span 
- className="text-[10px] font-black tracking-[0.35em] uppercase" 
- style={{ color: TERRA }}
- >
- Case Study 01 // Residential Construction
- </span>
- <h2 
- className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight mt-2 leading-none" 
- style={{ color: BRONZE }}
- >
- ECR Residence
- </h2>
- <div className="w-16 h-[2px] mt-4" style={{ background: TERRA }} />
- </div>
-
- {/* LUXURY METRICS DASHBOARD */}
- <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl sm:rounded-3xl border shadow-sm mb-10 sm:mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
- {[
- { icon: FiMaximize, label: "Total Built Space", value: "17k Sq.Ft", accent: TERRA },
- { icon: FiMapPin, label: "Geographic Site", value: "Chennai ECR", accent: TERRA },
- { icon: FiCalendar, label: "Year Completed", value: "2026", accent: TERRA }
- ].map((spec, idx) => (
- <div key={idx} className="p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-dark/[0.02] bg-[#FCFBF9] flex items-center gap-3 sm:gap-4 hover:border-dark/10 transition-all duration-300">
- <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${spec.accent}08` }}>
- <spec.icon className="text-sm sm:text-base" style={{ color: spec.accent }} />
- </div>
- <div>
- <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-dark/35 mb-0.5">{spec.label}</p>
- <p className="text-xs sm:text-sm font-black text-dark/95 leading-none">{spec.value}</p>
- </div>
- </div>
- ))}
- </div>
-
- {/* MAIN ALIGNED 2-COLUMN GRID (Images and Content Perfectly Aligned Side-by-Side) */}
- <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-stretch">
- 
- {/* Left Panel: Cinematic Image Gallery with Dynamic Thumbnail Selection (7/12 Width) */}
- <div className="lg:col-span-7 flex flex-col justify-between self-stretch gap-5 sm:gap-6">
- 
- {/* Primary Active Showcase Frame */}
- <div className="overflow-hidden rounded-2xl sm:rounded-[28px] shadow-lg aspect-[16/10] group relative bg-stone-100 border border-dark/5 flex-1 flex items-stretch">
- <AnimatePresence mode="wait">
- <motion.img
- key={activeImgP1}
- src={p1Images[activeImgP1]}
- alt={p1Captions[activeImgP1]}
- className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-103"
- initial={{ opacity: 0, scale: 1.02 }}
- animate={{ opacity: 1, scale: 1 }}
- exit={{ opacity: 0, scale: 0.98 }}
- transition={{ duration: 0.5, ease: 'easeInOut' }}
- />
- </AnimatePresence>
-
- {/* Left / Right Arrow Controls */}
- <button
- onClick={() => navP1(-1)}
- aria-label="Previous image"
- className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#fdfbf7]/85 backdrop-blur-sm border border-dark/10 flex items-center justify-center shadow-md hover:bg-white hover:scale-110 transition-all duration-200"
- >
- <FiChevronLeft className="text-base sm:text-lg" style={{ color: '#2A2A28' }} />
- </button>
- <button
- onClick={() => navP1(1)}
- aria-label="Next image"
- className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#fdfbf7]/85 backdrop-blur-sm border border-dark/10 flex items-center justify-center shadow-md hover:bg-white hover:scale-110 transition-all duration-200"
- >
- <FiChevronRight className="text-base sm:text-lg" style={{ color: '#2A2A28' }} />
- </button>
-
- {/* Slideshow Progress Dots */}
- <div className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 z-20 flex gap-1.5">
- {p1Images.map((_, i) => (
- <button
- key={i}
- onClick={() => { setIsP1Paused(true); setActiveImgP1(i); setTimeout(() => setIsP1Paused(false), 6000) }}
- className={`rounded-full transition-all duration-300 ${
- activeImgP1 === i ? 'w-4 h-1.5 bg-[#B85C38]' : 'w-1.5 h-1.5 bg-white/60 hover:bg-white'
- }`}
- aria-label={`Go to image ${i + 1}`}
- />
- ))}
- </div>
-
- {/* Active Caption Badge */}
- <div 
- className="absolute bottom-4 left-4 sm:bottom-5 sm:left-5 bg-[#fdfbf7]/95 backdrop-blur-md text-dark text-[8px] sm:text-[9px] uppercase tracking-widest px-3 sm:px-4 py-1.5 sm:py-2 rounded-md font-black border border-dark/5 shadow-sm"
- >
- {p1Captions[activeImgP1]}
- </div>
- </div>
-
- {/* Symmetrical Row of Interactive Thumbnails (Updated to grid-cols-9 with responsive touch swiping) */}
- <div className="flex overflow-x-auto lg:grid lg:grid-cols-9 gap-3 flex-shrink-0 pb-2 lg:pb-0 hide-scrollbar snap-x">
- {p1Images.map((img, idx) => (
- <button
- key={idx}
- onClick={() => setActiveImgP1(idx)}
- className={`overflow-hidden rounded-xl sm:rounded-2xl shadow-sm aspect-[4/3] relative bg-stone-100 border transition-all duration-300 flex-shrink-0 w-16 sm:w-20 lg:w-auto snap-center ${
- activeImgP1 === idx ? 'border-[#B85C38] scale-103 ring-2 ring-[#B85C38]/20' : 'border-dark/5 opacity-70 hover:opacity-100'
- }`}
- >
- <img src={img} alt={`ECR Residence Chennai — construction stage ${idx + 1}: ${p1Captions[idx] || 'residential construction Tamil Nadu'}`} className="w-full h-full object-cover" />
- </button>
- ))}
- </div>
- </div>
-
- {/* Right Panel: Advanced Project Storytelling Tabs Deck & Testimonial (5/12 Width) */}
- <div className="lg:col-span-5 flex flex-col justify-between self-stretch gap-6">
- 
- {/* Architectural Storytelling deck */}
- <div className="p-5 sm:p-8 rounded-[20px] sm:rounded-3xl bg-white border shadow-sm flex-1 flex flex-col justify-between" style={{ borderColor: BORDER_COLOR }}>
- <div>
- 
- {/* Visual Spec Tabs */}
- <div className="flex border-b pb-3 sm:pb-4 mb-5 sm:mb-6 gap-3 overflow-x-auto hide-scrollbar" style={{ borderColor: 'rgba(58,58,56,0.06)' }}>
- {[
- { id: 'vision', label: '01 / Vision' },
- { id: 'structural', label: '02 / Structure' },
- { id: 'material', label: '03 / Materiality' },
- { id: 'timeline', label: '04 / Timeline' }
- ].map((tab) => (
- <button
- key={tab.id}
- onClick={() => setActiveTabP1(tab.id)}
- className={`text-[9px] font-bold uppercase tracking-wider pb-1.5 border-b-2 transition-all duration-300 flex-shrink-0 ${
- activeTabP1 === tab.id ? 'border-[#B85C38] text-dark' : 'border-transparent text-dark/40 hover:text-dark/70'
- }`}
- >
- {tab.label}
- </button>
- ))}
- </div>
-
- {/* Dynamic Tab Contents */}
- <AnimatePresence mode="wait">
- <motion.div
- key={activeTabP1}
- initial={{ opacity: 0, x: -10 }}
- animate={{ opacity: 1, x: 0 }}
- exit={{ opacity: 0, x: 10 }}
- transition={{ duration: 0.3 }}
- className="space-y-4 text-xs sm:text-sm font-light text-dark/75 leading-relaxed"
- >
- {activeTabP1 === 'vision' && (
- <>
- <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2">Design Concept</h4>
- <p>
- The ECR Residence is a large-scale independent home designed for open living, structural strength, and long-term durability along Chennai's East Coast Road.
- </p>
- <p>
- The layout connects indoor living areas with outdoor spaces including the pool zone, while addressing ventilation and thermal comfort for the coastal climate.
- </p>
- </>
- )}
-
- {activeTabP1 === 'structural' && (
- <>
- <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2">Structural & Engineering</h4>
- <p>
- The structure uses post-tensioned slab technology to achieve wide, column-free spans in the main living area — allowing flexible interior planning without compromising load-bearing capacity.
- </p>
- <p className="font-bold border-l-2 pl-3 border-[#B85C38]" style={{ color: BRONZE }}>
- Foundation and reinforcement designed with Fe-550 grade steel for seismic resilience.
- </p>
- </>
- )}
-
- {activeTabP1 === 'material' && (
- <>
- <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2">Materials & Finishes</h4>
- <p>
- External walls use high-density local granite cavity construction, providing natural thermal insulation and reducing peak indoor temperatures during summer.
- </p>
- <p>
- Interiors feature premium marble flooring, with integrated systems for HVAC, lighting, and security — planned and executed to client specifications.
- </p>
- </>
- )}
-
- {activeTabP1 === 'timeline' && (
- <>
- <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2">Construction Timeline</h4>
- <ul className="space-y-2 text-xs">
- <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
- <span><strong>Phase 1:</strong> Planning & Excavation</span>
- <span>Month 1–3</span>
- </li>
- <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
- <span><strong>Phase 2:</strong> Substructure & Post-Tensioning</span>
- <span>Month 4–8</span>
- </li>
- <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
- <span><strong>Phase 3:</strong> Masonry & Wall Systems</span>
- <span>Month 9–12</span>
- </li>
- <li className="flex justify-between" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
- <span><strong>Phase 4:</strong> Finishing & Handover</span>
- <span>Month 13–16</span>
- </li>
- </ul>
- </>
- )}
- </motion.div>
- </AnimatePresence>
- </div>
-
- <div className="h-[1px] w-full bg-gradient-to-r from-[#B85C38]/20 to-transparent mt-5 sm:mt-6" />
- </div>
-
- {/* Bright Testimonial Panel */}
- <div className="p-5 sm:p-8 rounded-[20px] sm:rounded-3xl border shadow-sm flex-shrink-0 flex flex-col justify-between relative overflow-hidden bg-white" style={{ borderColor: BORDER_COLOR }}>
- <div className="absolute top-4 right-4 text-dark/[0.02] text-7xl pointer-events-none leading-none">“</div>
- 
- <div className="relative z-10">
- {/* Star Ratings */}
- <div className="flex items-center gap-1 text-xs text-amber-500 mb-4">
- {[...Array(5)].map((_, i) => <FaStar key={i} />)}
- </div>
-
- <p className="text-xs sm:text-sm font-light leading-relaxed text-dark/80 mb-6">
- "The KARRCHOLAI team impressed with their professionalism and dedication. From the initial planning stages to the ongoing execution, they have demonstrated a keen eye for detail and a commitment to excellence."
- </p>
- </div>
-
- <div className="pt-4 border-t flex items-center justify-between gap-4" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
- <div>
- <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5">Homeowner Client — Chennai ECR</p>
- </div>
- <div className="flex flex-col items-end flex-shrink-0">
- <span className="text-[8px] sm:text-[9px] font-black px-2.5 py-1 rounded bg-[#B85C38]/08 text-[#B85C38] uppercase tracking-wider">Verified Review</span>
- <span className="text-[8px] text-dark/30 mt-1 uppercase font-bold tracking-widest">12-Mo Evaluation</span>
- </div>
- </div>
- </div>
-
- </div>
-
- </div>
-
- </div>
- </section>
-
- {/* ── PROJECT 02: KARUR RESIDENCE ── */}
+ {/* ── PROJECT 01: KARUR RESIDENCE ── */}
  <section className="py-16 sm:py-28 md:py-40 relative" style={{ background: '#FAF8F5' }}>
  
  {/* Decorative Grid coordinate marker */}
@@ -473,7 +174,7 @@ export default function Projects() {
  className="text-[9px] font-bold tracking-[0.35em] uppercase" 
  style={{ color: SAGE }}
  >
- Case Study 02 // Sustainable Design
+ Case Study 01 // Sustainable Design
  </span>
  <h2 
  className="text-3xl sm:text-5xl font-bold tracking-tight mt-1" 

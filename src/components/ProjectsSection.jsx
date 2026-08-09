@@ -6,12 +6,12 @@ import prj3 from '../../assets/pic7.png'
 
 const projects = [
   { 
-    title: 'ecr residence', 
-    location: 'Chennai ecr',
+    title: 'Karur Residence', 
+    location: 'Karur, TN',
     tag: 'Residential', 
     image: prj1, 
-    year: '2026',
-    size: '17k Sq.Ft'
+    year: '2024',
+    size: '5,100 Sq.Ft'
   },
   { 
     title: 'Heritage Duplex', 
