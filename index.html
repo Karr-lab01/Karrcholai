@@ -64,7 +64,6 @@
         color: #1a1a1a;
         background: #fff;
       }
-      #seo-shell[hidden] { display: none !important; }
 
       /* Navigation — wraps on all screen sizes */
       #seo-shell nav {
@@ -519,20 +518,13 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!-- Hide SEO shell after React mounts -->
-    <script>
-      (function() {
-        var root = document.getElementById('root');
-        var shell = document.getElementById('seo-shell');
-        if (!root || !shell) return;
-        var observer = new MutationObserver(function() {
-          if (root.children.length > 0) {
-            shell.setAttribute('hidden', '');
-            observer.disconnect();
-          }
-        });
-        observer.observe(root, { childList: true, subtree: false });
-      })();
-    </script>
+    <!-- 
+      SEO shell stays visible until React injects a class on <html>.
+      Crawlers (no JS) always see the full shell content.
+      React adds class="react-ready" to <html> after mount — see main.jsx.
+    -->
+    <style>
+      html.react-ready #seo-shell { display: none !important; }
+    </style>
   </body>
 </html>
