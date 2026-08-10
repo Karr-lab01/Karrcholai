@@ -33,11 +33,11 @@ try {
 const routes = [
   {
     path: '/',
-    title: 'Karrcholai | Premium Residential Construction in Tamil Nadu',
-    description: 'Karrcholai Construction & Architecture — residential building, renovation, landscaping, solar energy & rainwater harvesting in Tamil Nadu. Free Vastu compass & Manaiyadi Sastram tools.',
-    h1: 'Build Your Dream Home with Expert Planning',
-    h2: 'Premium Residential Construction & Architecture in Tamil Nadu',
-    bodyText: 'Karrcholai Construction is Tamil Nadu\'s trusted residential construction company. We offer custom home building, renovation, interior design, landscaping, solar energy installation, and rainwater harvesting. Vastu-compliant design with Manaiyadi Sastram tools. 12+ years experience, 40+ completed projects across Karur, Chennai, Coimbatore, Madurai, Trichy and Erode. Construction cost Rs.1800 to Rs.3500 per sq.ft. Free Vastu compass and Manaiyadi Sastram calculator available online.',
+    title: 'Karrcholai | Residential Construction Company & PMC in Tamil Nadu',
+    description: 'Karrcholai Construction — residential construction company & PMC in Tamil Nadu. Custom homes, renovation, landscape, solar energy, rainwater harvesting. Free Vastu compass & Manaiyadi Sastram tools. Serving Chennai, Karur, Coimbatore, Madurai.',
+    h1: 'Residential Construction Company & Project Management Consultancy in Tamil Nadu',
+    h2: 'Build Your Dream Home with Expert Planning — Karrcholai Construction',
+    bodyText: 'Karrcholai is Tamil Nadu\'s trusted residential construction company and PMC. We build custom homes, villas, and residential buildings across Tamil Nadu and Chennai with quality craftsmanship, Vastu-compliant design, and transparent pricing. Over 12 years of experience, 40+ completed projects across Karur, Chennai, Coimbatore, Madurai, Trichy and Erode. Construction cost Rs.1800 to Rs.3500 per sq.ft. Free Vastu compass and Manaiyadi Sastram calculator available online.',
   },
   {
     path: '/about',
@@ -179,7 +179,7 @@ function buildRouteHtml(route) {
   );
 
   // 3. Replace canonical
-  const canonicalUrl = `${SITE_URL}${route.path === '/' ? '' : route.path}`;
+  const canonicalUrl = `${SITE_URL}${route.path === '/' ? '/' : route.path}`;
   html = html.replace(
     /<link rel="canonical" href="[^"]*"/,
     `<link rel="canonical" href="${canonicalUrl}"`
@@ -221,6 +221,7 @@ function buildRouteHtml(route) {
       </nav>
       <h1>${escapeHtml(route.h1)}</h1>
       <h2>${escapeHtml(route.h2)}</h2>
+      <img src="https://karrcholai.com/og-image.png" alt="${escapeHtml(route.h1)} — Karrcholai Construction Tamil Nadu" width="1200" height="630" />
       <p>${escapeHtml(route.bodyText)}</p>
     </div>
     <!-- seo-shell-end -->`;

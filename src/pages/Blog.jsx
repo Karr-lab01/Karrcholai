@@ -22,10 +22,10 @@ const Blog = () => {
  <motion.div className="bg-white min-h-screen text-[#1a1a1a] font-sans selection:bg-[#B85C38] selection:text-white">
  <Helmet>
  <title>The Journal | Construction Insights &amp; Stories | Karrcholai</title>
- <meta name="description" content="Read engineering legends, construction tips, and real client stories from Karrcholai — residential construction specialists in Tamil Nadu." />
+ <meta name="description" content="Read engineering legends, construction tips, and real client stories from Karrcholai â€” residential construction specialists in Tamil Nadu." />
  <link rel="canonical" href="https://karrcholai.com/blog" />
  <meta property="og:title" content="The Journal | Construction Insights & Stories | Karrcholai" />
- <meta property="og:description" content="Read engineering legends, construction tips, and real client stories from Karrcholai — residential construction specialists in Tamil Nadu." />
+ <meta property="og:description" content="Read engineering legends, construction tips, and real client stories from Karrcholai â€” residential construction specialists in Tamil Nadu." />
  <meta property="og:url" content="https://karrcholai.com/blog" />
  </Helmet>
  <Navbar />
@@ -105,7 +105,7 @@ const Blog = () => {
  <div style={{ width:32, height:32, borderRadius:'50%', background:'#3a5a8a', display:'flex', alignItems:'center', justifyContent:'center', fontSize:14, fontWeight:900, color:'#fff', flexShrink:0 }}>A</div>
  <div>
  <p style={{ color:'#fff', fontSize:11, fontWeight:700, margin:0, lineHeight:1 }}>Arun Kumar</p>
- <p style={{ color:'rgba(255,255,255,0.5)', fontSize:9, margin:0 }}>Client · Erode</p>
+ <p style={{ color:'rgba(255,255,255,0.5)', fontSize:9, margin:0 }}>Client Â· Erode</p>
  </div>
  </div>
  <p style={{ color:'rgba(255,255,255,0.7)', fontSize:10, margin:0, lineHeight:1.5, fontStyle:'italic' }}>"10 years of renting. One call. Eight months. And now every morning I wake up in a house that is completely ours."</p>

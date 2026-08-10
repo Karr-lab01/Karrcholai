@@ -188,7 +188,7 @@ const Services = () => {
       <Helmet>
         <title>Services | Karrcholai Construction</title>
         <meta name="description" content="Karrcholai offers premium PMC and residential construction services in Tamil Nadu, including landscape, solar, rainwater harvesting, flooring, lighting, and renovation." />
-        <link rel="canonical" href="https://karrcholai-sepia.vercel.app/services" />
+        <link rel="canonical" href="https://karrcholai.com/services" />
       </Helmet>
 
       {/* Scroll progress bar */}
