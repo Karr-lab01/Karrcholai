@@ -17,11 +17,11 @@ const Home = () => {
  return (
  <div className="font-sans text-dark min-h-screen overflow-x-hidden">
  <Helmet>
- <title>Karrcholai | Residential Construction Company &amp; PMC in Tamil Nadu</title>
- <meta name="description" content="Karrcholai Construction — residential construction company &amp; PMC in Tamil Nadu. Custom homes, renovation, landscape, solar energy &amp; rainwater harvesting. Free Vastu compass &amp; Manaiyadi Sastram tools. Serving Chennai, Karur, Coimbatore, Madurai." />
+ <title>Karrcholai | Construction &amp; PMC Company Tamil Nadu</title>
+ <meta name="description" content="Karrcholai Construction — residential construction &amp; PMC company in Tamil Nadu. Custom homes, renovation, solar, rainwater harvesting. Free Vastu compass &amp; Manaiyadi Sastram tools. Call +91-97414-16747." />
  <link rel="canonical" href="https://karrcholai.com/" />
- <meta property="og:title" content="Karrcholai | Residential Construction Company &amp; PMC in Tamil Nadu" />
- <meta property="og:description" content="Full-service residential construction &amp; PMC in Tamil Nadu — custom homes, renovation, landscape, solar energy, rainwater harvesting. Plus free Vastu compass &amp; Manaiyadi Sastram calculator." />
+ <meta property="og:title" content="Karrcholai | Construction &amp; PMC Company Tamil Nadu" />
+ <meta property="og:description" content="Residential construction &amp; PMC company in Tamil Nadu. Custom homes, renovation, solar, rainwater harvesting. Free Vastu compass &amp; Manaiyadi Sastram tools. Karur | Chennai | Coimbatore | Madurai." />
  <meta property="og:url" content="https://karrcholai.com/" />
  </Helmet>
  <Navbar />

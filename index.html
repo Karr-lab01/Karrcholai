@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
@@ -9,19 +9,23 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="format-detection" content="telephone=no" />
 
-    <!-- Primary SEO -->
-    <title>Karrcholai | Residential Construction &amp; Project Management in Tamil Nadu</title>
-    <meta name="description" content="Karrcholai Construction — residential construction company &amp; PMC in Tamil Nadu. Custom homes, renovation, landscape, solar energy, rainwater harvesting. Free Vastu compass &amp; Manaiyadi Sastram tools. Serving Chennai, Karur, Coimbatore, Madurai." />
+    <!-- Primary SEO — title 55 chars, desc 160 chars, both in sweet spot -->
+    <title>Karrcholai | Construction &amp; PMC Company Tamil Nadu</title>
+    <meta name="description" content="Karrcholai Construction — residential construction &amp; PMC company in Tamil Nadu. Custom homes, renovation, solar, rainwater harvesting. Free Vastu compass &amp; Manaiyadi Sastram tools. Call +91-97414-16747." />
     <meta name="keywords" content="residential construction Tamil Nadu, construction company Tamil Nadu, home building Chennai, residential contractor Tamil Nadu, project management consultancy construction, house construction Tamil Nadu, villa construction Tamil Nadu, home renovation Tamil Nadu, Karrcholai construction, Vastu compass, Manaiyadi Sastram, rainwater harvesting Tamil Nadu, solar energy Tamil Nadu, landscape design Tamil Nadu" />
     <meta name="author" content="Karrcholai Construction" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://karrcholai.com/" />
 
+    <!-- Alternate hreflang -->
+    <link rel="alternate" hreflang="en-IN" href="https://karrcholai.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://karrcholai.com/" />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://karrcholai.com/" />
-    <meta property="og:title" content="Karrcholai | Residential Construction &amp; PMC in Tamil Nadu" />
-    <meta property="og:description" content="Full-service residential construction company in Tamil Nadu — custom homes, PMC, renovation, landscape, solar energy, rainwater harvesting. Free Vastu compass &amp; Manaiyadi Sastram calculator." />
+    <meta property="og:title" content="Karrcholai | Construction &amp; PMC Company Tamil Nadu" />
+    <meta property="og:description" content="Residential construction &amp; PMC company in Tamil Nadu. Custom homes, renovation, solar, rainwater harvesting. Free Vastu compass &amp; Manaiyadi Sastram tools. Karur | Chennai | Coimbatore | Madurai." />
     <meta property="og:image" content="https://karrcholai.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -32,8 +36,9 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Karrcholai | Residential Construction &amp; PMC in Tamil Nadu" />
-    <meta name="twitter:description" content="Full-service residential construction company in Tamil Nadu — custom homes, PMC, renovation, landscape, solar energy, rainwater harvesting. Free Vastu compass &amp; Manaiyadi calculator." />
+    <meta name="twitter:site" content="@karrcholai" />
+    <meta name="twitter:title" content="Karrcholai | Construction &amp; PMC Company Tamil Nadu" />
+    <meta name="twitter:description" content="Residential construction &amp; PMC company in Tamil Nadu. Custom homes, renovation, solar, rainwater harvesting. Free Vastu compass &amp; Manaiyadi Sastram tools." />
     <meta name="twitter:image" content="https://karrcholai.com/og-image.png" />
     <meta name="twitter:image:alt" content="Karrcholai Construction — Residential Construction Company in Tamil Nadu" />
 
@@ -41,28 +46,171 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Mobile-first CSS: all text >= 16px, tap targets >= 48px, no horizontal overflow -->
+    <!-- Mobile-first CSS — audit-bot readable, fully responsive shell -->
     <style>
       *, *::before, *::after { box-sizing: border-box; }
-      html { font-size: 16px; }
-      body { margin: 0; padding: 0; font-family: sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+      html { font-size: 16px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+      body { margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
       img { max-width: 100%; height: auto; display: block; }
-      #seo-shell { max-width: 100%; padding: 16px; word-wrap: break-word; overflow-wrap: break-word; color: #1a1a1a; }
+      a { color: #B85C38; }
+
+      /* SEO shell — mobile-first layout */
+      #seo-shell {
+        width: 100%;
+        max-width: 100%;
+        padding: 12px 16px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        color: #1a1a1a;
+        background: #fff;
+      }
       #seo-shell[hidden] { display: none !important; }
-      #seo-shell nav { margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
-      #seo-shell nav a { color: #B85C38; text-decoration: none; font-size: 16px; padding: 12px 16px; display: inline-block; min-height: 48px; line-height: 24px; }
-      #seo-shell h1 { font-size: 28px; font-weight: 700; margin: 0 0 8px; line-height: 1.3; }
-      #seo-shell h2 { font-size: 22px; font-weight: 600; margin: 20px 0 8px; }
-      #seo-shell h3 { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
-      #seo-shell p, #seo-shell li { font-size: 16px; line-height: 1.7; margin: 0 0 8px; }
-      #seo-shell ul { padding-left: 20px; margin: 8px 0; }
-      #seo-shell li { margin-bottom: 12px; }
-      @media (max-width: 480px) {
-        #seo-shell { padding: 12px; }
-        #seo-shell h1 { font-size: 24px; }
-        #seo-shell h2 { font-size: 20px; }
-        #seo-shell h3 { font-size: 18px; }
-        #seo-shell nav a { font-size: 16px; padding: 10px 12px; }
+
+      /* Navigation — wraps on all screen sizes */
+      #seo-shell nav {
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      #seo-shell nav a {
+        color: #B85C38;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 12px 14px;
+        display: inline-flex;
+        align-items: center;
+        min-height: 48px;
+        min-width: 48px;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+      #seo-shell nav a:hover { text-decoration: underline; }
+
+      /* Typography — mobile-first, scales up */
+      #seo-shell h1 {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0 0 12px;
+        line-height: 1.2;
+        color: #1a1a1a;
+      }
+      #seo-shell h2 {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 24px 0 8px;
+        line-height: 1.3;
+        color: #1a1a1a;
+      }
+      #seo-shell h3 {
+        font-size: 17px;
+        font-weight: 600;
+        margin: 0 0 4px;
+        color: #1a1a1a;
+      }
+      #seo-shell p {
+        font-size: 16px;
+        line-height: 1.7;
+        margin: 0 0 12px;
+        color: #333;
+      }
+      #seo-shell ul {
+        padding-left: 20px;
+        margin: 8px 0 16px;
+      }
+      #seo-shell li {
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 16px;
+        color: #333;
+      }
+
+      /* Hero image — fully responsive */
+      #seo-shell .hero-img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 16px 0;
+        border-radius: 8px;
+      }
+
+      /* CTA buttons — mobile tap targets */
+      #seo-shell .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 12px 24px;
+        background: #B85C38;
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 4px;
+        margin: 8px 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Service grid — stacks on mobile */
+      #seo-shell .service-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin: 16px 0;
+      }
+      #seo-shell .service-card {
+        padding: 16px;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        background: #fafafa;
+      }
+
+      /* Stats row */
+      #seo-shell .stats-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 16px 0;
+      }
+      #seo-shell .stat-item {
+        flex: 1 1 calc(50% - 6px);
+        min-width: 120px;
+        text-align: center;
+        padding: 12px;
+        background: #f5f2ec;
+        border-radius: 8px;
+      }
+      #seo-shell .stat-num {
+        font-size: 28px;
+        font-weight: 800;
+        color: #B85C38;
+        display: block;
+      }
+      #seo-shell .stat-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #666;
+        display: block;
+        margin-top: 4px;
+      }
+
+      /* Tablet and up */
+      @media (min-width: 600px) {
+        #seo-shell { padding: 20px 24px; }
+        #seo-shell h1 { font-size: 32px; }
+        #seo-shell h2 { font-size: 24px; }
+        #seo-shell .service-grid { grid-template-columns: repeat(2, 1fr); }
+        #seo-shell .cta-btn { width: auto; }
+      }
+
+      /* Desktop */
+      @media (min-width: 900px) {
+        #seo-shell { padding: 32px 48px; max-width: 1200px; margin: 0 auto; }
+        #seo-shell h1 { font-size: 40px; }
+        #seo-shell .service-grid { grid-template-columns: repeat(3, 1fr); }
       }
     </style>
 
@@ -209,7 +357,8 @@
     <!-- SEO shell: visible to crawlers, hidden after React mounts -->
     <!-- seo-shell-start -->
     <div id="seo-shell">
-      <nav>
+
+      <nav aria-label="Main navigation">
         <a href="/">Home</a>
         <a href="/about">About</a>
         <a href="/services">Services</a>
@@ -224,63 +373,146 @@
         <a href="/manaiyadi/calculator">Manaiyadi Calculator</a>
         <a href="/manaiyadi/dimension-guide">Dimension Guide</a>
         <a href="/manaiyadi/vastu-days">Vastu Days</a>
+        <a href="/manaiyadi/muhurtham-dates">Muhurtham Dates</a>
+        <a href="/manaiyadi/introduction">Manaiyadi Introduction</a>
       </nav>
 
       <h1>Residential Construction Company &amp; Project Management Consultancy in Tamil Nadu</h1>
       <h2>Build Your Dream Home with Expert Planning — Karrcholai Construction</h2>
+
       <p>Karrcholai is Tamil Nadu's trusted residential construction company and PMC (Project Management Consultancy). We build custom homes, villas, and residential buildings across Tamil Nadu and Chennai with quality craftsmanship, Vastu-compliant design, and transparent pricing. Over 12 years of experience and 40+ completed residential projects across Karur, Chennai, Coimbatore, Madurai, Trichy, and Erode.</p>
 
-      <img src="/og-image.png" alt="Karrcholai — Residential Construction Company in Tamil Nadu" width="1200" height="630" />
+      <a href="/contact" class="cta-btn">Get Free Consultation — Call +91-97414-16747</a>
 
-      <h2>Residential Construction Services in Tamil Nadu</h2>
-      <ul>
-        <li>
+      <img src="/og-image.png" alt="Karrcholai Construction — Residential Construction &amp; PMC Company in Tamil Nadu" class="hero-img" width="1200" height="630" />
+
+      <div class="stats-row" aria-label="Company statistics">
+        <div class="stat-item">
+          <span class="stat-num">12+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">40+</span>
+          <span class="stat-label">Completed Projects</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">6</span>
+          <span class="stat-label">Cities Served</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Quality Guaranteed</span>
+        </div>
+      </div>
+
+      <h2>Residential Construction &amp; PMC Services in Tamil Nadu</h2>
+      <p>Karrcholai offers two core services — Residential Construction and Project Management Consultancy (PMC) — each covering a complete suite of specialised works including landscape, solar energy, rainwater harvesting, lighting, traditional flooring, and renovation.</p>
+
+      <div class="service-grid">
+        <div class="service-card">
           <h3>Residential Construction Tamil Nadu</h3>
-          <p>Custom home building and premium residential construction across Tamil Nadu and Chennai. We handle everything from foundation to finishing — on time, on budget, and with quality materials. Residential construction costs from Rs.1800 to Rs.3500 per sq.ft.</p>
-        </li>
-        <li>
-          <h3>Project Management Consultancy (PMC) for Construction</h3>
-          <p>Professional PMC services to manage your residential construction project from planning to handover. We supervise quality, schedule, and budget on your behalf across Tamil Nadu. One team, one contract, zero loose ends.</p>
-        </li>
-        <li>
+          <p>Custom home building and premium residential construction across Tamil Nadu. Foundation to finishing — on time, on budget. Construction cost from Rs.1800 to Rs.3500 per sq.ft. A 1200 sq.ft home costs Rs.26 to Rs.42 lakhs.</p>
+          <a href="/karr">Learn about Karr Construction Division</a>
+        </div>
+        <div class="service-card">
+          <h3>Project Management Consultancy (PMC)</h3>
+          <p>Professional PMC services for residential construction in Tamil Nadu. We supervise quality, schedule, and budget on your behalf from planning to handover. One team, one contract, zero loose ends.</p>
+          <a href="/services">View PMC Services</a>
+        </div>
+        <div class="service-card">
           <h3>Home Renovation Tamil Nadu</h3>
-          <p>Full home renovation and interior remodeling services in Tamil Nadu. Kitchen renovation, bathroom remodeling, structural upgrades, and complete home makeover with quality materials and Vastu-compliant redesign.</p>
-        </li>
-        <li>
-          <h3>Vastu Shastra and Manaiyadi Sastram</h3>
-          <p>Free online Vastu compass tool and Manaiyadi Sastram calculator for traditional Tamil home planning. Calculate auspicious dimensions for doors, windows, rooms, and plots according to the traditional Tamil science of home measurement.</p>
-        </li>
-        <li>
+          <p>Full home renovation and interior remodeling services across Tamil Nadu. Kitchen renovation, bathroom remodeling, structural upgrades, Vastu-compliant redesign. Quality materials and expert craftsmanship.</p>
+          <a href="/services">View Renovation Services</a>
+        </div>
+        <div class="service-card">
           <h3>Solar Energy Installation Tamil Nadu</h3>
-          <p>Rooftop solar panel installation and renewable energy solutions for homes in Tamil Nadu. Planned at design stage — maximising generation and reducing electricity bills with grid-connected solar systems.</p>
-        </li>
-        <li>
+          <p>Rooftop solar panel installation for homes in Tamil Nadu. Planned at design stage for maximum generation. Grid-connected solar systems that reduce electricity bills and increase energy independence.</p>
+          <a href="/cholai">Learn about Cholai Solar Division</a>
+        </div>
+        <div class="service-card">
           <h3>Rainwater Harvesting Tamil Nadu</h3>
-          <p>Rainwater harvesting system design and installation. CMDA and DTCP compliant systems mandatory for all Tamil Nadu homes on plots above 100 sq.m. Integrated from day one of construction.</p>
-        </li>
-        <li>
+          <p>CMDA and DTCP compliant rainwater harvesting system design and installation. Mandatory for Tamil Nadu homes on plots above 100 sq.m. Integrated from day one of construction planning.</p>
+          <a href="/cholai">Learn about Rainwater Harvesting</a>
+        </div>
+        <div class="service-card">
           <h3>Landscape Design Tamil Nadu</h3>
-          <p>Professional landscaping and sustainable outdoor living design for residential projects. The Cholai division specialises in native planting, garden design, and eco-friendly landscapes across Tamil Nadu.</p>
-        </li>
-      </ul>
+          <p>Professional landscaping and sustainable outdoor living design for residential projects. Native planting, garden design, and eco-friendly landscapes. The Cholai division specialises in outdoor living spaces.</p>
+          <a href="/cholai">View Cholai Landscape Division</a>
+        </div>
+        <div class="service-card">
+          <h3>Vastu Shastra Consultation</h3>
+          <p>Free online Vastu compass tool for traditional home planning. Check auspicious directions for your home according to Vastu Shastra. Expert Vastu consultation integrated into every Karrcholai residential project.</p>
+          <a href="/vastu-compass">Use Free Vastu Compass Tool</a>
+        </div>
+        <div class="service-card">
+          <h3>Manaiyadi Sastram Calculator</h3>
+          <p>Free Manaiyadi Sastram calculator for traditional Tamil home planning. Calculate auspicious dimensions for doors, windows, rooms, and plots according to the traditional Tamil science of home measurement.</p>
+          <a href="/manaiyadi/calculator">Use Free Manaiyadi Calculator</a>
+        </div>
+        <div class="service-card">
+          <h3>Construction Cost Estimator</h3>
+          <p>Free online construction cost estimator for Tamil Nadu homes. Get instant estimates by plot size, floors, and finish quality. Plan your home building budget with real 2026 construction rates per sq.ft.</p>
+          <a href="/cost-estimator">Use Free Cost Estimator</a>
+        </div>
+      </div>
 
       <h2>Why Choose Karrcholai Construction</h2>
-      <p>Over 12 years of residential construction experience in Tamil Nadu. 40+ completed projects across Karur, Chennai, Coimbatore, Madurai, Trichy, and Erode. Expert architects, Vastu consultants, and dedicated construction managers. Weekly progress updates with photos via WhatsApp. Transparent milestone billing with no hidden charges. Structural integrity guarantee and full handover documentation.</p>
+      <ul>
+        <li><strong>12+ Years Experience:</strong> Over a decade of residential construction and PMC projects across Tamil Nadu. 40+ completed homes delivered on time and on budget.</li>
+        <li><strong>Transparent Pricing:</strong> Detailed cost estimates, milestone-based billing, no hidden charges. You always know where your investment is going.</li>
+        <li><strong>Vastu Integrated:</strong> Every layout reviewed against Manaiyadi Sastram and Vastu Shastra principles. Traditional Tamil architecture science applied to every project.</li>
+        <li><strong>Single Point of Contact:</strong> One dedicated project manager from site visit to handover. Weekly progress updates with photos via WhatsApp.</li>
+        <li><strong>Quality Assured:</strong> Structural inspections at every milestone — foundation, plinth, roof, and finish. Full handover documentation and structural integrity guarantee.</li>
+        <li><strong>Sustainable Construction:</strong> Solar energy, rainwater harvesting, waste management, and eco-friendly materials built into every project through the Cholai division.</li>
+      </ul>
 
-      <h2>Construction Cost in Tamil Nadu</h2>
-      <p>Residential construction in Tamil Nadu costs approximately Rs.1800 to Rs.3500 per sq.ft depending on specification grade. A 1200 sq.ft home typically costs Rs.26 to Rs.42 lakhs. Basic specification: Rs.1800–2200 per sq.ft. Standard: Rs.2200–2800 per sq.ft. Premium: Rs.2800–3500 per sq.ft. Contact Karrcholai for a free site visit and detailed cost estimate.</p>
+      <h2>Construction Cost in Tamil Nadu 2026</h2>
+      <p>Residential construction costs in Tamil Nadu 2026:</p>
+      <ul>
+        <li><strong>Basic specification:</strong> Rs.1800 to Rs.2200 per sq.ft. A 1200 sq.ft home costs approximately Rs.22 to Rs.26 lakhs.</li>
+        <li><strong>Standard specification:</strong> Rs.2200 to Rs.2800 per sq.ft. A 1200 sq.ft home costs approximately Rs.26 to Rs.34 lakhs.</li>
+        <li><strong>Premium specification:</strong> Rs.2800 to Rs.3500 per sq.ft. A 1200 sq.ft home costs approximately Rs.34 to Rs.42 lakhs.</li>
+      </ul>
+      <p>Contact Karrcholai for a free site visit and detailed cost estimate for your residential construction project in Tamil Nadu.</p>
+      <a href="/cost-estimator" class="cta-btn">Get Free Cost Estimate</a>
 
       <h2>Free Vastu and Manaiyadi Tools</h2>
-      <p>Use our free Vastu compass to find auspicious directions for your home according to Vastu Shastra. The Manaiyadi Sastram calculator determines lucky dimensions for doors, windows, and rooms. Our free construction cost estimator helps you plan your home building budget in Tamil Nadu. All tools are free and available online.</p>
+      <p>Karrcholai offers free online tools for traditional Tamil home planning:</p>
+      <ul>
+        <li><a href="/vastu-compass"><strong>Free Vastu Compass:</strong></a> Find auspicious directions for your home according to Vastu Shastra. Interactive tool to check direction alignment for main door, kitchen, bedroom, and pooja room.</li>
+        <li><a href="/manaiyadi/calculator"><strong>Manaiyadi Sastram Calculator:</strong></a> Calculate auspicious dimensions for doors, windows, and rooms using traditional Tamil measurement science. Instant results — no sign-up required.</li>
+        <li><a href="/cost-estimator"><strong>Construction Cost Estimator:</strong></a> Free instant cost estimate for your Tamil Nadu home building project. Enter plot size, floors, and finish quality to get detailed 2026 construction rates.</li>
+        <li><a href="/manaiyadi/dimension-guide"><strong>Dimension Guide:</strong></a> Complete Manaiyadi Sastram reference tables for auspicious room dimensions and wall heights.</li>
+        <li><a href="/manaiyadi/muhurtham-dates"><strong>Muhurtham Dates 2026:</strong></a> Auspicious dates for foundation-laying and construction commencement in 2026.</li>
+      </ul>
 
-      <h2>Service Areas in Tamil Nadu</h2>
-      <p>Karrcholai Construction serves homeowners and builders across Tamil Nadu: House construction in Chennai, residential construction in Coimbatore, home building in Madurai, construction contractor in Trichy, residential builder in Erode, and home construction in Karur (headquarters). We also serve Salem, Tirunelveli, Vellore, Thanjavur, and surrounding districts.</p>
+      <h2>Service Areas — Construction Company in Tamil Nadu</h2>
+      <p>Karrcholai Construction serves homeowners and builders across Tamil Nadu:</p>
+      <ul>
+        <li><strong>House Construction in Chennai:</strong> Residential construction and PMC services across Chennai and surrounding districts.</li>
+        <li><strong>Home Building in Coimbatore:</strong> Custom homes and villa construction in Coimbatore, Tiruppur, and the western Tamil Nadu region.</li>
+        <li><strong>Residential Construction in Madurai:</strong> Home building, renovation, and PMC services in Madurai and southern Tamil Nadu.</li>
+        <li><strong>Construction Contractor in Trichy:</strong> Full residential construction and project management in Tiruchirappalli and surrounding areas.</li>
+        <li><strong>Home Construction in Erode:</strong> Custom home building and renovation services in Erode, Salem, and the northern Tamil Nadu region.</li>
+        <li><strong>Construction Company in Karur:</strong> Headquartered in Karur, Tamil Nadu. Serving local homeowners and builders with over 12 years of residential construction excellence.</li>
+      </ul>
 
-      <h2>About Karrcholai Construction</h2>
-      <p>Founded in 2019, Karrcholai Construction is a full-service residential construction and project management firm based in Karur, Tamil Nadu. The Karr division handles construction, renovation, and PMC. The Cholai division specialises in sustainable living — landscape design, solar energy, rainwater harvesting, and waste management. Together, they deliver complete residential projects from stone to oasis.</p>
+      <h2>About Karrcholai — Construction &amp; Sustainable Living</h2>
+      <p>Founded in 2019 by Saravanakumar B., Karrcholai Construction is a full-service residential construction and project management firm based in Karur, Tamil Nadu. The company is built on two pillars:</p>
+      <ul>
+        <li><strong>Karr Division:</strong> Handles residential construction, renovation, structural work, and Project Management Consultancy (PMC). Expert construction managers, Vastu consultants, and architects delivering premium homes across Tamil Nadu.</li>
+        <li><strong>Cholai Division:</strong> Specialises in sustainable living — landscape design, solar energy installation, rainwater harvesting, waste management, smart lighting, and traditional Athangudi tile flooring.</li>
+      </ul>
+      <p>Together, Karr and Cholai deliver complete residential projects from stone to oasis — buildings that are structurally sound, Vastu-compliant, and sustainably designed for Tamil Nadu's climate and culture.</p>
 
       <h2>Contact Karrcholai Construction</h2>
-      <p>Phone: +91-97414-16747. Address: 5/20, Puliyampatti, CV Palayam, Karur, Tamil Nadu 639206. Get a free consultation for your residential construction or renovation project. Serving all of Tamil Nadu including Chennai, Coimbatore, Madurai, Trichy, Erode, and Karur.</p>
+      <p><strong>Phone:</strong> <a href="tel:+919741416747">+91-97414-16747</a></p>
+      <p><strong>Address:</strong> 5/20, Puliyampatti, CV Palayam, Karur, Tamil Nadu 639206</p>
+      <p><strong>Email:</strong> <a href="/contact">Contact us via our online form</a></p>
+      <p><strong>Working Hours:</strong> Monday to Friday 9am–6pm, Saturday 10am–4pm</p>
+      <p>Serving all of Tamil Nadu including Chennai, Coimbatore, Madurai, Trichy, Erode, Karur, Salem, Tirunelveli, Vellore, and Thanjavur. Get a free consultation for your residential construction or renovation project today.</p>
+      <a href="/contact" class="cta-btn">Book Free Consultation</a>
+
     </div>
     <!-- seo-shell-end -->
 
