@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import VastuCompass from '../components/vastu/VastuCompass'
+import VastuDirectionCompass from '../components/vastu/VastuDirectionCompass'
 
 const VastuCompassPage = () => {
   return (
@@ -46,8 +47,29 @@ const VastuCompassPage = () => {
       <Navbar />
 
       <main>
-        <section id="compass-tool" data-compass-tool style={{ background: '#F5F2EC' }} className="pt-36 pb-16 md:pb-24 px-4 md:px-6">
+        {/* ── Vastu Direction Guide (static compass, click-to-explore) ── */}
+        <section style={{ background: '#F5F2EC' }} className="pt-36 pb-10 px-4 md:px-6">
+          <div className="mx-auto max-w-5xl">
+            <VastuDirectionCompass />
+          </div>
+        </section>
+
+        {/* ── Divider ── */}
+        <div className="mx-auto max-w-5xl px-4 md:px-6 py-2">
+          <div className="border-t border-stone-200" />
+        </div>
+
+        {/* ── Original compass + floor plan overlay tool ── */}
+        <section id="compass-tool" data-compass-tool style={{ background: '#F5F2EC' }} className="pt-8 pb-16 md:pb-24 px-4 md:px-6">
           <div className="mx-auto max-w-6xl">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-100 border border-stone-200 mb-3">
+                <span className="text-xs">📐</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-stone-500">Floor Plan Overlay Tool</span>
+              </div>
+              <h2 className="text-xl md:text-2xl font-black text-slate-900 mb-2">Align Compass to Your Floor Plan</h2>
+              <p className="text-sm text-slate-500 font-medium">Upload your floor plan, rotate the compass to match true North, and download</p>
+            </div>
             <VastuCompass />
           </div>
         </section>
