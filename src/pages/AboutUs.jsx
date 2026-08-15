@@ -53,12 +53,33 @@ const AboutUs = () => {
  return (
  <div ref={containerRef} className="bg-cream min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
  <Helmet>
- <title>About Karrcholai | Our Story, Founder &amp; Philosophy</title>
- <meta name="description" content="Meet Saravanakumar B., founder of Karrcholai Construction. 12+ years of residential construction in Tamil Nadu — built on strength, transparency, and sustainable living." />
+ <title>About Karrcholai | Founder Saravanakumar B. &amp; Our Story | Tamil Nadu Construction</title>
+ <meta name="description" content="Meet Saravanakumar B., BE Civil Engineer and founder of Karrcholai Construction. 12+ years of residential construction and PMC in Tamil Nadu — built on strength, transparency, and sustainable living." />
  <link rel="canonical" href="https://karrcholai.com/about" />
- <meta property="og:title" content="About Karrcholai | Our Story, Founder & Philosophy" />
+ <meta property="og:title" content="About Karrcholai | Founder &amp; Our Story | Tamil Nadu Construction" />
  <meta property="og:description" content="Meet Saravanakumar B., founder of Karrcholai Construction. 12+ years of residential construction in Tamil Nadu — built on strength, transparency, and sustainable living." />
  <meta property="og:url" content="https://karrcholai.com/about" />
+ <script type="application/ld+json">{JSON.stringify({
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
+     { "@type": "ListItem", "position": 2, "name": "About Us", "item": "https://karrcholai.com/about" }
+   ]
+ })}</script>
+ <script type="application/ld+json">{JSON.stringify({
+   "@context": "https://schema.org",
+   "@type": "AboutPage",
+   "name": "About Karrcholai Construction",
+   "url": "https://karrcholai.com/about",
+   "description": "About Karrcholai Construction — founded by Saravanakumar B., BE Civil Engineer, with 12+ years of residential construction and PMC experience in Tamil Nadu.",
+   "mainEntity": {
+     "@type": "Person",
+     "name": "Saravanakumar B.",
+     "jobTitle": "Founder & Civil Engineer",
+     "worksFor": { "@type": "Organization", "name": "Karrcholai Construction", "url": "https://karrcholai.com" }
+   }
+ })}</script>
  </Helmet>
  <Navbar />
 
@@ -232,7 +253,7 @@ const AboutUs = () => {
  whileInView={{ opacity: 1, y: 0 }}
  viewport={{ once: true, margin: "-50px" }}
  transition={{ duration: 1.2, ease: "easeOut" }}
- className="aspect-[4/5] md:aspect-square overflow-hidden relative group rounded-[1.5rem] border border-[#4a3b32]/10 shadow-xl mb-8 md:mb-0"
+ className="aspect-[4/3] md:aspect-[4/3] overflow-hidden relative group rounded-[1.5rem] border border-[#4a3b32]/10 shadow-xl mb-8 md:mb-0"
  >
  <motion.img
  initial={{ scale: 1.1 }}
@@ -240,7 +261,7 @@ const AboutUs = () => {
  transition={{ duration: 1.2, ease: "easeOut" }}
  src={courtyardImg}
  alt="Karrcholai completed home courtyard — quality residential construction"
- className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+ className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
  />
  <div className="absolute inset-0 bg-black/5 transition-opacity duration-700 group-hover:bg-black/10" />
  </motion.div>
@@ -533,21 +554,21 @@ const AboutUs = () => {
  {
  name: "Mrs. Elumalai Mohanavalli",
  role: "Homeowner",
- image: "https://tse2.mm.bing.net/th/id/OIP.oN5gaQN8Pd_4NoZg7iL7MgHaEJ?pid=Api&h=220&P=0",
+ image: "https://ui-avatars.com/api/?name=Mohanavalli&background=2D4B37&color=ffffff&size=150&bold=true",
  feedback: "The KARRCHOLAI team impressed with their professionalism and dedication. From the initial planning stages to the ongoing execution, they have demonstrated a keen eye for detail and a commitment to excellence.",
  delay: 0
  },
  {
  name: "Mrs. Naatrayan Karthiga Devi",
  role: "Homeowner",
- image: "https://i.pinimg.com/736x/6e/66/1e/6e661e53b43de79c1d26485ca386f6bd.jpg",
+ image: "https://ui-avatars.com/api/?name=Karthiga+Devi&background=B85C38&color=ffffff&size=150&bold=true",
  feedback: "We entrusted KARRCHOLAI with The team's dedication to quality craftsmanship and attention to detail truly shines through in every corner of our home. Thank you for turning our house into a haven!",
  delay: 0.2
  },
  {
  name: "Mrs. Mohanraj Priya",
  role: "Homeowner",
- image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=150&h=150&q=80",
+ image: "https://ui-avatars.com/api/?name=Mohanraj+Priya&background=4A7B5E&color=ffffff&size=150&bold=true",
  feedback: "Choosing KARRCHOLAI for our building renovation was the best decision we made! With their expertise in Vastu alterations and their commitment to quality. Thank you for giving our building a new lease on life!",
  delay: 0.4
  }

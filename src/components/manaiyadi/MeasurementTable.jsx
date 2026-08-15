@@ -152,7 +152,7 @@ const MeasurementTable = () => {
       <section className="relative px-6 py-24 md:py-32 overflow-hidden rounded-[3rem] md:rounded-[4rem]">
         {/* Atmospheric Background Image */}
         <div className="absolute inset-0 z-0">
-           <img src={staircase} alt="" className="w-full h-full object-cover opacity-10 blur-xl" />
+           <img src={staircase} alt="Decorative staircase background" className="w-full h-full object-cover opacity-10 blur-xl" />
            <div className="absolute inset-0 bg-gradient-to-b from-[#fdfbf7] via-transparent to-[#fdfbf7]"></div>
         </div>
 

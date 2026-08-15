@@ -2,6 +2,7 @@
 import { motion, AnimatePresence, useInView, useScroll, useTransform, useSpring } from 'framer-motion'
 import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiArrowRight, FiNavigation, FiChevronDown, FiInstagram, FiFacebook } from 'react-icons/fi'
 import { Helmet } from 'react-helmet-async'
+import emailjs from '@emailjs/browser'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import heroBg from '../../assets/Exterior of modern luxury house with garden and beautiful sky.jpg'
@@ -119,6 +120,9 @@ function FAQDark({ q, a, i, inView }) {
 
 export default function ContactUs() {
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState(false)
+  const contactFormRef = useRef(null)
   const heroRef = useRef(null)
   const introRef = useRef(null)
   const formRef = useRef(null)
@@ -137,17 +141,80 @@ export default function ContactUs() {
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
   const heroY = useTransform(heroScroll, [0, 1], ['0%', '28%'])
 
-  const handleSubmit = (e) => { e.preventDefault(); setSent(true); setTimeout(() => setSent(false), 4000) }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setSending(true)
+    setSendError(false)
+    // ── EmailJS ──────────────────────────────────────────────────────────────
+    // Replace these three values in your EmailJS dashboard:
+    //   VITE_EMAILJS_SERVICE_ID  — your EmailJS Service ID  (e.g. "service_xxxxxx")
+    //   VITE_EMAILJS_TEMPLATE_ID — your EmailJS Template ID (e.g. "template_xxxxxx")
+    //   VITE_EMAILJS_PUBLIC_KEY  — your EmailJS Public Key  (e.g. "xxxxxxxxxxxxxxxx")
+    // Store them in .env as VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY
+    emailjs.sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID  || 'YOUR_SERVICE_ID',
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID',
+      contactFormRef.current,
+      { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY' }
+    ).then(() => {
+      setSending(false)
+      setSent(true)
+      contactFormRef.current?.reset()
+      setTimeout(() => setSent(false), 5000)
+    }).catch(() => {
+      setSending(false)
+      setSendError(true)
+    })
+  }
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ background: CREAM, color: DARK }}>
       <Helmet>
-        <title>Contact Us | Book a Free Consultation | Karrcholai</title>
-        <meta name="description" content="Contact Karrcholai Construction for premium residential projects in Tamil Nadu. Schedule a free consultation — Karur, Chennai, Coimbatore & beyond." />
+        <title>Contact Karrcholai | Free Consultation | Residential Construction Tamil Nadu</title>
+        <meta name="description" content="Contact Karrcholai Construction for residential construction, PMC, and renovation in Tamil Nadu. Book a free consultation — serving Karur, Chennai, Coimbatore, Madurai, Trichy and Erode. Call +91-97414-16747." />
         <link rel="canonical" href="https://karrcholai.com/contact" />
-        <meta property="og:title" content="Contact Us | Book a Free Consultation | Karrcholai" />
-        <meta property="og:description" content="Contact Karrcholai Construction for premium residential projects in Tamil Nadu. Schedule a free consultation — Karur, Chennai, Coimbatore & beyond." />
+        <meta property="og:title" content="Contact Karrcholai | Free Consultation | Residential Construction Tamil Nadu" />
+        <meta property="og:description" content="Contact Karrcholai Construction for residential construction, PMC, and renovation in Tamil Nadu. Book a free consultation. Call +91-97414-16747." />
         <meta property="og:url" content="https://karrcholai.com/contact" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://karrcholai.com/contact" }
+          ]
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          "name": "Contact Karrcholai Construction",
+          "url": "https://karrcholai.com/contact",
+          "mainEntity": {
+            "@type": "LocalBusiness",
+            "name": "Karrcholai Construction",
+            "telephone": "+91-97414-16747",
+            "email": "karrcholai@gmail.com",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "5/20, Puliyampatti, CV Palayam",
+              "addressLocality": "Karur",
+              "addressRegion": "Tamil Nadu",
+              "postalCode": "639206",
+              "addressCountry": "IN"
+            }
+          }
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            { "@type": "Question", "name": "How long does a typical residential project take?", "acceptedAnswer": { "@type": "Answer", "text": "Most residential projects take 8–18 months depending on size and complexity. We provide a detailed timeline during the initial consultation." } },
+            { "@type": "Question", "name": "Do you offer free consultations?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — our first consultation is completely free. We'll walk you through the entire process, cost estimates, and design possibilities." } },
+            { "@type": "Question", "name": "What areas does Karrcholai serve?", "acceptedAnswer": { "@type": "Answer", "text": "We primarily serve Karur, Chennai, Coimbatore, Madurai, Trichy, and Erode — covering all of Tamil Nadu." } },
+            { "@type": "Question", "name": "Can I track my project progress?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We provide weekly progress reports, site photos, and a dedicated project manager as your single point of contact." } },
+            { "@type": "Question", "name": "Does Karrcholai handle permits and approvals?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we manage all government approvals, CMDA/DTCP permits, and legal documentation on your behalf." } }
+          ]
+        })}</script>
       </Helmet>
 
       {/* ── Scroll progress bar ── */}
@@ -339,13 +406,13 @@ export default function ContactUs() {
                 <h3 className="text-xl font-black mb-0.5" style={{ color: DARK }}>Get in Touch</h3>
                 <p className="text-[11px] font-light" style={{ color: `${DARK}60` }}>We'll get back to you shortly.</p>
               </div>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} ref={contactFormRef} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3">
-                  <Field label="Full Name"><input type="text" placeholder="Your name" className={inp} required /></Field>
-                  <Field label="Email Address"><input type="email" placeholder="you@email.com" className={inp} required /></Field>
-                  <Field label="Phone Number"><input type="tel" placeholder="+91 98765 43210" className={inp} /></Field>
+                  <Field label="Full Name"><input type="text" name="from_name" placeholder="Your name" className={inp} required /></Field>
+                  <Field label="Email Address"><input type="email" name="from_email" placeholder="you@email.com" className={inp} required /></Field>
+                  <Field label="Phone Number"><input type="tel" name="from_phone" placeholder="+91 98765 43210" className={inp} /></Field>
                   <Field label="Service Needed">
-                    <select className={inp} style={{ appearance: 'none' }}>
+                    <select name="service_type" className={inp} style={{ appearance: 'none' }}>
                       <option>General Inquiry</option>
                       <option>Residential Construction</option>
                       <option>Project Management</option>
@@ -355,7 +422,7 @@ export default function ContactUs() {
                   </Field>
                   <div className="sm:col-span-2">
                     <Field label="Budget Range">
-                      <select className={inp} style={{ appearance: 'none' }}>
+                      <select name="budget_range" className={inp} style={{ appearance: 'none' }}>
                         <option>Under ₹30 Lakhs</option>
                         <option>₹30 – ₹60 Lakhs</option>
                         <option>₹60 Lakhs – ₹1 Crore</option>
@@ -365,7 +432,7 @@ export default function ContactUs() {
                   </div>
                 </div>
                 <Field label="Your Message">
-                  <textarea rows={3} placeholder="Tell us about your project, location, and timeline..." className={inp + ' resize-none'} required />
+                  <textarea name="message" rows={3} placeholder="Tell us about your project, location, and timeline..." className={inp + ' resize-none'} required />
                 </Field>
                 <div className="pt-2">
                   <AnimatePresence mode="wait">
@@ -383,18 +450,25 @@ export default function ContactUs() {
                       <motion.button
                         key="submit-btn"
                         type="submit"
+                        disabled={sending}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        whileHover={{ scale: 1.02, y: -2 }}
+                        whileHover={{ scale: sending ? 1 : 1.02, y: sending ? 0 : -2 }}
                         whileTap={{ scale: 0.97 }}
-                        className="w-full py-4 rounded-xl font-black text-sm tracking-[0.2em] uppercase text-white flex items-center justify-center gap-2"
+                        className="w-full py-4 rounded-xl font-black text-sm tracking-[0.2em] uppercase text-white flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                         style={{ background: `linear-gradient(135deg, ${TERRA}, ${FOREST})`, boxShadow: `0 8px 24px ${TERRA}40` }}
                       >
-                        <FiSend size={14} />Send Message
+                        <FiSend size={14} />
+                        {sending ? 'Sending…' : 'Send Message'}
                       </motion.button>
                     )}
                   </AnimatePresence>
+                  {sendError && (
+                    <p className="text-red-500 text-xs font-bold text-center mt-3">
+                      Failed to send. Please call us directly at +91-97414-16747.
+                    </p>
+                  )}
                 </div>
               </form>
             </motion.div>

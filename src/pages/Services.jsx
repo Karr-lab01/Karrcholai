@@ -186,9 +186,36 @@ const Services = () => {
   return (
     <div ref={containerRef} style={{ background: '#fdfbf7', minHeight: '100vh', overflowX: 'hidden', fontFamily: 'inherit' }}>
       <Helmet>
-        <title>Services | Karrcholai Construction</title>
-        <meta name="description" content="Karrcholai offers premium PMC and residential construction services in Tamil Nadu, including landscape, solar, rainwater harvesting, flooring, lighting, and renovation." />
+        <title>Residential Construction &amp; PMC Services in Tamil Nadu | Karrcholai</title>
+        <meta name="description" content="Karrcholai offers residential construction and PMC services in Tamil Nadu — custom homes, renovation, landscape, solar, rainwater harvesting, smart lighting, traditional flooring. Serving Karur, Chennai, Coimbatore, Madurai, Trichy, Erode." />
         <link rel="canonical" href="https://karrcholai.com/services" />
+        <meta property="og:title" content="Residential Construction &amp; PMC Services in Tamil Nadu | Karrcholai" />
+        <meta property="og:description" content="Karrcholai offers residential construction and PMC services in Tamil Nadu — custom homes, renovation, landscape, solar, rainwater harvesting and more." />
+        <meta property="og:url" content="https://karrcholai.com/services" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://karrcholai.com/services" }
+          ]
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Residential Construction & PMC Services",
+          "provider": { "@type": "Organization", "name": "Karrcholai Construction", "url": "https://karrcholai.com" },
+          "areaServed": [
+            { "@type": "City", "name": "Karur" },
+            { "@type": "City", "name": "Chennai" },
+            { "@type": "City", "name": "Coimbatore" },
+            { "@type": "City", "name": "Madurai" },
+            { "@type": "City", "name": "Trichy" },
+            { "@type": "City", "name": "Erode" }
+          ],
+          "serviceType": ["Residential Construction", "Project Management Consultancy", "Home Renovation", "Solar Installation", "Rainwater Harvesting", "Landscape Design"],
+          "url": "https://karrcholai.com/services"
+        })}</script>
       </Helmet>
 
       {/* Scroll progress bar */}
@@ -196,6 +223,8 @@ const Services = () => {
 
       <Navbar />
 
+      {/* Visually-hidden SEO H1 — crawlers read this, UI shows the hero heading */}
+      <h1 className="sr-only">Residential Construction &amp; PMC Services in Tamil Nadu — Karrcholai</h1>
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', background: '#111' }}>

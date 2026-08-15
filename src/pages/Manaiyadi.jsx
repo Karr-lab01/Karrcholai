@@ -271,7 +271,7 @@ const Manaiyadi = () => {
  className="bg-dark rounded-[2.5rem] md:rounded-[4rem] px-6 py-16 md:p-20 text-center text-white shadow-2xl relative overflow-hidden grain"
  >
  <div className="absolute inset-0 opacity-[0.07]">
- <img src={heroBg} alt="" className="w-full h-full object-cover" />
+ <img src={heroBg} alt="Decorative background pattern" className="w-full h-full object-cover" />
  </div>
  <div className="relative z-10">
  <h2 className="text-2xl sm:text-3xl md:text-6xl font-black mb-6 tracking-tighter uppercase leading-[1.1]">

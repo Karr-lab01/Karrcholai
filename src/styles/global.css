@@ -113,3 +113,8 @@
     background-position: -600px;
   }
 }
+
+/* SEO Shell — hidden once React mounts */
+html.react-ready #seo-shell {
+  display: none;
+}

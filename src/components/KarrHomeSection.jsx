@@ -139,7 +139,7 @@ const KarrHomeSection = () => {
           >
             {/* Left: Image */}
             <div className="lg:col-span-5 relative">
-              <div className="relative aspect-[4/3] sm:aspect-[3/4] lg:aspect-auto lg:h-full min-h-[260px] sm:min-h-[360px] lg:min-h-[400px] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl">
+              <div className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl">
                 <img
                   src={current.image}
                   alt={
@@ -151,9 +151,9 @@ const KarrHomeSection = () => {
                   }
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/70 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/70 via-transparent to-transparent pointer-events-none" />
 
                 {/* Floating tag */}
                 <div className="absolute top-4 left-4 sm:top-6 sm:left-6">

@@ -21,21 +21,32 @@ const Blog = () => {
  return (
  <motion.div className="bg-white min-h-screen text-[#1a1a1a] font-sans selection:bg-[#B85C38] selection:text-white">
  <Helmet>
- <title>The Journal | Construction Insights &amp; Stories | Karrcholai</title>
- <meta name="description" content="Read engineering legends, construction tips, and real client stories from Karrcholai — residential construction specialists in Tamil Nadu." />
+ <title>Construction Blog | Vastu, Manaiyadi &amp; Building Tips | Karrcholai</title>
+ <meta name="description" content="Construction tips, Vastu Shastra guides, Manaiyadi Sastram advice, real client stories and building insights from Karrcholai — Tamil Nadu's residential construction specialists." />
  <link rel="canonical" href="https://karrcholai.com/blog" />
- <meta property="og:title" content="The Journal | Construction Insights & Stories | Karrcholai" />
- <meta property="og:description" content="Read engineering legends, construction tips, and real client stories from Karrcholai — residential construction specialists in Tamil Nadu." />
+ <meta property="og:title" content="Construction Blog | Vastu, Manaiyadi &amp; Building Tips | Karrcholai" />
+ <meta property="og:description" content="Construction tips, Vastu Shastra guides, Manaiyadi Sastram advice, real client stories and building insights from Karrcholai — Tamil Nadu's residential construction specialists." />
  <meta property="og:url" content="https://karrcholai.com/blog" />
+ <script type="application/ld+json">{JSON.stringify({
+   "@context": "https://schema.org",
+   "@type": "Blog",
+   "name": "Karrcholai Construction Journal",
+   "url": "https://karrcholai.com/blog",
+   "description": "Construction tips, Vastu guides, Manaiyadi Sastram, and real client stories from Tamil Nadu's residential construction specialists.",
+   "publisher": { "@type": "Organization", "name": "Karrcholai Construction", "url": "https://karrcholai.com" }
+ })}</script>
  </Helmet>
  <Navbar />
 
  <main className="pt-32 pb-20">
  <div className="border-b border-[#1a1a1a]/10 pb-12 mb-12">
  <div className="max-w-7xl mx-auto px-6 text-center">
- <h1 className="text-4xl md:text-5xl uppercase tracking-[0.2em] mb-4">The Journal</h1>
+ {/* Visually-hidden SEO H1 — crawlers see keyword-rich heading */}
+ <h1 className="sr-only">Construction Blog — Vastu, Manaiyadi Sastram &amp; Building Insights | Karrcholai Tamil Nadu</h1>
+ {/* Visual display heading */}
+ <p aria-hidden="true" className="text-4xl md:text-5xl uppercase tracking-[0.2em] mb-4">The Journal</p>
  <p className="text-[10px] md:text-[11px] font-bold tracking-[0.4em] uppercase text-[#1a1a1a]/50">
- Engineering stories, construction knowledge & building insights
+ Construction tips, Vastu guides, Manaiyadi Sastram &amp; building insights from Tamil Nadu
  </p>
  </div>
  </div>

@@ -81,12 +81,12 @@ const HeroSection = () => {
  transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
  className="mt-8 flex flex-col sm:flex-row items-center gap-4 md:gap-6 w-full max-w-[300px] sm:max-w-none justify-start"
  >
- <Link to="/contact" className="group relative overflow-hidden bg-[#B85C38] text-white text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase px-6 sm:px-8 py-3.5 sm:py-4 rounded-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(184,92,56,0.4)] hover:-translate-y-1 w-full sm:w-auto text-center flex justify-center">
- <span className="relative z-10 flex items-center gap-3 justify-center">
+ <Link to="/contact" className="group relative overflow-hidden bg-[#B85C38] text-white text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase px-6 sm:px-8 py-3.5 sm:py-4 rounded-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(184,92,56,0.4)] hover:-translate-y-1 w-full sm:w-auto text-center flex justify-center items-center">
+ <span className="relative z-10 flex items-center gap-3 justify-center text-white">
  Get Free Consultation
  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
  </span>
- <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+ <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out pointer-events-none" />
  </Link>
  <Link to="/projects" className="group bg-white/5 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase px-6 sm:px-8 py-3.5 sm:py-4 rounded-sm transition-all duration-500 hover:bg-white hover:text-[#1a1a1a] hover:-translate-y-1 w-full sm:w-auto text-center flex justify-center">
  Start Your Dream Project

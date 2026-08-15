@@ -9,15 +9,24 @@ const ManaiyadiCalculatorPage = () => {
  return (
  <div className="bg-[#fdfbf7] min-h-screen text-dark font-sans overflow-x-hidden">
  <Helmet>
- <title>Manaiyadi Dimension Calculator | Karrcholai</title>
+ <title>Free Manaiyadi Dimension Calculator | Auspicious Room Sizes Tamil Nadu | Karrcholai</title>
  <meta
  name="description"
- content="Free Manaiyadi Sastram dimension calculator — enter your room measurements and instantly check whether they are auspicious, neutral, or unfavourable for Tamil home construction."
+ content="Free Manaiyadi Sastram dimension calculator — enter room measurements in feet and instantly check whether they are auspicious, neutral, or unfavourable for Tamil home construction. No sign-up required."
  />
  <link rel="canonical" href="https://karrcholai.com/manaiyadi/calculator" />
- <meta property="og:title" content="Manaiyadi Dimension Calculator | Karrcholai" />
- <meta property="og:description" content="Free Manaiyadi Sastram dimension calculator — enter your room measurements and instantly check whether they are auspicious, neutral, or unfavourable for Tamil home construction." />
+ <meta property="og:title" content="Free Manaiyadi Dimension Calculator | Karrcholai Tamil Nadu" />
+ <meta property="og:description" content="Free Manaiyadi Sastram calculator — check auspicious room dimensions for Tamil home construction. Instant results, no sign-up required." />
  <meta property="og:url" content="https://karrcholai.com/manaiyadi/calculator" />
+ <script type="application/ld+json">{JSON.stringify({
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
+     { "@type": "ListItem", "position": 2, "name": "Manaiyadi Sastram", "item": "https://karrcholai.com/manaiyadi" },
+     { "@type": "ListItem", "position": 3, "name": "Manaiyadi Calculator", "item": "https://karrcholai.com/manaiyadi/calculator" }
+   ]
+ })}</script>
  </Helmet>
 
  <Navbar />

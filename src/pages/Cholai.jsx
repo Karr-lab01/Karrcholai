@@ -118,12 +118,29 @@ const Cholai = () => {
  return (
  <div ref={containerRef} className="bg-[#fcfcf9] min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
  <Helmet>
- <title>Cholai | Landscape, Solar &amp; Sustainable Home Solutions | Karrcholai</title>
- <meta name="description" content="Cholai is Karrcholai's sustainability division — landscape development, rainwater harvesting, solar energy, waste management, smart lighting & traditional flooring for homes in Tamil Nadu." />
+ <title>Cholai Division | Sustainable Home Solutions Tamil Nadu | Karrcholai</title>
+ <meta name="description" content="Cholai is Karrcholai's sustainability division — landscape development, rainwater harvesting, solar energy, waste management, smart lighting and Athangudi flooring for homes in Tamil Nadu." />
  <link rel="canonical" href="https://karrcholai.com/cholai" />
- <meta property="og:title" content="Cholai | Landscape, Solar & Sustainable Home Solutions | Karrcholai" />
- <meta property="og:description" content="Cholai is Karrcholai's sustainability division — landscape development, rainwater harvesting, solar energy, waste management, smart lighting & traditional flooring for homes in Tamil Nadu." />
+ <meta property="og:title" content="Cholai Division | Sustainable Home Solutions Tamil Nadu | Karrcholai" />
+ <meta property="og:description" content="Cholai is Karrcholai's sustainability division — landscape, rainwater harvesting, solar energy, waste management, smart lighting and traditional flooring for Tamil Nadu homes." />
  <meta property="og:url" content="https://karrcholai.com/cholai" />
+ <script type="application/ld+json">{JSON.stringify({
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
+     { "@type": "ListItem", "position": 2, "name": "Cholai Division", "item": "https://karrcholai.com/cholai" }
+   ]
+ })}</script>
+ <script type="application/ld+json">{JSON.stringify({
+   "@context": "https://schema.org",
+   "@type": "Service",
+   "name": "Sustainable Home Solutions — Cholai Division",
+   "provider": { "@type": "Organization", "name": "Karrcholai Construction", "url": "https://karrcholai.com" },
+   "serviceType": ["Landscape Development", "Rainwater Harvesting", "Solar Energy Installation", "Waste Management", "Smart Lighting", "Traditional Flooring"],
+   "areaServed": { "@type": "State", "name": "Tamil Nadu" },
+   "url": "https://karrcholai.com/cholai"
+ })}</script>
  </Helmet>
  <Navbar />
 

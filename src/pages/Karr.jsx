@@ -81,12 +81,20 @@ const Karr = () => {
  return (
  <div ref={containerRef} className="bg-[#fdfbf7] min-h-screen text-[#1a1a1a] selection:bg-[#B85C38] selection:text-white overflow-x-hidden font-sans">
  <Helmet>
- <title>Karr | Residential Construction &amp; Project Management | Karrcholai</title>
- <meta name="description" content="Karr is Karrcholai's construction division — turnkey residential building, structural work, renovation, PMC, and cost estimation across Tamil Nadu." />
+ <title>Karr Division | Residential Construction &amp; PMC in Tamil Nadu | Karrcholai</title>
+ <meta name="description" content="Karr is Karrcholai's construction division delivering turnkey residential building, structural work, renovation, and project management consultancy (PMC) across Tamil Nadu — Karur, Chennai, Coimbatore, Madurai, Trichy, Erode." />
  <link rel="canonical" href="https://karrcholai.com/karr" />
- <meta property="og:title" content="Karr | Residential Construction & Project Management | Karrcholai" />
- <meta property="og:description" content="Karr is Karrcholai's construction division — turnkey residential building, structural work, renovation, PMC, and cost estimation across Tamil Nadu." />
+ <meta property="og:title" content="Karr Division | Residential Construction &amp; PMC in Tamil Nadu | Karrcholai" />
+ <meta property="og:description" content="Karr is Karrcholai's construction division delivering turnkey residential building, structural work, renovation, and PMC across Tamil Nadu." />
  <meta property="og:url" content="https://karrcholai.com/karr" />
+ <script type="application/ld+json">{JSON.stringify({
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
+     { "@type": "ListItem", "position": 2, "name": "Karr Division", "item": "https://karrcholai.com/karr" }
+   ]
+ })}</script>
  </Helmet>
  <Navbar />
 

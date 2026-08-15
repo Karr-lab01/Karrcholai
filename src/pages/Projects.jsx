@@ -91,13 +91,21 @@ export default function Projects() {
  return (
  <div ref={containerRef} className="min-h-screen overflow-x-hidden font-sans select-none" style={{ background: CREAM, color: BRONZE }}>
  <Helmet>
- <title>Residential Construction Projects | Karrcholai Tamil Nadu</title>
- <meta name="description" content="Explore completed residential projects by Karrcholai — Karur Residence built with structural integrity, sustainable design, and disciplined execution." />
+ <title>Residential Construction Projects Tamil Nadu | Karrcholai Portfolio</title>
+ <meta name="description" content="Explore completed residential projects by Karrcholai — Karur Residence and more, built with structural integrity, sustainable design, and disciplined execution across Tamil Nadu." />
  <link rel="preconnect" href="https://fonts.googleapis.com" />
  <link rel="canonical" href="https://karrcholai.com/projects" />
- <meta property="og:title" content="Residential Construction Projects | Karrcholai Tamil Nadu" />
- <meta property="og:description" content="Explore completed residential projects by Karrcholai — Karur Residence built with structural integrity, sustainable design, and disciplined execution." />
+ <meta property="og:title" content="Residential Construction Projects Tamil Nadu | Karrcholai Portfolio" />
+ <meta property="og:description" content="Explore completed residential projects by Karrcholai — built with structural integrity, sustainable design, and disciplined execution across Tamil Nadu." />
  <meta property="og:url" content="https://karrcholai.com/projects" />
+ <script type="application/ld+json">{JSON.stringify({
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
+     { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://karrcholai.com/projects" }
+   ]
+ })}</script>
  </Helmet>
 
  {/* Luxury Progress Scroll Bar */}
@@ -107,6 +115,9 @@ export default function Projects() {
  />
 
  <Navbar />
+
+ {/* Visually-hidden SEO H1 */}
+ <h1 className="sr-only">Residential Construction Projects in Tamil Nadu — Karrcholai Portfolio</h1>
 
  {/* ── CINEMATIC FULL-WIDTH DARK HERO (Consistent with Karr / Cholai Screens) ── */}
  <section className="relative w-full h-[75vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#1a1a1a]">

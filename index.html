@@ -218,13 +218,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-    <!-- Google Analytics 4 -->
+    <!-- Google Analytics 4 — replace G-XXXXXXXXXX with your real Measurement ID from analytics.google.com -->
+    <!-- TODO: Replace G-XXXXXXXXXX below with your actual GA4 Measurement ID before deploying -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
+      gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
     </script>
 
     <!-- Structured Data — Local Business -->
@@ -272,7 +273,7 @@
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Solar Energy Installation" } }
         ]
       },
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "12", "bestRating": "5", "worstRating": "1" },
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "3", "bestRating": "5", "worstRating": "1" },
       "openingHoursSpecification": [
         { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:00" },
         { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "16:00" }
@@ -348,6 +349,31 @@
         { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://karrcholai.com/services" },
         { "@type": "ListItem", "position": 3, "name": "Projects", "item": "https://karrcholai.com/projects" },
         { "@type": "ListItem", "position": 4, "name": "Contact", "item": "https://karrcholai.com/contact" }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data — Person (Founder / E-E-A-T) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Saravanakumar B.",
+      "jobTitle": "Founder & Civil Engineer",
+      "description": "BE Civil Engineer with 12+ years of residential construction and project management experience in Tamil Nadu. Founder of Karrcholai Construction.",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Karrcholai Construction",
+        "url": "https://karrcholai.com"
+      },
+      "url": "https://karrcholai.com/about",
+      "knowsAbout": [
+        "Residential Construction",
+        "Project Management Consultancy",
+        "Vastu Shastra",
+        "Manaiyadi Sastram",
+        "Sustainable Construction",
+        "Tamil Nadu Architecture"
       ]
     }
     </script>

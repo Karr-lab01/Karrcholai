@@ -39,12 +39,24 @@ const VastuDaysPage = () => {
   return (
     <div className="bg-[#fdfbf7] min-h-screen text-dark font-sans overflow-x-hidden">
       <Helmet>
-        <title>வாஸ்து செய்யும் நாட்கள் 2026 | Karrcholai Construction</title>
+        <title>Vastu Foundation Muhurtham Dates 2026 | Auspicious Construction Times | Karrcholai</title>
         <meta
           name="description"
-          content="Precise Muhurtham windows for Vastu foundation-laying in each Tamil month of 2026. Traditional morning muhurtham times curated by Karrcholai Construction."
+          content="Precise Muhurtham time windows for Vastu foundation-laying in each Tamil month of 2026. Traditional morning muhurtham times for home construction, curated by Karrcholai Construction."
         />
         <link rel="canonical" href="https://karrcholai.com/manaiyadi/vastu-days" />
+        <meta property="og:title" content="Vastu Foundation Muhurtham Dates 2026 | Karrcholai" />
+        <meta property="og:description" content="Precise morning Muhurtham windows for Vastu foundation-laying in each Tamil month of 2026. Curated by Karrcholai Construction, Tamil Nadu." />
+        <meta property="og:url" content="https://karrcholai.com/manaiyadi/vastu-days" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Manaiyadi Sastram", "item": "https://karrcholai.com/manaiyadi" },
+            { "@type": "ListItem", "position": 3, "name": "Vastu Days 2026", "item": "https://karrcholai.com/manaiyadi/vastu-days" }
+          ]
+        })}</script>
       </Helmet>
 
       <Navbar />
@@ -298,7 +310,7 @@ const VastuDaysPage = () => {
               className="bg-dark rounded-[2.5rem] md:rounded-[4rem] px-6 py-16 md:p-20 text-center text-white shadow-2xl relative overflow-hidden grain"
             >
               <div className="absolute inset-0 opacity-[0.07]">
-                <img src={heroBg} alt="" className="w-full h-full object-cover" />
+                <img src={heroBg} alt="Decorative background pattern" className="w-full h-full object-cover" />
               </div>
               <div className="relative z-10">
                 <h2 className="text-2xl sm:text-3xl md:text-5xl font-black mb-6 tracking-tighter uppercase leading-tight">

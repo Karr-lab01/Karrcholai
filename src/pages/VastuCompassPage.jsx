@@ -9,14 +9,14 @@ const VastuCompassPage = () => {
   return (
     <div className="min-h-screen font-sans overflow-x-hidden" style={{ background: '#F5F2EC' }}>
       <Helmet>
-        <title>Vastu Direction Compass | Karrcholai</title>
+        <title>Free Vastu Direction Compass Tool | Home Planning Tamil Nadu | Karrcholai</title>
         <meta
           name="description"
-          content="Interactive Vastu Purusha Mandala compass — map your rooms to compass directions, score your home's Vastu compliance, and get Vedic remedy suggestions. Free tool by Karrcholai."
+          content="Free online Vastu Purusha Mandala compass — check auspicious directions for main door, kitchen, bedroom, and pooja room. Upload your floor plan and get Vastu compliance scores. Free tool by Karrcholai, Tamil Nadu."
         />
         <link rel="canonical" href="https://karrcholai.com/vastu-compass" />
-        <meta property="og:title" content="Vastu Direction Compass | Karrcholai" />
-        <meta property="og:description" content="Interactive Vastu Purusha Mandala compass — map your rooms to compass directions, score your home's Vastu compliance, and get Vedic remedy suggestions. Free tool by Karrcholai." />
+        <meta property="og:title" content="Free Vastu Direction Compass Tool | Karrcholai Tamil Nadu" />
+        <meta property="og:description" content="Free online Vastu compass — map rooms to compass directions, score Vastu compliance, get remedy suggestions. Upload your floor plan. No sign-up required." />
         <meta property="og:url" content="https://karrcholai.com/vastu-compass" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -47,6 +47,9 @@ const VastuCompassPage = () => {
       <Navbar />
 
       <main>
+        {/* Visually-hidden SEO H1 */}
+        <h1 className="sr-only">Free Vastu Direction Compass — Check Vastu Compliance for Your Home in Tamil Nadu</h1>
+
         {/* ── Vastu Direction Guide (static compass, click-to-explore) ── */}
         <section style={{ background: '#F5F2EC' }} className="pt-36 pb-10 px-4 md:px-6">
           <div className="mx-auto max-w-5xl">

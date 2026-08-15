@@ -77,11 +77,11 @@ const HomeManaiadiSection = () => {
  whileInView={{ opacity: 1, x: 0 }}
  viewport={{ once: true }}
  transition={{ duration: 0.9 }}
- className="lg:col-span-5 relative"
+ className="lg:col-span-5 relative pb-10 pr-4 md:pr-10"
  >
- <div className="relative aspect-[3/4] rounded-[3rem] overflow-hidden shadow-2xl group">
- <img src={vastuDetail} alt="Vastu architectural diagram showing proportion and structural balance" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
- <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/10 to-transparent" />
+ <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group min-h-[400px] sm:min-h-[480px] lg:min-h-[550px]">
+ <img src={vastuDetail} alt="Vastu architectural diagram showing proportion and structural balance" className="w-full h-full min-h-[400px] sm:min-h-[480px] lg:min-h-[550px] object-cover transition-transform duration-1000 group-hover:scale-105" />
+ <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/10 to-transparent pointer-events-none" />
  <div className="absolute bottom-8 left-8">
  <p className="text-white/50 text-[9px] font-black tracking-widest uppercase mb-2">Visual Harmony</p>
  <p className="text-white text-3xl font-black tracking-tighter uppercase leading-tight">
@@ -90,15 +90,15 @@ const HomeManaiadiSection = () => {
  </div>
  </div>
 
- {/* Floating card */}
+ {/* Floating card — contained inside padded parent */}
  <motion.div
  initial={{ opacity: 0, y: 20 }}
  whileInView={{ opacity: 1, y: 0 }}
  viewport={{ once: true }}
  transition={{ delay: 0.5 }}
- className="absolute -bottom-6 -right-4 md:-right-8 bg-dark text-white p-6 rounded-2xl shadow-2xl max-w-[200px]"
+ className="absolute bottom-0 right-0 bg-dark text-white p-5 rounded-2xl shadow-2xl max-w-[190px]"
  >
- <FiCompass size={24} className="text-secondary mb-3" />
+ <FiCompass size={22} className="text-secondary mb-3" />
  <p className="text-[10px] font-black tracking-widest uppercase text-white/40 mb-1">Cultural Heritage</p>
  <p className="text-sm font-bold leading-snug">Over 1000 years of architectural precision</p>
  </motion.div>

@@ -21,15 +21,24 @@ const ManaiyadiIntroduction = () => {
  return (
  <div className="bg-[#fdfbf7] min-h-screen text-dark font-sans overflow-x-hidden">
  <Helmet>
- <title>Introduction to Manaiyadi Sastram | Karrcholai Construction</title>
+ <title>Manaiyadi Sastram Introduction | Traditional Tamil Home Dimensions | Karrcholai</title>
  <meta
  name="description"
- content="A complete introduction to Manaiyadi Sastram — the traditional Tamil architectural practice. Learn about auspicious dimensions, wall heights, yoga unions, and room archetypes for modern home planning."
+ content="A complete introduction to Manaiyadi Sastram — the traditional Tamil science of auspicious home dimensions. Learn about room sizes, wall heights, yoga combinations, and Vastu Purusha Mandala for modern Tamil Nadu home construction."
  />
  <link rel="canonical" href="https://karrcholai.com/manaiyadi/introduction" />
- <meta property="og:title" content="Introduction to Manaiyadi Sastram | Karrcholai Construction" />
- <meta property="og:description" content="A complete introduction to Manaiyadi Sastram — the traditional Tamil architectural practice. Learn about auspicious dimensions, wall heights, yoga unions, and room archetypes for modern home planning." />
+ <meta property="og:title" content="Manaiyadi Sastram Introduction | Tamil Home Dimensions | Karrcholai" />
+ <meta property="og:description" content="Complete introduction to Manaiyadi Sastram — auspicious dimensions, wall heights, yoga unions, and room archetypes for modern Tamil Nadu home planning." />
  <meta property="og:url" content="https://karrcholai.com/manaiyadi/introduction" />
+ <script type="application/ld+json">{JSON.stringify({
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
+     { "@type": "ListItem", "position": 2, "name": "Manaiyadi Sastram", "item": "https://karrcholai.com/manaiyadi" },
+     { "@type": "ListItem", "position": 3, "name": "Introduction", "item": "https://karrcholai.com/manaiyadi/introduction" }
+   ]
+ })}</script>
  </Helmet>
 
  <Navbar />
@@ -247,7 +256,7 @@ const ManaiyadiIntroduction = () => {
  className="bg-dark rounded-[2.5rem] md:rounded-[4rem] px-6 py-16 md:p-20 text-center text-white shadow-2xl relative overflow-hidden grain"
  >
  <div className="absolute inset-0 opacity-[0.07]">
- <img src={heroBg} alt="" className="w-full h-full object-cover" />
+ <img src={heroBg} alt="Decorative background pattern" className="w-full h-full object-cover" />
  </div>
  <div className="relative z-10">
  <h2 className="text-2xl sm:text-3xl md:text-6xl font-black mb-6 tracking-tighter uppercase leading-[1.1]">

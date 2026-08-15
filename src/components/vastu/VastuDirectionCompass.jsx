@@ -4,7 +4,7 @@
  * detailed Vastu Shastra info from the Vaasthu Saasthra model PDF.
  */
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // ─── Vastu data from the PDF ──────────────────────────────────────────────────
@@ -578,6 +578,162 @@ function InfoPanel({ dirId, onClose }) {
   )
 }
 
+// ─── Mobile Bottom Sheet Modal ───────────────────────────────────────────────
+function MobileInfoModal({ dirId, onClose }) {
+  const d = VASTU_DATA[dirId]
+
+  // Lock body scroll while open
+  useEffect(() => {
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [])
+
+  // Close on Escape
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  if (!d) return null
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[9999] flex items-end"
+      style={{ background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)' }}
+      onClick={onClose}
+    >
+      {/* Sheet */}
+      <motion.div
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '100%' }}
+        transition={{ type: 'spring', stiffness: 320, damping: 32 }}
+        onClick={e => e.stopPropagation()}
+        className="w-full rounded-t-3xl overflow-hidden"
+        style={{
+          background: '#fff',
+          maxHeight: '82vh',
+          display: 'flex',
+          flexDirection: 'column',
+          borderTop: `3px solid ${d.borderColor}`,
+        }}
+      >
+        {/* Drag handle */}
+        <div className="flex justify-center pt-3 pb-1 shrink-0">
+          <div className="w-10 h-1 rounded-full bg-slate-200" />
+        </div>
+
+        {/* Sticky header */}
+        <div className="shrink-0 px-5 pt-3 pb-4"
+          style={{ background: d.bgLight, borderBottom: `1.5px solid ${d.borderColor}` }}>
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xl">{d.elementIcon}</span>
+                <span className="text-[10px] font-black uppercase tracking-widest"
+                  style={{ color: d.color }}>{d.element}</span>
+              </div>
+              <h2 className="text-lg font-black text-slate-900 leading-tight">{d.label}</h2>
+              <p className="text-xs font-bold mt-0.5" style={{ color: d.color }}>{d.tamil}</p>
+            </div>
+            <button
+              onClick={onClose}
+              className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
+              style={{ background: `${d.color}20`, border: `1.5px solid ${d.borderColor}` }}
+              aria-label="Close"
+            >
+              <span className="text-slate-600 font-bold text-sm leading-none">✕</span>
+            </button>
+          </div>
+
+          {/* Pills */}
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[9px] font-black"
+              style={{ background: `${d.color}15`, color: d.color, border: `1px solid ${d.borderColor}` }}>
+              🏛️ {d.deity}
+            </span>
+            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[9px] font-black"
+              style={{ background: `${d.color}15`, color: d.color, border: `1px solid ${d.borderColor}` }}>
+              🪐 {d.planet}
+            </span>
+            {d.corner && (
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[9px] font-black bg-slate-100 text-slate-500 border border-slate-200">
+                📐 Corner Zone
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Scrollable content */}
+        <div className="overflow-y-auto flex-1 px-5 py-4 space-y-4"
+          style={{ scrollbarWidth: 'thin', WebkitOverflowScrolling: 'touch' }}>
+
+          {/* Vastu tip */}
+          <div className="p-3 rounded-2xl border"
+            style={{ background: `${d.color}08`, borderColor: d.borderColor }}>
+            <p className="text-xs font-medium text-slate-700 leading-relaxed">{d.vastu_tip}</p>
+          </div>
+
+          {/* Rooms */}
+          <div>
+            <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2">
+              Ideal Rooms
+            </p>
+            <div className="space-y-2">
+              {d.rooms.map((room, i) => (
+                <div
+                  key={i}
+                  className="flex gap-3 p-3 rounded-xl border"
+                  style={{ background: d.bgLight, borderColor: d.borderColor + '80' }}
+                >
+                  <span className="text-lg shrink-0">{room.icon}</span>
+                  <div className="min-w-0">
+                    <p className="text-xs font-black text-slate-800">{room.en}</p>
+                    <p className="text-[10px] font-semibold mt-0.5" style={{ color: d.color }}>{room.name}</p>
+                    <p className="text-[10px] text-slate-500 mt-1 leading-relaxed">{room.note}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Rules */}
+          <div>
+            <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2">
+              Vastu Rules
+            </p>
+            <ul className="space-y-2">
+              {d.rules.map((rule, i) => (
+                <li key={i} className="flex gap-2.5 text-[11px] text-slate-700 leading-relaxed">
+                  <span className="mt-0.5 shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-white text-[8px] font-black"
+                    style={{ background: d.color }}>
+                    {i + 1}
+                  </span>
+                  {rule}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Corner angle */}
+          <div className="flex gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200 mb-2">
+            <span className="text-base shrink-0">📐</span>
+            <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
+              <strong className="text-slate-700">Corner Angle (PDF):</strong> {d.angle_note}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 // ─── Empty State ──────────────────────────────────────────────────────────────
 function EmptyState() {
   return (
@@ -606,6 +762,15 @@ function EmptyState() {
 export default function VastuDirectionCompass() {
   const [selected, setSelected] = useState(null)
   const [hovered,  setHovered]  = useState(null)
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 1024 : false
+  )
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const handleSelect = (id) => {
     setSelected(prev => prev === id ? null : id)
@@ -615,6 +780,17 @@ export default function VastuDirectionCompass() {
 
   return (
     <div className="w-full max-w-5xl mx-auto font-sans">
+
+      {/* Mobile bottom-sheet modal */}
+      <AnimatePresence>
+        {isMobile && selected && (
+          <MobileInfoModal
+            key={selected}
+            dirId={selected}
+            onClose={() => setSelected(null)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Page header */}
       <div className="text-center mb-8">
@@ -626,7 +802,7 @@ export default function VastuDirectionCompass() {
           Vastu Direction Guide
         </h1>
         <p className="text-sm text-slate-500 font-medium max-w-md mx-auto">
-          Click any direction on the compass to explore its Vastu rules, ideal rooms, and planetary ruler
+          Tap any direction on the compass to explore its Vastu rules, ideal rooms, and planetary ruler
         </p>
       </div>
 
@@ -668,9 +844,9 @@ export default function VastuDirectionCompass() {
             />
           </div>
 
-          {/* Hover hint */}
+          {/* Hint */}
           <div className="mt-4 text-center">
-            {hovered ? (
+            {hovered && !isMobile ? (
               <motion.p
                 key={hovered}
                 initial={{ opacity: 0, y: 4 }}
@@ -682,7 +858,9 @@ export default function VastuDirectionCompass() {
               </motion.p>
             ) : (
               <p className="text-[10px] text-slate-300 font-medium">
-                Hover or click a direction · Compass does not rotate — it shows true directions
+                {isMobile
+                  ? 'Tap a direction to see Vastu details'
+                  : 'Hover or click a direction · Compass does not rotate — it shows true directions'}
               </p>
             )}
           </div>
@@ -708,23 +886,25 @@ export default function VastuDirectionCompass() {
           </div>
         </div>
 
-        {/* Right: Info panel */}
-        <div className="bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden"
-          style={{
-            minHeight: '520px',
-            borderColor: selectedData ? selectedData.borderColor : undefined,
-            borderWidth: selectedData ? '2px' : '1px',
-          }}>
-          <AnimatePresence mode="wait">
-            {selected ? (
-              <InfoPanel key={selected} dirId={selected} onClose={() => setSelected(null)} />
-            ) : (
-              <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <EmptyState />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        {/* Right: Info panel — desktop only */}
+        {!isMobile && (
+          <div className="bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden"
+            style={{
+              minHeight: '520px',
+              borderColor: selectedData ? selectedData.borderColor : undefined,
+              borderWidth: selectedData ? '2px' : '1px',
+            }}>
+            <AnimatePresence mode="wait">
+              {selected ? (
+                <InfoPanel key={selected} dirId={selected} onClose={() => setSelected(null)} />
+              ) : (
+                <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <EmptyState />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
       </div>
 
       {/* Bottom source note */}

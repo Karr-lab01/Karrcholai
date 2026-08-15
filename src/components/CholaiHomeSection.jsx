@@ -261,7 +261,7 @@ const CholaiHomeSection = () => {
 
             {/* Right: Image with impact badge */}
             <div className="lg:col-span-6 relative">
-              <div className="relative aspect-[4/5] md:aspect-[4/3] lg:aspect-auto lg:h-full min-h-[380px] rounded-[2.5rem] overflow-hidden shadow-2xl">
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl">
                 {/* Auto-cycling image */}
                 <AnimatePresence mode="wait">
                   <motion.img
@@ -274,10 +274,10 @@ const CholaiHomeSection = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="w-full h-auto object-cover"
                   />
                 </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1A]/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1A]/80 via-transparent to-transparent pointer-events-none" />
 
                 {/* Glow frame */}
                 <div

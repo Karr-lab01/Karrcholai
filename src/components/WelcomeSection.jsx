@@ -108,51 +108,53 @@ const WelcomeSection = () => {
           </div>
 
           {/* ── Right Content (Interactive Visuals) ── */}
-          <div className="lg:col-span-6 relative">
-            <div className="relative aspect-[4/5] md:aspect-[3/4]">
-              {/* Main Image with Parallax */}
-              <motion.div 
-                style={{ y: y1 }}
-                className="absolute inset-0 z-10 rounded-2xl overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)]"
-              >
-                <img src={welcomeImg} className="w-full h-full object-cover scale-110" alt="Karrcholai residential construction project interior" loading="lazy" decoding="async" />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
-              </motion.div>
+          <div className="lg:col-span-6 relative pb-16 md:pb-20">
+            {/* Main Image Container - sets the height */}
+            <div className="relative w-full rounded-3xl overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] z-10">
+              <img 
+                src={welcomeImg} 
+                className="w-full h-auto object-cover" 
+                alt="Karrcholai residential construction project interior" 
+                loading="lazy" 
+                decoding="async" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
+            </div>
 
-              {/* Floating Secondary Image — hidden on small mobile */}
-              <motion.div 
-                style={{ y: y2 }}
-                className="hidden sm:block absolute -right-4 md:-right-10 top-1/2 -translate-y-1/2 w-1/2 aspect-square z-20 rounded-2xl overflow-hidden shadow-2xl border-[8px] md:border-[12px] border-white"
-              >
-                <img src={pic5} className="w-full h-full object-cover" alt="Karrcholai premium home construction finish — interior detail Tamil Nadu" loading="lazy" decoding="async" />
-              </motion.div>
+            {/* Floating Secondary Image - overlays on top */}
+            <div className="hidden sm:block absolute right-0 md:right-4 top-[40%] w-[42%] z-20 rounded-2xl overflow-hidden shadow-2xl border-8 md:border-[10px] border-white bg-white">
+              <img 
+                src={pic5} 
+                className="w-full h-auto object-cover" 
+                alt="Karrcholai premium home construction finish — interior detail Tamil Nadu" 
+                loading="lazy" 
+                decoding="async" 
+              />
+            </div>
 
-              {/* Rotating Experience Badge */}
-              <div className="hidden sm:flex absolute -left-6 md:-left-12 -bottom-6 md:-bottom-12 z-30 w-28 md:w-40 h-28 md:h-40 items-center justify-center">
-                {/* Only the circular text rotates */}
-                <motion.svg
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute w-full h-full text-primary fill-current opacity-90"
-                  viewBox="0 0 100 100"
-                >
-                  <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />
-                  <text style={{ fontSize: '7px', fontWeight: '900', fontFamily: 'Barlow, sans-serif' }} textAnchor="start">
-                    <textPath xlinkHref="#circlePath" textLength="251" lengthAdjust="spacing">
-                      ✦ DISCIPLINE ✦ DESIGN ✦ CONSTRUCTION
-                    </textPath>
-                  </text>
-                </motion.svg>
-                {/* Static inner circle — does not rotate */}
-                <div className="absolute flex flex-col items-center justify-center bg-white w-20 h-20 rounded-full shadow-xl">
-                  <span className="text-2xl font-black text-secondary">12</span>
-                  <span className="text-[8px] font-black uppercase tracking-tighter">Years</span>
-                </div>
+            {/* Rotating Experience Badge - bottom left */}
+            <div className="hidden sm:flex absolute left-0 bottom-0 z-30 w-32 md:w-40 h-32 md:h-40 items-center justify-center">
+              <motion.svg
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute w-full h-full text-primary fill-current opacity-90"
+                viewBox="0 0 100 100"
+              >
+                <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />
+                <text style={{ fontSize: '7px', fontWeight: '900', fontFamily: 'Barlow, sans-serif' }} textAnchor="start">
+                  <textPath xlinkHref="#circlePath" textLength="251" lengthAdjust="spacing">
+                    ✦ DISCIPLINE ✦ DESIGN ✦ CONSTRUCTION
+                  </textPath>
+                </text>
+              </motion.svg>
+              <div className="absolute flex flex-col items-center justify-center bg-white w-20 h-20 rounded-full shadow-xl">
+                <span className="text-2xl font-black text-secondary">12</span>
+                <span className="text-[8px] font-black uppercase tracking-tighter">Years</span>
               </div>
             </div>
 
             {/* Decorative background number */}
-            <div className="absolute -top-10 -right-10 text-[200px] font-black text-dark/5 select-none pointer-events-none">
+            <div className="absolute -top-10 -right-10 text-[200px] font-black text-dark/5 select-none pointer-events-none z-0">
               EST.
             </div>
           </div>

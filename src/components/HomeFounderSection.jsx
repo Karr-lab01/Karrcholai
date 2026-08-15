@@ -109,12 +109,12 @@ const HomeFounderSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 1.2, ease: "easeOut" }}
-                className="aspect-[4/5] md:aspect-square overflow-hidden relative group rounded-[1.5rem] border border-[#4a3b32]/10 shadow-xl"
+                className="aspect-[4/3] md:aspect-[4/3] overflow-hidden relative group rounded-[1.5rem] border border-[#4a3b32]/10 shadow-xl"
               >
                 <img 
                   src={courtyardImg} 
                   alt="Courtyard Construction" 
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
               </motion.div>
             </div>
