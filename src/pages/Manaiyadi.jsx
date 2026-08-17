@@ -25,7 +25,7 @@ const Manaiyadi = () => {
  return (
  <div className="bg-[#fdfbf7] min-h-screen text-dark selection:bg-secondary selection:text-white font-sans overflow-x-hidden">
  <Helmet>
- <title>Manaiyadi Sastram | Tamil Architecture Dimensions | Karrcholai</title>
+ <title>Manaiyadi Sastram Tamil Nadu | Karrcholai Construction</title>
  <meta name="description" content="Discover Manaiyadi Sastram — the traditional Tamil system for auspicious room dimensions and wall heights. Free calculator and reference tables for modern home construction." />
  <link rel="canonical" href="https://karrcholai.com/manaiyadi" />
  <meta property="og:title" content="Manaiyadi Sastram | Tamil Architecture Dimensions | Karrcholai" />

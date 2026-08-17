@@ -60,7 +60,7 @@ const ProjectDetail = () => {
  return (
  <div ref={containerRef} className="bg-[#F5F2EC] min-h-screen text-[#1C1C1A] selection:bg-[#C9754A] selection:text-white font-sans overflow-x-hidden">
  <Helmet>
- <title>{project.title} | Project Detail | Karrcholai</title>
+ <title>{project.title} | Construction Project Tamil Nadu | Karrcholai Construction</title>
  <meta name="description" content={`${project.description} — Karrcholai residential construction project in ${project.location}.`} />
  <link rel="canonical" href={`${SITE_URL}/projects/${project.id}`} />
  <meta property="og:title" content={`${project.title} | Karrcholai`} />

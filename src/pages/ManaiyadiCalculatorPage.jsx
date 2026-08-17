@@ -9,7 +9,7 @@ const ManaiyadiCalculatorPage = () => {
  return (
  <div className="bg-[#fdfbf7] min-h-screen text-dark font-sans overflow-x-hidden">
  <Helmet>
- <title>Free Manaiyadi Dimension Calculator | Auspicious Room Sizes Tamil Nadu | Karrcholai</title>
+ <title>Free Manaiyadi Calculator Tamil Nadu | Karrcholai Construction</title>
  <meta
  name="description"
  content="Free Manaiyadi Sastram dimension calculator — enter room measurements in feet and instantly check whether they are auspicious, neutral, or unfavourable for Tamil home construction. No sign-up required."

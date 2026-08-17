@@ -93,7 +93,7 @@ const AboutUs = () => {
   return (
     <div ref={containerRef} className="bg-cream min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
       <Helmet>
-        <title>About Karrcholai | Founder Saravanakumar B. &amp; Our Story | Tamil Nadu Construction</title>
+        <title>About Us | Civil Engineers Tamil Nadu | Karrcholai Construction</title>
         <meta name="description" content="Meet Saravanakumar B., BE Civil Engineer and founder of Karrcholai Construction. 12+ years of residential construction and PMC in Tamil Nadu — built on strength, transparency, and sustainable living." />
         <link rel="canonical" href="https://karrcholai.com/about" />
         <meta property="og:title" content="About Karrcholai | Founder &amp; Our Story | Tamil Nadu Construction" />
@@ -218,7 +218,7 @@ const AboutUs = () => {
                   <div className="flex gap-6 mt-8 pt-8 border-t border-white/10">
                     <div>
                       <div className="text-3xl font-black text-secondary">12+</div>
-                      <div className="text-[10px] uppercase tracking-[0.25em] text-white/40 mt-1">Years Experience</div>
+                      <div className="text-[10px] uppercase tracking-[0.25em] text-white/40 mt-1">Years Professional Experience</div>
                     </div>
                     <div className="w-[1px] bg-white/10" />
                     <div>
@@ -259,33 +259,46 @@ const AboutUs = () => {
                 className="space-y-7 text-[15px] md:text-[17px] text-dark/75 font-medium leading-[1.85]"
               >
                 <p>
-                  With over <strong className="text-dark">12 years of experience</strong> in residential construction, we have seen the challenges homeowners face while building their dream homes — changing requirements, uncontrolled costs, material wastage, coordination between different professionals and the difficulty of ensuring quality at every stage.
+                  Building a dream home should be exciting, not overwhelming. With over <strong className="text-dark">12 years of experience in MNCs and private construction firms</strong>, our founder saw the constant struggles homeowners face: budget overruns, material waste, poor quality control, and chaotic vendor coordination.
                 </p>
                 <p>
-                  We wanted to create a better way. That idea became <strong className="text-[#C9754A]">KARRCHOLAI.</strong>
-                </p>
-                <p>
-                  Our journey began with residential construction, but our vision grew beyond simply building houses. We wanted to bring construction and project management together with sustainable living solutions.
-                </p>
-                <p>
-                  Today, KARRCHOLAI focuses on <strong className="text-dark">Residential Construction and Project Management Consultancy</strong>, helping homeowners manage their projects with better planning, quality control, transparent execution and economical solutions.
-                </p>
-                <p>
-                  At the same time, through our <strong className="text-dark">CHOLAI</strong> approach, we encourage responsible living through solutions such as landscape development, rainwater harvesting, solar energy and waste management.
+                  We knew there had to be a better way. In 2021, we founded <strong className="text-[#C9754A]">KARRCHOLAI</strong> to bring structure, transparency, and peace of mind to residential construction.
                 </p>
 
-                {/* Belief strip */}
-                <div className="mt-8 p-7 border-l-2 border-secondary bg-secondary/5 rounded-r-2xl">
-                  <p className="text-base md:text-lg font-semibold text-dark leading-relaxed">
-                    "Good construction is not about spending more. It is about planning better, using materials responsibly and making the right decisions at the right time."
+                {/* What We Do */}
+                <div>
+                  <p className="text-[11px] font-black uppercase tracking-[0.35em] text-secondary mb-3">What We Do</p>
+                  <p>
+                    We offer end-to-end <strong className="text-dark">Residential Construction and Project Management Consultancy</strong>, guiding you from initial design to final handover with clear processes and smart cost management.
                   </p>
+                </div>
+
+                {/* KARR + CHOLAI meaning */}
+                <div className="space-y-3">
+                  <p>
+                    <strong className="text-dark">KARR (Strength &amp; Structure):</strong> Uncompromising construction quality, tight project management, and solid execution.
+                  </p>
+                  <p>
+                    <strong className="text-dark">CHOLAI (Greenery &amp; Sustainability):</strong> Eco-friendly solutions that turn houses into lasting, responsible homes.
+                  </p>
+                </div>
+
+                {/* CHOLAI Approach */}
+                <div className="mt-2 p-7 border-l-2 border-secondary bg-secondary/5 rounded-r-2xl space-y-3">
+                  <p className="text-[11px] font-black uppercase tracking-[0.35em] text-secondary">The CHOLAI Approach</p>
+                  <p className="text-base text-dark/75 leading-relaxed">
+                    We help you build smarter for the future by seamlessly integrating sustainable features into your home:
+                  </p>
+                  <ul className="space-y-1 text-sm text-dark/70">
+                    <li className="flex items-start gap-2"><span className="text-secondary mt-1">›</span> Landscaping &amp; Greenery for healthier living spaces</li>
+                    <li className="flex items-start gap-2"><span className="text-secondary mt-1">›</span> Rainwater Harvesting to secure water independence</li>
+                    <li className="flex items-start gap-2"><span className="text-secondary mt-1">›</span> Solar Energy Integration to slash energy bills</li>
+                    <li className="flex items-start gap-2"><span className="text-secondary mt-1">›</span> Waste Management to minimize build-site impact</li>
+                  </ul>
                 </div>
 
                 {/* Tag line */}
                 <div className="pt-4 space-y-1">
-                  <p className="text-[11px] font-black uppercase tracking-[0.35em] text-secondary">
-                    Build strong. Build responsibly. Build for better living.
-                  </p>
                   <p className="text-xs text-dark/40 uppercase tracking-widest">From Stone to Oasis — We Build Better Living.</p>
                 </div>
               </motion.div>
@@ -312,7 +325,7 @@ const AboutUs = () => {
                 Founder
               </p>
               <h2 className="text-3xl md:text-5xl font-light text-dark tracking-tight">
-                Meet the <span className="font-semibold">Founder</span>
+                Founder's <span className="font-semibold">Message</span>
               </h2>
             </motion.div>
 
@@ -353,21 +366,39 @@ const AboutUs = () => {
                 className="w-full md:w-7/12 space-y-6 text-[15px] md:text-[17px] text-dark/75 font-medium leading-[1.85]"
               >
                 <p>
-                  Hello, I'm <strong className="text-dark">Saravanakumar B.</strong>, a BE Civil Engineer and the founder of <strong className="text-dark">Karrcholai Construction.</strong> With more than 12 years of experience in residential construction, my journey has been built through practical site knowledge, disciplined execution, and a strong belief in honest building practices.
+                  Hello, I'm <strong className="text-dark">Saravanakumar B.</strong>, a BE Civil Engineer and the founder of <strong className="text-dark">Karrcholai Construction.</strong>
                 </p>
                 <p>
-                  For me, construction is not only about creating structures — it is about creating spaces for life. A home must be strong in its foundation, clear in planning, practical in execution, and peaceful for the people who live in it. This belief became the reason for starting{' '}
-                  <span className="text-[#C9754A] font-semibold">Karrcholai Construction.</span>
+                  With more than <strong className="text-dark">12 years of professional experience</strong> in the construction industry, my journey has been shaped by practical site experience, disciplined project execution and a strong belief in honest and responsible building practices. I have also gained valuable exposure working with <strong className="text-dark">MNC and Private Limited companies</strong>, where I was involved in structured project environments, quality standards, and large-scale execution processes. In addition, my experience with an <strong className="text-dark">Architectural firm</strong> helped me develop a stronger understanding of design intent, space planning, aesthetics, and the importance of integrating architecture with practical construction.
                 </p>
                 <p>
-                  The name Karrcholai comes from two ideas — <strong className="text-dark">Karr</strong>, meaning stone, and <strong className="text-dark">Cholai</strong>, meaning oasis. Together, they represent my vision: <strong className="text-dark">strong construction with peaceful living.</strong>
+                  For me, construction is not simply about creating structures — it is about creating spaces for life.
                 </p>
                 <p>
-                  My focus is on custom residential construction, project management consultancy, and responsible building practices that give long-term value to the client.
+                  A good home should have a strong foundation, thoughtful planning, practical execution and a comfortable environment for the people who live in it. This belief became the foundation for starting{' '}
+                  <span className="text-[#C9754A] font-semibold">Karrcholai Construction in 2021.</span>
                 </p>
+                <p>The name <strong className="text-dark">KARRCHOLAI</strong> comes from two ideas:</p>
+                <ul className="space-y-1 pl-1">
+                  <li className="flex items-start gap-2"><span className="text-secondary mt-1">›</span><span><strong className="text-dark">KARR</strong> — representing stone, strength and construction.</span></li>
+                  <li className="flex items-start gap-2"><span className="text-secondary mt-1">›</span><span><strong className="text-dark">CHOLAI</strong> — representing an oasis, greenery and peaceful living.</span></li>
+                </ul>
+                <p>
+                  Together, <strong className="text-dark">KARRCHOLAI</strong> represents my vision of combining strong construction with better and more responsible living.
+                </p>
+                <p>
+                  My focus is on custom residential construction, <strong className="text-dark">Project Management Consultancy</strong> and responsible building practices, with an emphasis on quality, transparency, cost-conscious planning and long-term value for every client.
+                </p>
+                <div className="mt-2 p-6 border-l-2 border-secondary bg-secondary/5 rounded-r-2xl">
+                  <p className="text-base text-dark/80 leading-relaxed">
+                    At Karrcholai, our goal is not simply to build a house. Our goal is to help create a <strong className="text-dark">well-planned home</strong> that people can confidently live in for years to come.
+                  </p>
+                </div>
                 <div className="pt-4 space-y-1">
                   <p className="text-dark/50">With regards,</p>
                   <p className="font-bold text-dark text-lg">Saravanakumar B.</p>
+                  <p className="text-sm text-dark/50">Founder &amp; Civil Engineer</p>
+                  <p className="text-sm text-dark/50">Karrcholai Construction</p>
                 </div>
               </motion.div>
             </div>
@@ -431,7 +462,7 @@ const AboutUs = () => {
           <div className="container mx-auto px-6 max-w-6xl relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x-0 md:divide-x divide-white/10">
               {[
-                { number: '12+', label: 'Years Experience' },
+                { number: '12+', label: 'Years Professional Experience' },
                 { number: '40+', label: 'Projects Completed' },
                 { number: '100%', label: 'Client Satisfaction' },
                 { number: '24/7', label: 'Project Support' },
@@ -475,42 +506,48 @@ const AboutUs = () => {
                   12+ Years of <span className="font-semibold">Residential Construction</span>
                 </h2>
                 <p className="text-dark/40 text-xs uppercase tracking-widest font-semibold md:mb-2">
-                  Built on practical knowledge
+                  Built on Practical Knowledge
                 </p>
               </div>
             </motion.div>
 
-            {/* Two-column intro */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 mb-16 md:mb-20">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="space-y-5 text-[15px] md:text-[16px] text-dark/70 font-medium leading-[1.85]"
-              >
+            {/* Intro body */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="space-y-6 text-[15px] md:text-[17px] text-dark/70 font-medium leading-[1.85] mb-16 md:mb-20"
+            >
+              <p>
+                Building a home is a responsibility that requires experience, attention to detail and disciplined execution at every stage.
+              </p>
+              <p>
+                With more than <strong className="text-dark">12 years of professional experience</strong> in the construction industry, our founder has developed practical knowledge of the residential construction process — from planning and initial groundwork to structural execution, finishing and final handover.
+              </p>
+              <p>
+                Over the years, we have experienced the real challenges that come with building a home — understanding client requirements, coordinating different teams and professionals, controlling material usage, maintaining quality, managing budgets and ensuring that work progresses according to plan.
+              </p>
+              <p>
+                Our experience has taught us that a successful project is not simply about completing construction. It is about <strong className="text-dark">planning carefully before execution</strong>, identifying potential problems early, using materials responsibly and maintaining quality throughout every stage of the project.
+              </p>
+              <p>
+                Our professional experience across <strong className="text-dark">MNCs, private limited companies and architectural environments</strong>, together with hands-on residential construction experience, has helped us develop a practical understanding of both technical requirements and real-world project execution.
+              </p>
+              <p>
+                That is why our approach combines technical knowledge, practical site experience and project management to help homeowners make informed decisions and manage their projects more effectively.
+              </p>
+
+              {/* Closing belief strip */}
+              <div className="mt-4 p-7 border-l-2 border-secondary bg-secondary/5 rounded-r-2xl space-y-3">
                 <p>
-                  Building a home is a responsibility that requires experience at every stage. With 12+ years in residential construction, we have developed practical knowledge of the complete construction process — from planning and initial groundwork to execution, finishing and handover.
+                  Every project adds to our experience. Every challenge improves our approach. Every completed home strengthens our commitment to building better.
                 </p>
-                <p>
-                  Over the years, we have worked through the real challenges: understanding client requirements, coordinating different teams, controlling material usage, maintaining quality, managing budgets and ensuring that work progresses as planned.
+                <p className="text-base font-semibold text-dark">
+                  At Karrcholai, we believe that experience is not just measured in years — it is measured by what we learn, how we solve problems and the value we create for every client.
                 </p>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                className="space-y-5 text-[15px] md:text-[16px] text-dark/70 font-medium leading-[1.85]"
-              >
-                <p>
-                  Our experience has taught us that a successful project is not simply about completing construction. It is about <strong className="text-dark">planning before execution</strong>, identifying problems before they become costly, using materials responsibly and maintaining quality throughout the project.
-                </p>
-                <p>
-                  That is why our approach combines technical knowledge, practical site experience and project management. Every project adds to our experience. Every completed home strengthens our commitment to building better.
-                </p>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
 
             {/* Experience grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

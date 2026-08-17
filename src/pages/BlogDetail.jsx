@@ -44,12 +44,12 @@ const BlogDetail = () => {
   const isVastu        = post.heroType === 'vastu';
 
   const pageTitle = isArunStory
-    ? `How Arun Built His Dream Home — A Client Story | Karrcholai`
+    ? `How Arun Built His Dream Home — A Client Story | Karrcholai Construction`
     : isFirstStone
-    ? `The First Stone — Professional Plan Analysis | Karrcholai`
+    ? `The First Stone — Professional Plan Analysis | Karrcholai Construction`
     : isVastu
-    ? `What Was the Purpose Behind the Creation of the Vastu Shastras? | Karrcholai`
-    : `${post.title} | Karrcholai Journal`
+    ? `What Was the Purpose Behind the Creation of the Vastu Shastras? | Karrcholai Construction`
+    : `${post.title} | Karrcholai Construction`
   const pageDesc = post.excerpt || `Read this article from the Karrcholai construction journal — engineering insights, client stories and building knowledge from Tamil Nadu.`
   const canonicalId = post.id
 

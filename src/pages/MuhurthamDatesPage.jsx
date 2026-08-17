@@ -35,7 +35,7 @@ const MuhurthamDatesPage = () => {
   return (
     <div className="bg-[#fdfbf7] min-h-screen text-dark font-sans overflow-x-hidden">
       <Helmet>
-        <title>Auspicious Muhurtham Dates 2026 for Home Construction | Karrcholai</title>
+        <title>Auspicious Muhurtham Dates 2026 Tamil Nadu | Karrcholai Construction</title>
         <meta
           name="description"
           content="Complete list of auspicious Muhurtham dates in 2026 for foundation-laying and construction commencement. Traditional Tamil almanac curated by Karrcholai Construction, Tamil Nadu."

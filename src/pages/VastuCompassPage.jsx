@@ -9,7 +9,7 @@ const VastuCompassPage = () => {
   return (
     <div className="min-h-screen font-sans overflow-x-hidden" style={{ background: '#F5F2EC' }}>
       <Helmet>
-        <title>Free Vastu Direction Compass Tool | Home Planning Tamil Nadu | Karrcholai</title>
+        <title>Free Vastu Direction Compass Tamil Nadu | Karrcholai Construction</title>
         <meta
           name="description"
           content="Free online Vastu Purusha Mandala compass — check auspicious directions for main door, kitchen, bedroom, and pooja room. Upload your floor plan and get Vastu compliance scores. Free tool by Karrcholai, Tamil Nadu."

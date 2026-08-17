@@ -11,7 +11,7 @@ export default function CostEstimatorPage() {
   return (
     <div className="bg-[#fdfbf7] min-h-screen text-dark overflow-x-hidden">
       <Helmet>
-        <title>Free Construction Cost Estimator Tamil Nadu 2026 | Karrcholai</title>
+        <title>Free Construction Cost Estimator Tamil Nadu | Karrcholai Construction</title>
         <meta name="description"
           content="Free instant construction cost estimator for Tamil Nadu homes. Get a detailed ₹ estimate by plot size, floors, finish quality and city — 2026 rates. Covers Karur, Chennai, Coimbatore, Madurai, Trichy, Erode. No sign-up required." />
         <link rel="canonical" href="https://karrcholai.com/cost-estimator" />

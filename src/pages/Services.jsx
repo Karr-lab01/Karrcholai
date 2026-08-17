@@ -188,7 +188,7 @@ export default function Services() {
   return (
     <div className="bg-[#f8f7f3] min-h-screen overflow-x-hidden font-sans">
       <Helmet>
-        <title>Services | Residential Construction, PMC, Renovation & Sustainable Solutions | Karrcholai</title>
+        <title>Construction Services Tamil Nadu | Karrcholai Construction</title>
         <meta name="description" content="Karrcholai offers residential construction, PMC, renovation, and sustainable building in Tamil Nadu." />
         <link rel="canonical" href="https://karrcholai.com/services" />
       </Helmet>

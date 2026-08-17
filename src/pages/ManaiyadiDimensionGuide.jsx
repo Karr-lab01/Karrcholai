@@ -9,7 +9,7 @@ const ManaiyadiDimensionGuide = () => {
  return (
  <div className="bg-[#fdfbf7] min-h-screen text-dark font-sans overflow-x-hidden">
  <Helmet>
- <title>Manaiyadi Dimension Guide &amp; Auspicious Wall Heights | Tamil Nadu | Karrcholai</title>
+ <title>Manaiyadi Dimension Guide Tamil Nadu | Karrcholai Construction</title>
  <meta
  name="description"
  content="Complete Manaiyadi Sastram reference tables — auspicious and unfavourable room dimensions (6–100 ft) and ceiling heights (6–30 ft) for traditional Tamil residential construction in Tamil Nadu."

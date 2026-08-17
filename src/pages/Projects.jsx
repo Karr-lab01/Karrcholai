@@ -269,7 +269,7 @@ export default function Projects() {
   return (
     <div ref={containerRef} className="min-h-screen overflow-x-hidden font-sans" style={{ background: CREAM, color: BRONZE }}>
       <Helmet>
-        <title>Residential Construction Projects Tamil Nadu | Karrcholai Portfolio</title>
+        <title>Residential Construction Projects Tamil Nadu | Karrcholai Construction</title>
         <meta name="description" content="Explore completed residential projects by Karrcholai — Karur Residence and more, built with structural integrity, sustainable design, and disciplined execution across Tamil Nadu." />
         <link rel="canonical" href="https://karrcholai.com/projects" />
         <meta property="og:title" content="Projects | Karrcholai" />

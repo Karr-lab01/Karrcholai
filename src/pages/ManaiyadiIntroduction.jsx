@@ -21,7 +21,7 @@ const ManaiyadiIntroduction = () => {
  return (
  <div className="bg-[#fdfbf7] min-h-screen text-dark font-sans overflow-x-hidden">
  <Helmet>
- <title>Manaiyadi Sastram Introduction | Traditional Tamil Home Dimensions | Karrcholai</title>
+ <title>Manaiyadi Sastram Introduction Tamil Nadu | Karrcholai Construction</title>
  <meta
  name="description"
  content="A complete introduction to Manaiyadi Sastram — the traditional Tamil science of auspicious home dimensions. Learn about room sizes, wall heights, yoga combinations, and Vastu Purusha Mandala for modern Tamil Nadu home construction."

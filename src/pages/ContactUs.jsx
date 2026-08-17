@@ -98,7 +98,7 @@ export default function ContactUs() {
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ background: CREAM, color: DARK }}>
       <Helmet>
-        <title>Contact Karrcholai | Free Consultation | Residential Construction Tamil Nadu</title>
+        <title>Free Consultation | Construction Company Tamil Nadu | Karrcholai Construction</title>
         <meta name="description" content="Contact Karrcholai Construction for residential construction, PMC, and renovation in Tamil Nadu. Book a free consultation � serving Karur, Chennai, Coimbatore, Madurai, Trichy and Erode. Call +91-97414-16747." />
         <link rel="canonical" href="https://karrcholai.com/contact" />
         <meta property="og:title" content="Contact Karrcholai | Free Consultation | Residential Construction Tamil Nadu" />

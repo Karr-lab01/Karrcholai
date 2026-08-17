@@ -17,7 +17,7 @@ const Home = () => {
  return (
  <div className="font-sans text-dark min-h-screen overflow-x-hidden">
  <Helmet>
- <title>Karrcholai | Construction &amp; PMC Company Tamil Nadu</title>
+ <title>Construction &amp; PMC Company Tamil Nadu | Karrcholai Construction</title>
  <meta name="description" content="Karrcholai Construction — residential construction &amp; PMC company in Tamil Nadu. Custom homes, renovation, solar, rainwater harvesting. Free Vastu compass &amp; Manaiyadi Sastram tools. Call +91-97414-16747." />
  <link rel="canonical" href="https://karrcholai.com/" />
  <meta property="og:title" content="Karrcholai | Construction &amp; PMC Company Tamil Nadu" />

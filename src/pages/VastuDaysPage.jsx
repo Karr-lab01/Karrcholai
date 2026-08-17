@@ -40,7 +40,7 @@ const VastuDaysPage = () => {
   return (
     <div className="bg-[#fdfbf7] min-h-screen text-dark font-sans overflow-x-hidden">
       <Helmet>
-        <title>Vastu Foundation Muhurtham Dates 2026 | Auspicious Construction Times | Karrcholai</title>
+        <title>Vastu Muhurtham Dates 2026 Tamil Nadu | Karrcholai Construction</title>
         <meta
           name="description"
           content="Precise Muhurtham time windows for Vastu foundation-laying in each Tamil month of 2026. Traditional morning muhurtham times for home construction, curated by Karrcholai Construction."

@@ -118,7 +118,7 @@ const Cholai = () => {
  return (
  <div ref={containerRef} className="bg-[#fcfcf9] min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
  <Helmet>
- <title>Cholai Division | Sustainable Home Solutions Tamil Nadu | Karrcholai</title>
+ <title>Sustainable Home Solutions Tamil Nadu | Karrcholai Construction</title>
  <meta name="description" content="Cholai is Karrcholai's sustainability division — landscape development, rainwater harvesting, solar energy, waste management, smart lighting and Athangudi flooring for homes in Tamil Nadu." />
  <link rel="canonical" href="https://karrcholai.com/cholai" />
  <meta property="og:title" content="Cholai Division | Sustainable Home Solutions Tamil Nadu | Karrcholai" />

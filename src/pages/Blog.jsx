@@ -21,7 +21,7 @@ const Blog = () => {
  return (
  <motion.div className="bg-white min-h-screen text-[#1a1a1a] font-sans selection:bg-[#B85C38] selection:text-white">
  <Helmet>
- <title>Construction Blog | Vastu, Manaiyadi &amp; Building Tips | Karrcholai</title>
+ <title>Construction Blog Tamil Nadu | Karrcholai Construction</title>
  <meta name="description" content="Construction tips, Vastu Shastra guides, Manaiyadi Sastram advice, real client stories and building insights from Karrcholai — Tamil Nadu's residential construction specialists." />
  <link rel="canonical" href="https://karrcholai.com/blog" />
  <meta property="og:title" content="Construction Blog | Vastu, Manaiyadi &amp; Building Tips | Karrcholai" />
