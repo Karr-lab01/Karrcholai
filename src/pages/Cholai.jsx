@@ -152,11 +152,11 @@ const Cholai = () => {
 
  <main>
  {/* --- HERO SECTION --- */}
- <section className="relative h-screen flex items-center justify-center overflow-hidden bg-dark">
- <motion.div 
- style={{ y: y1, opacity }}
- className="absolute inset-0 z-0"
+ <section
+ className="relative flex items-center justify-center overflow-hidden bg-dark"
+ style={{ minHeight: '100svh' }}
  >
+ <div className="absolute inset-0 z-0">
  <video 
  ref={videoRef}
  autoPlay 
@@ -168,7 +168,7 @@ const Cholai = () => {
  <source src={cholaiVideo} type="video/mp4" />
  </video>
  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-dark" />
- </motion.div>
+ </div>
 
  <div className="relative z-10 text-center px-4 max-w-5xl">
  <motion.div
@@ -347,7 +347,6 @@ const Cholai = () => {
  ))}
  </div>
 
- {/* --- CALL TO ACTION --- */}
  <section className="py-24 md:py-40 bg-dark text-white relative overflow-hidden">
  <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20" />
  
@@ -381,22 +380,46 @@ const Cholai = () => {
  </p>
 
  <div className="flex flex-wrap justify-center gap-6">
- <motion.button 
- whileHover={{ scale: 1.05 }}
- whileTap={{ scale: 0.95 }}
- className="bg-secondary text-white px-10 py-5 text-xs font-black uppercase tracking-[0.2em] rounded-sm shadow-xl hover:bg-white hover:text-dark transition-all duration-300"
+ <a href="/contact"
+ className="bg-secondary text-white px-10 py-5 text-xs font-black uppercase tracking-[0.2em] rounded-sm shadow-xl hover:bg-white hover:text-dark transition-all duration-300 inline-block"
  >
  Book a Consultation
- </motion.button>
- <motion.button 
- whileHover={{ scale: 1.05 }}
- whileTap={{ scale: 0.95 }}
- className="border border-white/20 text-white px-10 py-5 text-xs font-black uppercase tracking-[0.2em] rounded-sm hover:bg-white/5 transition-all duration-300"
+ </a>
+ <a href="/projects"
+ className="border border-white/20 text-white px-10 py-5 text-xs font-black uppercase tracking-[0.2em] rounded-sm hover:bg-white/5 transition-all duration-300 inline-block"
  >
  View Case Studies
- </motion.button>
+ </a>
  </div>
  </motion.div>
+ </div>
+ </section>
+
+ {/* Topical cluster: Rainwater article → Cholai Sustainable → Projects → Contact */}
+ <section className="py-12 px-6 bg-[#0d1a0d] border-t border-white/5">
+ <div className="container mx-auto max-w-5xl">
+ <p className="text-[9px] font-black tracking-[0.5em] uppercase mb-5 text-white/25">Explore This Topic</p>
+ <div className="flex flex-wrap items-center gap-3">
+ {[
+  { to: '/karr',           emoji: '🏗️', label: 'Residential Construction', title: 'Karr Division',         bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',   accent: '#B85C38' },
+  { to: '/cost-estimator', emoji: '₹',  label: 'Free Tool',                 title: 'Cost Estimator',        bg: 'linear-gradient(135deg, #B85C38, #8B3A20)',   accent: 'rgba(255,255,255,0.6)' },
+  { to: '/projects',       emoji: '🏠', label: 'Our Portfolio',              title: 'View Projects',         bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',   accent: 'rgba(255,255,255,0.35)' },
+  { to: '/contact',        emoji: '📞', label: 'Free Consultation',           title: 'Talk to Karrcholai',   bg: '#111',                                        accent: 'rgba(255,255,255,0.35)' },
+ ].map((cl, idx, arr) => (
+ <span key={cl.to} className="flex items-center gap-3">
+  <a href={cl.to}
+  className="flex items-center gap-3 rounded-xl px-4 py-3 transition-opacity hover:opacity-80"
+  style={{ background: cl.bg, textDecoration: 'none' }}>
+  <span className="text-lg">{cl.emoji}</span>
+  <span>
+   <span className="block text-[7px] font-black tracking-[0.35em] uppercase mb-0.5" style={{ color: cl.accent }}>{cl.label}</span>
+   <span className="block text-[12px] font-bold text-white whitespace-nowrap">{cl.title}</span>
+  </span>
+  </a>
+  {idx < arr.length - 1 && <span className="font-black text-xs text-white/20">→</span>}
+ </span>
+ ))}
+ </div>
  </div>
  </section>
  </main>
@@ -408,3 +431,5 @@ const Cholai = () => {
 }
 
 export default Cholai
+
+

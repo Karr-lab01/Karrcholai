@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import heroBg from '../assets/manaiyadi_hero.png'
 
-// ── AUSPICIOUS DATES DATA 2026 ──────────────────────────────────────────────
+// -- AUSPICIOUS DATES DATA 2026 (from physical Tamil almanac) ----------------
 const auspiciousDates = [
   { month: 'ஜனவரி',      english: 'January',   dates: [28] },
   { month: 'பிப்ரவரி',   english: 'February',  dates: [6, 8, 13, 15, 16, 20] },
@@ -59,22 +59,19 @@ const MuhurthamDatesPage = () => {
 
       <main>
         {/* ── HERO ── */}
-        <section className="relative h-[70vh] md:h-screen flex items-center justify-center overflow-hidden">
-          <motion.div
-            initial={{ scale: 1.15, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 2, ease: 'easeOut' }}
-            className="absolute inset-0 z-0"
-          >
-            <img
-              src={heroBg}
-              alt="Auspicious muhurtham dates for home construction"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/45 to-black/85" />
-          </motion.div>
+        <section
+          className="relative flex items-center justify-center overflow-hidden"
+          style={{
+            minHeight: '100svh',
+            backgroundImage: `url(${heroBg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/40 to-black/75 pointer-events-none" />
 
-          <div className="relative z-10 container mx-auto px-6 text-center">
+          <div className="relative z-10 container mx-auto px-6 text-center py-24">
             <motion.div
               initial={{ opacity: 0, y: 80 }}
               animate={{ opacity: 1, y: 0 }}
@@ -83,7 +80,7 @@ const MuhurthamDatesPage = () => {
               <p className="text-white font-black tracking-[0.5em] md:tracking-[0.8em] uppercase text-[10px] md:text-xs mb-6">
                 Almanac 2026
               </p>
-              <h1 className="text-5xl md:text-8xl lg:text-9xl font-black text-white leading-[0.85] tracking-tighter mb-8 uppercase">
+              <h1 className="text-4xl sm:text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-8 uppercase" style={{ fontFamily: "'Noto Sans Tamil', 'Latha', serif" }}>
                 சுப முகூர்த்த
                 <br />
                 <span className="text-primary italic">தினங்கள்.</span>
@@ -145,15 +142,9 @@ const MuhurthamDatesPage = () => {
               <table className="w-full border-collapse">
                 <thead className="bg-dark text-white">
                   <tr>
-                    <th className="px-10 py-6 text-left text-[10px] font-black uppercase tracking-[0.3em] w-56">
-                      Month
-                    </th>
-                    <th className="px-10 py-6 text-left text-[10px] font-black uppercase tracking-[0.3em]">
-                      Auspicious Dates
-                    </th>
-                    <th className="px-10 py-6 text-right text-[10px] font-black uppercase tracking-[0.3em] w-32">
-                      Count
-                    </th>
+                    <th className="px-10 py-6 text-left text-[10px] font-black uppercase tracking-[0.3em] w-56">Month</th>
+                    <th className="px-10 py-6 text-left text-[10px] font-black uppercase tracking-[0.3em]">Auspicious Dates</th>
+                    <th className="px-10 py-6 text-right text-[10px] font-black uppercase tracking-[0.3em] w-32">Count</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-dark/5">
@@ -167,7 +158,7 @@ const MuhurthamDatesPage = () => {
                       className="group hover:bg-primary/[0.03] transition-colors"
                     >
                       <td className="px-10 py-7">
-                        <p className="text-xl font-black text-dark group-hover:text-primary transition-colors tracking-tight">
+                        <p className="text-xl font-black text-dark group-hover:text-primary transition-colors tracking-tight" style={{ fontFamily: "'Noto Sans Tamil', 'Latha', serif" }}>
                           {item.month}
                         </p>
                         <p className="text-[10px] font-bold text-dark/25 uppercase tracking-widest mt-0.5">
@@ -210,7 +201,7 @@ const MuhurthamDatesPage = () => {
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <p className="font-black text-dark text-lg tracking-tight">{item.month}</p>
+                      <p className="font-black text-dark text-lg tracking-tight" style={{ fontFamily: "'Noto Sans Tamil', 'Latha', serif" }}>{item.month}</p>
                       <p className="text-[9px] font-bold text-dark/30 uppercase tracking-widest">{item.english}</p>
                     </div>
                     <span className="text-[10px] font-black text-primary/60 bg-primary/5 border border-primary/10 rounded-full px-3 py-1">
@@ -281,7 +272,7 @@ const MuhurthamDatesPage = () => {
                   className={`p-8 md:p-10 rounded-[2.5rem] border ${card.bg}`}
                 >
                   <div className={`${card.color} mb-6 text-3xl`}>
-                    {card.isEmoji ? card.icon : card.icon}
+                    {card.icon}
                   </div>
                   <h4 className={`font-black uppercase tracking-[0.2em] text-[10px] mb-3 ${card.color}`}>
                     {card.title}
@@ -334,3 +325,5 @@ const MuhurthamDatesPage = () => {
 }
 
 export default MuhurthamDatesPage
+
+

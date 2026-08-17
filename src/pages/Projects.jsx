@@ -1,10 +1,11 @@
 ﻿import { useState, useRef, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useInView } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { 
- FiMapPin, FiCalendar, FiMaximize, FiUser, FiArrowRight, 
- FiCheckCircle, FiShield, FiCpu, FiSun, FiDroplet, FiZap, FiActivity, FiCompass,
- FiChevronLeft, FiChevronRight
+import {
+  FiMapPin, FiCalendar, FiMaximize, FiArrowRight,
+  FiChevronLeft, FiChevronRight, FiZap, FiDroplet,
+  FiTool, FiLayers, FiAlertTriangle, FiCheckCircle,
+  FiHome, FiStar
 } from 'react-icons/fi'
 import { FaStar, FaQuoteLeft } from 'react-icons/fa'
 import Navbar from '../components/Navbar'
@@ -12,7 +13,7 @@ import UnifiedFooter from '../components/UnifiedFooter'
 import FootprintMapSection from '../components/FootprintMapSection'
 import { Helmet } from 'react-helmet-async'
 
-// Image imports from root assets
+// Image imports
 import kr_3d from '../../assets/Karur Residance/3D Exterior Model.jpeg'
 import kr_carportico from '../../assets/Karur Residance/Car Portico.jpeg'
 import kr_footing from '../../assets/Karur Residance/Footing.jpeg'
@@ -30,481 +31,650 @@ import kr_pooja from '../../assets/Karur Residance/Pooja.jpeg'
 import kr_vasthupooja from '../../assets/Karur Residance/Vasthu Pooja.jpeg'
 import heroImg from '../../assets/img1.jpg'
 
-// Bright Luxury Color Palette
-const CREAM = '#fdfbf7' // Alabaster Cream
-const CARD_BG = '#F6F3EC' // Light Linen Cream
-const SAGE = '#2D4B37' // Sage green highlight
-const TERRA = '#B85C38' // Terracotta highlight
-const BRONZE = '#2A2A28' // Premium dark-bronze text
-const MUTED = '#7C7C79' // Muted text
-const BRASS = '#C5A880' // Brass highlights
-const BORDER_COLOR = 'rgba(58,58,56,0.06)' // Soft elegant borders
+// ── Palette ──────────────────────────────────────────────────────────────────
+const SAGE   = '#2D4B37'
+const TERRA  = '#B85C38'
+const CREAM  = '#fdfbf7'
+const CARD   = '#FFFFFF'
+const BRONZE = '#2A2A28'
+const MUTED  = '#7C7C79'
+const BRASS  = '#C5A880'
 
-export default function Projects() {
- const containerRef = useRef(null)
- const { scrollYProgress } = useScroll()
- const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 })
+// ── Project Data ──────────────────────────────────────────────────────────────
+const PROJECTS = [
+  {
+    id: 'karur-residence',
+    // 1. Title
+    title: 'Karur Residence',
+    subtitle: 'A sustainable family home — Karur, Tamil Nadu',
+    category: 'Residential',
+    year: '2024',
 
- // Interactive Gallery States
- const [activeImgP2, setActiveImgP2] = useState(0)
- const [activeTabP2, setActiveTabP2] = useState('vision')
- const [isP2Paused, setIsP2Paused] = useState(false)
+    // 2. Location
+    location: 'Karur, Tamil Nadu',
+    coordinates: '10.96° N / 78.08° E',
 
- const p2Images = [
- kr_3d, kr_vasthupooja, kr_footing, kr_plinthbeam, kr_groundfloor,
- kr_column, kr_brickwork, kr_roof, kr_carportico, kr_living,
- kr_kitchen, kr_masterbedroom, kr_masterbath, kr_pooja, kr_maindoor
- ]
- const p2Captions = [
- "01 / 3D Exterior Model",
- "02 / Vasthu Pooja",
- "03 / Footing",
- "04 / Plinth Beam",
- "05 / Ground Floor",
- "06 / Ground Floor Column",
- "07 / Ground Floor Brick Work",
- "08 / Ground Floor Roof",
- "09 / Car Portico",
- "10 / Living",
- "11 / Kitchen",
- "12 / Master Bedroom",
- "13 / Master Bath",
- "14 / Pooja",
- "15 / Main Door"
- ]
+    // 3. Plot Area
+    plotArea: '2,400 Sq.Ft',
 
- // Auto slideshow timer
- useEffect(() => {
- if (isP2Paused) return
- const timer = setInterval(() => {
- setActiveImgP2(prev => (prev + 1) % p2Images.length)
- }, 5000)
- return () => clearInterval(timer)
- }, [isP2Paused, p2Images.length])
+    // 4. Built-up Area
+    builtUpArea: '5,100 Sq.Ft',
 
- const navP2 = useCallback((dir) => {
- setIsP2Paused(true)
- setActiveImgP2(prev => (prev + dir + p2Images.length) % p2Images.length)
- setTimeout(() => setIsP2Paused(false), 6000)
- }, [p2Images.length])
+    // First Stone
+    firstStone: {
+      date: 'February 14, 2023',
+      event: 'Vasthu Pooja & Ground-Breaking Ceremony',
+      note: 'The family performed the traditional bhoomi pooja before the first footing was dug — setting the foundation with intention.',
+    },
 
- return (
- <div ref={containerRef} className="min-h-screen overflow-x-hidden font-sans select-none" style={{ background: CREAM, color: BRONZE }}>
- <Helmet>
- <title>Residential Construction Projects Tamil Nadu | Karrcholai Portfolio</title>
- <meta name="description" content="Explore completed residential projects by Karrcholai — Karur Residence and more, built with structural integrity, sustainable design, and disciplined execution across Tamil Nadu." />
- <link rel="preconnect" href="https://fonts.googleapis.com" />
- <link rel="canonical" href="https://karrcholai.com/projects" />
- <meta property="og:title" content="Residential Construction Projects Tamil Nadu | Karrcholai Portfolio" />
- <meta property="og:description" content="Explore completed residential projects by Karrcholai — built with structural integrity, sustainable design, and disciplined execution across Tamil Nadu." />
- <meta property="og:url" content="https://karrcholai.com/projects" />
- <script type="application/ld+json">{JSON.stringify({
-   "@context": "https://schema.org",
-   "@type": "BreadcrumbList",
-   "itemListElement": [
-     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
-     { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://karrcholai.com/projects" }
-   ]
- })}</script>
- </Helmet>
+    // 5. Scope
+    scope: 'Complete design, structural planning, sustainable systems integration, and end-to-end construction of a G+1 residential home — from vastu orientation and footing through to final interior finishes and handover.',
 
- {/* Luxury Progress Scroll Bar */}
- <motion.div
- className="fixed top-0 left-0 right-0 h-[4px] z-[200] origin-left"
- style={{ scaleX, background: `linear-gradient(90deg, ${SAGE}, ${BRASS}, ${TERRA})` }}
- />
+    // 6. Construction Method
+    constructionMethod: [
+      { label: 'Foundation', value: 'Isolated footing with plinth beam' },
+      { label: 'Frame', value: 'RCC column-beam frame with brick infill' },
+      { label: 'Slab', value: 'Flat RCC slabs — conventional shuttering' },
+      { label: 'Orientation', value: 'Vastu-aligned site layout' },
+    ],
 
- <Navbar />
+    // 7. Materials
+    materials: [
+      { icon: FiLayers, name: 'CSEB Blocks', desc: 'Compressed stabilised earth blocks — reduced embodied carbon' },
+      { icon: FiZap,    name: 'Solar Panels', desc: '12.5 kWp monocrystalline roof-integrated array' },
+      { icon: FiDroplet,name: 'Rainwater Tank', desc: '50,000 L underground 3-stage filtration system' },
+      { icon: FiTool,   name: 'Bamboo Framing', desc: 'Structural bamboo in select secondary spans' },
+    ],
 
- {/* Visually-hidden SEO H1 */}
- <h1 className="sr-only">Residential Construction Projects in Tamil Nadu — Karrcholai Portfolio</h1>
+    // 8. Challenges
+    challenges: [
+      'Rocky sub-soil requiring partial rock-cutting for footings',
+      'Integrating rainwater harvesting under the plot footprint without reducing built area',
+      'Client requirement for zero mechanical cooling in ground floor living spaces',
+      'Managing monsoon delays during foundation and plinth beam phases',
+    ],
 
- {/* ── CINEMATIC FULL-WIDTH DARK HERO (Consistent with Karr / Cholai Screens) ── */}
- <section className="relative w-full h-[75vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#1a1a1a]">
- 
- {/* Background Visual Frame */}
- <div className="absolute inset-0 z-0">
- <motion.img 
- src={heroImg}
- alt="Karrcholai Construction Signature Landmarks"
- className="w-full h-full object-cover opacity-85"
- initial={{ scale: 1.15 }}
- animate={{ scale: 1 }}
- transition={{ duration: 1.8, ease: "easeOut" }}
- />
- {/* Sophisticated site-wide multi-layered overlays */}
- <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a]/40 via-transparent to-[#1a1a1a]/70" />
- <div className="absolute inset-0" style={{
- background: 'linear-gradient(135deg, rgba(45,75,55,0.08) 0%, transparent 60%, rgba(184,92,56,0.06) 100%)'
- }} />
- </div>
+    // 9. Solution
+    solutions: [
+      'Designed isolated footings sized to the actual rock bearing capacity — eliminating over-excavation cost',
+      'Positioned the 50,000 L RWH tank beneath the driveway, recovering usable floor area',
+      'Double-height ventilation shaft + roof vents create stack-effect cooling — no AC needed in living areas',
+      'Prefabricated column cages off-site; erection completed in weather windows during monsoon breaks',
+    ],
 
- {/* Centered Premium Title Branding Block */}
- <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 text-center drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
- <motion.div
- initial={{ opacity: 0, y: 40 }}
- animate={{ opacity: 1, y: 0 }}
- transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
- >
- <h1 
- className="text-5xl md:text-8xl font-bold text-white leading-none tracking-tighter mb-8 drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]"
- >
- Our <span className="text-white/40">Projects.</span>
- </h1>
- <p 
- className="text-white/90 text-sm md:text-lg max-w-xl mx-auto font-normal leading-relaxed border-t border-white/20 pt-6 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
- >
- Residential projects across Tamil Nadu — built with strong structure, careful planning, and quality execution.
- </p>
- </motion.div>
- </div>
+    // 10. Photos (gallery)
+    gallery: [
+      { src: kr_3d,           caption: '3D Exterior Model' },
+      { src: kr_vasthupooja,  caption: 'Vasthu Pooja' },
+      { src: kr_footing,      caption: 'Footing Work' },
+      { src: kr_plinthbeam,   caption: 'Plinth Beam' },
+      { src: kr_groundfloor,  caption: 'Ground Floor' },
+      { src: kr_column,       caption: 'Column Work' },
+      { src: kr_brickwork,    caption: 'Brick Work' },
+      { src: kr_roof,         caption: 'Roof Slab' },
+      { src: kr_carportico,   caption: 'Car Portico' },
+      { src: kr_living,       caption: 'Living Area' },
+      { src: kr_kitchen,      caption: 'Kitchen' },
+      { src: kr_masterbedroom,caption: 'Master Bedroom' },
+      { src: kr_masterbath,   caption: 'Master Bathroom' },
+      { src: kr_pooja,        caption: 'Pooja Room' },
+      { src: kr_maindoor,     caption: 'Main Door' },
+    ],
 
- {/* Downward Scroll Indicator */}
- <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 hidden md:block">
- <motion.div
- animate={{ y: [0, 8, 0] }}
- transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
- className="w-[1px] h-12 bg-gradient-to-b from-[#B85C38] to-transparent"
- />
- </div>
- </section>
+    // 11. Result
+    result: {
+      headline: '5,100 Sq.Ft. delivered — on scope, on budget.',
+      points: [
+        '~60% reduction in grid electricity via solar array',
+        'Natural cooling maintains 26–28 °C without AC on ground floor',
+        'RWH system covers full household water needs during monsoon',
+        'Completed in 14 months including all sustainability systems',
+      ],
+      stats: [
+        { label: 'Duration', value: '14 mo.' },
+        { label: 'Solar Output', value: '12.5 kWp' },
+        { label: 'Water Storage', value: '50,000 L' },
+      ],
+    },
 
- {/* ── PROJECT 01: KARUR RESIDENCE ── */}
- <section className="py-16 sm:py-28 md:py-40 relative" style={{ background: '#FAF8F5' }}>
- 
- {/* Decorative Grid coordinate marker */}
- <div className="absolute right-12 top-12 text-[10px] font-black text-dark/15 tracking-widest uppercase hidden md:block">
- LATITUDE 10.96° N // LONGITUDE 78.08° E // KARUR, TN
- </div>
+    // 12. Client Testimonial
+    testimonial: {
+      quote: 'We entrusted KARRCHOLAI with our home. The team\'s dedication to quality craftsmanship and attention to detail truly shines through in every corner. Thank you for turning our house into a haven!',
+      author: 'Homeowner',
+      location: 'Karur, Tamil Nadu',
+      rating: 5,
+    },
 
- <div className="max-w-7xl mx-auto px-6 md:px-12">
- 
- {/* Section Case Header */}
- <div className="mb-10 sm:mb-14">
- <span 
- className="text-[9px] font-bold tracking-[0.35em] uppercase" 
- style={{ color: SAGE }}
- >
- Case Study 01 // Sustainable Design
- </span>
- <h2 
- className="text-3xl sm:text-5xl font-bold tracking-tight mt-1" 
- style={{ color: BRONZE }}
- >
- Karur Residence
- </h2>
- <div className="w-16 h-[2px] mt-4" style={{ background: SAGE }} />
- </div>
+    // 13. Related Services
+    relatedServices: [
+      { to: '/karr',           emoji: '🏗️', label: 'Construction',      title: 'Karr Division' },
+      { to: '/cholai',         emoji: '🌿', label: 'Sustainability',     title: 'Cholai Division' },
+      { to: '/cost-estimator', emoji: '₹',  label: 'Free Tool',          title: 'Cost Estimator' },
+      { to: '/vastu-compass',  emoji: '🧭', label: 'Free Tool',          title: 'Vastu Compass' },
+    ],
+  },
+]
 
- {/* BRIGHT LUXURY METRICS ACCORDION */}
- <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl sm:rounded-3xl border shadow-sm mb-10 sm:mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
- {[
- { icon: FiMaximize, label: "Total Built Space", value: "5,100 Sq.Ft", accent: SAGE },
- { icon: FiMapPin, label: "Geographic Site", value: "Karur, TN", accent: SAGE },
- { icon: FiCalendar, label: "Year Completed", value: "2024", accent: SAGE }
- ].map((spec, idx) => (
- <div key={idx} className="p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-dark/[0.02] bg-[#FCFBF9] flex items-center gap-3 sm:gap-4 hover:border-dark/10 transition-all duration-300">
- <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${spec.accent}08` }}>
- <spec.icon className="text-sm sm:text-base" style={{ color: spec.accent }} />
- </div>
- <div>
- <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-dark/35 mb-0.5">{spec.label}</p>
- <p className="text-xs sm:text-sm font-black text-dark/95 leading-none">{spec.value}</p>
- </div>
- </div>
- ))}
- </div>
+// ── Section label component ────────────────────────────────────────────────────
+const SectionLabel = ({ number, title }) => (
+  <div className="flex items-center gap-3 mb-6">
+    <span
+      className="text-[9px] font-black tracking-[0.35em] uppercase px-2.5 py-1 rounded-full"
+      style={{ background: `${SAGE}12`, color: SAGE }}
+    >
+      {String(number).padStart(2, '0')}
+    </span>
+    <span className="text-[11px] font-black tracking-[0.3em] uppercase" style={{ color: MUTED }}>
+      {title}
+    </span>
+    <span className="flex-1 h-px" style={{ background: `${BRONZE}10` }} />
+  </div>
+)
 
- {/* MAIN ALIGNED 2-COLUMN GRID (Images and Content Perfectly Aligned Side-by-Side) */}
- <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
- 
- {/* Left Panel: Symmetrical Image Gallery with Interactive Thumbnails (7/12 Width) */}
- <div className="lg:col-span-7 flex flex-col justify-between self-stretch gap-5 sm:gap-6">
- {/* Primary Active Showcase Frame */}
- <div className="overflow-hidden rounded-2xl sm:rounded-[28px] shadow-lg aspect-[16/10] group relative bg-stone-100 border border-dark/5 flex-1 flex items-stretch">
- <AnimatePresence mode="wait">
- <motion.img
- key={activeImgP2}
- src={p2Images[activeImgP2]}
- alt={p2Captions[activeImgP2]}
- className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-103"
- initial={{ opacity: 0, scale: 1.02 }}
- animate={{ opacity: 1, scale: 1 }}
- exit={{ opacity: 0, scale: 0.98 }}
- transition={{ duration: 0.5, ease: 'easeInOut' }}
- />
- </AnimatePresence>
+// ── Photo Gallery sub-component ────────────────────────────────────────────────
+function PhotoGallery({ gallery }) {
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
 
- {/* Left / Right Arrow Controls */}
- <button
- onClick={() => navP2(-1)}
- aria-label="Previous image"
- className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#fdfbf7]/85 backdrop-blur-sm border border-dark/10 flex items-center justify-center shadow-md hover:bg-white hover:scale-110 transition-all duration-200"
- >
- <FiChevronLeft className="text-base sm:text-lg" style={{ color: '#2A2A28' }} />
- </button>
- <button
- onClick={() => navP2(1)}
- aria-label="Next image"
- className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#fdfbf7]/85 backdrop-blur-sm border border-dark/10 flex items-center justify-center shadow-md hover:bg-white hover:scale-110 transition-all duration-200"
- >
- <FiChevronRight className="text-base sm:text-lg" style={{ color: '#2A2A28' }} />
- </button>
+  useEffect(() => {
+    if (paused) return
+    const t = setInterval(() => setActive(p => (p + 1) % gallery.length), 4500)
+    return () => clearInterval(t)
+  }, [paused, gallery.length])
 
- {/* Slideshow Progress Dots */}
- <div className="absolute bottom-4 right-4 z-20 flex gap-1.5">
- {p2Images.map((_, i) => (
- <button
- key={i}
- onClick={() => { setIsP2Paused(true); setActiveImgP2(i); setTimeout(() => setIsP2Paused(false), 6000) }}
- className={`rounded-full transition-all duration-300 ${
- activeImgP2 === i ? 'w-4 h-1.5 bg-[#2D4B37]' : 'w-1.5 h-1.5 bg-white/60 hover:bg-white'
- }`}
- aria-label={`Go to image ${i + 1}`}
- />
- ))}
- </div>
+  const nav = useCallback((dir) => {
+    setPaused(true)
+    setActive(p => (p + dir + gallery.length) % gallery.length)
+    setTimeout(() => setPaused(false), 6000)
+  }, [gallery.length])
 
- <div 
- className="absolute bottom-4 left-4 bg-[#fdfbf7]/95 backdrop-blur-md text-dark text-[8px] sm:text-[9px] uppercase tracking-widest px-3 py-1.5 rounded font-black border border-dark/5 shadow-sm"
- >
- {p2Captions[activeImgP2]}
- </div>
- </div>
+  return (
+    <div className="space-y-4">
+      {/* Main frame */}
+      <div className="relative overflow-hidden rounded-2xl aspect-[16/9] bg-stone-100 shadow-lg">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={active}
+            src={gallery[active].src}
+            alt={gallery[active].caption}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.03 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          />
+        </AnimatePresence>
 
- {/* Symmetrical Row of Interactive Thumbnails */}
- <div className="flex overflow-x-auto gap-3 flex-shrink-0 pb-2 hide-scrollbar snap-x">
- {p2Images.map((img, idx) => (
- <button
- key={idx}
- onClick={() => setActiveImgP2(idx)}
- className={`overflow-hidden rounded-xl sm:rounded-2xl shadow-sm aspect-[4/3] relative bg-stone-100 border transition-all duration-300 flex-shrink-0 w-16 sm:w-20 snap-center ${
- activeImgP2 === idx ? 'border-[#2D4B37] scale-103 ring-2 ring-[#2D4B37]/20' : 'border-dark/5 opacity-70 hover:opacity-100'
- }`}
- >
- <img src={img} alt={`Karur Residence — construction stage ${idx + 1}: ${p2Captions[idx] || 'sustainable home construction Karur Tamil Nadu'}`} className="w-full h-full object-cover" />
- </button>
- ))}
- </div>
- </div>
+        {/* Controls */}
+        <button
+          onClick={() => nav(-1)}
+          aria-label="Previous"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow hover:bg-white transition-all"
+        >
+          <FiChevronLeft style={{ color: BRONZE }} />
+        </button>
+        <button
+          onClick={() => nav(1)}
+          aria-label="Next"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow hover:bg-white transition-all"
+        >
+          <FiChevronRight style={{ color: BRONZE }} />
+        </button>
 
- {/* Right Panel: Aligned structured specifications & Review (5/12 Width) */}
- <div className="lg:col-span-5 flex flex-col justify-between self-stretch gap-6">
- 
- {/* Architectural Storytelling deck */}
- <div className="p-5 sm:p-8 rounded-[20px] sm:rounded-3xl bg-white border shadow-sm flex-1 flex flex-col justify-between" style={{ borderColor: BORDER_COLOR }}>
- <div>
- 
- {/* Visual Spec Tabs */}
- <div className="flex border-b pb-3 sm:pb-4 mb-5 sm:mb-6 gap-3 overflow-x-auto hide-scrollbar" style={{ borderColor: 'rgba(58,58,56,0.06)' }}>
- {[
- { id: 'vision', label: '01 / Vision' },
- { id: 'structural', label: '02 / Systems' },
- { id: 'material', label: '03 / Materials' },
- { id: 'timeline', label: '04 / Timeline' }
- ].map((tab) => (
- <button
- key={tab.id}
- onClick={() => setActiveTabP2(tab.id)}
- className={`text-[9px] font-bold uppercase tracking-wider pb-1.5 border-b-2 transition-all duration-300 flex-shrink-0 ${
- activeTabP2 === tab.id ? 'border-[#2D4B37] text-dark' : 'border-transparent text-dark/40 hover:text-dark/70'
- }`}
- >
- {tab.label}
- </button>
- ))}
- </div>
+        {/* Caption */}
+        <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-md" style={{ color: BRONZE }}>
+          {String(active + 1).padStart(2, '0')} / {gallery[active].caption}
+        </div>
 
- {/* Dynamic Tab Contents */}
- <AnimatePresence mode="wait">
- <motion.div
- key={activeTabP2}
- initial={{ opacity: 0, x: -10 }}
- animate={{ opacity: 1, x: 0 }}
- exit={{ opacity: 0, x: 10 }}
- transition={{ duration: 0.3 }}
- className="space-y-4 text-xs sm:text-sm font-light text-dark/75 leading-relaxed"
- >
- {activeTabP2 === 'vision' && (
- <>
- <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2">Design Concept</h4>
- <p>
- The Karur Residence was designed as a sustainable home that balances comfortable living with responsible resource use.
- </p>
- <p>
- The plan integrates natural ventilation, solar energy, and rainwater harvesting — demonstrating that practical eco-friendly design can work well for modern residential living.
- </p>
- </>
- )}
+        {/* Dots */}
+        <div className="absolute bottom-3 right-3 flex gap-1.5">
+          {gallery.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { setPaused(true); setActive(i); setTimeout(() => setPaused(false), 6000) }}
+              className={`rounded-full transition-all duration-300 ${active === i ? 'w-4 h-1.5' : 'w-1.5 h-1.5 bg-white/60'}`}
+              style={active === i ? { background: SAGE } : {}}
+              aria-label={`Image ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
 
- {activeTabP2 === 'structural' && (
- <>
- <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2">Sustainable Systems</h4>
- <p>
- Roof-integrated monocrystalline solar panels with battery storage (12.5 kWp) supply a significant portion of daily household electricity needs.
- </p>
- <p>
- A rainwater harvesting system collects and filters monsoon runoff through a three-stage process into a 50,000-litre underground storage tank for reuse.
- </p>
- </>
- )}
-
- {activeTabP2 === 'material' && (
- <>
- <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2">Materials & Ventilation</h4>
- <p>
- The build uses compressed stabilised earth blocks (CSEBs) and bamboo structural elements where appropriate — reducing embodied carbon while maintaining strength.
- </p>
- <p>
- The layout follows natural wind paths, with double-height ventilation shafts and native planting to improve cross-ventilation and reduce dependence on mechanical cooling.
- </p>
- </>
- )}
-
- {activeTabP2 === 'timeline' && (
- <>
- <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2">Construction Timeline</h4>
- <ul className="space-y-2 text-xs">
- <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
- <span><strong>Phase 1:</strong> Site Planning & Orientation</span>
- <span>Month 1–2</span>
- </li>
- <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
- <span><strong>Phase 2:</strong> Rainwater System Installation</span>
- <span>Month 3–6</span>
- </li>
- <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
- <span><strong>Phase 3:</strong> CSEB Masonry Work</span>
- <span>Month 7–11</span>
- </li>
- <li className="flex justify-between" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
- <span><strong>Phase 4:</strong> Solar Integration & Handover</span>
- <span>Month 12–14</span>
- </li>
- </ul>
- </>
- )}
- </motion.div>
- </AnimatePresence>
- </div>
-
- <div className="h-[1px] w-full bg-gradient-to-r from-[#2D4B37]/20 to-transparent mt-5 sm:mt-6" />
- </div>
-
- {/* Bright Testimonial Panel */}
- <div className="p-5 sm:p-8 rounded-[20px] sm:rounded-3xl border shadow-sm flex-shrink-0 flex flex-col justify-between relative overflow-hidden bg-white" style={{ borderColor: BORDER_COLOR }}>
- <div className="absolute top-4 right-4 text-dark/[0.02] text-7xl pointer-events-none leading-none">“</div>
- 
- <div className="relative z-10">
- {/* Star Ratings */}
- <div className="flex items-center gap-1 text-xs text-amber-500 mb-4">
- {[...Array(5)].map((_, i) => <FaStar key={i} />)}
- </div>
-
- <p className="text-xs sm:text-sm font-light leading-relaxed text-dark/85 mb-6">
- "We entrusted KARRCHOLAI with our home. The team's dedication to quality craftsmanship and attention to detail truly shines through in every corner of our home. Thank you for turning our house into a haven!"
- </p>
- </div>
-
- <div className="pt-4 border-t flex items-center justify-between gap-4" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
- <div>
- <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5">Homeowner Client — Karur</p>
- </div>
- <div className="flex flex-col items-end flex-shrink-0">
- <span className="text-[8px] sm:text-[9px] font-black px-2.5 py-1 rounded bg-[#2D4B37]/08 text-[#2D4B37] uppercase tracking-wider">Verified Review</span>
- <span className="text-[8px] text-dark/30 mt-1 uppercase font-bold tracking-widest">12-Mo Evaluation</span>
- </div>
- </div>
- </div>
-
- </div>
-
- </div>
-
- </div>
- </section>
-
- {/* ── GEOGRAPHIC FOOTPRINT MAP SECTION ── */}
- <FootprintMapSection />
-
-
- {/* ── CALL TO ACTION ── */}
- <section className="relative py-32 overflow-hidden" style={{ background: SAGE }}>
- <div className="absolute inset-0 opacity-[0.05]"
- style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/dark-matter.png")' }}
- />
- <div className="absolute inset-0"
- style={{ background: `radial-gradient(ellipse at 65% 50%, ${TERRA}25 0%, transparent 65%)` }}
- />
- <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
- <span className="text-[20vw] font-black opacity-[0.03] select-none whitespace-nowrap text-white">
- BUILD
- </span>
- </div>
-
- <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
- <motion.div
- initial={{ opacity: 0, y: -10 }}
- whileInView={{ opacity: 1, y: 0 }}
- viewport={{ once: true }}
- className="flex items-center justify-center gap-3 mb-6"
- >
- <div className="h-px w-10 bg-white/40" />
- <span className="text-[11px] font-black tracking-[0.4em] uppercase text-white/80">
- Let's Build Together
- </span>
- <div className="h-px w-10 bg-white/40" />
- </motion.div>
-
- <motion.h2
- initial={{ opacity: 0, y: 30 }}
- whileInView={{ opacity: 1, y: 0 }}
- viewport={{ once: true }}
- transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
- className="text-4xl md:text-6xl font-black leading-tight text-white mb-6"
- >
- Have a Project<br />
- <span style={{ color: BRASS}}>in Mind?</span>
- </motion.h2>
-
- <p 
- className="text-xs md:text-base font-light leading-relaxed mb-12 text-white/70 max-w-xl mx-auto"
- >
- Let's turn your project into a home built with clarity, structure, and care — from initial planning through to handover.
- </p>
-
- <motion.div
- initial={{ opacity: 0, y: 10 }}
- whileInView={{ opacity: 1, y: 0 }}
- viewport={{ once: true }}
- transition={{ delay: 0.3 }}
- className="flex flex-col sm:flex-row gap-4 justify-center"
- >
- <Link to="/contact">
- <motion.button
- whileHover={{ scale: 1.04, y: -2 }}
- whileTap={{ scale: 0.97 }}
- className="w-full sm:w-auto btn-primary bg-white text-[#1c1c1a] hover:bg-[#B85C38] hover:text-white text-xs tracking-[0.18em] uppercase flex items-center justify-center gap-2 px-8 py-4 rounded-sm transition-all duration-300 font-bold"
- >
- Start Your Project <FiArrowRight />
- </motion.button>
- </Link>
- <Link to="/services">
- <motion.button
- whileHover={{ scale: 1.04, y: -2 }}
- whileTap={{ scale: 0.97 }}
- className="w-full sm:w-auto border border-white/25 hover:border-white text-white hover:bg-white/10 text-xs tracking-[0.18em] uppercase flex items-center justify-center px-8 py-4 rounded-sm transition-all duration-300 font-bold bg-transparent"
- >
- View Our Services
- </motion.button>
- </Link>
- </motion.div>
- </div>
- </section>
-
- <UnifiedFooter />
- </div>
- )
+      {/* Thumbnail strip */}
+      <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar snap-x">
+        {gallery.map((img, i) => (
+          <button
+            key={i}
+            onClick={() => { setPaused(true); setActive(i); setTimeout(() => setPaused(false), 6000) }}
+            className={`flex-shrink-0 w-16 aspect-square rounded-xl overflow-hidden border-2 snap-center transition-all duration-200 ${
+              active === i ? 'scale-105 shadow-md' : 'opacity-60 hover:opacity-90 border-transparent'
+            }`}
+            style={active === i ? { borderColor: SAGE } : {}}
+          >
+            <img src={img.src} alt={img.caption} className="w-full h-full object-cover" />
+          </button>
+        ))}
+      </div>
+    </div>
+  )
 }
 
+// ── Main Page ──────────────────────────────────────────────────────────────────
+export default function Projects() {
+  const containerRef = useRef(null)
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 })
+  const project = PROJECTS[0]
 
+  return (
+    <div ref={containerRef} className="min-h-screen overflow-x-hidden font-sans" style={{ background: CREAM, color: BRONZE }}>
+      <Helmet>
+        <title>Residential Construction Projects Tamil Nadu | Karrcholai Portfolio</title>
+        <meta name="description" content="Explore completed residential projects by Karrcholai — Karur Residence and more, built with structural integrity, sustainable design, and disciplined execution across Tamil Nadu." />
+        <link rel="canonical" href="https://karrcholai.com/projects" />
+        <meta property="og:title" content="Projects | Karrcholai" />
+        <meta property="og:description" content="Residential construction portfolio — Tamil Nadu." />
+        <meta property="og:url" content="https://karrcholai.com/projects" />
+      </Helmet>
+
+      {/* Scroll progress bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] z-[200] origin-left"
+        style={{ scaleX, background: `linear-gradient(90deg, ${SAGE}, ${BRASS}, ${TERRA})` }}
+      />
+
+      <Navbar />
+
+      {/* ── HERO ── */}
+      <section
+        className="relative w-full flex items-end overflow-hidden"
+        style={{ minHeight: '70svh', backgroundImage: `url(${heroImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/85 via-[#1a1a1a]/30 to-transparent" />
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-16 pb-16 pt-32 flex flex-col items-center text-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+            <span className="text-[9px] font-black tracking-[0.5em] uppercase text-white/50 mb-3 block">
+              Our Work
+            </span>
+            <h1 className="text-5xl md:text-8xl font-black text-white leading-none tracking-tighter mb-4">
+              Projects.
+            </h1>
+            <p className="text-white/60 text-sm md:text-base max-w-md font-light mx-auto">
+              Residential construction across Tamil Nadu — built with structure, clarity, and care.
+            </p>
+          </motion.div>
+        </div>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block">
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent mx-auto"
+          />
+        </div>
+      </section>
+
+      {/* ── PROJECT CASE STUDY ── */}
+      <article className="max-w-5xl mx-auto px-6 md:px-12 py-20 md:py-32 space-y-20">
+
+        {/* ── FIRST STONE ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.6 }}
+          className="flex items-center gap-3"
+        >
+          <div
+            className="flex items-center gap-3 px-4 py-2.5 rounded-xl"
+            style={{ background: SAGE }}
+          >
+            <span className="text-[9px] font-black tracking-[0.45em] uppercase" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              Case Study 01
+            </span>
+            <span className="w-px h-3 bg-white/20" />
+            <span className="text-sm font-black tracking-tight text-white">
+              The First <span style={{ color: BRASS }}>Stone</span>
+            </span>
+          </div>
+        </motion.div>
+
+        {/* ── 1. PROJECT TITLE ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+        >
+          <SectionLabel number={1} title="Project Title" />
+          <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-none mb-3" style={{ color: BRONZE }}>
+            {project.title}
+          </h2>
+          <p className="text-base font-light" style={{ color: MUTED }}>{project.subtitle}</p>
+          <div className="flex gap-3 mt-5">
+            <span className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full" style={{ background: `${SAGE}15`, color: SAGE }}>
+              {project.category}
+            </span>
+            <span className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full" style={{ background: `${TERRA}12`, color: TERRA }}>
+              {project.year}
+            </span>
+          </div>
+        </motion.div>
+
+        {/* ── 2-4. LOCATION / PLOT / BUILT-UP (Metrics Row) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+        >
+          <SectionLabel number={2} title="Site Metrics" />
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {[
+              { icon: FiMapPin,   num: '02', label: 'Location',      value: project.location,    sub: project.coordinates },
+              { icon: FiMaximize, num: '03', label: 'Plot Area',      value: project.plotArea,    sub: 'Total site footprint' },
+              { icon: FiHome,     num: '04', label: 'Built-up Area',  value: project.builtUpArea, sub: 'Gross floor area' },
+            ].map((m, i) => (
+              <div
+                key={i}
+                className="p-5 md:p-6 rounded-2xl border flex flex-col gap-3 hover:shadow-md transition-shadow"
+                style={{ background: CARD, borderColor: `${BRONZE}08` }}
+              >
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: `${SAGE}10` }}>
+                  <m.icon size={16} style={{ color: SAGE }} />
+                </div>
+                <div>
+                  <p className="text-[8px] font-black uppercase tracking-widest mb-1" style={{ color: MUTED }}>
+                    {m.num} / {m.label}
+                  </p>
+                  <p className="text-xl font-black" style={{ color: BRONZE }}>{m.value}</p>
+                  <p className="text-[10px] mt-0.5 font-light" style={{ color: MUTED }}>{m.sub}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ── 5. SCOPE ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+        >
+          <SectionLabel number={5} title="Scope of Work" />
+          <div
+            className="p-6 md:p-8 rounded-2xl border"
+            style={{ background: CARD, borderColor: `${BRONZE}08` }}
+          >
+            <p className="text-base md:text-lg font-light leading-relaxed" style={{ color: BRONZE }}>
+              {project.scope}
+            </p>
+          </div>
+        </motion.div>
+
+        {/* ── 6. CONSTRUCTION METHOD ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+        >
+          <SectionLabel number={6} title="Construction Method" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {project.constructionMethod.map((m, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-4 p-5 rounded-xl border"
+                style={{ background: CARD, borderColor: `${BRONZE}08` }}
+              >
+                <span
+                  className="text-[9px] font-black tracking-widest uppercase mt-0.5 flex-shrink-0 px-2 py-1 rounded"
+                  style={{ background: `${SAGE}10`, color: SAGE }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-wider mb-1" style={{ color: MUTED }}>{m.label}</p>
+                  <p className="text-sm font-semibold" style={{ color: BRONZE }}>{m.value}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ── 7. MATERIALS ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+        >
+          <SectionLabel number={7} title="Key Materials" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {project.materials.map((mat, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-4 p-5 rounded-xl border group hover:shadow-sm transition-all"
+                style={{ background: CARD, borderColor: `${BRONZE}08` }}
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ background: `${TERRA}10` }}
+                >
+                  <mat.icon size={16} style={{ color: TERRA }} />
+                </div>
+                <div>
+                  <p className="text-sm font-black mb-0.5" style={{ color: BRONZE }}>{mat.name}</p>
+                  <p className="text-xs font-light leading-relaxed" style={{ color: MUTED }}>{mat.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ── 8 & 9. CHALLENGES + SOLUTION (side by side) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Challenges */}
+            <div>
+              <SectionLabel number={8} title="Challenges" />
+              <div
+                className="p-6 rounded-2xl border h-full space-y-4"
+                style={{ background: `${TERRA}06`, borderColor: `${TERRA}15` }}
+              >
+                {project.challenges.map((c, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <FiAlertTriangle size={14} className="flex-shrink-0 mt-0.5" style={{ color: TERRA }} />
+                    <p className="text-sm font-light leading-relaxed" style={{ color: BRONZE }}>{c}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Solution */}
+            <div>
+              <SectionLabel number={9} title="Solution" />
+              <div
+                className="p-6 rounded-2xl border h-full space-y-4"
+                style={{ background: `${SAGE}06`, borderColor: `${SAGE}15` }}
+              >
+                {project.solutions.map((s, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <FiCheckCircle size={14} className="flex-shrink-0 mt-0.5" style={{ color: SAGE }} />
+                    <p className="text-sm font-light leading-relaxed" style={{ color: BRONZE }}>{s}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── 10. PHOTOS ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+        >
+          <SectionLabel number={10} title="Photos" />
+          <PhotoGallery gallery={project.gallery} />
+        </motion.div>
+
+        {/* ── 11. RESULT ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+        >
+          <SectionLabel number={11} title="Result" />
+          <div className="rounded-2xl overflow-hidden border" style={{ borderColor: `${BRONZE}08` }}>
+            {/* Headline */}
+            <div className="px-6 md:px-10 py-8" style={{ background: BRONZE }}>
+              <p className="text-[10px] font-black tracking-[0.4em] uppercase mb-3" style={{ color: BRASS }}>
+                Outcome
+              </p>
+              <h3 className="text-2xl md:text-3xl font-black text-white leading-tight">
+                {project.result.headline}
+              </h3>
+            </div>
+
+            {/* Stats bar */}
+            <div
+              className="grid grid-cols-3 divide-x"
+              style={{ background: `${SAGE}`, divideColor: 'rgba(255,255,255,0.1)' }}
+            >
+              {project.result.stats.map((s, i) => (
+                <div key={i} className="text-center px-4 py-5" style={{ borderColor: 'rgba(255,255,255,0.1)', borderRightWidth: i < 2 ? 1 : 0 }}>
+                  <p className="text-[9px] font-black uppercase tracking-widest text-white/50 mb-1">{s.label}</p>
+                  <p className="text-xl md:text-2xl font-black text-white">{s.value}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Points */}
+            <div className="px-6 md:px-10 py-8 grid sm:grid-cols-2 gap-4" style={{ background: CARD }}>
+              {project.result.points.map((pt, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <span
+                    className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                    style={{ background: `${SAGE}15` }}
+                  >
+                    <FiCheckCircle size={11} style={{ color: SAGE }} />
+                  </span>
+                  <p className="text-sm font-light leading-relaxed" style={{ color: BRONZE }}>{pt}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── 12. CLIENT TESTIMONIAL ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+        >
+          <SectionLabel number={12} title="Client Testimonial" />
+          <div
+            className="relative p-8 md:p-12 rounded-2xl border overflow-hidden"
+            style={{ background: CARD, borderColor: `${BRONZE}08` }}
+          >
+            {/* Big quote mark */}
+            <FaQuoteLeft
+              className="absolute top-6 right-6 opacity-[0.04]"
+              style={{ fontSize: '8rem', color: BRONZE }}
+            />
+
+            {/* Stars */}
+            <div className="flex gap-1 mb-6">
+              {[...Array(project.testimonial.rating)].map((_, i) => (
+                <FaStar key={i} size={14} style={{ color: '#F59E0B' }} />
+              ))}
+            </div>
+
+            <blockquote className="text-base md:text-xl font-light leading-relaxed mb-8 relative z-10 max-w-2xl" style={{ color: BRONZE }}>
+              "{project.testimonial.quote}"
+            </blockquote>
+
+            <div className="flex items-center justify-between gap-4 pt-6 border-t" style={{ borderColor: `${BRONZE}08` }}>
+              <div>
+                <p className="text-sm font-black" style={{ color: BRONZE }}>{project.testimonial.author}</p>
+                <p className="text-[10px] font-light mt-0.5" style={{ color: MUTED }}>{project.testimonial.location}</p>
+              </div>
+              <span
+                className="text-[8px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full"
+                style={{ background: `${SAGE}12`, color: SAGE }}
+              >
+                Verified Review
+              </span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── 13. RELATED SERVICES ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}
+        >
+          <SectionLabel number={13} title="Related Services" />
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {project.relatedServices.map((s, i) => (
+              <Link
+                key={i}
+                to={s.to}
+                className="group flex flex-col items-start gap-3 p-5 rounded-2xl border hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                style={{ background: CARD, borderColor: `${BRONZE}08` }}
+              >
+                <span className="text-2xl">{s.emoji}</span>
+                <div>
+                  <p className="text-[8px] font-black uppercase tracking-widest mb-1" style={{ color: MUTED }}>{s.label}</p>
+                  <p className="text-sm font-black group-hover:underline" style={{ color: BRONZE }}>{s.title}</p>
+                </div>
+                <FiArrowRight size={12} className="mt-auto" style={{ color: SAGE }} />
+              </Link>
+            ))}
+          </div>
+        </motion.div>
+
+      </article>
+
+      {/* ── FOOTPRINT MAP ── */}
+      <FootprintMapSection />
+
+      {/* ── CTA ── */}
+      <section className="relative py-28 overflow-hidden" style={{ background: SAGE }}>
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
+        >
+          <span className="text-[20vw] font-black opacity-[0.04] select-none whitespace-nowrap text-white">BUILD</span>
+        </div>
+        <div className="relative z-10 max-w-2xl mx-auto px-6 text-center">
+          <motion.p
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+            className="text-[10px] font-black tracking-[0.5em] uppercase text-white/50 mb-4"
+          >
+            Let's Build Together
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.8 }}
+            className="text-4xl md:text-6xl font-black text-white leading-tight mb-6"
+          >
+            Have a Project<br />
+            <span style={{ color: BRASS }}>in Mind?</span>
+          </motion.h2>
+          <p className="text-white/60 text-sm font-light mb-10 max-w-lg mx-auto">
+            From initial planning through to handover — built with clarity, structure, and care.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/contact">
+              <motion.button
+                whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}
+                className="w-full sm:w-auto bg-white text-[#1c1c1a] hover:bg-[#B85C38] hover:text-white text-xs tracking-[0.2em] uppercase flex items-center justify-center gap-2 px-8 py-4 rounded-full transition-all duration-300 font-black"
+              >
+                Start Your Project <FiArrowRight />
+              </motion.button>
+            </Link>
+            <Link to="/services">
+              <motion.button
+                whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}
+                className="w-full sm:w-auto border border-white/30 hover:border-white text-white hover:bg-white/10 text-xs tracking-[0.2em] uppercase flex items-center justify-center px-8 py-4 rounded-full transition-all duration-300 font-black bg-transparent"
+              >
+                View Our Services
+              </motion.button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <UnifiedFooter />
+    </div>
+  )
+}

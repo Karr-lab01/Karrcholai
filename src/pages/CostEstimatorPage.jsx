@@ -1,6 +1,7 @@
 ﻿import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import CostEstimator from '../components/CostEstimator'
+import FAQSection from '../components/FAQSection'
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 import { FiArrowRight } from 'react-icons/fi'
@@ -96,6 +97,66 @@ export default function CostEstimatorPage() {
           </div>
         </div>
       </section>
+
+      {/* Topical cluster: Cost Estimator → Residential Construction → Projects → Contact */}
+      <section className="py-12 px-6 bg-[#faf9f6] border-t border-black/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-dark/25 mb-5">Continue Your Planning Journey</p>
+          <div className="flex flex-wrap items-center gap-3">
+            {[
+              { to: '/karr',          emoji: '🏗️', label: 'Residential Construction', title: 'Karr Division',       bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)', accent: '#B85C38' },
+              { to: '/projects',      emoji: '🏠', label: 'Our Portfolio',             title: 'View Projects',       bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)', accent: 'rgba(255,255,255,0.4)' },
+              { to: '/vastu-compass', emoji: '🧭', label: 'Free Tool',                 title: 'Vastu Compass',       bg: 'linear-gradient(135deg, #1a2e1a, #0d1a0d)', accent: '#d4af37' },
+              { to: '/contact',       emoji: '📞', label: 'Free Consultation',          title: 'Talk to Karrcholai', bg: '#1A1A1A', accent: 'rgba(255,255,255,0.35)' },
+            ].map((cl, idx, arr) => (
+              <span key={cl.to} className="flex items-center gap-3">
+                <Link to={cl.to}
+                  className="flex items-center gap-3 no-underline rounded-xl px-4 py-3 transition-opacity hover:opacity-80"
+                  style={{ background: cl.bg, textDecoration: 'none' }}>
+                  <span className="text-lg">{cl.emoji}</span>
+                  <span>
+                    <span className="block text-[7px] font-black tracking-[0.35em] uppercase mb-0.5" style={{ color: cl.accent }}>{cl.label}</span>
+                    <span className="block text-[12px] font-bold text-white whitespace-nowrap">{cl.title}</span>
+                  </span>
+                </Link>
+                {idx < arr.length - 1 && <span className="text-dark/20 font-black text-xs">→</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <FAQSection
+        accent="#2D4B37"
+        subtitle="Cost FAQ"
+        title="Your Construction Cost Questions, Answered"
+        faqs={[
+          {
+            q: 'How much does it cost to construct a house in Tamil Nadu?',
+            a: 'Construction costs in Tamil Nadu typically range from ₹1,800 to ₹3,500+ per sq ft depending on location, finish quality, and design complexity. A standard finish in Karur or Trichy may cost ₹1,800–₹2,200/sqft, while premium finishes in Chennai or Coimbatore can reach ₹2,800–₹3,500+/sqft. Use our estimator above for a quick personalised ballpark.',
+          },
+          {
+            q: 'What is included in the per-square-foot cost?',
+            a: 'The per-sqft rate typically covers structural work (foundation, columns, beams, roof slab), brickwork, plastering, flooring, basic electrical and plumbing, doors and windows, and standard interior finishes. Items like landscaping, solar panels, modular kitchen, and premium fittings are usually priced separately.',
+          },
+          {
+            q: 'Does the estimate include GST and approval fees?',
+            a: 'Our estimator gives a construction cost estimate. Government approval fees (CMDA/DTCP/panchayat), architect fees, soil testing, and GST on materials are separate and vary by location. We include these in the detailed BOQ we prepare during consultation.',
+          },
+          {
+            q: 'How accurate is the online estimator?',
+            a: 'The estimator provides a reliable ±15% ballpark based on current 2026 Tamil Nadu market rates. For a precise quote with a full Bill of Quantities (BOQ) and milestone payment schedule, book a free consultation with our team.',
+          },
+          {
+            q: 'Can I reduce construction costs without compromising quality?',
+            a: 'Yes. Smart choices in material sourcing, phased construction, and early planning significantly reduce costs. Our PMC service specifically helps clients optimise budgets through transparent contractor rates, bulk material procurement, and tight quality supervision.',
+          },
+          {
+            q: 'Do construction costs vary between cities in Tamil Nadu?',
+            a: 'Yes. Chennai and Coimbatore typically cost 10–20% more than Karur, Trichy, or Erode due to higher labour and logistics costs. Our estimator adjusts rates by city — select your location for a more accurate figure.',
+          },
+        ]}
+      />
 
       <UnifiedFooter />
     </div>

@@ -7,6 +7,7 @@ import {
 } from 'react-icons/fi';
 import Navbar from '../components/Navbar';
 import UnifiedFooter from '../components/UnifiedFooter';
+import FAQSection from '../components/FAQSection';
 
 // Asset placeholders (using existing images from the project if possible)
 import karVideo from '../../assets/kar1.mp4';
@@ -82,7 +83,7 @@ const Karr = () => {
  <div ref={containerRef} className="bg-[#fdfbf7] min-h-screen text-[#1a1a1a] selection:bg-[#B85C38] selection:text-white overflow-x-hidden font-sans">
  <Helmet>
  <title>Karr Division | Residential Construction &amp; PMC in Tamil Nadu | Karrcholai</title>
- <meta name="description" content="Karr is Karrcholai's construction division delivering turnkey residential building, structural work, renovation, and project management consultancy (PMC) across Tamil Nadu — Karur, Chennai, Coimbatore, Madurai, Trichy, Erode." />
+ <meta name="description" content="Karr is Karrcholai's construction division delivering turnkey residential building, structural work, renovation, and project management consultancy (PMC) across Tamil Nadu � Karur, Chennai, Coimbatore, Madurai, Trichy, Erode." />
  <link rel="canonical" href="https://karrcholai.com/karr" />
  <meta property="og:title" content="Karr Division | Residential Construction &amp; PMC in Tamil Nadu | Karrcholai" />
  <meta property="og:description" content="Karr is Karrcholai's construction division delivering turnkey residential building, structural work, renovation, and PMC across Tamil Nadu." />
@@ -105,27 +106,23 @@ const Karr = () => {
  />
 
  <main>
- {/* ── HERO SECTION ── */}
- <section className="relative w-full h-[75vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#1a1a1a]">
- <motion.div 
- style={{ y: heroY, opacity: heroOpacity }}
- className="absolute inset-0 z-0"
+ {/* -- HERO SECTION -- */}
+ <section
+ className="relative w-full flex items-center justify-center overflow-hidden bg-[#1a1a1a]"
+ style={{ minHeight: '100svh' }}
  >
+ <div className="absolute inset-0 z-0">
  <video 
  autoPlay 
  muted 
  loop 
  playsInline
- className="w-full h-full object-cover opacity-50"
+ className="absolute inset-0 w-full h-full object-cover opacity-50"
  >
  <source src={karVideo} type="video/mp4" />
  </video>
- {/* Sophisticated multi-layered overlay */}
  <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a]/60 via-transparent to-[#1a1a1a]/80" />
- <div className="absolute inset-0" style={{
- background: 'linear-gradient(135deg, rgba(45,75,55,0.15) 0%, transparent 60%, rgba(184,92,56,0.1) 100%)'
- }} />
- </motion.div>
+ </div>
 
  <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 text-center">
  <motion.div
@@ -141,7 +138,7 @@ const Karr = () => {
  <span className="text-white/30">Construction.</span>
  </h1>
  <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
- The Karr division delivers residential construction and project management services — built on structural integrity, transparent planning, and disciplined site execution across Tamil Nadu.
+ The Karr division delivers residential construction and project management services � built on structural integrity, transparent planning, and disciplined site execution across Tamil Nadu.
  </p>
  </motion.div>
  </div>
@@ -155,7 +152,7 @@ const Karr = () => {
  </div>
  </section>
 
- {/* ── SECTION 1: RESIDENTIAL CONSTRUCTION ── */}
+ {/* -- SECTION 1: RESIDENTIAL CONSTRUCTION -- */}
  <section className="py-16 md:py-24 px-6 bg-[#fdfbf7]">
  <div className="max-w-7xl mx-auto">
  <div className="mb-12 md:mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
@@ -171,7 +168,7 @@ const Karr = () => {
  transition={{ delay: 0.2 }}
  className="text-[#1a1a1a]/50 text-base max-w-xs font-light border-l border-[#B85C38]/30 pl-8"
  >
- We handle complete construction for independent houses and villas — from foundation to finishing. Every project is managed with verified structural work, quality materials, and consistent on-site supervision.
+ We handle complete construction for independent houses and villas � from foundation to finishing. Every project is managed with verified structural work, quality materials, and consistent on-site supervision.
  </motion.p>
  </div>
 
@@ -205,7 +202,7 @@ const Karr = () => {
  </div>
  </section>
 
- {/* ── SECTION 2: PMC ── */}
+ {/* -- SECTION 2: PMC -- */}
  <section className="py-16 md:py-24 px-6 bg-[#1a1a1a] text-white">
  <div className="max-w-7xl mx-auto">
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
@@ -216,7 +213,7 @@ const Karr = () => {
  <span className="text-white/30">Management.</span>
  </h2>
  <p className="text-white/40 text-lg font-light leading-relaxed mb-12 max-w-lg">
- Our Project Management Consultancy (PMC) provides expert oversight for homeowners who need structured planning, cost control, and quality supervision — without managing the build day to day themselves.
+ Our Project Management Consultancy (PMC) provides expert oversight for homeowners who need structured planning, cost control, and quality supervision � without managing the build day to day themselves.
  </p>
  
  <div className="space-y-6">
@@ -261,7 +258,7 @@ const Karr = () => {
  </div>
  </section>
 
- {/* ── SECTION 3: RENOVATION ── */}
+ {/* -- SECTION 3: RENOVATION -- */}
  <section className="py-16 md:py-24 px-6 bg-[#fdfbf7] relative overflow-hidden">
  {/* Decorative Texture Overlay */}
  <div className="absolute inset-0 opacity-[0.03] pointer-events-none paper-texture" />
@@ -288,7 +285,7 @@ const Karr = () => {
  <span className="text-[#1a1a1a]/20">Remodelling Services.</span>
  </h2>
  <p className="text-[#1a1a1a]/50 text-lg font-light leading-relaxed mb-12">
- We upgrade and extend existing homes — improving layout, repairing structure, and updating interiors while maintaining the integrity of the building.
+ We upgrade and extend existing homes � improving layout, repairing structure, and updating interiors while maintaining the integrity of the building.
  </p>
  
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -315,7 +312,7 @@ const Karr = () => {
  </div>
  </section>
 
- {/* ── SECTION 4: ESTIMATION ── */}
+ {/* -- SECTION 4: ESTIMATION -- */}
  <section className="py-16 md:py-24 px-6 bg-white">
  <div className="max-w-7xl mx-auto">
  <div className="text-center mb-12 md:mb-16">
@@ -374,7 +371,75 @@ const Karr = () => {
  </div>
  </div>
  </section>
+
+ {/* Topical cluster: Cost Estimator → Projects → Vastu Compass → Manaiyadi → Contact */}
+ <section className="py-12 px-6 bg-[#fdfbf7] border-t border-black/5">
+  <div className="max-w-7xl mx-auto">
+   <p className="text-[9px] font-black tracking-[0.5em] uppercase mb-5" style={{ color: 'rgba(0,0,0,0.25)' }}>
+    Continue Your Journey
+   </p>
+   <div className="flex flex-wrap items-center gap-3">
+    {[
+     { to: '/cost-estimator',       emoji: '₹',  label: 'Free Tool',              title: 'Cost Estimator',       bg: 'linear-gradient(135deg, #B85C38, #8B3A20)',   accent: 'rgba(255,255,255,0.6)' },
+     { to: '/projects',             emoji: '🏠', label: 'Our Portfolio',          title: 'View Projects',         bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',   accent: 'rgba(255,255,255,0.35)' },
+     { to: '/vastu-compass',        emoji: '🧭', label: 'Free Tool',              title: 'Vastu Compass',         bg: 'linear-gradient(135deg, #1a2e1a, #0d1a0d)',   accent: '#d4af37' },
+     { to: '/manaiyadi/calculator', emoji: '📐', label: 'Free Tool',              title: 'Manaiyadi Calculator',  bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',   accent: '#B85C38' },
+     { to: '/contact',              emoji: '📞', label: 'Free Consultation',       title: 'Talk to Karrcholai',   bg: '#1A1A1A',                                     accent: 'rgba(255,255,255,0.35)' },
+    ].map((cl, idx, arr) => (
+     <span key={cl.to} className="flex items-center gap-3">
+      <a href={cl.to}
+       className="flex items-center gap-3 rounded-xl px-4 py-3 transition-opacity hover:opacity-80"
+       style={{ background: cl.bg, textDecoration: 'none' }}>
+       <span className="text-lg">{cl.emoji}</span>
+       <span>
+        <span className="block text-[7px] font-black tracking-[0.35em] uppercase mb-0.5" style={{ color: cl.accent }}>{cl.label}</span>
+        <span className="block text-[12px] font-bold text-white whitespace-nowrap">{cl.title}</span>
+       </span>
+      </a>
+      {idx < arr.length - 1 && <span className="text-xs font-black" style={{ color: 'rgba(0,0,0,0.2)' }}>→</span>}
+     </span>
+    ))}
+   </div>
+  </div>
+ </section>
  </main>
+
+ <FAQSection
+  dark={false}
+  accent="#B85C38"
+  subtitle="PMC & Construction FAQ"
+  title="Your Questions About Karr Division, Answered"
+  faqs={[
+   {
+    q: 'What is PMC in construction?',
+    a: 'PMC stands for Project Management Consultancy. Karrcholai\'s PMC service means we act as your professional on-site representative — managing contractors, tracking budgets, supervising quality, handling procurement, and delivering progress reports — so you get a well-built home without having to manage the construction yourself.',
+   },
+   {
+    q: 'What is the difference between PMC and a regular contractor?',
+    a: 'A contractor builds the structure. A PMC like Karrcholai manages the entire project on your behalf — vetting and coordinating contractors, enforcing quality standards, preventing cost overruns, and ensuring the project complies with approved drawings. We work for you, not the contractor.',
+   },
+   {
+    q: 'Do you provide house construction from foundation to handover?',
+    a: 'Yes. Our residential construction service covers every phase — foundation and structural work, brickwork and plastering, flooring, electrical and plumbing, painting, and interior finishing — right through to key handover with full documentation.',
+   },
+   {
+    q: 'How do you ensure quality during construction?',
+    a: 'We assign a dedicated site manager to every project. Quality inspections are conducted at every milestone — foundation, structure, MEP rough-in, finishing, and handover. We use standardised checklists and provide photo progress reports throughout.',
+   },
+   {
+    q: 'Can I hire Karrcholai for PMC if I already have a contractor?',
+    a: 'Yes. You can engage us purely in a PMC capacity — we\'ll audit the existing contractor\'s work, track quality and budgets, and act as your independent oversight team. This is especially useful for clients who live far from the construction site.',
+   },
+   {
+    q: 'Which areas of Tamil Nadu do you serve?',
+    a: 'We serve Karur, Chennai, Coimbatore, Madurai, Trichy, Erode, and surrounding districts across Tamil Nadu. Contact us to discuss your specific location and project scope.',
+   },
+   {
+    q: 'Do you handle permits, approvals, and documentation?',
+    a: 'Yes. We manage CMDA / DTCP / Panchayat approvals, building plan sanctions, soil testing documentation, and full handover documentation including structural completion certificates and utility connections.',
+   },
+  ]}
+ />
 
  <UnifiedFooter />
  </div>
@@ -382,3 +447,6 @@ const Karr = () => {
 };
 
 export default Karr;
+
+
+

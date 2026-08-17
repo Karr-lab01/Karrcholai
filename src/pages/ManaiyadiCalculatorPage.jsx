@@ -63,6 +63,35 @@ const ManaiyadiCalculatorPage = () => {
  </motion.div>
  </div>
  </section>
+
+ {/* Topical cluster: Vastu Compass → Construction → Projects → Contact */}
+ <section className="py-12 px-6 border-t" style={{ background: '#faf9f6', borderColor: 'rgba(0,0,0,0.05)' }}>
+  <div className="mx-auto max-w-6xl">
+   <p className="text-[9px] font-black tracking-[0.5em] uppercase mb-5 text-dark/25">Explore This Topic</p>
+   <div className="flex flex-wrap items-center gap-3">
+    {[
+     { to: '/vastu-compass', emoji: '🧭', label: 'Free Tool',               title: 'Vastu Compass',       bg: 'linear-gradient(135deg, #1a2e1a, #0d1a0d)', accent: '#d4af37' },
+     { to: '/blog/701',      emoji: '📖', label: 'Vastu Article',            title: 'Vastu Shastras',      bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)', accent: '#B85C38' },
+     { to: '/karr',          emoji: '🏗️', label: 'Residential Construction', title: 'Karr Division',      bg: 'linear-gradient(135deg, #3a2010, #1a1a1a)', accent: 'rgba(255,255,255,0.45)' },
+     { to: '/projects',      emoji: '🏠', label: 'Our Portfolio',            title: 'View Projects',       bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)', accent: 'rgba(255,255,255,0.35)' },
+     { to: '/contact',       emoji: '📞', label: 'Free Consultation',         title: 'Talk to Karrcholai', bg: '#1A1A1A', accent: 'rgba(255,255,255,0.35)' },
+    ].map((cl, idx, arr) => (
+     <span key={cl.to} className="flex items-center gap-3">
+      <a href={cl.to}
+       className="flex items-center gap-3 rounded-xl px-4 py-3 transition-opacity hover:opacity-80"
+       style={{ background: cl.bg, textDecoration: 'none' }}>
+       <span className="text-lg">{cl.emoji}</span>
+       <span>
+        <span className="block text-[7px] font-black tracking-[0.35em] uppercase mb-0.5" style={{ color: cl.accent }}>{cl.label}</span>
+        <span className="block text-[12px] font-bold text-white whitespace-nowrap">{cl.title}</span>
+       </span>
+      </a>
+      {idx < arr.length - 1 && <span className="text-dark/20 font-black text-xs">→</span>}
+     </span>
+    ))}
+   </div>
+  </div>
+ </section>
  </main>
 
  <UnifiedFooter />

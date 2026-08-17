@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { FiBookOpen, FiCompass, FiShield, FiAlertTriangle, FiCheckCircle, FiInfo, FiLayers, FiMaximize } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
+import FAQSection from '../components/FAQSection'
 import ManaiyadiCalculator from '../components/manaiyadi/ManaiyadiCalculator'
 import MeasurementTable from '../components/manaiyadi/MeasurementTable'
 
@@ -292,6 +293,38 @@ const Manaiyadi = () => {
  </div>
  </section>
  </main>
+
+ <FAQSection
+  accent="#B85C38"
+  subtitle="Manaiyadi Questions"
+  title="Frequently Asked Questions About Manaiyadi Sastram"
+  faqs={[
+   {
+    q: 'What is Manaiyadi Sastram?',
+    a: 'Manaiyadi Sastram (மனையடி சாஸ்திரம்) is a traditional Tamil system of home planning that prescribes auspicious dimensions for room lengths, widths, wall heights, door sizes, and plot proportions. It has been used for centuries in Tamil Nadu to align homes with principles of prosperity, health, and harmony.',
+   },
+   {
+    q: 'How is Manaiyadi Sastram different from Vastu Shastra?',
+    a: 'Vastu Shastra is a pan-Indian system focused on directional orientation and spatial layout. Manaiyadi Sastram is specifically Tamil and focuses on the numerical value and auspiciousness of actual room dimensions. At Karrcholai, we apply both systems together during design to give clients a complete, culturally grounded home.',
+   },
+   {
+    q: 'Can Manaiyadi dimensions be applied to modern construction?',
+    a: 'Yes. Manaiyadi Sastram principles can be integrated into any modern residential construction project. Our team maps the traditional auspicious dimension ranges to standard architectural drawings — ensuring the structural engineering and Manaiyadi compliance are achieved simultaneously.',
+   },
+   {
+    q: 'Does Karrcholai incorporate Manaiyadi in every project?',
+    a: 'Yes, for clients who request it. We discuss Manaiyadi preferences during the initial planning phase and apply the dimension guidelines to room layouts, door and window sizes, and wall heights. This is particularly common in our residential construction and PMC projects.',
+   },
+   {
+    q: 'Which rooms are most important to plan with Manaiyadi?',
+    a: 'The main entrance door, master bedroom, kitchen, and pooja room are considered the most important spaces for Manaiyadi compliance. Getting the dimensions of these spaces right is traditionally seen as most impactful for the household\'s well-being.',
+   },
+   {
+    q: 'Is the Manaiyadi calculator free to use?',
+    a: 'Yes. Our online Manaiyadi calculator is completely free. Enter your desired dimension and it will instantly show whether it falls in a favourable, neutral, or unfavourable category based on traditional Tamil measurement tables.',
+   },
+  ]}
+ />
 
  <UnifiedFooter />
 

@@ -1,587 +1,654 @@
-﻿import React, { useState, useRef } from 'react'
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
+﻿import { useState, useRef } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import {
-  FiArrowRight, FiCheck, FiHome, FiTool, FiBriefcase
-} from 'react-icons/fi'
-import {
-  FaLeaf, FaCloudRain, FaSun, FaRecycle,
-  FaLightbulb, FaTh, FaHardHat, FaBuilding
-} from 'react-icons/fa'
-import { MdOutlineEngineering, MdConstruction } from 'react-icons/md'
+import { FiArrowRight, FiCheck, FiPhone, FiChevronDown } from 'react-icons/fi'
+import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaLightbulb, FaTh } from 'react-icons/fa'
+import { MdArchitecture, MdSolarPower, MdOutlineEngineering } from 'react-icons/md'
+import { BsHouseDoor, BsBuilding, BsArrowRight } from 'react-icons/bs'
+import { TbLeaf, TbDroplet } from 'react-icons/tb'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
+import FAQSection from '../components/FAQSection'
 import { Helmet } from 'react-helmet-async'
 
-// ── Assets ──────────────────────────────────────────────────────────────────
-import imgRes       from '../../assets/Residential_construction.jpg'
-import imgPmc       from '../../assets/Projectmanagemnt.png'
-import imgReno      from '../../assets/renovation.jpg.jpeg'
-import imgConstruct from '../../assets/construction.jpg'
-import imgLandscape from '../../assets/lancape.jpg.jpeg'
-import imgRain      from '../../assets/rainwater.jpg.jpeg'
-import imgSolar     from '../../assets/solar panel.jpg.jpeg'
-import imgLighting  from '../../assets/lighting.jpg'
-import imgFloor     from '../../assets/red-floor.jpg'
-import imgHero      from '../../assets/pexels-kawserhamid-176342.jpg'
+import imgRes   from '../../assets/Residential_construction.jpg'
+import imgPmc   from '../../assets/pmc.jpeg'
+import imgReno  from '../../assets/renovation.jpg.jpeg'
+import imgSolar from '../../assets/solar panel.jpg.jpeg'
+import imgRain  from '../../assets/rainwater.jpg.jpeg'
+import imgFloor from '../../assets/red-floor.jpg'
+import imgLight from '../../assets/lighting.jpg'
+import imgLand  from '../../assets/lancape.jpg.jpeg'
+import imgHero  from '../../assets/pexels-kawserhamid-176342.jpg'
+import imgConst from '../../assets/construction.jpg'
 
-
-// ── Sub-service card component ───────────────────────────────────────────────
-const SubServiceCard = ({ icon, label, desc, img, accent, index }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 28 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.55, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-    whileHover={{ y: -6, boxShadow: '0 24px 60px rgba(0,0,0,0.13)' }}
-    style={{
-      background: '#fff',
-      borderRadius: '1.75rem',
-      overflow: 'hidden',
-      border: '1px solid rgba(26,26,26,0.07)',
-      boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
-      transition: 'box-shadow 0.3s',
-      display: 'flex',
-      flexDirection: 'column',
-    }}
-  >
-    {/* Image or gradient placeholder */}
-    <div style={{ height: 180, overflow: 'hidden', position: 'relative', flexShrink: 0 }}>
-      {img ? (
-        <img src={img} alt={label} loading="lazy"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block',
-            transition: 'transform 0.6s ease' }} />
-      ) : (
-        <div style={{ width: '100%', height: '100%',
-          background: `linear-gradient(135deg, ${accent}18 0%, ${accent}08 100%)`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          color: accent, fontSize: 52, opacity: 0.5 }}>
-          {icon}
-        </div>
-      )}
-      {/* Icon badge */}
-      <div style={{
-        position: 'absolute', bottom: 12, left: 16,
-        width: 44, height: 44, borderRadius: '14px',
-        background: '#fff',
-        boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        color: accent, fontSize: 20,
-      }}>
-        {icon}
-      </div>
-    </div>
-
-    {/* Content */}
-    <div style={{ padding: '1.5rem', flex: 1 }}>
-      <h4 style={{
-        fontSize: '0.95rem', fontWeight: 800, color: '#1A1A1A',
-        letterSpacing: '-0.01em', marginBottom: '0.6rem',
-      }}>{label}</h4>
-      <div style={{ width: 32, height: 2, background: accent, borderRadius: 2, marginBottom: '0.85rem' }} />
-      <p style={{
-        fontSize: '0.82rem', color: 'rgba(26,26,26,0.52)',
-        lineHeight: 1.75, fontWeight: 300, margin: 0,
-      }}>{desc}</p>
-    </div>
-  </motion.div>
-)
-
-
-// ── Data ─────────────────────────────────────────────────────────────────────
-const mainServices = [
-  {
-    id: 'pmc',
-    tag: 'Project Management Consultancy',
-    title: 'PMC Services',
-    headline: ['Expert oversight,', 'end-to-end.'],
-    desc: 'Our Project Management Consultancy covers the full construction lifecycle — planning, procurement, supervision, and handover. We act as your trusted representative on site, so your project finishes on time, on budget, and without compromise.',
-    heroImg: imgPmc,
-    accent: '#B85C38',
-    num: '01',
-    features: [
-      'Budget & Timeline Management',
-      'Contractor Coordination',
-      'Quality Assurance',
-      'Risk Mitigation',
-      'Progress Reporting',
-      'Handover & Documentation',
-    ],
-    subLabel: 'Services under PMC',
-    subDesc: 'Everything below is handled and coordinated within our PMC engagement — one contract, one team, zero loose ends.',
-    subServices: [
-      { icon: <FaLeaf />, label: 'Landscape Development', img: imgLandscape,
-        desc: 'We design outdoor spaces that enhance your property — native planting, green area planning, and practical garden layout to complement the architecture.' },
-      { icon: <FaCloudRain />, label: 'Rainwater Harvesting', img: imgRain,
-        desc: 'Site-specific rainwater collection and groundwater recharge systems integrated into your build from day one, reducing dependency on municipal water.' },
-      { icon: <FaSun />, label: 'Solar Energy Solutions', img: imgSolar,
-        desc: 'We design and integrate solar panel systems aligned with your roof layout and energy goals — cutting long-term electricity costs from the ground up.' },
-      { icon: <FaRecycle />, label: 'Waste Management', img: null,
-        desc: 'Planned waste segregation, composting systems, and debris management built into the project schedule for a cleaner, more responsible build process.' },
-      { icon: <FaLightbulb />, label: 'Smart Lighting', img: imgLighting,
-        desc: 'LED and smart control lighting systems planned during construction — not retrofitted — so every circuit is efficient, elegant, and right-sized for each space.' },
-      { icon: <FaTh />, label: 'Traditional Flooring', img: imgFloor,
-        desc: 'Athangudi tiles, oxide flooring, and natural stone selections curated and installed as part of your build — heritage underfoot, planned with the rest of your home.' },
-      { icon: <FiTool />, label: 'Renovation & Expansion', img: imgReno,
-        desc: 'Structural changes, modern finishes, and Vastu-compliant redesigns managed within the PMC framework — seamlessly coordinated with no disruption.' },
-    ],
-  },
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const SERVICES = [
   {
     id: 'residential',
-    tag: 'Residential Construction',
-    title: 'Residential Builds',
-    headline: ['Your dream home,', 'built right.'],
-    desc: "From independent houses to premium villas, we handle every phase of residential construction with precision craftsmanship, quality materials, and a design philosophy rooted in Tamil Nadu's architectural heritage.",
-    heroImg: imgRes,
-    accent: '#4A7B5E',
-    num: '02',
-    features: [
-      'Custom Home Design & Build',
-      'Luxury Villa Construction',
-      'Vastu-Compliant Layout',
-      'Premium Material Sourcing',
-      'Structural Integrity Guarantee',
-      'Interior Finishing & Handover',
+    index: '01',
+    label: 'Residential Construction',
+    shortLabel: 'Residential',
+    tag: 'Build Your Dream',
+    tagline: 'Custom homes built with precision, heritage & heart.',
+    body: "From independent houses to premium villas, we handle every phase — foundation to finishing — with Vastu-compliant layouts, premium materials, and craftsmanship rooted in Tamil Nadu's architectural tradition.",
+    img: imgRes,
+    accent: '#C17B3E',
+    accentDark: '#8B5520',
+    icon: BsHouseDoor,
+    features: ['Custom Home Design & Build', 'Luxury Villa Construction', 'Vastu-Compliant Layouts', 'Premium Material Sourcing', 'Structural Integrity Guarantee', 'Interior Finishing & Handover'],
+    subs: [
+      { icon: FaLeaf,      label: 'Landscape Development', img: imgLand,  desc: 'Lawn planning, garden beds, hardscaping — outdoor spaces designed to grow with your home.' },
+      { icon: FaCloudRain, label: 'Rainwater Harvesting',  img: imgRain,  desc: 'Rooftop collection, storage tanks, recharge pits — water security built in from day one.' },
+      { icon: FaSun,       label: 'Solar Integration',     img: imgSolar, desc: 'Rooftop solar at design stage — maximising generation with smart panel placement.' },
+      { icon: FaTh,        label: 'Heritage Flooring',     img: imgFloor, desc: 'Athangudi tiles, lime plaster, stone finishes — cool, beautiful, and rooted in culture.' },
+      { icon: FaLightbulb, label: 'Smart Lighting',        img: imgLight, desc: 'Layered lighting — ambient, task, accent — planned during construction, not retrofitted.' },
+      { icon: FaRecycle,   label: 'Waste Systems',         img: null,     desc: 'Composting zones, segregation areas, and waste chutes — sustainable living by design.' },
     ],
-    subLabel: 'Services under Residential',
-    subDesc: 'These aren\'t sold separately. They are fully integrated into every residential project we deliver — planned, executed, and quality-checked by our team.',
-    subServices: [
-      { icon: <FaLeaf />, label: 'Landscape Development', img: imgLandscape,
-        desc: 'Outdoor spaces designed to grow with your home — lawn planning, garden beds, tree placement, and hardscaping that ties the exterior together.' },
-      { icon: <FaCloudRain />, label: 'Rainwater Harvesting', img: imgRain,
-        desc: 'Integrated rooftop collection, storage tanks, and recharge pits that secure water availability long after move-in.' },
-      { icon: <FaSun />, label: 'Solar Energy Solutions', img: imgSolar,
-        desc: 'Rooftop solar systems planned at design stage — maximising generation and minimising visible clutter with smart panel placement.' },
-      { icon: <FaRecycle />, label: 'Waste Management', img: null,
-        desc: 'Built-in composting zones, segregation areas, and waste chutes that make sustainable living effortless from day one.' },
-      { icon: <FaLightbulb />, label: 'Smart Lighting', img: imgLighting,
-        desc: 'Layered lighting design — ambient, task, and accent — using energy-efficient LED systems and natural light strategies tailored to each room.' },
-      { icon: <FaTh />, label: 'Traditional Flooring', img: imgFloor,
-        desc: 'Timeless Athangudi tiles, lime plaster, and stone finishes that keep your home cool, beautiful, and deeply rooted in culture.' },
-      { icon: <FiTool />, label: 'Renovation & Expansion', img: imgReno,
-        desc: 'Phase-wise extensions, structural upgrades, and full interior remodels executed with the same quality as a new build.' },
+  },
+  {
+    id: 'pmc',
+    index: '02',
+    label: 'PMC Services',
+    shortLabel: 'PMC',
+    tag: 'Project Management',
+    tagline: 'Expert oversight from groundbreaking to key handover.',
+    body: 'Our Project Management Consultancy covers the full construction lifecycle — planning, procurement, supervision, and handover. We act as your trusted on-site representative so your project finishes on time, on budget, with zero compromise.',
+    img: imgPmc,
+    accent: '#4A7C6F',
+    accentDark: '#2D5A4F',
+    icon: MdOutlineEngineering,
+    features: ['Budget & Timeline Management', 'Contractor Coordination', 'Quality Assurance', 'Risk Mitigation', 'Progress Reporting', 'Handover & Documentation'],
+    subs: [
+      { icon: FaLeaf,      label: 'Landscape Development',  img: imgLand,  desc: 'Native planting, green area planning, and garden layout coordinated within PMC.' },
+      { icon: FaCloudRain, label: 'Rainwater Harvesting',   img: imgRain,  desc: 'Site-specific collection and recharge systems integrated from day one.' },
+      { icon: FaSun,       label: 'Solar Energy Solutions', img: imgSolar, desc: 'Solar systems aligned with roof layout and energy goals — zero extra contracts.' },
+      { icon: FaRecycle,   label: 'Waste Management',       img: null,     desc: 'Planned segregation, composting, and debris management within the project schedule.' },
+      { icon: FaLightbulb, label: 'Smart Lighting',         img: imgLight, desc: 'LED and smart lighting planned during construction — efficient, elegant, right-sized.' },
+      { icon: FaTh,        label: 'Traditional Flooring',   img: imgFloor, desc: 'Athangudi tiles, oxide flooring, stone — heritage underfoot, planned with your home.' },
+    ],
+  },
+  {
+    id: 'renovation',
+    index: '03',
+    label: 'Renovation',
+    shortLabel: 'Renovation',
+    tag: 'Transform & Renew',
+    tagline: 'Breathe new life into every space you love.',
+    body: "Whether it's a single room or a complete structural overhaul, our renovation service brings modern design, structural confidence, and Vastu-aligned redesigns — managed without disrupting your daily life.",
+    img: imgReno,
+    accent: '#7B6B9E',
+    accentDark: '#544878',
+    icon: MdArchitecture,
+    features: ['Structural Upgrades', 'Interior Remodelling', 'Vastu Realignment', 'Kitchen & Bath Renovation', 'Flooring & Facade Upgrades', 'Phase-Wise Delivery'],
+    subs: [
+      { icon: MdArchitecture, label: 'Interior Remodelling', img: imgConst, desc: 'Walls, ceilings, openings — completely reimagined with modern spatial planning.' },
+      { icon: FaTh,           label: 'Flooring & Tiling',   img: imgFloor, desc: 'Heritage tiles, porcelain, hardwood — selection and installation under one roof.' },
+      { icon: FaLightbulb,    label: 'Lighting Overhaul',   img: imgLight, desc: 'New circuits, smart controls, and layered lighting for fully transformed ambience.' },
+      { icon: FaCloudRain,    label: 'Plumbing Revamp',     img: imgRain,  desc: 'Full plumbing replacement, leak-proofing, and rainwater integration in renovations.' },
+      { icon: FaSun,          label: 'Solar Add-On',        img: imgSolar, desc: 'Retrofit solar panels to existing structures — maximising savings without full rebuild.' },
+      { icon: FaLeaf,         label: 'Garden Makeover',     img: imgLand,  desc: 'New planting, pathways, water features, and green design for revived outdoor areas.' },
+    ],
+  },
+  {
+    id: 'sustainable',
+    index: '04',
+    label: 'Sustainable Solutions',
+    shortLabel: 'Sustainable',
+    tag: 'Green Building',
+    tagline: 'Building responsibly for the next generation.',
+    body: 'Sustainability is woven into every Karrcholai project — not offered as an add-on. From solar and rainwater to native landscaping and zero-waste construction, we build homes that tread lightly and last longer.',
+    img: imgSolar,
+    accent: '#4E8B5F',
+    accentDark: '#2D6040',
+    icon: TbLeaf,
+    features: ['Solar Panel Systems', 'Rainwater Harvesting', 'Waste Segregation Design', 'Energy-Efficient Lighting', 'Native Landscaping', 'Green Material Selection'],
+    subs: [
+      { icon: MdSolarPower, label: 'Solar Energy Systems',    img: imgSolar, desc: 'Full rooftop solar design — grid-tied or off-grid — planned at construction or retrofitted.' },
+      { icon: TbDroplet,    label: 'Rainwater Harvesting',    img: imgRain,  desc: 'Collection, filtration, and groundwater recharge tailored to your site and usage.' },
+      { icon: FaLeaf,       label: 'Native Landscaping',      img: imgLand,  desc: 'Drought-resistant plants, permeable surfaces, and biodiversity-led garden design.' },
+      { icon: FaRecycle,    label: 'Waste Zero Systems',      img: null,     desc: 'Composting units, biogas connections, and construction debris management plans.' },
+      { icon: FaLightbulb,  label: 'Energy Efficient Design', img: imgLight, desc: 'Passive cooling, cross-ventilation, insulation, and LED systems cut lifetime energy costs.' },
+      { icon: FaTh,         label: 'Green Materials',         img: imgFloor, desc: 'Locally sourced stone, lime plaster, recycled aggregates — lower carbon, higher quality.' },
     ],
   },
 ]
 
-const whyUs = [
-  { icon: <MdOutlineEngineering size={28} />, title: '12+ Years on Site', desc: 'Over a decade of residential and PMC projects across Tamil Nadu.' },
-  { icon: <FiCheck size={28} />, title: 'Transparent Pricing', desc: 'Detailed estimates, milestone billing, no hidden charges.' },
-  { icon: <FaBuilding size={28} />, title: 'Vastu Integrated', desc: 'Every layout reviewed against Manaiyadi and Vastu principles.' },
-  { icon: <FaHardHat size={28} />, title: 'Single Point of Contact', desc: 'One dedicated manager from site visit to handover key.' },
-  { icon: <MdConstruction size={28} />, title: 'Quality Assured', desc: 'Inspections at every milestone — structure, MEP, and finish.' },
-  { icon: <FiBriefcase size={28} />, title: 'Full Documentation', desc: 'Approvals, drawings, and handover files — all organised.' },
-]
+const ease = [0.22, 1, 0.36, 1]
 
+const fadeUp = {
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.75, ease },
+}
 
-// ── Main component ────────────────────────────────────────────────────────────
-const Services = () => {
-  const [activeService, setActiveService] = useState('pmc')
-  const containerRef = useRef(null)
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] })
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
+// ─── Parallax Hero BG ─────────────────────────────────────────────────────────
+function HeroBg() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '22%'])
+  return (
+    <div ref={ref} className="absolute inset-0 overflow-hidden">
+      <motion.div style={{ y }} className="absolute inset-0 scale-110">
+        <img src={imgHero} alt="" className="w-full h-full object-cover" />
+      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/55 to-[#0a0a0a]" />
+    </div>
+  )
+}
 
-  const current = mainServices.find(s => s.id === activeService)
+// ─── Sub-service card ──────────────────────────────────────────────────────────
+function SubCard({ icon: Icon, label, desc, img, accent, i }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: i * 0.07, ease }}
+      className="group bg-white rounded-[22px] overflow-hidden border border-black/[0.05] shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1.5"
+    >
+      <div className="h-44 overflow-hidden relative bg-[#f5f4f0]">
+        {img ? (
+          <img src={img} alt={label} loading="lazy"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center" style={{ background: `${accent}10` }}>
+            <Icon style={{ color: accent, fontSize: '3.5rem', opacity: 0.25 }} />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
+        <div className="absolute bottom-3 left-4 w-9 h-9 rounded-xl bg-white shadow-md flex items-center justify-center" style={{ color: accent }}>
+          <Icon size={15} />
+        </div>
+      </div>
+      <div className="p-5">
+        <h4 className="text-[14px] font-bold text-[#111] mb-1.5 tracking-tight">{label}</h4>
+        <div className="w-7 h-[2px] rounded-full mb-3" style={{ background: accent }} />
+        <p className="text-[12px] text-black/38 leading-relaxed">{desc}</p>
+      </div>
+    </motion.div>
+  )
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+export default function Services() {
+  const [active, setActive] = useState('residential')
+  const tabRef  = useRef(null)
+  const detailRef = useRef(null)
+
+  const svc  = SERVICES.find(s => s.id === active)
+  const Icon = svc.icon
+
+  const goTo = (id) => {
+    setActive(id)
+    setTimeout(() => detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 40)
+  }
 
   return (
-    <div ref={containerRef} style={{ background: '#fdfbf7', minHeight: '100vh', overflowX: 'hidden', fontFamily: 'inherit' }}>
+    <div className="bg-[#f8f7f3] min-h-screen overflow-x-hidden font-sans">
       <Helmet>
-        <title>Residential Construction &amp; PMC Services in Tamil Nadu | Karrcholai</title>
-        <meta name="description" content="Karrcholai offers residential construction and PMC services in Tamil Nadu — custom homes, renovation, landscape, solar, rainwater harvesting, smart lighting, traditional flooring. Serving Karur, Chennai, Coimbatore, Madurai, Trichy, Erode." />
+        <title>Services | Residential Construction, PMC, Renovation & Sustainable Solutions | Karrcholai</title>
+        <meta name="description" content="Karrcholai offers residential construction, PMC, renovation, and sustainable building in Tamil Nadu." />
         <link rel="canonical" href="https://karrcholai.com/services" />
-        <meta property="og:title" content="Residential Construction &amp; PMC Services in Tamil Nadu | Karrcholai" />
-        <meta property="og:description" content="Karrcholai offers residential construction and PMC services in Tamil Nadu — custom homes, renovation, landscape, solar, rainwater harvesting and more." />
-        <meta property="og:url" content="https://karrcholai.com/services" />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karrcholai.com/" },
-            { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://karrcholai.com/services" }
-          ]
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          "name": "Residential Construction & PMC Services",
-          "provider": { "@type": "Organization", "name": "Karrcholai Construction", "url": "https://karrcholai.com" },
-          "areaServed": [
-            { "@type": "City", "name": "Karur" },
-            { "@type": "City", "name": "Chennai" },
-            { "@type": "City", "name": "Coimbatore" },
-            { "@type": "City", "name": "Madurai" },
-            { "@type": "City", "name": "Trichy" },
-            { "@type": "City", "name": "Erode" }
-          ],
-          "serviceType": ["Residential Construction", "Project Management Consultancy", "Home Renovation", "Solar Installation", "Rainwater Harvesting", "Landscape Design"],
-          "url": "https://karrcholai.com/services"
-        })}</script>
       </Helmet>
-
-      {/* Scroll progress bar */}
-      <motion.div style={{ scaleX, background: '#B85C38', position: 'fixed', top: 0, left: 0, right: 0, height: 3, zIndex: 100, transformOrigin: 'left' }} />
 
       <Navbar />
 
-      {/* Visually-hidden SEO H1 — crawlers read this, UI shows the hero heading */}
-      <h1 className="sr-only">Residential Construction &amp; PMC Services in Tamil Nadu — Karrcholai</h1>
+      {/* ══════════════════════════════════════════════════════════════════════
+          HERO
+      ══════════════════════════════════════════════════════════════════════ */}
+      <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-[#0a0a0a]">
+        <HeroBg />
 
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', background: '#111' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${imgHero})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.35 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.7) 100%)' }} />
-        <div style={{ position: 'absolute', right: '-2rem', bottom: '-4rem', fontSize: 'clamp(12rem,20vw,22rem)', fontWeight: 900, color: 'rgba(255,255,255,0.03)', lineHeight: 1, pointerEvents: 'none', userSelect: 'none', letterSpacing: '-0.05em' }}>SVC</div>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-14
+          pb-[clamp(56px,9vw,96px)] pt-[clamp(140px,22vh,200px)]">
 
-        <div style={{ position: 'relative', zIndex: 10, maxWidth: 1280, margin: '0 auto', padding: 'clamp(120px,18vh,180px) 2rem 80px', width: '100%' }}>
-          <motion.span initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}
-            style={{ display: 'inline-block', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.35em', textTransform: 'uppercase', color: '#B85C38', marginBottom: '1.5rem' }}>
-            What We Deliver
-          </motion.span>
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="inline-flex items-center gap-2.5 mb-8">
+            <span className="block w-7 h-[1.5px] bg-[#C17B3E]" />
+            <span className="text-[10px] font-black tracking-[0.35em] uppercase text-white/45">What We Deliver</span>
+          </motion.div>
 
-          <motion.h1 initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1, delay: 0.4 }}
-            style={{ fontSize: 'clamp(2.8rem,7vw,6.5rem)', fontWeight: 900, color: '#fff', lineHeight: 1.0, letterSpacing: '-0.02em', margin: '0 0 2rem', maxWidth: '16ch' }}>
-            We Build.<br />
-            <span style={{ color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.3)' }}>You Live.</span>
-          </motion.h1>
+          <div className="overflow-hidden mb-3">
+            <motion.h1 initial={{ y: '105%' }} animate={{ y: 0 }}
+              transition={{ duration: 1, delay: 0.28, ease }}
+              className="text-[clamp(3.2rem,8.5vw,8rem)] font-black text-white leading-[0.93] tracking-tighter">
+              Services That
+            </motion.h1>
+          </div>
+          <div className="overflow-hidden mb-9">
+            <motion.h1 initial={{ y: '105%' }} animate={{ y: 0 }}
+              transition={{ duration: 1, delay: 0.4, ease }}
+              className="text-[clamp(3.2rem,8.5vw,8rem)] font-black leading-[0.93] tracking-tighter text-transparent"
+              style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.16)' }}>
+              Build Legacies.
+            </motion.h1>
+          </div>
 
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.6 }}
-            style={{ fontSize: 'clamp(0.9rem,1.5vw,1.15rem)', color: 'rgba(255,255,255,0.55)', maxWidth: 520, lineHeight: 1.8, marginBottom: '2.5rem', fontWeight: 300 }}>
-            Two core services — PMC and Residential Construction — each covering a full suite of specialised works so your project is built right, inside and out.
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ delay: 0.62, duration: 0.9 }}
+            className="text-white/32 text-[15px] md:text-lg font-light leading-relaxed max-w-lg mb-12">
+            Four service pillars covering every stage — from first pour to final handover.
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }}
-            style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            {mainServices.map(s => (
-              <button key={s.id} onClick={() => { setActiveService(s.id); document.getElementById('service-detail')?.scrollIntoView({ behavior: 'smooth' }) }}
-                style={{ padding: '0.85rem 1.75rem', borderRadius: '6px', border: 'none', cursor: 'pointer',
-                  background: activeService === s.id ? s.accent : 'rgba(255,255,255,0.08)',
-                  color: '#fff', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase',
-                  transition: 'background 0.3s', display: 'flex', alignItems: 'center', gap: 8, backdropFilter: 'blur(10px)' }}>
-                {s.id === 'pmc' ? <MdOutlineEngineering size={14} /> : <FiHome size={14} />}
-                {s.id === 'pmc' ? 'PMC Services' : 'Residential Builds'}
-              </button>
+          {/* 4 mini nav cards */}
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.78, duration: 0.8 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-14 max-w-2xl">
+            {SERVICES.map((s) => {
+              const SI = s.icon
+              const isA = active === s.id
+              return (
+                <motion.button key={s.id} onClick={() => goTo(s.id)}
+                  whileHover={{ y: -4 }} whileTap={{ scale: 0.97 }}
+                  className="text-left px-4 py-4 rounded-2xl border transition-all duration-300 cursor-pointer"
+                  style={{
+                    background: isA ? `${s.accent}1a` : 'rgba(255,255,255,0.04)',
+                    borderColor: isA ? `${s.accent}55` : 'rgba(255,255,255,0.07)',
+                    backdropFilter: 'blur(16px)',
+                  }}>
+                  <SI size={17} className="mb-2.5" style={{ color: isA ? s.accent : 'rgba(255,255,255,0.28)' }} />
+                  <p className="text-white text-[11px] font-bold leading-snug mb-0.5">{s.shortLabel}</p>
+                  <p className="text-white/22 text-[9px] font-light">{s.tag}</p>
+                </motion.button>
+              )
+            })}
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            className="flex gap-8 md:gap-16 flex-wrap pt-7 border-t border-white/[0.07]">
+            {[['12+', 'Years on Site'], ['200+', 'Projects Delivered'], ['100%', 'Client-Owned Designs'], ['4', 'Service Pillars']].map(([v, l]) => (
+              <div key={l}>
+                <p className="text-[clamp(1.6rem,3vw,2.4rem)] font-black text-white leading-none tracking-tighter">{v}</p>
+                <p className="text-[9px] text-white/20 mt-1.5 uppercase tracking-[0.18em]">{l}</p>
+              </div>
             ))}
           </motion.div>
         </div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}
-          style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-          <span style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.3em', textTransform: 'uppercase' }}>scroll</span>
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
-            style={{ width: 16, height: 28, border: '1px solid rgba(255,255,255,0.2)', borderRadius: 20, display: 'flex', justifyContent: 'center', paddingTop: 5 }}>
-            <div style={{ width: 2, height: 8, background: 'rgba(255,255,255,0.4)', borderRadius: 4 }} />
-          </motion.div>
+        <motion.div animate={{ y: [0, 9, 0] }} transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
+          className="absolute bottom-9 left-1/2 -translate-x-1/2 z-20 hidden md:block">
+          <FiChevronDown size={18} className="text-white/22" />
         </motion.div>
       </section>
 
 
-      {/* ── STICKY TAB NAV ───────────────────────────────────────────────── */}
-      <section id="service-detail" style={{ position: 'sticky', top: 'var(--nav-height-scrolled, 84px)', zIndex: 80,
-        background: '#fdfbf7', borderBottom: '1px solid rgba(26,26,26,0.07)', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 2rem', display: 'flex', alignItems: 'center', gap: '0.25rem', overflowX: 'auto' }}>
-          {mainServices.map(s => (
-            <button key={s.id} onClick={() => setActiveService(s.id)}
-              style={{ flexShrink: 0, padding: '1.1rem 1.75rem', background: 'none', border: 'none', cursor: 'pointer',
-                position: 'relative', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase',
-                color: activeService === s.id ? '#1A1A1A' : 'rgba(26,26,26,0.4)', transition: 'color 0.3s',
-                display: 'flex', alignItems: 'center', gap: 8 }}>
-              {s.id === 'pmc' ? <MdOutlineEngineering size={14} /> : <FiHome size={14} />}
-              {s.id === 'pmc' ? 'PMC Services' : 'Residential Builds'}
-              {activeService === s.id && (
-                <motion.span layoutId="tab-underline"
-                  style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)',
-                    height: 3, width: '80%', borderRadius: '3px 3px 0 0', background: s.accent }} />
-              )}
-            </button>
-          ))}
-        </div>
-      </section>
-
-
-      {/* ── SERVICE DETAIL ───────────────────────────────────────────────── */}
-      <AnimatePresence mode="wait">
-        <motion.div key={current.id}
-          initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
-
-          {/* ── Service intro block ── */}
-          <section style={{ padding: 'clamp(60px,8vw,120px) 2rem', background: '#fdfbf7' }}>
-            <div style={{ maxWidth: 1280, margin: '0 auto',
-              display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%,480px),1fr))',
-              gap: 'clamp(3rem,6vw,7rem)', alignItems: 'center' }}>
-
-              {/* Left: text */}
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: '1.5rem' }}>
-                  <div style={{ width: 48, height: 48, borderRadius: '50%', background: `${current.accent}15`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', color: current.accent, fontSize: 22 }}>
-                    {current.id === 'pmc' ? <MdOutlineEngineering /> : <FiHome />}
+      {/* ══════════════════════════════════════════════════════════════════════
+          STICKY TAB STRIP
+      ══════════════════════════════════════════════════════════════════════ */}
+      <div ref={tabRef} className="sticky top-[72px] z-[90] bg-[#f8f7f3]/95 backdrop-blur-xl border-b border-black/[0.06] shadow-[0_2px_24px_rgba(0,0,0,0.06)]">
+        <div className="max-w-7xl mx-auto px-6 md:px-14">
+          <div className="flex items-stretch overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
+            {SERVICES.map((s) => {
+              const SI = s.icon
+              const isA = active === s.id
+              return (
+                <button key={s.id} onClick={() => goTo(s.id)}
+                  className="flex-shrink-0 flex items-center gap-2.5 px-6 py-5 relative cursor-pointer border-none bg-transparent transition-all duration-200 group"
+                  style={{ minWidth: 0 }}>
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-200 flex-shrink-0"
+                    style={{
+                      background: isA ? `${s.accent}18` : 'transparent',
+                      color: isA ? s.accent : 'rgba(0,0,0,0.28)',
+                    }}>
+                    <SI size={13} />
                   </div>
-                  <span style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.35em', textTransform: 'uppercase', color: current.accent }}>{current.tag}</span>
-                </div>
-
-                <div style={{ fontSize: 'clamp(5rem,12vw,10rem)', fontWeight: 900, color: 'rgba(26,26,26,0.04)', lineHeight: 0.85, marginBottom: '-1rem', letterSpacing: '-0.05em', pointerEvents: 'none' }}>{current.num}</div>
-                <h2 style={{ fontSize: 'clamp(2.2rem,5vw,4.5rem)', fontWeight: 900, color: '#1A1A1A', lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 1.5rem' }}>
-                  {current.headline[0]}<br />
-                  <span style={{ color: current.accent }}>{current.headline[1]}</span>
-                </h2>
-                <p style={{ fontSize: 'clamp(0.9rem,1.4vw,1.05rem)', color: 'rgba(26,26,26,0.58)', lineHeight: 1.8, maxWidth: 520, marginBottom: '2.5rem', fontWeight: 300 }}>
-                  {current.desc}
-                </p>
-
-                {/* Feature checklist */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem 1.5rem', marginBottom: '2.5rem' }}>
-                  {current.features.map((f, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <div style={{ width: 20, height: 20, borderRadius: '50%', flexShrink: 0, background: `${current.accent}18`,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', color: current.accent }}>
-                        <FiCheck size={11} strokeWidth={3} />
-                      </div>
-                      <span style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(26,26,26,0.5)' }}>{f}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <Link to="/contact"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '0.85rem 2rem',
-                    background: current.accent, color: '#fff', borderRadius: 6, fontSize: '0.68rem',
-                    fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', textDecoration: 'none', transition: 'opacity 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-                  onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
-                  Get a Free Consultation <FiArrowRight size={14} />
-                </Link>
-              </div>
-
-              {/* Right: hero image */}
-              <div style={{ position: 'relative' }}>
-                <motion.div whileHover={{ scale: 1.015 }} transition={{ duration: 0.6 }}
-                  style={{ borderRadius: '2.5rem', overflow: 'hidden', aspectRatio: '4/3', boxShadow: '0 32px 80px rgba(0,0,0,0.14)', border: '1px solid rgba(26,26,26,0.06)' }}>
-                  <img src={current.heroImg} alt={current.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                </motion.div>
-                {/* Floating badge */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-                  style={{ position: 'absolute', bottom: '-1.5rem', left: '-1.5rem', background: '#fff',
-                    borderRadius: 20, padding: '1.25rem 1.5rem', boxShadow: '0 16px 48px rgba(0,0,0,0.12)',
-                    border: '1px solid rgba(26,26,26,0.06)', minWidth: 170 }}>
-                  <p style={{ fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.25em', textTransform: 'uppercase', color: current.accent, marginBottom: 4 }}>Includes</p>
-                  <p style={{ fontSize: '0.85rem', fontWeight: 900, color: '#1A1A1A', letterSpacing: '-0.01em', margin: 0 }}>
-                    {current.subServices.length} Specialised Services
-                  </p>
-                </motion.div>
-              </div>
-            </div>
-          </section>
-
-
-          {/* ── Sub-services section ── */}
-          <section style={{ padding: 'clamp(60px,8vw,100px) 2rem', background: current.id === 'pmc' ? '#fff' : '#fafaf8' }}>
-            <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-
-              {/* Section header */}
-              <div style={{ marginBottom: 'clamp(2.5rem,5vw,4rem)' }}>
-                <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                  style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.35em', textTransform: 'uppercase',
-                    color: current.accent, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span style={{ display: 'inline-block', width: 28, height: 2, background: current.accent }} />
-                  {current.subLabel}
-                </motion.p>
-                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
-                  <motion.h3 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                    style={{ fontSize: 'clamp(1.8rem,4vw,3.2rem)', fontWeight: 900, color: '#1A1A1A', lineHeight: 1.05, letterSpacing: '-0.02em', margin: 0, maxWidth: '22ch' }}>
-                    Every service you need — under one roof.
-                  </motion.h3>
-                  <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-                    style={{ fontSize: '0.9rem', color: 'rgba(26,26,26,0.45)', maxWidth: 380, lineHeight: 1.75, fontWeight: 300, margin: 0 }}>
-                    {current.subDesc}
-                  </motion.p>
-                </div>
-              </div>
-
-              {/* ── Premium card grid ── */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))',
-                gap: '1.5rem',
-              }}>
-                {current.subServices.map((sub, i) => (
-                  <SubServiceCard key={i} {...sub} accent={current.accent} index={i} />
-                ))}
-              </div>
-
-              {/* ── Bottom assurance banner ── */}
-              <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }}
-                style={{ marginTop: '3.5rem', borderRadius: '1.75rem', overflow: 'hidden',
-                  background: `linear-gradient(120deg, #1A1A1A 0%, #2a2a2a 100%)`,
-                  display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap',
-                  padding: 'clamp(1.5rem,4vw,2.5rem) clamp(1.5rem,4vw,3rem)',
-                  boxShadow: '0 24px 60px rgba(0,0,0,0.15)' }}>
-                <div style={{ flex: '0 0 auto' }}>
-                  <div style={{ width: 56, height: 56, borderRadius: '16px', background: `${current.accent}25`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', color: current.accent, fontSize: 26 }}>
-                    {current.id === 'pmc' ? <MdOutlineEngineering /> : <FiHome />}
+                  <div className="text-left">
+                    <p className="text-[11px] font-black tracking-wide whitespace-nowrap transition-colors duration-200"
+                      style={{ color: isA ? '#111' : 'rgba(0,0,0,0.38)' }}>
+                      {s.shortLabel}
+                    </p>
+                    <p className="text-[9px] tracking-wide whitespace-nowrap hidden md:block transition-colors duration-200"
+                      style={{ color: isA ? `${s.accent}bb` : 'rgba(0,0,0,0.22)' }}>
+                      {s.tag}
+                    </p>
                   </div>
-                </div>
-                <div style={{ flex: 1, minWidth: 220 }}>
-                  <p style={{ fontSize: 'clamp(0.9rem,1.4vw,1.1rem)', fontWeight: 800, color: '#fff', letterSpacing: '-0.01em', marginBottom: '0.4rem' }}>
-                    One team. One contract. All delivered.
-                  </p>
-                  <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)', margin: 0, fontWeight: 300, lineHeight: 1.7 }}>
-                    Every service above is managed in-house — planned, coordinated, quality-checked, and handed over by Karrcholai.
-                  </p>
-                </div>
-                <Link to="/contact"
-                  style={{ flexShrink: 0, padding: '0.85rem 1.75rem', background: current.accent, color: '#fff', borderRadius: 8,
-                    fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase',
-                    textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8,
-                    boxShadow: `0 8px 32px ${current.accent}50` }}>
-                  Start a Project <FiArrowRight size={12} />
-                </Link>
-              </motion.div>
-
-            </div>
-          </section>
-        </motion.div>
-      </AnimatePresence>
-
-
-      {/* ── COMPARE / CHOOSE SECTION ─────────────────────────────────────── */}
-      <section style={{ padding: 'clamp(60px,8vw,120px) 2rem', background: '#1A1A1A', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-          fontSize: 'clamp(10rem,20vw,22rem)', fontWeight: 900, color: 'rgba(255,255,255,0.025)',
-          pointerEvents: 'none', userSelect: 'none', letterSpacing: '-0.05em', whiteSpace: 'nowrap' }}>
-          KARR
-        </div>
-        <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 2 }}>
-          <div style={{ textAlign: 'center', marginBottom: 'clamp(2.5rem,5vw,5rem)' }}>
-            <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-              style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.35em', textTransform: 'uppercase', color: '#B85C38', marginBottom: '1rem' }}>
-              Which one is right for you?
-            </motion.p>
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
-              style={{ fontSize: 'clamp(2rem,4.5vw,4rem)', fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-              PMC vs Residential
-            </motion.h2>
+                  {isA && (
+                    <motion.span layoutId="tab-bar"
+                      className="absolute bottom-0 left-3 right-3 h-[2.5px] rounded-t-full"
+                      style={{ background: s.accent }} />
+                  )}
+                </button>
+              )
+            })}
           </div>
+        </div>
+      </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,380px),1fr))', gap: '2rem' }}>
-            {mainServices.map((s, i) => (
-              <motion.div key={s.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.15 }}
-                onClick={() => { setActiveService(s.id); document.getElementById('service-detail')?.scrollIntoView({ behavior: 'smooth' }) }}
-                whileHover={{ y: -6 }}
-                style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${s.accent}30`, borderRadius: '2rem',
-                  padding: '2.5rem', cursor: 'pointer', position: 'relative', overflow: 'hidden', transition: 'background 0.3s' }}>
-                <div style={{ position: 'absolute', top: 0, right: 0, padding: '1rem 1.5rem',
-                  background: `${s.accent}20`, borderBottomLeftRadius: '1.5rem',
-                  fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: s.accent }}>
-                  {s.num}
-                </div>
-                <div style={{ width: 56, height: 56, borderRadius: '16px', background: `${s.accent}18`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', color: s.accent, fontSize: 26, marginBottom: '1.5rem' }}>
-                  {s.id === 'pmc' ? <MdOutlineEngineering /> : <FiHome />}
-                </div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fff', marginBottom: '0.75rem', letterSpacing: '-0.01em' }}>{s.title}</h3>
-                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.7, fontWeight: 300, marginBottom: '1.75rem' }}>{s.desc.slice(0, 130)}…</p>
 
-                {/* Sub-service pills preview */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.75rem' }}>
-                  {s.subServices.map((sub, j) => (
-                    <span key={j} style={{ padding: '0.35rem 0.85rem', borderRadius: 100,
-                      background: `${s.accent}15`, color: s.accent,
-                      fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                      {sub.label}
+      {/* ══════════════════════════════════════════════════════════════════════
+          SERVICE DETAIL — full width
+      ══════════════════════════════════════════════════════════════════════ */}
+      <div ref={detailRef}>
+        <AnimatePresence mode="wait">
+          <motion.div key={svc.id}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}>
+
+            {/* ── SPLIT HERO: image left, content right ── */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[560px]">
+              {/* Image panel */}
+              <div className="relative overflow-hidden bg-[#111] lg:min-h-[560px] h-[320px] lg:h-auto">
+                <motion.img
+                  key={svc.id + '-img'}
+                  src={svc.img} alt={svc.label} loading="lazy"
+                  initial={{ scale: 1.06, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.9, ease }}
+                  className="w-full h-full object-cover absolute inset-0"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+
+                {/* Index badge */}
+                <div className="absolute top-6 left-6 text-[clamp(5rem,11vw,9rem)] font-black leading-none tracking-tighter pointer-events-none select-none"
+                  style={{ color: 'rgba(255,255,255,0.06)' }}>
+                  {svc.index}
+                </div>
+
+                {/* Tag pill */}
+                <div className="absolute bottom-6 left-6">
+                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-black tracking-[0.28em] uppercase backdrop-blur-md"
+                    style={{ background: `${svc.accent}28`, color: svc.accent, border: `1px solid ${svc.accent}45` }}>
+                    <Icon size={11} /> {svc.tag}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content panel */}
+              <div className="bg-white flex flex-col justify-center px-8 md:px-12 lg:px-14 py-14">
+                <motion.p
+                  key={svc.id + '-eyebrow'}
+                  initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.05 }}
+                  className="text-[9px] font-black tracking-[0.32em] uppercase mb-5 flex items-center gap-2"
+                  style={{ color: svc.accent }}>
+                  <span className="w-6 h-[1.5px] inline-block" style={{ background: svc.accent }} />
+                  {svc.tag}
+                </motion.p>
+
+                <motion.h2
+                  key={svc.id + '-h2'}
+                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.1, ease }}
+                  className="text-[clamp(2rem,4vw,3.4rem)] font-black text-[#111] leading-[1.02] tracking-tighter mb-4">
+                  {svc.label}
+                </motion.h2>
+
+                <motion.p
+                  key={svc.id + '-tagline'}
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                  transition={{ delay: 0.18 }}
+                  className="text-[15px] font-light italic mb-5 leading-snug"
+                  style={{ color: `${svc.accent}cc` }}>
+                  "{svc.tagline}"
+                </motion.p>
+
+                <motion.p
+                  key={svc.id + '-body'}
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                  transition={{ delay: 0.24 }}
+                  className="text-[14px] text-black/45 font-light leading-relaxed mb-8 max-w-[52ch]">
+                  {svc.body}
+                </motion.p>
+
+                {/* Feature pills */}
+                <motion.div
+                  key={svc.id + '-features'}
+                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.32 }}
+                  className="flex flex-wrap gap-2 mb-8">
+                  {svc.features.map((f, i) => (
+                    <span key={i}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-semibold"
+                      style={{ background: `${svc.accent}0d`, color: `${svc.accent}dd`, border: `1px solid ${svc.accent}25` }}>
+                      <FiCheck size={9} strokeWidth={3} style={{ color: svc.accent }} />
+                      {f}
                     </span>
                   ))}
+                </motion.div>
+
+                {/* CTAs */}
+                <motion.div
+                  key={svc.id + '-ctas'}
+                  initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="flex gap-3 flex-wrap">
+                  <Link to="/contact"
+                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-white text-[11px] font-black tracking-widest uppercase transition-all hover:opacity-85 hover:-translate-y-0.5"
+                    style={{ background: svc.accent, boxShadow: `0 10px 28px ${svc.accent}38` }}>
+                    Get Free Quote <FiArrowRight size={12} />
+                  </Link>
+                  <a href="tel:+916385062939"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-[11px] font-bold tracking-widest uppercase border border-black/[0.1] text-[#333] transition-all hover:bg-[#111] hover:text-white hover:border-transparent">
+                    <FiPhone size={12} /> Call Now
+                  </a>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* ── INCLUDED SERVICES ── */}
+            <section className="bg-[#f8f7f3] py-[clamp(56px,8vw,96px)] px-6 md:px-14">
+              <div className="max-w-7xl mx-auto">
+
+                {/* Section header */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-[clamp(2rem,4vw,3.5rem)]">
+                  <div>
+                    <motion.p {...fadeUp}
+                      className="text-[9px] font-black tracking-[0.32em] uppercase mb-3 flex items-center gap-2"
+                      style={{ color: svc.accent }}>
+                      <span className="w-6 h-[1.5px] inline-block" style={{ background: svc.accent }} />
+                      Everything Under One Roof
+                    </motion.p>
+                    <motion.h3 {...fadeUp} transition={{ duration: 0.7, delay: 0.08 }}
+                      className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
+                      Included Services
+                    </motion.h3>
+                  </div>
+                  <motion.p {...fadeUp} transition={{ duration: 0.65, delay: 0.14 }}
+                    className="text-[13px] text-black/38 font-light leading-relaxed max-w-[38ch]">
+                    All managed in-house — planned, executed, and quality-checked by our team.
+                  </motion.p>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: s.accent }}>
-                  Explore {s.id === 'pmc' ? 'PMC Services' : 'Residential Builds'} <FiArrowRight size={13} />
+                {/* Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {svc.subs.map((sub, i) => (
+                    <SubCard key={i} {...sub} accent={svc.accent} i={i} />
+                  ))}
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </section>
+
+            {/* ── CTA BANNER ── */}
+            <section className="px-6 md:px-14 pb-[clamp(56px,8vw,96px)] bg-[#f8f7f3]">
+              <div className="max-w-7xl mx-auto">
+                <motion.div
+                  initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ duration: 0.65 }}
+                  className="relative rounded-[28px] overflow-hidden p-[clamp(2rem,5vw,3.5rem)]"
+                  style={{ background: 'linear-gradient(130deg, #0f0f0f 0%, #1a1a1a 100%)' }}>
+                  {/* Glows */}
+                  <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full blur-[100px] opacity-20"
+                    style={{ background: svc.accent }} />
+                  <div className="absolute -left-10 -bottom-10 w-60 h-60 rounded-full blur-[80px] opacity-10"
+                    style={{ background: svc.accentDark }} />
+
+                  <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-7">
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
+                      style={{ background: `${svc.accent}22`, color: svc.accent }}>
+                      <Icon />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-white text-[clamp(1.1rem,2vw,1.4rem)] font-black tracking-tight leading-snug mb-2">
+                        One team. One contract. All delivered.
+                      </p>
+                      <p className="text-white/32 text-[13px] font-light leading-relaxed max-w-xl">
+                        Karrcholai coordinates every aspect — design to handover — so nothing falls through the cracks.
+                      </p>
+                    </div>
+                    <Link to="/contact"
+                      className="flex-shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl text-white text-[11px] font-black tracking-widest uppercase transition-all hover:opacity-85"
+                      style={{ background: svc.accent, boxShadow: `0 8px 30px ${svc.accent}45` }}>
+                      Start a Project <FiArrowRight size={11} />
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+            </section>
+
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          ALL 4 SERVICES — dark overview strip
+      ══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-[clamp(64px,9vw,120px)] px-6 md:px-14 bg-[#0d0d0d] relative overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full blur-[160px] opacity-[0.05]"
+          style={{ background: '#C17B3E' }} />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full blur-[120px] opacity-[0.04]"
+          style={{ background: '#4E8B5F' }} />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-[clamp(3rem,5vw,5rem)]">
+            <div>
+              <motion.p {...fadeUp}
+                className="text-[9px] font-black tracking-[0.35em] uppercase text-[#C17B3E] mb-3 flex items-center gap-2">
+                <span className="w-6 h-[1.5px] bg-[#C17B3E] inline-block" />
+                Our Four Pillars
+              </motion.p>
+              <motion.h2 {...fadeUp} transition={{ duration: 0.7, delay: 0.1 }}
+                className="text-[clamp(2rem,4.5vw,3.8rem)] font-black text-white tracking-tighter leading-[1.05] max-w-md">
+                Every Stage of Your Project, Covered.
+              </motion.h2>
+            </div>
+            <motion.p {...fadeUp} transition={{ duration: 0.65, delay: 0.15 }}
+              className="text-[13px] text-white/28 font-light leading-relaxed max-w-[34ch] md:text-right">
+              From foundation to handover — residential, managed, renovated, or green.
+            </motion.p>
+          </div>
+
+          {/* 4 cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {SERVICES.map((s, i) => {
+              const SI = s.icon
+              const isA = active === s.id
+              return (
+                <motion.div key={s.id}
+                  initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.55, delay: i * 0.09, ease }}
+                  whileHover={{ y: -8, transition: { duration: 0.25 } }}
+                  onClick={() => goTo(s.id)}
+                  className="cursor-pointer group rounded-[22px] overflow-hidden relative"
+                  style={{
+                    border: isA ? `1.5px solid ${s.accent}50` : '1.5px solid rgba(255,255,255,0.05)',
+                    boxShadow: isA ? `0 20px 56px ${s.accent}20` : 'none',
+                    background: '#161616',
+                  }}>
+                  {/* Active bar */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] transition-all duration-500"
+                    style={{ background: isA ? s.accent : 'transparent' }} />
+
+                  {/* Image */}
+                  <div className="h-44 relative overflow-hidden">
+                    <img src={s.img} alt={s.label} loading="lazy"
+                      className="w-full h-full object-cover opacity-40 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#161616] via-[#161616]/20 to-transparent" />
+                    <span className="absolute top-4 right-4 text-[10px] font-black tracking-widest"
+                      style={{ color: `${s.accent}66` }}>{s.index}</span>
+                  </div>
+
+                  <div className="p-5">
+                    <div className="flex items-center gap-2.5 mb-3.5">
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200"
+                        style={{ background: isA ? `${s.accent}22` : 'rgba(255,255,255,0.06)', color: isA ? s.accent : 'rgba(255,255,255,0.28)' }}>
+                        <SI size={14} />
+                      </div>
+                      <span className="text-[9px] font-black uppercase tracking-widest"
+                        style={{ color: isA ? `${s.accent}88` : 'rgba(255,255,255,0.18)' }}>{s.tag}</span>
+                    </div>
+                    <h3 className="text-[14px] font-black text-white mb-1.5 tracking-tight leading-snug">{s.label}</h3>
+                    <p className="text-[11px] text-white/28 font-light leading-relaxed mb-4 line-clamp-2">{s.tagline}</p>
+                    <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest transition-all duration-300"
+                      style={{ color: isA ? s.accent : 'rgba(255,255,255,0.22)' }}>
+                      Explore <FiArrowRight size={10} />
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>
 
 
-      {/* ── WHY US ───────────────────────────────────────────────────────── */}
-      <section style={{ padding: 'clamp(60px,8vw,120px) 2rem', background: '#fdfbf7' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 'clamp(2.5rem,5vw,5rem)' }}>
-            <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-              style={{ display: 'inline-block', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.35em',
-                textTransform: 'uppercase', color: '#B85C38', marginBottom: '1rem' }}>
-              Our Commitment
-            </motion.span>
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
-              style={{ fontSize: 'clamp(2rem,4.5vw,4rem)', fontWeight: 900, color: '#1A1A1A', letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-              Why Karrcholai?
-            </motion.h2>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(min(100%,280px),1fr))', gap: '1.5rem' }}>
-            {whyUs.map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.08 }}
-                whileHover={{ y: -5, boxShadow: '0 16px 48px rgba(0,0,0,0.1)' }}
-                style={{ background: '#fff', borderRadius: '1.75rem', padding: '2rem',
-                  border: '1px solid rgba(26,26,26,0.06)', boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
-                  position: 'relative', overflow: 'hidden', transition: 'transform 0.3s, box-shadow 0.3s' }}>
-                <div style={{ width: 52, height: 52, borderRadius: '14px', background: 'rgba(184,92,56,0.08)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#B85C38', marginBottom: '1.5rem' }}>
-                  {item.icon}
-                </div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 900, color: '#1A1A1A', marginBottom: '0.6rem', letterSpacing: '-0.01em' }}>{item.title}</h4>
-                <div style={{ width: 36, height: 2, background: '#B85C38', borderRadius: 2, marginBottom: '0.75rem' }} />
-                <p style={{ fontSize: '0.85rem', color: 'rgba(26,26,26,0.5)', lineHeight: 1.7, fontWeight: 300, margin: 0 }}>{item.desc}</p>
-                <div style={{ position: 'absolute', bottom: -12, right: -12, opacity: 0.04, transform: 'rotate(-12deg)', color: '#1A1A1A', fontSize: 90 }}>
-                  {item.icon}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section style={{ position: 'relative', overflow: 'hidden', padding: 'clamp(80px,10vw,140px) 2rem' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${imgConstruct})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(0.18)' }} />
-        <motion.div animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.35, 0.2] }} transition={{ duration: 10, repeat: Infinity }}
-          style={{ position: 'absolute', top: '-20%', left: '-10%', width: 'clamp(300px,50vw,600px)', height: 'clamp(300px,50vw,600px)',
-            background: '#B85C38', filter: 'blur(160px)', borderRadius: '50%', pointerEvents: 'none' }} />
-
-        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 2 }}>
-          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
-            style={{ fontSize: 'clamp(2.2rem,5.5vw,5rem)', fontWeight: 900, color: '#fff', lineHeight: 1.05, letterSpacing: '-0.025em', marginBottom: '1.5rem' }}>
-            Ready to start your project?
-          </motion.h2>
-          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }}
-            style={{ fontSize: 'clamp(0.9rem,1.5vw,1.1rem)', color: 'rgba(255,255,255,0.5)', lineHeight: 1.8, maxWidth: 560, margin: '0 auto 2.5rem', fontWeight: 300 }}>
-            Whether it's a full PMC engagement or building your dream home from scratch — let's talk. First consultation is free.
-          </motion.p>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.3 }}
-            style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/contact"
-              style={{ padding: '1rem 2.5rem', background: '#B85C38', color: '#fff', borderRadius: 6,
-                fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase',
-                textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10,
-                boxShadow: '0 8px 40px rgba(184,92,56,0.4)' }}>
-              Book a Free Consultation <FiArrowRight size={14} />
-            </Link>
-            <Link to="/projects"
-              style={{ padding: '1rem 2.5rem', background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(10px)',
-                color: '#fff', borderRadius: 6, border: '1px solid rgba(255,255,255,0.15)',
-                fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase',
-                textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-              View Our Projects
-            </Link>
+      {/* ══════════════════════════════════════════════════════════════════════
+          FINAL CTA
+      ══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-[clamp(72px,10vw,120px)] px-6 md:px-14 bg-[#f8f7f3]">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.8, ease }}
+            className="relative rounded-[2.5rem] overflow-hidden p-[clamp(2.5rem,6vw,5rem)] text-center"
+            style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #111 100%)' }}>
+            <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-[130px] opacity-14"
+              style={{ background: '#C17B3E' }} />
+            <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-[100px] opacity-7"
+              style={{ background: '#4E8B5F' }} />
+            <div className="relative z-10">
+              <div className="w-14 h-14 rounded-2xl bg-[#C17B3E]/14 border border-[#C17B3E]/22 flex items-center justify-center mx-auto mb-7 text-[#C17B3E] text-xl">
+                <BsBuilding />
+              </div>
+              <p className="text-[9px] font-black tracking-[0.35em] uppercase text-[#C17B3E] mb-4">Ready to Begin?</p>
+              <h2 className="text-[clamp(2rem,4.5vw,3.8rem)] font-black text-white tracking-tighter leading-[1.05] mb-5">
+                Let's build something<br />worth living in.
+              </h2>
+              <p className="text-white/32 text-[14px] font-light leading-relaxed max-w-md mx-auto mb-10">
+                From first conversation to the day you get your keys — one team, no middlemen, no surprises.
+              </p>
+              <div className="flex gap-3 justify-center flex-wrap">
+                <Link to="/contact"
+                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-[#C17B3E] text-white text-[11px] font-black tracking-widest uppercase transition-all hover:opacity-85 hover:-translate-y-0.5 shadow-[0_14px_40px_rgba(193,123,62,0.36)]">
+                  Start a Project <FiArrowRight size={12} />
+                </Link>
+                <Link to="/projects"
+                  className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl border border-white/10 text-[11px] font-bold tracking-widest uppercase text-white/55 transition-all hover:border-white/22 hover:text-white">
+                  View Our Work <BsArrowRight size={12} />
+                </Link>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
+
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          FAQ
+      ══════════════════════════════════════════════════════════════════════ */}
+      <FAQSection
+        dark={false}
+        accent="#C17B3E"
+        subtitle="Common Questions"
+        title="Everything You Need to Know About Our Services"
+        faqs={[
+          { q: 'Do you provide house construction from foundation to handover?', a: 'Yes. Karrcholai handles the complete construction lifecycle — from site analysis and foundation work through structural build, finishing, and final key handover. You get one team, one contract, and a single point of contact throughout.' },
+          { q: 'What is PMC in construction?', a: 'PMC stands for Project Management Consultancy. We act as your on-site representative — managing contractors, budgets, timelines, material procurement, quality inspections, and documentation.' },
+          { q: 'What does your renovation service cover?', a: 'Our renovation service covers structural upgrades, interior remodelling, Vastu realignment, kitchen and bathroom renovation, flooring replacement, facade work, and phase-wise expansion.' },
+          { q: 'Are sustainable features like solar and rainwater harvesting included?', a: 'Sustainability is built into every Karrcholai project by default. Solar, rainwater, smart lighting, waste segregation, and native landscaping are planned at design stage — not retrofitted as extras.' },
+          { q: 'Which areas of Tamil Nadu do you serve?', a: 'We serve Karur, Chennai, Coimbatore, Madurai, Trichy, Erode, and surrounding areas across Tamil Nadu.' },
+          { q: 'Do you offer Vastu-compliant design?', a: 'Yes. Every residential layout is reviewed against Vastu Shastra and Manaiyadi Sastram principles — auspicious orientations, door placements, and dimensions alongside modern engineering.' },
+          { q: 'How long does residential construction take?', a: 'A standard independent house typically takes 10–16 months from groundbreaking to handover. We provide a detailed milestone timeline at the start of every project.' },
+        ]}
+      />
 
       <UnifiedFooter />
     </div>
   )
 }
-
-export default Services

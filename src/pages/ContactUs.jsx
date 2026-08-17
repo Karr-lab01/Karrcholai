@@ -1,10 +1,11 @@
 ﻿import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView, useScroll, useTransform, useSpring } from 'framer-motion'
-import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiArrowRight, FiNavigation, FiChevronDown, FiInstagram, FiFacebook } from 'react-icons/fi'
+import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiArrowRight, FiNavigation, FiInstagram, FiFacebook } from 'react-icons/fi'
 import { Helmet } from 'react-helmet-async'
 import emailjs from '@emailjs/browser'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
+import FAQSection from '../components/FAQSection'
 import heroBg from '../../assets/Exterior of modern luxury house with garden and beautiful sky.jpg'
 import heroVid from '../../assets/contact1.jpg'
 import modernHouse from '../../assets/MORDEN HOUSE.jpg'
@@ -20,7 +21,7 @@ const DARK = '#1C1C1A'
 
 const inp = `w-full px-4 py-2.5 rounded-xl text-sm font-medium outline-none transition-all duration-300 border-2 border-transparent bg-[#F5F2EC] focus:bg-white focus:border-[#C9754A]`
 
-// ── Parallax word (same as Projects) ─────────────────────────────────────────
+// -- Parallax word (same as Projects) -----------------------------------------
 function PWord({ children, delay = 0 }) {
   return (
     <motion.span initial={{ y: 110, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
@@ -31,7 +32,7 @@ function PWord({ children, delay = 0 }) {
   )
 }
 
-// ── Animated form field ───────────────────────────────────────────────────────
+// -- Animated form field -------------------------------------------------------
 function Field({ label, children }) {
   return (
     <motion.div initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
@@ -42,79 +43,6 @@ function Field({ label, children }) {
   )
 }
 
-// ── FAQ accordion ─────────────────────────────────────────────────────────────
-const faqs = [
-  { q: 'How long does a typical residential project take?', a: 'Most residential projects take 8–18 months depending on size and complexity. We provide a detailed timeline during the initial consultation.' },
-  { q: 'Do you offer free consultations?', a: "Yes — our first consultation is completely free. We'll walk you through the entire process, cost estimates, and design possibilities." },
-  { q: 'What areas do you serve?', a: 'We primarily serve Chennai, Coimbatore, Madurai, Trichy, and surrounding areas across Tamil Nadu.' },
-  { q: 'Can I track my project progress?', a: 'Absolutely. We provide weekly progress reports, site photos, and a dedicated project manager as your single point of contact.' },
-  { q: 'Do you handle permits and approvals?', a: 'Yes, we manage all government approvals, CMDA/DTCP permits, and legal documentation on your behalf.' },
-]
-
-function FAQ({ q, a, i }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-      className="border-b last:border-0 cursor-pointer" style={{ borderColor: `${DARK}10` }}
-      onClick={() => setOpen(v => !v)}>
-      <div className="flex items-center justify-between py-5 gap-4">
-        <span className="text-sm font-bold" style={{ color: DARK }}>{q}</span>
-        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.3 }} className="flex-shrink-0">
-          <FiChevronDown size={16} style={{ color: TERRA }} />
-        </motion.div>
-      </div>
-      <AnimatePresence>
-        {open && (
-          <motion.p initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.35 }}
-            className="overflow-hidden text-sm font-light leading-relaxed pb-5" style={{ color: `${DARK}65` }}>
-            {a}
-          </motion.p>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  )
-}
-
-// ── FAQ Dark variant ─────────────────────────────────────────────────────────
-function FAQDark({ q, a, i, inView }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ delay: 0.2 + i * 0.08, duration: 0.6 }}
-      className="border-b cursor-pointer group"
-      style={{ borderColor: 'rgba(255,255,255,0.07)' }}
-      onClick={() => setOpen(v => !v)}
-    >
-      <div className="flex items-center gap-4 py-5">
-        {/* Number */}
-        <span className="text-[11px] font-black tabular-nums flex-shrink-0 w-6"
-          style={{ color: open ? TERRA : 'rgba(255,255,255,0.2)' }}>
-          {String(i + 1).padStart(2, '0')}
-        </span>
-        <span className="flex-1 text-sm font-bold transition-colors duration-300"
-          style={{ color: open ? '#fff' : 'rgba(232,229,223,0.7)' }}>{q}</span>
-        <motion.div animate={{ rotate: open ? 45 : 0 }} transition={{ duration: 0.3 }}
-          className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300"
-          style={{ background: open ? TERRA : 'rgba(255,255,255,0.06)', border: `1px solid ${open ? TERRA : 'rgba(255,255,255,0.1)'}` }}>
-          <span className="text-white text-sm font-black leading-none">+</span>
-        </motion.div>
-      </div>
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.35 }}
-            className="overflow-hidden pl-10 pb-5">
-            <p className="text-sm font-light leading-relaxed" style={{ color: 'rgba(232,229,223,0.55)' }}>{a}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  )
-}
 
 
 
@@ -145,11 +73,11 @@ export default function ContactUs() {
     e.preventDefault()
     setSending(true)
     setSendError(false)
-    // ── EmailJS ──────────────────────────────────────────────────────────────
+    // -- EmailJS --------------------------------------------------------------
     // Replace these three values in your EmailJS dashboard:
-    //   VITE_EMAILJS_SERVICE_ID  — your EmailJS Service ID  (e.g. "service_xxxxxx")
-    //   VITE_EMAILJS_TEMPLATE_ID — your EmailJS Template ID (e.g. "template_xxxxxx")
-    //   VITE_EMAILJS_PUBLIC_KEY  — your EmailJS Public Key  (e.g. "xxxxxxxxxxxxxxxx")
+    //   VITE_EMAILJS_SERVICE_ID  � your EmailJS Service ID  (e.g. "service_xxxxxx")
+    //   VITE_EMAILJS_TEMPLATE_ID � your EmailJS Template ID (e.g. "template_xxxxxx")
+    //   VITE_EMAILJS_PUBLIC_KEY  � your EmailJS Public Key  (e.g. "xxxxxxxxxxxxxxxx")
     // Store them in .env as VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY
     emailjs.sendForm(
       import.meta.env.VITE_EMAILJS_SERVICE_ID  || 'YOUR_SERVICE_ID',
@@ -171,7 +99,7 @@ export default function ContactUs() {
     <div className="min-h-screen overflow-x-hidden" style={{ background: CREAM, color: DARK }}>
       <Helmet>
         <title>Contact Karrcholai | Free Consultation | Residential Construction Tamil Nadu</title>
-        <meta name="description" content="Contact Karrcholai Construction for residential construction, PMC, and renovation in Tamil Nadu. Book a free consultation — serving Karur, Chennai, Coimbatore, Madurai, Trichy and Erode. Call +91-97414-16747." />
+        <meta name="description" content="Contact Karrcholai Construction for residential construction, PMC, and renovation in Tamil Nadu. Book a free consultation � serving Karur, Chennai, Coimbatore, Madurai, Trichy and Erode. Call +91-97414-16747." />
         <link rel="canonical" href="https://karrcholai.com/contact" />
         <meta property="og:title" content="Contact Karrcholai | Free Consultation | Residential Construction Tamil Nadu" />
         <meta property="og:description" content="Contact Karrcholai Construction for residential construction, PMC, and renovation in Tamil Nadu. Book a free consultation. Call +91-97414-16747." />
@@ -208,38 +136,38 @@ export default function ContactUs() {
           "@context": "https://schema.org",
           "@type": "FAQPage",
           "mainEntity": [
-            { "@type": "Question", "name": "How long does a typical residential project take?", "acceptedAnswer": { "@type": "Answer", "text": "Most residential projects take 8–18 months depending on size and complexity. We provide a detailed timeline during the initial consultation." } },
-            { "@type": "Question", "name": "Do you offer free consultations?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — our first consultation is completely free. We'll walk you through the entire process, cost estimates, and design possibilities." } },
-            { "@type": "Question", "name": "What areas does Karrcholai serve?", "acceptedAnswer": { "@type": "Answer", "text": "We primarily serve Karur, Chennai, Coimbatore, Madurai, Trichy, and Erode — covering all of Tamil Nadu." } },
-            { "@type": "Question", "name": "Can I track my project progress?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We provide weekly progress reports, site photos, and a dedicated project manager as your single point of contact." } },
-            { "@type": "Question", "name": "Does Karrcholai handle permits and approvals?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we manage all government approvals, CMDA/DTCP permits, and legal documentation on your behalf." } }
+            { "@type": "Question", "name": "How long does a typical residential project take?", "acceptedAnswer": { "@type": "Answer", "text": "Most residential projects take 10–18 months depending on size and complexity. We provide a detailed milestone timeline during the initial consultation." } },
+            { "@type": "Question", "name": "Do you offer free consultations?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — our first consultation is completely free. We'll walk you through the entire process, cost estimates, timelines, and design possibilities with no obligation." } },
+            { "@type": "Question", "name": "Which areas of Tamil Nadu does Karrcholai serve?", "acceptedAnswer": { "@type": "Answer", "text": "We serve Karur, Chennai, Coimbatore, Madurai, Trichy, Erode, and surrounding districts across Tamil Nadu." } },
+            { "@type": "Question", "name": "Can I track my project progress remotely?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We provide weekly progress reports with site photos, milestone sign-offs, and a dedicated project manager as your single point of contact throughout construction." } },
+            { "@type": "Question", "name": "Does Karrcholai handle government permits and approvals?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We manage all CMDA / DTCP / Panchayat approvals, building plan sanctions, soil testing, and full handover documentation on your behalf." } },
+            { "@type": "Question", "name": "What is the minimum budget for a residential project?", "acceptedAnswer": { "@type": "Answer", "text": "We work on projects from ₹25 lakhs upwards. Our team will prepare a detailed estimate based on your plot size, location, number of floors, and finish level." } }
           ]
         })}</script>
       </Helmet>
 
-      {/* ── Scroll progress bar ── */}
+      {/* -- Scroll progress bar -- */}
       <motion.div className="fixed top-0 left-0 right-0 h-[3px] z-[200] origin-left"
         style={{ scaleX, background: `linear-gradient(90deg, ${FOREST}, ${TERRA})` }} />
 
 
       <Navbar />
 
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative flex items-center justify-center overflow-hidden"
-        style={{ height: 'clamp(420px, 65vw, 600px)' }}>
+      {/* -- HERO ----------------------------------------------------------- */}
+      <section ref={heroRef} className="relative flex items-center justify-center overflow-hidden" style={{ minHeight: "100svh", backgroundImage: `url(${heroVid})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
 
-        {/* Background — image with slow Ken Burns zoom + parallax */}
-        <motion.div className="absolute inset-0 z-0" style={{ y: heroY }}>
+        {/* Background */}
+        <div className="absolute inset-0 z-0">
           <motion.img
             src={heroVid}
-            alt="Karrcholai Construction — luxury residential project exterior"
+            alt="Karrcholai Construction � luxury residential project exterior"
             className="absolute inset-0 w-full h-full object-cover object-center"
-            initial={{ scale: 1.15, opacity: 0 }}
-            animate={{ scale: 1.08, opacity: 1 }}
+            style={{ minHeight: "100%", minWidth: "100%" }} initial={{ scale: 1.04, opacity: 0 }} animate={{ scale: 1.02, opacity: 1 }}
             transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
+            loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
-        </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80 pointer-events-none" />
+        </div>
         {/* Ambient orbs */}
         <motion.div className="absolute w-96 h-96 rounded-full blur-3xl pointer-events-none"
           style={{ background: TERRA, right: '5%', top: '10%', opacity: 0.07 }}
@@ -249,7 +177,7 @@ export default function ContactUs() {
           style={{ background: FOREST, left: '3%', bottom: '15%', opacity: 0.07 }}
           animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 9, repeat: Infinity, delay: 2 }} />
 
-        <div className="relative z-10 text-center px-4 sm:px-6" style={{ paddingTop: '90px' }}>
+        <div className="relative z-10 text-center px-4 sm:px-6" style={{ paddingTop: '0' }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -258,10 +186,10 @@ export default function ContactUs() {
             {/* Label */}
             <p className="font-black tracking-[0.4em] uppercase text-xs sm:text-sm mb-6"
               style={{ color: TERRA }}>
-              Karrcholai · Stone Grove
+              Karrcholai � Stone Grove
             </p>
 
-            {/* Heading — Cholai style */}
+            {/* Heading � Cholai style */}
             <div style={{ paddingBottom: '0.2em' }}>
               <h1 className="font-black text-white uppercase tracking-tighter leading-[0.95] mb-8"
                 style={{ fontSize: 'clamp(2.8rem, 12vw, 8rem)' }}>
@@ -276,11 +204,11 @@ export default function ContactUs() {
               </h1>
             </div>
 
-            {/* Subtitle — Cholai style with lines */}
+            {/* Subtitle � Cholai style with lines */}
             <div className="flex items-center justify-center gap-4 mb-8">
               <div className="h-px w-12" style={{ background: `${TERRA}60` }} />
               <p className="text-white/70 text-xs sm:text-sm font-light tracking-[0.2em] uppercase max-w-lg">
-                From Stone to Oasis — We Build Better Living
+                From Stone to Oasis � We Build Better Living
               </p>
               <div className="h-px w-12" style={{ background: `${TERRA}60` }} />
             </div>
@@ -289,7 +217,7 @@ export default function ContactUs() {
           </motion.div>
         </div>
 
-        {/* Scroll indicator — Cholai style */}
+        {/* Scroll indicator � Cholai style */}
         <motion.div
           animate={{ y: [0, 15, 0] }}
           transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
@@ -300,7 +228,7 @@ export default function ContactUs() {
         </motion.div>
       </section>
 
-      {/* ── INTRO: content + image collage ───────────────────────────────── */}
+      {/* -- INTRO: content + image collage --------------------------------- */}
       <section ref={introRef} className="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
@@ -385,7 +313,7 @@ export default function ContactUs() {
         </div>
       </section>
 
-      {/* ── CONTACT SECTION ────────────────────────────────────────── */}
+      {/* -- CONTACT SECTION ------------------------------------------ */}
       <section ref={formRef} className="py-12 md:py-16" style={{ background: DARK }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={formInView ? { opacity: 1, y: 0 } : {}}
@@ -423,10 +351,10 @@ export default function ContactUs() {
                   <div className="sm:col-span-2">
                     <Field label="Budget Range">
                       <select name="budget_range" className={inp} style={{ appearance: 'none' }}>
-                        <option>Under ₹30 Lakhs</option>
-                        <option>₹30 – ₹60 Lakhs</option>
-                        <option>₹60 Lakhs – ₹1 Crore</option>
-                        <option>Above ₹1 Crore</option>
+                        <option>Under ?30 Lakhs</option>
+                        <option>?30 � ?60 Lakhs</option>
+                        <option>?60 Lakhs � ?1 Crore</option>
+                        <option>Above ?1 Crore</option>
                       </select>
                     </Field>
                   </div>
@@ -460,7 +388,7 @@ export default function ContactUs() {
                         style={{ background: `linear-gradient(135deg, ${TERRA}, ${FOREST})`, boxShadow: `0 8px 24px ${TERRA}40` }}
                       >
                         <FiSend size={14} />
-                        {sending ? 'Sending…' : 'Send Message'}
+                        {sending ? 'Sending�' : 'Send Message'}
                       </motion.button>
                     )}
                   </AnimatePresence>
@@ -482,8 +410,8 @@ export default function ContactUs() {
                   <h3 className="font-black text-sm tracking-[0.25em] uppercase text-white">Office Hours</h3>
                 </div>
                 {[
-                  { day: 'Monday – Friday', time: '9:00 AM – 6:00 PM', open: true },
-                  { day: 'Saturday', time: '10:00 AM – 4:00 PM', open: true },
+                  { day: 'Monday � Friday', time: '9:00 AM � 6:00 PM', open: true },
+                  { day: 'Saturday', time: '10:00 AM � 4:00 PM', open: true },
                   { day: 'Sunday', time: 'Closed', open: false },
                 ].map((row, i) => (
                   <motion.div key={i} initial={{ opacity: 0, x: 10 }} animate={formInView ? { opacity: 1, x: 0 } : {}}
@@ -528,106 +456,107 @@ export default function ContactUs() {
         </div>
       </section>
 
-      {/* ── FAQ & MAP UNIFIED ────────────────────────────────────────── */}
-      <section ref={faqRef} className="py-20 md:py-28 relative overflow-hidden" style={{ background: DARK }}>
-        {/* Ambient glows */}
+      {/* -- FAQ ----------------------------------------------------------- */}
+      <FAQSection
+        dark
+        accent={TERRA}
+        subtitle="Common Questions"
+        title={<>Got Questions? We've Got <span style={{ color: TERRA, fontStyle: 'italic' }}>Answers.</span></>}
+        schema={false}
+        faqs={[
+          {
+            q: 'How long does a typical residential project take?',
+            a: 'Most residential projects take 10–18 months depending on size and complexity. We provide a detailed milestone timeline during the initial consultation.',
+          },
+          {
+            q: 'Do you offer free consultations?',
+            a: "Yes — our first consultation is completely free. We'll walk you through the entire process, cost estimates, timelines, and design possibilities with no obligation.",
+          },
+          {
+            q: 'Which areas of Tamil Nadu do you serve?',
+            a: 'We serve Karur, Chennai, Coimbatore, Madurai, Trichy, Erode, and surrounding districts across Tamil Nadu. Contact us with your specific location.',
+          },
+          {
+            q: 'Can I track my project progress remotely?',
+            a: 'Absolutely. We provide weekly progress reports with site photos, milestone sign-offs, and a dedicated project manager as your single point of contact throughout construction.',
+          },
+          {
+            q: 'Do you handle government permits and approvals?',
+            a: 'Yes. We manage all CMDA / DTCP / Panchayat approvals, building plan sanctions, soil testing, and full handover documentation on your behalf.',
+          },
+          {
+            q: 'What is the minimum budget for a residential project with Karrcholai?',
+            a: 'We work on projects from ₹25 lakhs upwards. Our team will prepare a detailed estimate based on your plot size, location, number of floors, and finish level — with transparent pricing at every milestone.',
+          },
+        ]}
+      />
+
+      {/* -- MAP ------------------------------------------------------------ */}
+      <section ref={faqRef} className="py-16 md:py-20 relative overflow-hidden" style={{ background: DARK }}>
         <motion.div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none"
           style={{ background: TERRA, opacity: 0.04 }}
           animate={{ scale: [1, 1.2, 1], opacity: [0.03, 0.07, 0.03] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-
-            {/* Left: FAQ */}
-            <div ref={faqRef}>
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={faqInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8 }} className="mb-12">
-                <div className="flex items-center gap-3 mb-4">
-                  <motion.div className="h-[2px] rounded-full" style={{ background: TERRA }}
-                    initial={{ width: 0 }} animate={faqInView ? { width: 32 } : { width: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }} />
-                  <span className="text-[10px] font-black tracking-[0.45em] uppercase" style={{ color: TERRA }}>Common Questions</span>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={faqInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="relative rounded-3xl overflow-hidden aspect-[4/3] lg:aspect-[16/7] shadow-2xl border border-white/10">
+            <iframe
+              src="https://maps.google.com/maps?q=5/20,+PULIYAMPATTI,+CV+PALAYAM+(PO),+PUGALUR+(TALUK),+THENNILAI+(WEST),+KARUR(DT)+-+639+206&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              width="100%" height="100%"
+              style={{ border: 0, filter: 'saturate(0.8) contrast(1.1) invert(0.1) hue-rotate(180deg)' }}
+              allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+              title="Karrcholai office location map"
+            />
+            <a href="https://maps.google.com/?q=5/20,+PULIYAMPATTI,+CV+PALAYAM+(PO),+PUGALUR+(TALUK),+THENNILAI+(WEST),+KARUR(DT)+-+639+206"
+              target="_blank" rel="noopener noreferrer"
+              className="absolute inset-0 z-10 block cursor-pointer"
+              aria-label="Open location in Google Maps" />
+            {/* Info overlay */}
+            <div className="absolute bottom-5 left-5 right-5 z-20 pointer-events-none">
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={faqInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className="pointer-events-auto rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8"
+                style={{ background: 'rgba(22,20,16,0.92)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-base font-black text-white mb-1">Find Us</h3>
+                  <p className="text-[10px] font-light text-white/40 leading-relaxed">5/20, Puliyampatti, CV Palayam (PO), Pugalur Taluk, Thennilai West, Karur — 639 206</p>
                 </div>
-                <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
-                  Got Questions? We've Got <span style={{ color: TERRA, fontStyle: 'italic' }}>Answers.</span>
-                </h2>
-              </motion.div>
-
-              <div className="space-y-1">
-                {faqs.map((f, i) => (
-                  <FAQDark key={i} q={f.q} a={f.a} i={i} inView={faqInView} />
-                ))}
-              </div>
-
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={faqInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.6 }}
-                className="mt-10 p-6 rounded-2xl border border-white/5 bg-white/[0.02]">
-                <p className="text-xs font-bold text-white mb-1">Still have questions?</p>
-                <p className="text-[11px] font-light text-white/40">Our team is ready to help you plan your project. Contact us via email or phone.</p>
-              </motion.div>
-            </div>
-
-            {/* Right: MAP */}
-            <div ref={mapRef} className="lg:sticky lg:top-32">
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={faqInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative rounded-3xl overflow-hidden aspect-[4/5] lg:aspect-auto lg:h-[580px] group shadow-2xl border border-white/10">
-
-                {/* Map iframe */}
-                <iframe src="https://maps.google.com/maps?q=5/20,+PULIYAMPATTI,+CV+PALAYAM+(PO),+PUGALUR+(TALUK),+THENNILAI+(WEST),+KARUR(DT)+-+639+206&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                  width="100%" height="100%" style={{ border: 0, filter: 'saturate(0.8) contrast(1.1) invert(0.1) hue-rotate(180deg)' }}
-                  allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
-
-                {/* Map Clickable Overlay */}
-                <a href="https://maps.google.com/?q=5/20,+PULIYAMPATTI,+CV+PALAYAM+(PO),+PUGALUR+(TALUK),+THENNILAI+(WEST),+KARUR(DT)+-+639+206" 
-                   target="_blank" rel="noopener noreferrer" 
-                   className="absolute inset-0 z-10 block cursor-pointer" aria-label="Open location in Google Maps">
-                </a>
-
-                {/* Info Card Overlay */}
-                <div className="absolute bottom-6 left-6 right-6 z-20 pointer-events-none">
-                  <motion.div initial={{ opacity: 0, y: 20 }} animate={mapInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    className="pointer-events-auto rounded-2xl p-5"
-                    style={{ background: 'rgba(22,20,16,0.92)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-
-                    <div className="flex flex-col gap-4">
-                      <div>
-                        <h3 className="text-xl font-black text-white">Find Us</h3>
-                        <p className="text-[10px] font-light text-white/40 mt-1 leading-relaxed">5/20, PULIYAMPATTI, CV PALAYAM (PO), PUGALUR (TALUK), THENNILAI (WEST), KARUR(DT) - 639 206</p>
+                <div className="flex flex-col gap-2 sm:flex-row sm:gap-4 flex-shrink-0">
+                  {[
+                    { Icon: FiMapPin, v: 'Karur, Tamil Nadu', c: TERRA },
+                    { Icon: FiPhone, v: '+91 97414 16747', c: FOREST },
+                  ].map((row, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0"
+                        style={{ background: `${row.c}20`, border: `1px solid ${row.c}30` }}>
+                        <row.Icon size={10} style={{ color: row.c }} />
                       </div>
-
-                      <div className="flex flex-col gap-2.5">
-                        {[
-                          { Icon: FiMapPin, v: 'Thennilai (West), Karur', c: TERRA },
-                          { Icon: FiPhone, v: '+91 97414 16747', c: FOREST },
-                        ].map((row, i) => (
-                          <div key={i} className="flex items-center gap-3">
-                            <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0"
-                              style={{ background: `${row.c}20`, border: `1px solid ${row.c}30` }}>
-                              <row.Icon size={10} style={{ color: row.c }} />
-                            </div>
-                            <span className="text-[11px] font-medium text-white/60">{row.v}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      <motion.a href="https://maps.google.com/?q=5/20,+PULIYAMPATTI,+CV+PALAYAM+(PO),+PUGALUR+(TALUK),+THENNILAI+(WEST),+KARUR(DT)+-+639+206" target="_blank" rel="noopener noreferrer"
-                        whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                        className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white text-dark text-[10px] font-black uppercase tracking-widest transition-all">
-                        <FiNavigation size={12} /> Get Directions
-                      </motion.a>
+                      <span className="text-[11px] font-medium text-white/55">{row.v}</span>
                     </div>
-                  </motion.div>
+                  ))}
                 </div>
+                <motion.a
+                  href="https://maps.google.com/?q=5/20,+PULIYAMPATTI,+CV+PALAYAM+(PO),+PUGALUR+(TALUK),+THENNILAI+(WEST),+KARUR(DT)+-+639+206"
+                  target="_blank" rel="noopener noreferrer"
+                  whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+                  className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white text-[#1a1a1a] text-[10px] font-black uppercase tracking-widest flex-shrink-0">
+                  <FiNavigation size={11} /> Directions
+                </motion.a>
               </motion.div>
             </div>
-
-          </div>
+          </motion.div>
         </div>
       </section>
+
       <UnifiedFooter />
     </div>
   )
 }
+
+
+
+
+
+

@@ -45,23 +45,23 @@ const ManaiyadiIntroduction = () => {
 
  <main>
  {/* â”€â”€ HERO â”€â”€ */}
- <section className="relative h-screen flex items-center justify-center overflow-hidden">
- <motion.div
- initial={{ scale: 1.2, opacity: 0 }}
- animate={{ scale: 1, opacity: 1 }}
- transition={{ duration: 2, ease: 'easeOut' }}
- className="absolute inset-0 z-0"
+ <section
+ className="relative flex items-center justify-center overflow-hidden"
+ style={{
+   minHeight: '100svh',
+   backgroundImage: `url(${heroBg})`,
+   backgroundSize: 'cover',
+   backgroundPosition: 'center',
+   backgroundRepeat: 'no-repeat',
+ }}
  >
- <img src={heroBg} alt="Traditional Tamil home design — Manaiyadi Sastram hero image" className="w-full h-full object-cover" />
- <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80"></div>
- </motion.div>
+ <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/70 via-black/40 to-black/75 pointer-events-none" />
 
- <div className="relative z-10 container mx-auto px-6 text-center">
+ <div className="relative z-10 container mx-auto px-6 text-center py-24">
  <motion.div
  initial={{ opacity: 0, y: 100 }}
  animate={{ opacity: 1, y: 0 }}
  transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
- className="mt-16"
  >
  <p className="text-white font-black tracking-[0.5em] md:tracking-[0.8em] uppercase text-[10px] md:text-xs mb-6 md:mb-8">
  Traditional Tamil Architecture
@@ -73,7 +73,7 @@ const ManaiyadiIntroduction = () => {
  <div className="flex flex-col md:flex-row items-center justify-center gap-8">
  <div className="w-[1px] h-20 bg-white/20 hidden md:block"></div>
  <p className="text-white font-medium text-sm md:text-lg max-w-xl font-light leading-relaxed tracking-wide drop-shadow-md">
- A complete introduction â€” from ancient principles to practical room-by-room guidance for modern construction.
+ A complete introduction — from ancient principles to practical room-by-room guidance for modern construction.
  </p>
  </div>
  </motion.div>
@@ -286,3 +286,7 @@ const ManaiyadiIntroduction = () => {
 }
 
 export default ManaiyadiIntroduction
+
+
+
+

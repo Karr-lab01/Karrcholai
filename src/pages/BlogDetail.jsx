@@ -272,7 +272,7 @@ const BlogDetail = () => {
           )}
         </div>
 
-        {/* ── Internal linking: Related articles + tool CTAs ── */}
+        {/* ── Internal linking: Topical cluster chains ── */}
         {(() => {
           const relatedPosts = blogPosts
             .filter(p => p.id !== post.id && p.category === post.category)
@@ -281,6 +281,40 @@ const BlogDetail = () => {
             .filter(p => p.id !== post.id && p.category !== post.category)
             .slice(0, 2 - relatedPosts.length)
           const suggested = [...relatedPosts, ...otherPosts].slice(0, 2)
+
+          // Per-article topical cluster chains
+          // Vastu article (701): Vastu Compass → Manaiyadi Calculator → Construction → Contact
+          // First Stone / Single Stone Stories (603): Cost Estimator → Residential Construction → Projects → Contact
+          // Engineering Legends (601): Construction Services → Projects → Contact
+          // Construction Tips: Cost Estimator → Residential Construction → Projects → Contact
+          // Land and Plot Tips (generic): Vastu Compass → Manaiyadi Calculator → Construction → Contact
+
+          const isVastuCluster   = post.id === 701 || post.category === 'Land and Plot Tips'
+          const isCostCluster    = post.id === 603 || post.category === 'Construction Tips' || post.category === 'Single Stone Stories'
+          const isEngineerCluster = post.category === 'Engineering Legends'
+
+          const clusterLinks = isVastuCluster ? [
+            { to: '/vastu-compass',         emoji: '🧭', label: 'Free Tool',              title: 'Vastu Compass',           bg: 'linear-gradient(135deg, #1a2e1a, #0d1a0d)',       accent: '#d4af37' },
+            { to: '/manaiyadi/calculator',  emoji: '📐', label: 'Free Tool',              title: 'Manaiyadi Calculator',    bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',       accent: '#B85C38' },
+            { to: '/karr',                  emoji: '🏗️', label: 'Residential Construction', title: 'Karr Division',         bg: 'linear-gradient(135deg, #3a2010, #1a1a1a)',       accent: 'rgba(255,255,255,0.45)' },
+            { to: '/projects',              emoji: '🏠', label: 'Our Work',               title: 'View Projects',           bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',       accent: 'rgba(255,255,255,0.35)' },
+            { to: '/contact',               emoji: '📞', label: 'Free Consultation',       title: 'Talk to Karrcholai',     bg: '#1A1A1A',                                          accent: 'rgba(255,255,255,0.35)' },
+          ] : isCostCluster ? [
+            { to: '/cost-estimator',        emoji: '🏗️', label: 'Free Tool',              title: 'Cost Estimator',          bg: 'linear-gradient(135deg, #B85C38, #8B3A20)',       accent: 'rgba(255,255,255,0.6)' },
+            { to: '/karr',                  emoji: '🏠', label: 'Residential Construction', title: 'Karr Division',         bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',       accent: '#B85C38' },
+            { to: '/projects',              emoji: '📸', label: 'Portfolio',               title: 'View Projects',           bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',       accent: 'rgba(255,255,255,0.35)' },
+            { to: '/contact',               emoji: '📞', label: 'Free Consultation',       title: 'Talk to Karrcholai',     bg: '#1A1A1A',                                          accent: 'rgba(255,255,255,0.35)' },
+          ] : isEngineerCluster ? [
+            { to: '/karr',                  emoji: '🏗️', label: 'Residential Construction', title: 'Karr Division',         bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',       accent: '#B85C38' },
+            { to: '/cost-estimator',        emoji: '₹',  label: 'Free Tool',              title: 'Cost Estimator',          bg: 'linear-gradient(135deg, #B85C38, #8B3A20)',       accent: 'rgba(255,255,255,0.6)' },
+            { to: '/projects',              emoji: '🏠', label: 'Portfolio',               title: 'View Projects',           bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',       accent: 'rgba(255,255,255,0.35)' },
+            { to: '/contact',               emoji: '📞', label: 'Free Consultation',       title: 'Talk to Karrcholai',     bg: '#1A1A1A',                                          accent: 'rgba(255,255,255,0.35)' },
+          ] : [
+            { to: '/cost-estimator',        emoji: '🏗️', label: 'Free Tool',              title: 'Cost Estimator',          bg: 'linear-gradient(135deg, #B85C38, #8B3A20)',       accent: 'rgba(255,255,255,0.6)' },
+            { to: '/karr',                  emoji: '🏠', label: 'Residential Construction', title: 'Karr Division',         bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',       accent: '#B85C38' },
+            { to: '/projects',              emoji: '📸', label: 'Portfolio',               title: 'View Projects',           bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',       accent: 'rgba(255,255,255,0.35)' },
+            { to: '/contact',               emoji: '📞', label: 'Free Consultation',       title: 'Talk to Karrcholai',     bg: '#1A1A1A',                                          accent: 'rgba(255,255,255,0.35)' },
+          ]
 
           return (
             <section style={{ borderTop: '1px solid rgba(0,0,0,0.06)', padding: '56px 24px', background: '#FAF9F6' }}>
@@ -309,57 +343,29 @@ const BlogDetail = () => {
                   </div>
                 )}
 
-                {/* Free tool CTAs — contextual based on category */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12 }}>
-                  {(post.category === 'Land and Plot Tips' || post.category === 'Construction Tips') && (
-                    <Link to="/vastu-compass"
-                      style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '16px 20px',
-                        background: 'linear-gradient(135deg, #1a2e1a, #0d1a0d)',
-                        borderRadius: 12, textDecoration: 'none' }}>
-                      <span style={{ fontSize: 20 }}>🧭</span>
-                      <div>
-                        <span style={{ fontSize: 8, fontWeight: 900, letterSpacing: '0.35em', textTransform: 'uppercase',
-                          color: '#d4af37', display: 'block', marginBottom: 3 }}>Free Tool</span>
-                        <span style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>Vastu Compass</span>
-                      </div>
-                    </Link>
-                  )}
-                  {(post.category === 'Land and Plot Tips' || post.category === 'Single Stone Stories') && (
-                    <Link to="/manaiyadi/calculator"
-                      style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '16px 20px',
-                        background: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',
-                        borderRadius: 12, textDecoration: 'none' }}>
-                      <span style={{ fontSize: 20 }}>📐</span>
-                      <div>
-                        <span style={{ fontSize: 8, fontWeight: 900, letterSpacing: '0.35em', textTransform: 'uppercase',
-                          color: '#B85C38', display: 'block', marginBottom: 3 }}>Free Tool</span>
-                        <span style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>Manaiyadi Calculator</span>
-                      </div>
-                    </Link>
-                  )}
-                  {post.category === 'Construction Tips' && (
-                    <Link to="/cost-estimator"
-                      style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '16px 20px',
-                        background: 'linear-gradient(135deg, #B85C38, #8B3A20)',
-                        borderRadius: 12, textDecoration: 'none' }}>
-                      <span style={{ fontSize: 20 }}>🏗️</span>
-                      <div>
-                        <span style={{ fontSize: 8, fontWeight: 900, letterSpacing: '0.35em', textTransform: 'uppercase',
-                          color: 'rgba(255,255,255,0.6)', display: 'block', marginBottom: 3 }}>Free Tool</span>
-                        <span style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>Cost Estimator</span>
-                      </div>
-                    </Link>
-                  )}
-                  <Link to="/contact"
-                    style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '16px 20px',
-                      background: '#1A1A1A', borderRadius: 12, textDecoration: 'none' }}>
-                    <span style={{ fontSize: 20 }}>📞</span>
-                    <div>
-                      <span style={{ fontSize: 8, fontWeight: 900, letterSpacing: '0.35em', textTransform: 'uppercase',
-                        color: 'rgba(255,255,255,0.35)', display: 'block', marginBottom: 3 }}>Free Consultation</span>
-                      <span style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>Talk to Karrcholai</span>
-                    </div>
-                  </Link>
+                {/* Topical cluster label */}
+                <p style={{ fontSize: 9, fontWeight: 900, letterSpacing: '0.5em', textTransform: 'uppercase',
+                  color: 'rgba(0,0,0,0.25)', marginBottom: 16 }}>Explore This Topic</p>
+
+                {/* Cluster chain — visual flow strip */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, marginBottom: 24 }}>
+                  {clusterLinks.map((cl, idx) => (
+                    <React.Fragment key={cl.to}>
+                      <Link to={cl.to}
+                        style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '14px 18px',
+                          background: cl.bg, borderRadius: 12, textDecoration: 'none', flexShrink: 0 }}>
+                        <span style={{ fontSize: 18 }}>{cl.emoji}</span>
+                        <div>
+                          <span style={{ fontSize: 7, fontWeight: 900, letterSpacing: '0.35em', textTransform: 'uppercase',
+                            color: cl.accent, display: 'block', marginBottom: 2 }}>{cl.label}</span>
+                          <span style={{ fontSize: 12, fontWeight: 700, color: '#fff', whiteSpace: 'nowrap' }}>{cl.title}</span>
+                        </div>
+                      </Link>
+                      {idx < clusterLinks.length - 1 && (
+                        <span style={{ fontSize: 10, color: 'rgba(0,0,0,0.2)', fontWeight: 900, flexShrink: 0 }}>→</span>
+                      )}
+                    </React.Fragment>
+                  ))}
                 </div>
               </div>
             </section>

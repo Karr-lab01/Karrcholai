@@ -2,7 +2,7 @@
 import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
-import VastuCompass from '../components/vastu/VastuCompass'
+import FAQSection from '../components/FAQSection'
 import VastuDirectionCompass from '../components/vastu/VastuDirectionCompass'
 
 const VastuCompassPage = () => {
@@ -62,21 +62,69 @@ const VastuCompassPage = () => {
           <div className="border-t border-stone-200" />
         </div>
 
-        {/* ── Original compass + floor plan overlay tool ── */}
-        <section id="compass-tool" data-compass-tool style={{ background: '#F5F2EC' }} className="pt-8 pb-16 md:pb-24 px-4 md:px-6">
-          <div className="mx-auto max-w-6xl">
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-100 border border-stone-200 mb-3">
-                <span className="text-xs">📐</span>
-                <span className="text-[10px] font-black uppercase tracking-widest text-stone-500">Floor Plan Overlay Tool</span>
-              </div>
-              <h2 className="text-xl md:text-2xl font-black text-slate-900 mb-2">Align Compass to Your Floor Plan</h2>
-              <p className="text-sm text-slate-500 font-medium">Upload your floor plan, rotate the compass to match true North, and download</p>
+        {/* Topical cluster: Vastu article → Manaiyadi Calculator → Construction → Contact */}
+        <section className="py-12 px-4 md:px-6" style={{ background: '#F5F2EC' }}>
+          <div className="mx-auto max-w-5xl">
+            <p className="text-[9px] font-black tracking-[0.5em] uppercase mb-5" style={{ color: 'rgba(0,0,0,0.25)' }}>
+              Explore This Topic
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              {[
+                { to: '/blog/701',             emoji: '📖', label: 'Vastu Article',         title: 'Vastu Shastras',         bg: 'linear-gradient(135deg, #1a2e1a, #0d1a0d)',   accent: '#d4af37' },
+                { to: '/manaiyadi/calculator', emoji: '📐', label: 'Free Tool',             title: 'Manaiyadi Calculator',   bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',   accent: '#B85C38' },
+                { to: '/karr',                 emoji: '🏗️', label: 'Construction',          title: 'Karr Division',          bg: 'linear-gradient(135deg, #3a2010, #1a1a1a)',   accent: 'rgba(255,255,255,0.45)' },
+                { to: '/projects',             emoji: '🏠', label: 'Our Portfolio',         title: 'View Projects',          bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',   accent: 'rgba(255,255,255,0.35)' },
+                { to: '/contact',              emoji: '📞', label: 'Free Consultation',      title: 'Talk to Karrcholai',     bg: '#1A1A1A',                                     accent: 'rgba(255,255,255,0.35)' },
+              ].map((cl, idx, arr) => (
+                <span key={cl.to} className="flex items-center gap-3">
+                  <a href={cl.to}
+                    className="flex items-center gap-3 rounded-xl px-4 py-3 transition-opacity hover:opacity-80"
+                    style={{ background: cl.bg, textDecoration: 'none' }}>
+                    <span className="text-lg">{cl.emoji}</span>
+                    <span>
+                      <span className="block text-[7px] font-black tracking-[0.35em] uppercase mb-0.5" style={{ color: cl.accent }}>{cl.label}</span>
+                      <span className="block text-[12px] font-bold text-white whitespace-nowrap">{cl.title}</span>
+                    </span>
+                  </a>
+                  {idx < arr.length - 1 && <span className="font-black text-xs" style={{ color: 'rgba(0,0,0,0.2)' }}>→</span>}
+                </span>
+              ))}
             </div>
-            <VastuCompass />
           </div>
         </section>
       </main>
+
+      <FAQSection
+        accent="#3F5F4A"
+        subtitle="Vastu Questions"
+        title="Common Vastu Shastra Questions"
+        faqs={[
+          {
+            q: 'Do you provide Vastu consultation for home construction?',
+            a: 'Yes. Karrcholai integrates Vastu Shastra principles into every residential project — from plot orientation and main door placement to room positions, kitchen direction, and bedroom alignment. We ensure your home is both structurally sound and Vastu-compliant.',
+          },
+          {
+            q: 'What is the best direction for the main door according to Vastu?',
+            a: 'North and east-facing entrances are generally considered most auspicious in Vastu Shastra, as they invite sunlight and positive energy. However, the ideal direction also depends on the householder\'s birth star and the plot\'s orientation. Our compass tool helps you explore all eight directions.',
+          },
+          {
+            q: 'Which direction should the kitchen face in Vastu?',
+            a: 'The southeast direction, governed by Agni (fire), is traditionally recommended for the kitchen in Vastu Shastra. The cook should ideally face east while preparing food. Northwest is an acceptable alternative if southeast is not possible.',
+          },
+          {
+            q: 'Where should the master bedroom be in a Vastu-compliant home?',
+            a: 'The southwest corner of the house is considered ideal for the master bedroom, as it represents stability and strength (the earth element). The head of the household sleeping in the southwest promotes authority and good health according to Vastu principles.',
+          },
+          {
+            q: 'Can Vastu be applied to an existing home or only during construction?',
+            a: 'Vastu remedies can be applied to existing homes through strategic adjustments — repositioning furniture, adding mirrors, using colours, plants, or minor structural changes. However, full compliance is most effectively achieved during the design and construction stage.',
+          },
+          {
+            q: 'What is the difference between Vastu Shastra and Manaiyadi Sastram?',
+            a: 'Vastu Shastra is a pan-Indian system covering directional orientation and spatial planning. Manaiyadi Sastram is a specifically Tamil system that focuses on the numerical auspiciousness of room dimensions and wall heights. At Karrcholai, we apply both systems together for a culturally complete home.',
+          },
+        ]}
+      />
 
       <UnifiedFooter />
     </div>

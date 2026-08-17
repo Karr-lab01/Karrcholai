@@ -6,24 +6,23 @@ import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import heroBg from '../assets/manaiyadi_hero.png'
 
-// ── VASTU CONSTRUCTION DAYS 2026 ────────────────────────────────────────────
+// ── VASTU CONSTRUCTION DAYS 2026 (from physical Tamil almanac) ──────────────
 const vastuDays = [
   { tamilMonth: 'தை',       date: 12, weekday: 'திங்கள்', engDate: '26.01.26', time: '10.41 - 11.17' },
-  { tamilMonth: 'மாசி',     date: 22, weekday: 'வெள்ளி',   engDate: '06.03.26', time: '10.32 - 11.08' },
-  { tamilMonth: 'சித்திரை', date: 10, weekday: 'வியாழன்',  engDate: '23.04.26', time: '8.54 - 9.30'   },
-  { tamilMonth: 'வைகாசி',  date: 21, weekday: 'வியாழன்',  engDate: '04.06.26', time: '9.58 - 10.34'  },
-  { tamilMonth: 'ஆடி',     date: 11, weekday: 'திங்கள்',  engDate: '27.07.26', time: '7.44 - 8.20'   },
+  { tamilMonth: 'மாசி',     date: 22, weekday: 'வெள்ளி',  engDate: '06.03.26', time: '10.32 - 11.08' },
+  { tamilMonth: 'சித்திரை', date: 10, weekday: 'வியாழன்', engDate: '23.04.26', time: '8.54 - 9.30'   },
+  { tamilMonth: 'வைகாசி',  date: 21, weekday: 'வியாழன்', engDate: '04.06.26', time: '9.58 - 10.34'  },
+  { tamilMonth: 'ஆடி',     date: 11, weekday: 'திங்கள்', engDate: '27.07.26', time: '7.44 - 8.20'   },
   { tamilMonth: 'ஆவணி',   date: 6,  weekday: 'ஞாயிறு',  engDate: '23.08.26', time: '7.23 - 7.59'   },
-  { tamilMonth: 'ஐப்பசி',  date: 11, weekday: 'புதன்',    engDate: '28.10.26', time: '7.44 - 8.20'   },
-  { tamilMonth: 'கார்த்தி', date: 8,  weekday: 'செவ்வாய்', engDate: '24.11.26', time: '11.29 - 12.05' },
+  { tamilMonth: 'ஐப்பசி',  date: 11, weekday: 'புதன்',   engDate: '28.10.26', time: '7.44 - 8.20'   },
+  { tamilMonth: 'கார்த்தி', date: 8,  weekday: 'செவ்வாய்',engDate: '24.11.26', time: '11.29 - 12.05' },
 ]
 
-// Weekday → English label
 const weekdayMap = {
   'திங்கள்': 'Monday',
   'வெள்ளி':  'Friday',
   'வியாழன்': 'Thursday',
-  'ஞாயிறு': 'Sunday',
+  'ஞாயிறு':  'Sunday',
   'புதன்':   'Wednesday',
   'செவ்வாய்':'Tuesday',
 }
@@ -34,6 +33,8 @@ const fadeInUp = {
   viewport: { once: true },
   transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
 }
+
+const tamilFont = { fontFamily: "'Noto Sans Tamil', 'Latha', serif" }
 
 const VastuDaysPage = () => {
   return (
@@ -63,22 +64,10 @@ const VastuDaysPage = () => {
 
       <main>
         {/* ── HERO ── */}
-        <section className="relative h-[70vh] md:h-screen flex items-center justify-center overflow-hidden">
-          <motion.div
-            initial={{ scale: 1.15, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 2, ease: 'easeOut' }}
-            className="absolute inset-0 z-0"
-          >
-            <img
-              src={heroBg}
-              alt="Vastu days for home foundation"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/45 to-black/85" />
-          </motion.div>
+        <section className="relative flex items-center justify-center overflow-hidden" style={{ minHeight: "100svh", backgroundImage: `url(${heroBg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/40 to-black/75 pointer-events-none" />
 
-          <div className="relative z-10 container mx-auto px-6 text-center">
+          <div className="relative z-10 container mx-auto px-6 text-center py-24">
             <motion.div
               initial={{ opacity: 0, y: 80 }}
               animate={{ opacity: 1, y: 0 }}
@@ -87,7 +76,7 @@ const VastuDaysPage = () => {
               <p className="text-white font-black tracking-[0.5em] md:tracking-[0.8em] uppercase text-[10px] md:text-xs mb-6">
                 Foundation Muhurtham
               </p>
-              <h1 className="text-5xl md:text-8xl lg:text-9xl font-black text-white leading-[0.85] tracking-tighter mb-8 uppercase">
+              <h1 className="text-4xl sm:text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-8 uppercase" style={tamilFont}>
                 வாஸ்து செய்யும்
                 <br />
                 <span className="text-secondary italic">நாட்கள்.</span>
@@ -119,7 +108,7 @@ const VastuDaysPage = () => {
               { value: '2026', label: 'Tamil Calendar Year' },
             ].map((stat, i) => (
               <div key={i} className="text-center px-4 md:px-8">
-                <p className="text-3xl md:text-5xl font-black text-white tracking-tighter mb-2">{stat.value}</p>
+                <p className="text-3xl md:text-5xl font-black text-white tracking-tighter mb-2" style={i === 2 ? tamilFont : {}}>{stat.value}</p>
                 <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30">{stat.label}</p>
               </div>
             ))}
@@ -166,7 +155,7 @@ const VastuDaysPage = () => {
                       className="group hover:bg-secondary/[0.03] transition-colors"
                     >
                       <td className="px-10 py-8">
-                        <span className="text-2xl font-black text-dark group-hover:text-secondary transition-colors tracking-tighter">
+                        <span className="text-2xl font-black text-dark group-hover:text-secondary transition-colors tracking-tighter" style={tamilFont}>
                           {row.tamilMonth}
                         </span>
                       </td>
@@ -177,7 +166,7 @@ const VastuDaysPage = () => {
                       </td>
                       <td className="px-10 py-8">
                         <div>
-                          <span className="text-sm font-bold text-dark/70">{row.weekday}</span>
+                          <span className="text-sm font-bold text-dark/70" style={tamilFont}>{row.weekday}</span>
                           <span className="block text-[10px] text-dark/30 font-medium mt-0.5">
                             {weekdayMap[row.weekday] || ''}
                           </span>
@@ -209,23 +198,21 @@ const VastuDaysPage = () => {
                   transition={{ delay: i * 0.06 }}
                   className="bg-white border border-dark/5 rounded-[1.5rem] overflow-hidden shadow-sm"
                 >
-                  {/* Card header */}
                   <div className="flex items-center gap-4 p-5 pb-0">
                     <span className="w-12 h-12 rounded-full bg-primary/5 border border-primary/15 flex items-center justify-center text-primary font-black text-lg flex-shrink-0">
                       {row.date}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <p className="font-black text-dark text-xl tracking-tight">{row.tamilMonth}</p>
-                      <p className="text-[10px] text-dark/35 font-bold mt-0.5">
+                      <p className="font-black text-dark text-xl tracking-tight" style={tamilFont}>{row.tamilMonth}</p>
+                      <p className="text-[10px] text-dark/35 font-bold mt-0.5" style={tamilFont}>
                         {row.weekday} &nbsp;·&nbsp; {row.engDate}
                       </p>
                     </div>
                   </div>
-                  {/* Time strip */}
                   <div className="flex items-center gap-3 mt-4 px-5 py-4 bg-secondary/5 border-t border-secondary/10">
                     <FiClock size={14} className="text-secondary flex-shrink-0" />
                     <span className="text-sm font-black text-secondary tracking-wide">{row.time}</span>
-                    <span className="ml-auto text-[9px] font-bold text-dark/25 uppercase tracking-widest">காலை</span>
+                    <span className="ml-auto text-[9px] font-bold text-dark/25 uppercase tracking-widest" style={tamilFont}>காலை</span>
                   </div>
                 </motion.div>
               ))}
@@ -244,9 +231,9 @@ const VastuDaysPage = () => {
                   Traditional Guideline
                 </h5>
                 <p className="text-white/40 text-xs md:text-sm font-light leading-relaxed max-w-2xl">
-                  All times shown are <span className="text-white/75 font-semibold">morning (காலை)</span> muhurtham
+                  All times shown are <span className="text-white/75 font-semibold" style={tamilFont}>காலை (morning)</span> muhurtham
                   windows. Consult your family astrologer for personalised alignment with your birth star{' '}
-                  <span className="text-white/75">(நட்சத்திரம்)</span> before finalising the date.
+                  <span className="text-white/75" style={tamilFont}>(நட்சத்திரம்)</span> before finalising the date.
                 </p>
               </div>
             </motion.div>
@@ -318,8 +305,7 @@ const VastuDaysPage = () => {
                   <span className="text-secondary">First Stone?</span>
                 </h2>
                 <p className="text-white/40 text-xs md:text-base mb-10 max-w-lg mx-auto font-light leading-relaxed">
-                  We'll coordinate your Vastu muhurtham with your construction schedule — so the stars and the site
-                  are both ready.
+                  We'll coordinate your Vastu muhurtham with your construction schedule — so the stars and the site are both ready.
                 </p>
                 <motion.a
                   href="/contact"
@@ -341,3 +327,7 @@ const VastuDaysPage = () => {
 }
 
 export default VastuDaysPage
+
+
+
+
