@@ -24,7 +24,6 @@ const ManaiyadiDimensionGuide = lazy(() => import('./pages/ManaiyadiDimensionGui
 const ManaiyadiIntroduction   = lazy(() => import('./pages/ManaiyadiIntroduction'))
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
 const VastuCompassPage = lazy(() => import('./pages/VastuCompassPage'))
-const CostEstimatorPage = lazy(() => import('./pages/CostEstimatorPage'))
 const MuhurthamDatesPage = lazy(() => import('./pages/MuhurthamDatesPage'))
 const VastuDaysPage = lazy(() => import('./pages/VastuDaysPage'))
 const Services   = lazy(() => import('./pages/Services'))
@@ -71,7 +70,6 @@ const AppContent = ({ videoOpen, setVideoOpen }) => {
             <Route path="/manaiyadi/introduction"   element={<ManaiyadiIntroduction />} />
             <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/vastu-compass" element={<VastuCompassPage />} />
-            <Route path="/cost-estimator" element={<CostEstimatorPage />} />
             <Route path="/manaiyadi/muhurtham-dates" element={<MuhurthamDatesPage />} />
             <Route path="/manaiyadi/vastu-days" element={<VastuDaysPage />} />
             <Route path="*"        element={<NotFound />} />

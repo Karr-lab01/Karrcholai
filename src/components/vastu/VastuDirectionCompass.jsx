@@ -256,7 +256,7 @@ const DIRECTION_COLORS = {
 // ─── Compass SVG ──────────────────────────────────────────────────────────────
 function CompassSVG({ selected, hovered, onSelect, onHover }) {
   const R_OUTER = 172
-  const R_INNER = 56
+  const R_INNER = 72
 
   // 4 diagonal direction needle markers
   const cardinalDirs = [
@@ -292,6 +292,37 @@ function CompassSVG({ selected, hovered, onSelect, onHover }) {
         <clipPath id="compass-clip">
           <circle cx={CX} cy={CY} r={R_OUTER} />
         </clipPath>
+        {/* North needle: red gradient, tall */}
+        <linearGradient id="needle-north" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%"   stopColor="#CC0000" />
+          <stop offset="60%"  stopColor="#EF4444" />
+          <stop offset="100%" stopColor="#FCA5A5" stopOpacity="0.6" />
+        </linearGradient>
+        {/* South needle: blue gradient, medium */}
+        <linearGradient id="needle-south" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#1D4ED8" />
+          <stop offset="60%"  stopColor="#3B82F6" />
+          <stop offset="100%" stopColor="#93C5FD" stopOpacity="0.6" />
+        </linearGradient>
+        {/* West needle: cyan-blue gradient, wide/flat */}
+        <linearGradient id="needle-west" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop offset="0%"   stopColor="#0369A1" />
+          <stop offset="60%"  stopColor="#0EA5E9" />
+          <stop offset="100%" stopColor="#7DD3FC" stopOpacity="0.5" />
+        </linearGradient>
+        {/* East needle: amber/orange gradient, wide/flat */}
+        <linearGradient id="needle-east" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stopColor="#B45309" />
+          <stop offset="60%"  stopColor="#F59E0B" />
+          <stop offset="100%" stopColor="#FCD34D" stopOpacity="0.5" />
+        </linearGradient>
+        {/* Hub metallic radial gradient */}
+        <radialGradient id="hub-metal" cx="38%" cy="32%" r="65%">
+          <stop offset="0%"   stopColor="#FFFFFF" />
+          <stop offset="40%"  stopColor="#E2E8F0" />
+          <stop offset="80%"  stopColor="#CBD5E1" />
+          <stop offset="100%" stopColor="#94A3B8" />
+        </radialGradient>
       </defs>
 
       {/* Outer bezel */}
@@ -388,31 +419,72 @@ function CompassSVG({ selected, hovered, onSelect, onHover }) {
         )
       })}
 
-      {/* Inner ring */}
-      <circle cx={CX} cy={CY} r={R_INNER + 2} fill="#FFFFFF" stroke="#E2E8F0" strokeWidth={1} />
-      <circle cx={CX} cy={CY} r={R_INNER}     fill="#F8FAFC" stroke="#CBD5E1" strokeWidth={1.5} />
+      {/* Inner white circle — large clean background for the compass rose */}
+      <circle cx={CX} cy={CY} r={R_INNER + 4} fill="#FFFFFF" stroke="#E2E8F0" strokeWidth={1} />
+      <circle cx={CX} cy={CY} r={R_INNER + 2} fill="#FAFCFF" stroke="#CBD5E1" strokeWidth={1} />
 
-      {/* Compass needle star */}
-      {cardinalDirs.map(({ id, deg, color, size }) => {
-        const tip  = polar(CX, CY, R_INNER - 4, deg)
-        const base = polar(CX, CY, 10, deg + 180)
-        const wL   = polar(CX, CY, 7,  deg - 90)
-        const wR   = polar(CX, CY, 7,  deg + 90)
+      {/* ── Compass Rose: 4-pointed needle star ── */}
+      <g style={{ pointerEvents: 'none' }}>
+
+        {/* North needle — tall, narrow at base, sharp tip */}
+        <path
+          d={`M ${CX - 9} ${CY - 6}
+              L ${CX} ${CY - (R_INNER - 2)}
+              L ${CX + 9} ${CY - 6}
+              Q ${CX} ${CY - 18} ${CX - 9} ${CY - 6} Z`}
+          fill="url(#needle-north)"
+        />
+
+        {/* South needle — medium length, slightly wider */}
+        <path
+          d={`M ${CX - 7} ${CY + 5}
+              L ${CX} ${CY + (R_INNER - 6)}
+              L ${CX + 7} ${CY + 5}
+              Q ${CX} ${CY + 16} ${CX - 7} ${CY + 5} Z`}
+          fill="url(#needle-south)"
+        />
+
+        {/* West needle — flat/wide, extends far left */}
+        <path
+          d={`M ${CX - 6} ${CY - 8}
+              L ${CX - (R_INNER - 2)} ${CY}
+              L ${CX - 6} ${CY + 8}
+              Q ${CX - 16} ${CY} ${CX - 6} ${CY - 8} Z`}
+          fill="url(#needle-west)"
+        />
+
+        {/* East needle — flat/wide, extends far right */}
+        <path
+          d={`M ${CX + 6} ${CY - 8}
+              L ${CX + (R_INNER - 2)} ${CY}
+              L ${CX + 6} ${CY + 8}
+              Q ${CX + 16} ${CY} ${CX + 6} ${CY - 8} Z`}
+          fill="url(#needle-east)"
+        />
+
+        {/* Hub — large metallic sphere */}
+        <circle cx={CX} cy={CY} r={18} fill="url(#hub-metal)" stroke="#CBD5E1" strokeWidth={1.5} />
+        {/* Inner dark pupil */}
+        <circle cx={CX} cy={CY} r={7} fill="#1E293B" />
+        {/* Specular highlight */}
+        <circle cx={CX - 2.5} cy={CY - 2.5} r={3} fill="rgba(255,255,255,0.55)" />
+        <circle cx={CX - 1} cy={CY - 1} r={1.2} fill="rgba(255,255,255,0.9)" />
+      </g>
+
+      {/* North indicator — tiny compact red arrow on top of the bezel */}
+      {(() => {
+        const tip = polar(CX, CY, 196, 0)    // arrow tip
+        const bL  = polar(CX, CY, 190, -1.5) // base left  (very narrow)
+        const bR  = polar(CX, CY, 190,  1.5) // base right
+        const sT  = polar(CX, CY, 190, 0)    // stem top
+        const sB  = polar(CX, CY, 187, 0)    // stem bottom
         return (
-          <path key={`needle-${id}`}
-            d={`M ${base.x} ${base.y} L ${wL.x} ${wL.y} L ${tip.x} ${tip.y} L ${wR.x} ${wR.y} Z`}
-            fill={color}
-            stroke="white"
-            strokeWidth={0.8}
-            style={{ pointerEvents: 'none' }}
-          />
+          <g style={{ pointerEvents: 'none' }}>
+            <polygon points={`${tip.x},${tip.y} ${bL.x},${bL.y} ${bR.x},${bR.y}`} fill="#DC2626" />
+            <line x1={sT.x} y1={sT.y} x2={sB.x} y2={sB.y} stroke="#64748B" strokeWidth={1.5} strokeLinecap="round" />
+          </g>
         )
-      })}
-
-      {/* Hub */}
-      <circle cx={CX} cy={CY} r={12} fill="url(#vdc-center)" stroke="#CBD5E1" strokeWidth={1.5} style={{ pointerEvents: 'none' }} />
-      <circle cx={CX} cy={CY} r={4}  fill="#1E293B" style={{ pointerEvents: 'none' }} />
-      <circle cx={CX - 1.5} cy={CY - 1.5} r={1.8} fill="rgba(255,255,255,0.6)" style={{ pointerEvents: 'none' }} />
+      })()}
 
       {/* NE marker on outer rim */}
       {(() => {

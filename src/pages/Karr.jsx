@@ -138,7 +138,7 @@ const Karr = () => {
  <span className="text-white/30">Construction.</span>
  </h1>
  <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
- The Karr division delivers residential construction and project management services � built on structural integrity, transparent planning, and disciplined site execution across Tamil Nadu.
+ The Karr division delivers residential construction and project management services — built on structural integrity, transparent planning, and disciplined site execution across Tamil Nadu.
  </p>
  </motion.div>
  </div>
@@ -168,7 +168,7 @@ const Karr = () => {
  transition={{ delay: 0.2 }}
  className="text-[#1a1a1a]/50 text-base max-w-xs font-light border-l border-[#B85C38]/30 pl-8"
  >
- We handle complete construction for independent houses and villas � from foundation to finishing. Every project is managed with verified structural work, quality materials, and consistent on-site supervision.
+ We handle complete construction for independent houses and villas — from foundation to finishing. Every project is managed with verified structural work, quality materials, and consistent on-site supervision.
  </motion.p>
  </div>
 
@@ -213,7 +213,7 @@ const Karr = () => {
  <span className="text-white/30">Management.</span>
  </h2>
  <p className="text-white/40 text-lg font-light leading-relaxed mb-12 max-w-lg">
- Our Project Management Consultancy (PMC) provides expert oversight for homeowners who need structured planning, cost control, and quality supervision � without managing the build day to day themselves.
+ Our Project Management Consultancy (PMC) provides expert oversight for homeowners who need structured planning, cost control, and quality supervision — without managing the build day to day themselves.
  </p>
  
  <div className="space-y-6">
@@ -285,7 +285,7 @@ const Karr = () => {
  <span className="text-[#1a1a1a]/20">Remodelling Services.</span>
  </h2>
  <p className="text-[#1a1a1a]/50 text-lg font-light leading-relaxed mb-12">
- We upgrade and extend existing homes � improving layout, repairing structure, and updating interiors while maintaining the integrity of the building.
+ We upgrade and extend existing homes — improving layout, repairing structure, and updating interiors while maintaining the integrity of the building.
  </p>
  
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -380,7 +380,6 @@ const Karr = () => {
    </p>
    <div className="flex flex-wrap items-center gap-3">
     {[
-     { to: '/cost-estimator',       emoji: '₹',  label: 'Free Tool',              title: 'Cost Estimator',       bg: 'linear-gradient(135deg, #B85C38, #8B3A20)',   accent: 'rgba(255,255,255,0.6)' },
      { to: '/projects',             emoji: '🏠', label: 'Our Portfolio',          title: 'View Projects',         bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',   accent: 'rgba(255,255,255,0.35)' },
      { to: '/vastu-compass',        emoji: '🧭', label: 'Free Tool',              title: 'Vastu Compass',         bg: 'linear-gradient(135deg, #1a2e1a, #0d1a0d)',   accent: '#d4af37' },
      { to: '/manaiyadi/calculator', emoji: '📐', label: 'Free Tool',              title: 'Manaiyadi Calculator',  bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',   accent: '#B85C38' },

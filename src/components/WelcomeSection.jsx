@@ -63,31 +63,9 @@ const WelcomeSection = () => {
                 Living <span className="text-primary/40">Spaces.</span>
               </h2>
 
-              <p className="text-dark/70 text-base md:text-xl font-light leading-relaxed max-w-xl">
-                We don't just build structures; we orchestrate environments where memories are made. 
-                Based in <span className="text-primary font-bold">Tamil Nadu</span>, our architectural philosophy 
-                merges modern discipline with timeless aesthetics.
+              <p className="text-dark/70 text-base md:text-lg font-light leading-relaxed max-w-xl">
+                Karrcholai Construction is a residential construction and Project Management Consultancy founded by a Civil Engineer with 12+ years of professional experience in residential construction. Since establishing Karrcholai, we have focused on delivering quality homes through systematic project planning, transparent execution and responsible construction practices.
               </p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="grid grid-cols-2 gap-8"
-            >
-              <div className="border-l-4 border-primary pl-6 py-2">
-                <h4 className="text-3xl font-black text-primary mb-1">
-                  <Counter to={12} suffix="+" />
-                </h4>
-                <p className="text-[10px] text-dark/40 font-black tracking-widest uppercase">Years of mastery</p>
-              </div>
-              <div className="border-l-4 border-secondary pl-6 py-2">
-                <h4 className="text-3xl font-black text-secondary mb-1">
-                  <Counter to={40} suffix="+" />
-                </h4>
-                <p className="text-[10px] text-dark/40 font-black tracking-widest uppercase">Visions Realized</p>
-              </div>
             </motion.div>
 
             <motion.div

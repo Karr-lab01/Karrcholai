@@ -55,10 +55,10 @@ const PROJECTS = [
     coordinates: '10.96° N / 78.08° E',
 
     // 3. Plot Area
-    plotArea: '2,400 Sq.Ft',
+    plotArea: '2,177 Sq.Ft',
 
     // 4. Built-up Area
-    builtUpArea: '5,100 Sq.Ft',
+    builtUpArea: '1,350 Sq.Ft',
 
     // First Stone
     firstStone: {
@@ -80,26 +80,27 @@ const PROJECTS = [
 
     // 7. Materials
     materials: [
-      { icon: FiLayers, name: 'CSEB Blocks', desc: 'Compressed stabilised earth blocks — reduced embodied carbon' },
-      { icon: FiZap,    name: 'Solar Panels', desc: '12.5 kWp monocrystalline roof-integrated array' },
-      { icon: FiDroplet,name: 'Rainwater Tank', desc: '50,000 L underground 3-stage filtration system' },
-      { icon: FiTool,   name: 'Bamboo Framing', desc: 'Structural bamboo in select secondary spans' },
+      { icon: FiLayers, name: 'Wire Cut Bricks',   desc: 'Machine-made wire cut bricks for uniform size, sharp edges and superior strength' },
+      { icon: FiHome,   name: 'Concrete — M20',    desc: 'M20 grade concrete, manually mixed on-site for controlled quality' },
+      { icon: FiTool,   name: 'TMT Bar — 550 SD',  desc: 'TATA Brand Fe-550 SD TMT reinforcement bars for high ductility and seismic resistance' },
+      { icon: FiZap,    name: 'Cement — Dalmia',   desc: 'Dalmia brand OPC/PPC cement for consistent strength and workability' },
+      { icon: FiDroplet,name: 'Rendercon Chemical', desc: 'Rendercon bonding chemical applied in plaster mix for crack-free, durable finish' },
     ],
 
     // 8. Challenges
     challenges: [
-      'Rocky sub-soil requiring partial rock-cutting for footings',
-      'Integrating rainwater harvesting under the plot footprint without reducing built area',
-      'Client requirement for zero mechanical cooling in ground floor living spaces',
-      'Managing monsoon delays during foundation and plinth beam phases',
+      'Designing the plan to meet every stakeholder\'s requirement while keeping it practical and buildable',
+      'Strictly adhering to Indian Standards (IS codes) across structural, civil, and finishing works',
+      'Clearly communicating technical drawings and specifications to clients in an understandable way',
+      'Ensuring approved materials and brands are procured and used exactly as specified — without substitution or confusion on site',
     ],
 
     // 9. Solution
     solutions: [
-      'Designed isolated footings sized to the actual rock bearing capacity — eliminating over-excavation cost',
-      'Positioned the 50,000 L RWH tank beneath the driveway, recovering usable floor area',
-      'Double-height ventilation shaft + roof vents create stack-effect cooling — no AC needed in living areas',
-      'Prefabricated column cages off-site; erection completed in weather windows during monsoon breaks',
+      'Execution strictly followed the contract agreement and client-approved drawings at every stage — no deviations without written consent',
+      'All approved materials and brands were verified at the time of delivery and tracked through a site register to eliminate mix-ups',
+      'Structural drawings and work sequences were explained to labourers and workers in simple, visual terms — doubts were addressed on the spot before work commenced',
+      'Regular client walkthroughs were conducted at key milestones to explain progress, confirm decisions, and ensure complete satisfaction before advancing to the next phase',
     ],
 
     // 10. Photos (gallery)
@@ -123,17 +124,16 @@ const PROJECTS = [
 
     // 11. Result
     result: {
-      headline: '5,100 Sq.Ft. delivered — on scope, on budget.',
+      headline: '1,350 Sq.Ft. delivered — on scope, on budget.',
       points: [
-        '~60% reduction in grid electricity via solar array',
-        'Natural cooling maintains 26–28 °C without AC on ground floor',
-        'RWH system covers full household water needs during monsoon',
-        'Completed in 14 months including all sustainability systems',
+        '1,350 Sq.Ft. fully built and handed over within the agreed scope and budget',
+        'Completed in 14 months from ground-breaking to final handover',
+        'Post-completion follow-up conducted to address any snag list items',
+        'Client confirmed full satisfaction — structure, finishes, and systems performing as designed',
       ],
       stats: [
         { label: 'Duration', value: '14 mo.' },
-        { label: 'Solar Output', value: '12.5 kWp' },
-        { label: 'Water Storage', value: '50,000 L' },
+        { label: 'Satisfaction', value: '100%' },
       ],
     },
 
@@ -149,7 +149,6 @@ const PROJECTS = [
     relatedServices: [
       { to: '/karr',           emoji: '🏗️', label: 'Construction',      title: 'Karr Division' },
       { to: '/cholai',         emoji: '🌿', label: 'Sustainability',     title: 'Cholai Division' },
-      { to: '/cost-estimator', emoji: '₹',  label: 'Free Tool',          title: 'Cost Estimator' },
       { to: '/vastu-compass',  emoji: '🧭', label: 'Free Tool',          title: 'Vastu Compass' },
     ],
   },
@@ -528,7 +527,7 @@ export default function Projects() {
 
             {/* Stats bar */}
             <div
-              className="grid grid-cols-3 divide-x"
+              className={`grid grid-cols-${project.result.stats.length} divide-x`}
               style={{ background: `${SAGE}`, divideColor: 'rgba(255,255,255,0.1)' }}
             >
               {project.result.stats.map((s, i) => (

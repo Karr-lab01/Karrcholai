@@ -64,16 +64,16 @@ const HeroSection = () => {
  with Expert Planning.
  </motion.h1>
  
- {/* Subheading */}
- <motion.p 
- initial={{ opacity: 0, x: -30 }}
- animate={{ opacity: 1, x: 0 }}
- transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
- className="mt-5 text-sm md:text-base lg:text-lg text-white/80 max-w-xl font-light leading-relaxed drop-shadow-md"
+ {/* Tagline above CTA buttons */}
+ <motion.p
+  initial={{ opacity: 0, y: 10 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.7 }}
+  className="text-white/60 text-sm sm:text-base font-light leading-relaxed max-w-xl mt-5"
  >
- World-class residential construction and Vastu-compliant architectural planning, crafted with unmatched precision.
+  Karrcholai Construction is a Tamil Nadu-based residential construction and Project Management Consultancy firm focused on quality construction, transparent project execution and responsible living.
  </motion.p>
- 
+
  {/* CTA Buttons */}
  <motion.div 
  initial={{ opacity: 0, y: 30 }}

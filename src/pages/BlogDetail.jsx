@@ -300,17 +300,14 @@ const BlogDetail = () => {
             { to: '/projects',              emoji: '🏠', label: 'Our Work',               title: 'View Projects',           bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',       accent: 'rgba(255,255,255,0.35)' },
             { to: '/contact',               emoji: '📞', label: 'Free Consultation',       title: 'Talk to Karrcholai',     bg: '#1A1A1A',                                          accent: 'rgba(255,255,255,0.35)' },
           ] : isCostCluster ? [
-            { to: '/cost-estimator',        emoji: '🏗️', label: 'Free Tool',              title: 'Cost Estimator',          bg: 'linear-gradient(135deg, #B85C38, #8B3A20)',       accent: 'rgba(255,255,255,0.6)' },
             { to: '/karr',                  emoji: '🏠', label: 'Residential Construction', title: 'Karr Division',         bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',       accent: '#B85C38' },
             { to: '/projects',              emoji: '📸', label: 'Portfolio',               title: 'View Projects',           bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',       accent: 'rgba(255,255,255,0.35)' },
             { to: '/contact',               emoji: '📞', label: 'Free Consultation',       title: 'Talk to Karrcholai',     bg: '#1A1A1A',                                          accent: 'rgba(255,255,255,0.35)' },
           ] : isEngineerCluster ? [
             { to: '/karr',                  emoji: '🏗️', label: 'Residential Construction', title: 'Karr Division',         bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',       accent: '#B85C38' },
-            { to: '/cost-estimator',        emoji: '₹',  label: 'Free Tool',              title: 'Cost Estimator',          bg: 'linear-gradient(135deg, #B85C38, #8B3A20)',       accent: 'rgba(255,255,255,0.6)' },
             { to: '/projects',              emoji: '🏠', label: 'Portfolio',               title: 'View Projects',           bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',       accent: 'rgba(255,255,255,0.35)' },
             { to: '/contact',               emoji: '📞', label: 'Free Consultation',       title: 'Talk to Karrcholai',     bg: '#1A1A1A',                                          accent: 'rgba(255,255,255,0.35)' },
           ] : [
-            { to: '/cost-estimator',        emoji: '🏗️', label: 'Free Tool',              title: 'Cost Estimator',          bg: 'linear-gradient(135deg, #B85C38, #8B3A20)',       accent: 'rgba(255,255,255,0.6)' },
             { to: '/karr',                  emoji: '🏠', label: 'Residential Construction', title: 'Karr Division',         bg: 'linear-gradient(135deg, #2D4B37, #1a2e1a)',       accent: '#B85C38' },
             { to: '/projects',              emoji: '📸', label: 'Portfolio',               title: 'View Projects',           bg: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)',       accent: 'rgba(255,255,255,0.35)' },
             { to: '/contact',               emoji: '📞', label: 'Free Consultation',       title: 'Talk to Karrcholai',     bg: '#1A1A1A',                                          accent: 'rgba(255,255,255,0.35)' },

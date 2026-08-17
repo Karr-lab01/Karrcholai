@@ -1,9 +1,9 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { FiAward, FiBarChart2, FiShield, FiUsers, FiClock, FiHeart } from 'react-icons/fi'
+import { FiBarChart2, FiShield, FiUsers, FiHome } from 'react-icons/fi'
 
 const reasons = [
-  { icon: FiAward,    title: '12+ Years Experience',         desc: 'Over a decade of mastery in Tamil Nadu.' },
+  { icon: FiHome,     title: 'Vastu-Aligned Design',         desc: 'Every home planned with traditional Vastu principles for harmony and well-being.' },
   { icon: FiBarChart2,title: 'Professional PMC',             desc: 'Structured management for precision builds.' },
   { icon: FiShield,   title: 'Transparent Pricing',          desc: 'Complete financial clarity at every stage.' },
   { icon: FiUsers,    title: 'Quality Workmanship',          desc: 'Premium materials and skilled craftsmen.' },

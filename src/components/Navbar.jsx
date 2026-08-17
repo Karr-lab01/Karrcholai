@@ -12,7 +12,6 @@ const manaiyadiDropdown = [
   { name: 'சுப முகூர்த்த தினங்கள்', path: '/manaiyadi/muhurtham-dates', desc: 'Auspicious dates for 2026' },
   { name: 'வாஸ்து செய்யும் நாட்கள்', path: '/manaiyadi/vastu-days',     desc: 'Foundation muhurtham windows' },
   { name: 'Direction Compass',     path: '/vastu-compass',             desc: "Check your plot's Vastu alignment" },
-  { name: 'Cost Estimator',        path: '/cost-estimator',            desc: '₹ Instant construction cost estimate' },
 ]
 
 const navLinks = [
@@ -24,7 +23,6 @@ const navLinks = [
   { name: 'Projects',  path: '/projects' },
   { name: 'Manaiyadi', path: '/manaiyadi', hasDropdown: true },
   { name: 'Blog',      path: '/blog' },
-  { name: 'Contact',   path: '/contact' },
 ]
 
 const Navbar = () => {

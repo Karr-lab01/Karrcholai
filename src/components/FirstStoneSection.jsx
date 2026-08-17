@@ -628,9 +628,6 @@ export default function FirstStoneSection() {
               <a href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: T, color: W, fontSize: 12, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', padding: '13px 26px', borderRadius: 12, textDecoration: 'none', boxShadow: `0 4px 20px ${T}55` }}>
                 🏗️ Get Your Plan Reviewed
               </a>
-              <a href="/cost-estimator" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.12)', color: W, fontSize: 12, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', padding: '13px 26px', borderRadius: 12, textDecoration: 'none', border: '1.5px solid rgba(255,255,255,0.25)' }}>
-                💰 Estimate Your Cost
-              </a>
             </div>
             <p style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.25)', margin: '24px 0 0', letterSpacing: '0.3em', textTransform: 'uppercase' }}>Karrcholai Construction · Tamil Nadu · Stone · Grove · Living</p>
           </div>

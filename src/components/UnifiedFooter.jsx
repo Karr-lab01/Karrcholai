@@ -151,7 +151,6 @@ const UnifiedFooter = () => {
                 <ul className="flex flex-col gap-4">
                   {[
                     { name: 'Vastu Compass', path: '/vastu-compass' },
-                    { name: 'Cost Estimator', path: '/cost-estimator' },
                     { name: 'Manaiyadi Sastram', path: '/manaiyadi' },
                     { name: 'Manaiyadi Calculator', path: '/manaiyadi/calculator' },
                     { name: 'Dimension Guide', path: '/manaiyadi/dimension-guide' },

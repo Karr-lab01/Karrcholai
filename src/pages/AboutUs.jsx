@@ -231,8 +231,8 @@ const AboutUs = () => {
                 {/* Karr + Cholai etymology */}
                 <div className="mt-6 grid grid-cols-2 gap-4">
                   {[
-                    { word: 'Karr', meaning: 'Stone', detail: 'Strength, stability and the foundation of every home.' },
-                    { word: 'Cholai', meaning: 'Oasis', detail: 'Greenery, comfort, sustainability and a better environment.' },
+                    { word: 'Karr', meaning: 'Stone' },
+                    { word: 'Cholai', meaning: 'Oasis' },
                   ].map((item) => (
                     <motion.div
                       key={item.word}
@@ -243,8 +243,7 @@ const AboutUs = () => {
                       className="p-5 bg-white border border-dark/5 rounded-2xl"
                     >
                       <div className="text-2xl font-black text-secondary mb-1">{item.word}</div>
-                      <div className="text-xs font-bold uppercase tracking-widest text-dark/40 mb-3">{item.meaning}</div>
-                      <p className="text-sm text-dark/60 leading-relaxed">{item.detail}</p>
+                      <div className="text-xs font-bold uppercase tracking-widest text-dark/40">{item.meaning}</div>
                     </motion.div>
                   ))}
                 </div>

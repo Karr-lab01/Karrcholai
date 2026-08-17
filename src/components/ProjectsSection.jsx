@@ -11,7 +11,7 @@ const projects = [
     tag: 'Residential', 
     image: prj1, 
     year: '2024',
-    size: '5,100 Sq.Ft'
+    size: '1,350 Sq.Ft'
   },
   { 
     title: 'Heritage Duplex', 
