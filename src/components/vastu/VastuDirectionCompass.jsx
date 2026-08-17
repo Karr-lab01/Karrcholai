@@ -238,27 +238,19 @@ const wedgePath = (startDeg, endDeg, rOuter, rInner) => {
   ].join(' ')
 }
 
-// 8 zones: each covers 45°
+// 4 diagonal zones: NE, SE, SW, NW — each covers 90°
 const COMPASS_ZONES = [
-  { id: 'N',  label: 'N',  tamil: 'வடக்கு',       startDeg: -22.5, endDeg: 22.5,  midDeg: 0,   labelR: 140 },
-  { id: 'NE', label: 'NE', tamil: 'வட கிழக்கு',   startDeg: 22.5,  endDeg: 67.5,  midDeg: 45,  labelR: 140 },
-  { id: 'E',  label: 'E',  tamil: 'கிழக்கு',       startDeg: 67.5,  endDeg: 112.5, midDeg: 90,  labelR: 140 },
-  { id: 'SE', label: 'SE', tamil: 'தென் கிழக்கு', startDeg: 112.5, endDeg: 157.5, midDeg: 135, labelR: 140 },
-  { id: 'S',  label: 'S',  tamil: 'தெற்கு',        startDeg: 157.5, endDeg: 202.5, midDeg: 180, labelR: 140 },
-  { id: 'SW', label: 'SW', tamil: 'தென் மேற்கு',  startDeg: 202.5, endDeg: 247.5, midDeg: 225, labelR: 140 },
-  { id: 'W',  label: 'W',  tamil: 'மேற்கு',        startDeg: 247.5, endDeg: 292.5, midDeg: 270, labelR: 140 },
-  { id: 'NW', label: 'NW', tamil: 'வட மேற்கு',    startDeg: 292.5, endDeg: 337.5, midDeg: 315, labelR: 140 },
+  { id: 'NE', label: 'NE', tamil: 'வடகிழக்கு',  startDeg: 0,   endDeg: 90,  midDeg: 45,  labelR: 128 },
+  { id: 'SE', label: 'SE', tamil: 'தென்கிழக்கு', startDeg: 90,  endDeg: 180, midDeg: 135, labelR: 128 },
+  { id: 'SW', label: 'SW', tamil: 'தென்மேற்கு',  startDeg: 180, endDeg: 270, midDeg: 225, labelR: 128 },
+  { id: 'NW', label: 'NW', tamil: 'வடமேற்கு',   startDeg: 270, endDeg: 360, midDeg: 315, labelR: 128 },
 ]
 
 const DIRECTION_COLORS = {
-  N:  { fill: '#DBEAFE', stroke: '#3B82F6', hover: '#BFDBFE', text: '#1D4ED8' },
-  NE: { fill: '#EDE9FE', stroke: '#7C3AED', hover: '#DDD6FE', text: '#5B21B6' },
-  E:  { fill: '#FEF3C7', stroke: '#D97706', hover: '#FDE68A', text: '#92400E' },
-  SE: { fill: '#FEE2E2', stroke: '#DC2626', hover: '#FECACA', text: '#991B1B' },
-  S:  { fill: '#FEF9C3', stroke: '#A16207', hover: '#FEF08A', text: '#713F12' },
-  SW: { fill: '#FEF3C7', stroke: '#92400E', hover: '#FDE68A', text: '#78350F' },
-  W:  { fill: '#E0F2FE', stroke: '#0284C7', hover: '#BAE6FD', text: '#0C4A6E' },
-  NW: { fill: '#D1FAE5', stroke: '#059669', hover: '#A7F3D0', text: '#065F46' },
+  NE: { fill: '#DBEAFE', stroke: '#2563EB', hover: '#BFDBFE', text: '#1D4ED8' }, // 🔵 Blue
+  SE: { fill: '#FEE2E2', stroke: '#DC2626', hover: '#FECACA', text: '#991B1B' }, // 🔴 Red
+  SW: { fill: '#FEF3C7', stroke: '#D97706', hover: '#FDE68A', text: '#92400E' }, // 🟠 Orange/Gold
+  NW: { fill: '#D1FAE5', stroke: '#059669', hover: '#A7F3D0', text: '#065F46' }, // 🟢 Green
 }
 
 // ─── Compass SVG ──────────────────────────────────────────────────────────────
@@ -266,12 +258,12 @@ function CompassSVG({ selected, hovered, onSelect, onHover }) {
   const R_OUTER = 172
   const R_INNER = 56
 
-  // Cardinal needle tip markers
+  // 4 diagonal direction needle markers
   const cardinalDirs = [
-    { id: 'N', deg: 0,   color: '#DC2626', size: 48 },
-    { id: 'S', deg: 180, color: '#2563EB', size: 36 },
-    { id: 'E', deg: 90,  color: '#D97706', size: 36 },
-    { id: 'W', deg: 270, color: '#0284C7', size: 36 },
+    { id: 'NE', deg: 45,  color: '#2563EB' }, // 🔵 Blue
+    { id: 'SE', deg: 135, color: '#DC2626' }, // 🔴 Red
+    { id: 'SW', deg: 225, color: '#D97706' }, // 🟠 Orange/Gold
+    { id: 'NW', deg: 315, color: '#059669' }, // 🟢 Green
   ]
 
   return (
@@ -296,6 +288,10 @@ function CompassSVG({ selected, hovered, onSelect, onHover }) {
           <stop offset="0%" stopColor="#F8FAFC" />
           <stop offset="100%" stopColor="#E2E8F0" />
         </radialGradient>
+        {/* Clip to keep all wedge strokes inside the compass circle */}
+        <clipPath id="compass-clip">
+          <circle cx={CX} cy={CY} r={R_OUTER} />
+        </clipPath>
       </defs>
 
       {/* Outer bezel */}
@@ -320,38 +316,29 @@ function CompassSVG({ selected, hovered, onSelect, onHover }) {
         )
       })}
 
-      {/* Clickable wedge segments */}
-      {COMPASS_ZONES.map(zone => {
-        const isSelected = selected === zone.id
-        const isHovered  = hovered === zone.id
-        const c = DIRECTION_COLORS[zone.id]
-        const fill = isSelected ? c.hover : isHovered ? c.hover : c.fill
-        return (
-          <g key={zone.id}>
-            <path
-              d={wedgePath(zone.startDeg, zone.endDeg, R_OUTER, R_INNER)}
-              fill={fill}
-              stroke={isSelected || isHovered ? c.stroke : '#E2E8F0'}
-              strokeWidth={isSelected ? 2 : isHovered ? 1.5 : 1}
-              style={{ cursor: 'pointer', transition: 'fill 0.18s, stroke 0.18s' }}
-              onClick={() => onSelect(zone.id)}
-              onMouseEnter={() => onHover(zone.id)}
-              onMouseLeave={() => onHover(null)}
-            />
-            {/* Selected glow ring */}
-            {isSelected && (
+      {/* Clickable wedge segments — clipped to prevent stroke bleed outside circle */}
+      <g clipPath="url(#compass-clip)">
+        {COMPASS_ZONES.map(zone => {
+          const isSelected = selected === zone.id
+          const isHovered  = hovered === zone.id
+          const c = DIRECTION_COLORS[zone.id]
+          const fill = isSelected ? c.hover : isHovered ? c.hover : c.fill
+          return (
+            <g key={zone.id}>
               <path
-                d={wedgePath(zone.startDeg, zone.endDeg, R_OUTER + 5, R_INNER - 3)}
-                fill="none"
-                stroke={c.stroke}
-                strokeWidth={2.5}
-                opacity={0.4}
-                style={{ pointerEvents: 'none' }}
+                d={wedgePath(zone.startDeg, zone.endDeg, R_OUTER, R_INNER)}
+                fill={fill}
+                stroke={isSelected || isHovered ? c.stroke : '#E2E8F0'}
+                strokeWidth={isSelected ? 2.5 : isHovered ? 1.5 : 1}
+                style={{ cursor: 'pointer', transition: 'fill 0.18s, stroke 0.18s' }}
+                onClick={() => onSelect(zone.id)}
+                onMouseEnter={() => onHover(zone.id)}
+                onMouseLeave={() => onHover(null)}
               />
-            )}
-          </g>
-        )
-      })}
+            </g>
+          )
+        })}
+      </g>
 
       {/* Separator lines between zones */}
       {COMPASS_ZONES.map(zone => {
@@ -366,32 +353,33 @@ function CompassSVG({ selected, hovered, onSelect, onHover }) {
         )
       })}
 
-      {/* Direction labels */}
+      {/* Direction labels — fixed positions per quadrant to avoid overlap */}
       {COMPASS_ZONES.map(zone => {
         const isSelected = selected === zone.id
         const isHovered  = hovered === zone.id
         const c = DIRECTION_COLORS[zone.id]
-        const isCardinal = ['N', 'E', 'S', 'W'].includes(zone.id)
-        const lp = polar(CX, CY, zone.labelR, zone.midDeg)
-        const tp = polar(CX, CY, zone.labelR - 20, zone.midDeg)
+        // Each quadrant gets a fixed center point well inside its area
+        const LABEL_POSITIONS = {
+          NE: { lx: 295, ly: 130, tx: 295, ty: 152 },
+          SE: { lx: 295, ly: 270, tx: 295, ty: 292 },
+          SW: { lx: 105, ly: 270, tx: 105, ty: 292 },
+          NW: { lx: 105, ly: 130, tx: 105, ty: 152 },
+        }
+        const pos = LABEL_POSITIONS[zone.id]
         return (
           <g key={`label-${zone.id}`} style={{ pointerEvents: 'none' }}>
-            {/* Direction abbreviation */}
             <text
-              x={lp.x} y={lp.y}
+              x={pos.lx} y={pos.ly}
               textAnchor="middle" dominantBaseline="central"
-              fontSize={isCardinal ? 18 : 14}
-              fontWeight={900}
+              fontSize={17} fontWeight={900}
               fill={isSelected || isHovered ? c.text : '#334155'}
               fontFamily="Georgia, serif"
               style={{ transition: 'fill 0.18s' }}
             >{zone.label}</text>
-            {/* Tamil label */}
             <text
-              x={tp.x} y={tp.y + 18}
+              x={pos.tx} y={pos.ty}
               textAnchor="middle" dominantBaseline="central"
-              fontSize={7}
-              fontWeight={600}
+              fontSize={7} fontWeight={600}
               fill={isSelected || isHovered ? c.text : '#94A3B8'}
               fontFamily="sans-serif"
               style={{ transition: 'fill 0.18s' }}
@@ -426,19 +414,19 @@ function CompassSVG({ selected, hovered, onSelect, onHover }) {
       <circle cx={CX} cy={CY} r={4}  fill="#1E293B" style={{ pointerEvents: 'none' }} />
       <circle cx={CX - 1.5} cy={CY - 1.5} r={1.8} fill="rgba(255,255,255,0.6)" style={{ pointerEvents: 'none' }} />
 
-      {/* Cardinal N marker on outer rim */}
+      {/* NE marker on outer rim */}
       {(() => {
-        const p = polar(CX, CY, 192, 0)
+        const p = polar(CX, CY, 192, 45)
         return (
           <text x={p.x} y={p.y} textAnchor="middle" dominantBaseline="central"
-            fontSize={10} fontWeight={900} fill="#DC2626" fontFamily="sans-serif"
+            fontSize={10} fontWeight={900} fill="#2563EB" fontFamily="sans-serif"
             style={{ pointerEvents: 'none' }}
-          >▲</text>
+          >◆</text>
         )
       })()}
 
-      {/* Degree labels at cardinal points on bezel */}
-      {[{ deg: 0, lbl: 'N' }, { deg: 90, lbl: 'E' }, { deg: 180, lbl: 'S' }, { deg: 270, lbl: 'W' }].map(({ deg, lbl }) => {
+      {/* Direction markers on outer rim */}
+      {[{ deg: 45, lbl: 'NE' }, { deg: 135, lbl: 'SE' }, { deg: 225, lbl: 'SW' }, { deg: 315, lbl: 'NW' }].map(({ deg, lbl }) => {
         const p = polar(CX, CY, 178, deg)
         return (
           <text key={`rim-${lbl}`} x={p.x} y={p.y}
@@ -748,7 +736,7 @@ function EmptyState() {
         Tap North, South, East, West or any corner to see Vastu Shastra details for that direction
       </p>
       <div className="mt-6 grid grid-cols-4 gap-2 w-full max-w-[280px]">
-        {['N ↑', 'NE ↗', 'E →', 'SE ↘', 'S ↓', 'SW ↙', 'W ←', 'NW ↖'].map(d => (
+        {['NE ↗', 'SE ↘', 'SW ↙', 'NW ↖'].map(d => (
           <div key={d} className="px-2 py-1.5 rounded-lg bg-slate-100 text-[9px] font-black text-slate-400 text-center">
             {d}
           </div>
@@ -865,15 +853,12 @@ export default function VastuDirectionCompass() {
             )}
           </div>
 
-          {/* Legend */}
           <div className="mt-5 grid grid-cols-2 gap-2">
             {[
-              { icon: '💧', label: 'Water zones', dirs: 'N, NNW, W' },
-              { icon: '🔥', label: 'Fire zone', dirs: 'SE (Kitchen)' },
-              { icon: '🌍', label: 'Earth zones', dirs: 'S, SW' },
-              { icon: '🌬️', label: 'Air zones', dirs: 'E, NW' },
-              { icon: '✨', label: 'Space zone', dirs: 'NE (Sacred)' },
-              { icon: '📐', label: 'Corner rules', dirs: 'SW=90°, NE=90°+' },
+              { icon: '🔵', label: 'வடகிழக்கு (NE)', dirs: 'நீல நிறம்' },
+              { icon: '🔴', label: 'தென்கிழக்கு (SE)', dirs: 'சிவப்பு நிறம்' },
+              { icon: '🟢', label: 'வடமேற்கு (NW)', dirs: 'பச்சை நிறம்' },
+              { icon: '🟠', label: 'தென்மேற்கு (SW)', dirs: 'ஆரஞ்சு / தங்க நிறம்' },
             ].map(item => (
               <div key={item.label} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-stone-50 border border-stone-100">
                 <span className="text-base">{item.icon}</span>
